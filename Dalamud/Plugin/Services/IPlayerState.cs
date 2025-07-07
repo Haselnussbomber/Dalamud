@@ -3,15 +3,47 @@ using Lumina.Excel.Sheets;
 
 namespace Dalamud.Plugin.Services;
 
+#pragma warning disable SA1400 // Access modifier should be declared: Interface members are public by default
+
 /// <summary>
 /// Interface for determining unlock state of various content in the game.
 /// </summary>
 public interface IPlayerState
 {
     /// <summary>
+    /// A delegate type used for the <see cref="ClassJobChange"/> event.
+    /// </summary>
+    /// <param name="classJobId">The new ClassJob id.</param>
+    delegate void ClassJobChangeDelegate(uint classJobId);
+
+    /// <summary>
+    /// A delegate type used for the <see cref="LevelChange"/> event.
+    /// </summary>
+    /// <param name="classJobId">The ClassJob id.</param>
+    /// <param name="level">The level of the corresponding ClassJob.</param>
+    delegate void LevelChangeDelegate(uint classJobId, uint level);
+
+    /// <summary>
+    /// A delegate type used for the <see cref="Unlock"/> event.
+    /// </summary>
+    /// <param name="rowRef">A RowRef of the unlocked thing.</param>
+    delegate void UnlockDelegate(RowRef rowRef);
+
+    /// <summary>
+    /// Event that fires when a characters ClassJob changed.
+    /// </summary>
+    event ClassJobChangeDelegate? ClassJobChange;
+
+    /// <summary>
+    /// Event that fires when <em>any</em> character level changes, including levels
+    /// for a not-currently-active ClassJob (e.g. PvP matches, DoH/DoL).
+    /// </summary>
+    event LevelChangeDelegate? LevelChange;
+
+    /// <summary>
     /// Event triggered when something was unlocked.
     /// </summary>
-    event EventHandler<RowRef>? Unlock;
+    event UnlockDelegate? Unlock;
 
     /// <summary>
     /// Determines whether the specified Action is unlocked.

@@ -13,6 +13,7 @@ public interface IClientState
     /// A delegate type used for the <see cref="ClassJobChanged"/> event.
     /// </summary>
     /// <param name="classJobId">The new ClassJob id.</param>
+    [Obsolete("Moved to IPlayerState")]
     public delegate void ClassJobChangeDelegate(uint classJobId);
 
     /// <summary>
@@ -20,6 +21,7 @@ public interface IClientState
     /// </summary>
     /// <param name="classJobId">The ClassJob id.</param>
     /// <param name="level">The level of the corresponding ClassJob.</param>
+    [Obsolete("Moved to IPlayerState")]
     public delegate void LevelChangeDelegate(uint classJobId, uint level);
 
     /// <summary>
@@ -37,12 +39,14 @@ public interface IClientState
     /// <summary>
     /// Event that fires when a characters ClassJob changed.
     /// </summary>
+    [Obsolete("Moved to IPlayerState and renamed to ClassJobChange")]
     public event ClassJobChangeDelegate? ClassJobChanged;
 
     /// <summary>
     /// Event that fires when <em>any</em> character level changes, including levels
     /// for a not-currently-active ClassJob (e.g. PvP matches, DoH/DoL).
     /// </summary>
+    [Obsolete("Moved to IPlayerState and renamed to LevelChange")]
     public event LevelChangeDelegate? LevelChanged;
 
     /// <summary>

@@ -1,9 +1,7 @@
 using Dalamud.Data;
 using Dalamud.Plugin.Services;
-using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
-using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 using Lumina.Excel;
@@ -489,20 +487,6 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
         return UIState.Instance()->IsUnlockLinkUnlockedOrQuestCompleted(unlockLink);
     }
 
-    private void PerformMateriaActionMigrationDetour(RaptureHotbarModule* thisPtr)
-    {
-        try
-        {
-            this.UpdateUnlocks(true);
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Error during unlock check");
-        }
-
-        this.performMateriaActionMigrationDelegateHook.Original(thisPtr);
-    }
-
     private void UpdateUnlocks(bool fireEvent)
     {
         if (!this.clientState.IsLoggedIn)
@@ -585,7 +569,18 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
             if (fireEvent)
             {
                 Log.Verbose("Unlock detected: {row}", $"{typeof(T).Name}#{row.RowId}");
-                this.Unlock.InvokeSafely(this, (RowRef)rowRef);
+
+                foreach (var action in Delegate.EnumerateInvocationList(this.Unlock))
+                {
+                    try
+                    {
+                        action((RowRef)rowRef);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "Exception during raise of {handler}", action.Method);
+                    }
+                }
             }
         }
     }
