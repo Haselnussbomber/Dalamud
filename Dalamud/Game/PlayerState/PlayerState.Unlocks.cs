@@ -25,7 +25,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsAetherCurrentUnlocked(AetherCurrent row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsAetherCurrentUnlocked(row.RowId);
@@ -34,7 +34,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsAetherCurrentCompFlgSetUnlocked(AetherCurrentCompFlgSet row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsAetherCurrentZoneComplete(row.RowId);
@@ -43,7 +43,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsAozActionUnlocked(AozAction row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         if (row.RowId == 0 || !row.Action.IsValid)
@@ -64,7 +64,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
         if (row.RowId == 0)
             return false;
 
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         var rowPtr = ExdModule.GetBannerConditionByIndex(row.RowId);
@@ -107,7 +107,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsBuddyEquipUnlocked(BuddyEquip row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.Instance()->Buddy.CompanionInfo.IsBuddyEquipUnlocked(row.RowId);
@@ -122,7 +122,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsChocoboTaxiUnlocked(ChocoboTaxi row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.Instance()->IsChocoboTaxiStandUnlocked(row.RowId);
@@ -131,7 +131,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsCompanionUnlocked(Companion row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.Instance()->IsCompanionUnlocked(row.RowId);
@@ -164,7 +164,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsGlassesUnlocked(Glasses row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsGlassesUnlocked((ushort)row.RowId);
@@ -173,7 +173,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsHowToUnlocked(HowTo row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.Instance()->IsHowToUnlocked(row.RowId);
@@ -182,7 +182,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsInstanceContentUnlocked(Lumina.Excel.Sheets.InstanceContent row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.IsInstanceContentUnlocked(row.RowId);
@@ -194,7 +194,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
         if (item.ItemAction.RowId == 0)
             return false;
 
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         // To avoid the ExdModule.GetItemRowById call, which can return null if the excel page
@@ -257,7 +257,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsMountUnlocked(Mount row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsMountUnlocked(row.RowId);
@@ -272,7 +272,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsOrchestrionUnlocked(Orchestrion row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsOrchestrionRollUnlocked(row.RowId);
@@ -281,7 +281,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsOrnamentUnlocked(Ornament row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsOrnamentUnlocked(row.RowId);
@@ -296,7 +296,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsPublicContentUnlocked(PublicContent row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.IsPublicContentUnlocked(row.RowId);
@@ -305,7 +305,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsSecretRecipeBookUnlocked(SecretRecipeBook row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return CSPlayerState.Instance()->IsSecretRecipeBookUnlocked(row.RowId);
@@ -320,7 +320,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsTripleTriadCardUnlocked(TripleTriadCard row)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         return UIState.Instance()->IsTripleTriadCardUnlocked((ushort)row.RowId);
@@ -355,7 +355,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsRowRefUnlocked(RowRef rowRef)
     {
-        if (!this.clientState.IsLoggedIn || rowRef.IsUntyped)
+        if (!this.IsLoaded || rowRef.IsUntyped)
             return false;
 
         if (rowRef.TryGetValue<Lumina.Excel.Sheets.Action>(out var actionRow))
@@ -466,7 +466,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsUnlockLinkUnlocked(ushort unlockLink)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         if (unlockLink == 0)
@@ -478,7 +478,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
     /// <inheritdoc/>
     public bool IsUnlockLinkUnlocked(uint unlockLink)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return false;
 
         if (unlockLink == 0)
@@ -489,7 +489,7 @@ internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerS
 
     private void UpdateUnlocks(bool fireEvent)
     {
-        if (!this.clientState.IsLoggedIn)
+        if (!this.IsLoaded)
             return;
 
         this.UpdateUnlocksForSheet<Lumina.Excel.Sheets.Action>(fireEvent);

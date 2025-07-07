@@ -97,6 +97,7 @@ public interface IClientState
     /// <summary>
     /// Gets the content ID of the local character.
     /// </summary>
+    [Obsolete("Moved to IPlayerState and renamed to ContentId")]
     public ulong LocalContentId { get; }
 
     /// <summary>
