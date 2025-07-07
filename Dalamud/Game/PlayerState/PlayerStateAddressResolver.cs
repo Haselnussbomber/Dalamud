@@ -1,11 +1,11 @@
 using FFXIVClientStructs.FFXIV.Client.UI;
 
-namespace Dalamud.Game.UnlockState;
+namespace Dalamud.Game.PlayerState;
 
 /// <summary>
 /// Unlock state memory address resolver.
 /// </summary>
-internal class UnlockStateAddressResolver : BaseAddressResolver
+internal class PlayerStateAddressResolver : BaseAddressResolver
 {
     /// <summary>
     /// Gets the address of a method which is called when <see cref="RaptureAtkModule.AgentUpdateFlag"/> has <see cref="RaptureAtkModule.AgentUpdateFlags.UnlocksUpdate"/>.

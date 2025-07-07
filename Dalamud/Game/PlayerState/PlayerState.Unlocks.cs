@@ -1,10 +1,4 @@
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-
 using Dalamud.Data;
-using Dalamud.Hooking;
-using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 
@@ -15,56 +9,15 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
 
-namespace Dalamud.Game.UnlockState;
+using CSPlayerState = FFXIVClientStructs.FFXIV.Client.Game.UI.PlayerState;
+
+namespace Dalamud.Game.PlayerState;
 
 /// <summary>
 /// This class represents the state of the players unlocks.
 /// </summary>
-[ServiceManager.EarlyLoadedService]
-internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
+internal unsafe partial class PlayerState : IInternalDisposableService, IPlayerState
 {
-    private static readonly ModuleLog Log = new("UnlockState");
-
-    private readonly UnlockStateAddressResolver address;
-    private readonly Hook<PerformMateriaActionMigrationDelegate> performMateriaActionMigrationDelegateHook;
-    private readonly ConcurrentDictionary<Type, HashSet<uint>> cachedUnlockedRowIds = [];
-
-    [ServiceManager.ServiceDependency]
-    private readonly DataManager dataManager = Service<DataManager>.Get();
-
-    [ServiceManager.ServiceDependency]
-    private readonly ClientState.ClientState clientState = Service<ClientState.ClientState>.Get();
-
-    [ServiceManager.ServiceConstructor]
-    private UnlockState(TargetSigScanner sigScanner)
-    {
-        this.address = new UnlockStateAddressResolver();
-        this.address.Setup(sigScanner);
-
-        this.clientState.Login += this.OnLogin;
-        this.clientState.Logout += this.OnLogout;
-
-        this.performMateriaActionMigrationDelegateHook = Hook<PerformMateriaActionMigrationDelegate>.FromAddress(
-            this.address.PerformMateriaActionMigration,
-            this.PerformMateriaActionMigrationDetour);
-
-        this.performMateriaActionMigrationDelegateHook.Enable();
-    }
-
-    [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-    private delegate void PerformMateriaActionMigrationDelegate(RaptureHotbarModule* thisPtr);
-
-    /// <inheritdoc/>
-    public event EventHandler<RowRef>? Unlock;
-
-    /// <inheritdoc/>
-    void IInternalDisposableService.DisposeService()
-    {
-        this.clientState.Login -= this.OnLogin;
-        this.clientState.Logout -= this.OnLogout;
-        this.performMateriaActionMigrationDelegateHook.Dispose();
-    }
-
     /// <inheritdoc/>
     public bool IsActionUnlocked(Lumina.Excel.Sheets.Action row)
     {
@@ -77,7 +30,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsAetherCurrentUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsAetherCurrentUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -86,7 +39,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsAetherCurrentZoneComplete(row.RowId);
+        return CSPlayerState.Instance()->IsAetherCurrentZoneComplete(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -216,7 +169,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsGlassesUnlocked((ushort)row.RowId);
+        return CSPlayerState.Instance()->IsGlassesUnlocked((ushort)row.RowId);
     }
 
     /// <inheritdoc/>
@@ -257,10 +210,10 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
                 return UIState.Instance()->Buddy.CompanionInfo.IsBuddyEquipUnlocked(item.ItemAction.Value.Data[0]);
 
             case ItemActionType.Mount:
-                return PlayerState.Instance()->IsMountUnlocked(item.ItemAction.Value.Data[0]);
+                return CSPlayerState.Instance()->IsMountUnlocked(item.ItemAction.Value.Data[0]);
 
             case ItemActionType.SecretRecipeBook:
-                return PlayerState.Instance()->IsSecretRecipeBookUnlocked(item.ItemAction.Value.Data[0]);
+                return CSPlayerState.Instance()->IsSecretRecipeBookUnlocked(item.ItemAction.Value.Data[0]);
 
             case ItemActionType.UnlockLink:
                 return UIState.Instance()->IsUnlockLinkUnlocked(item.ItemAction.Value.Data[0]);
@@ -269,19 +222,19 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
                 return UIState.Instance()->IsTripleTriadCardUnlocked((ushort)item.AdditionalData.RowId);
 
             case ItemActionType.FolkloreTome:
-                return PlayerState.Instance()->IsFolkloreBookUnlocked(item.ItemAction.Value.Data[0]);
+                return CSPlayerState.Instance()->IsFolkloreBookUnlocked(item.ItemAction.Value.Data[0]);
 
             case ItemActionType.OrchestrionRoll when item.AdditionalData.Is<Orchestrion>():
-                return PlayerState.Instance()->IsOrchestrionRollUnlocked(item.AdditionalData.RowId);
+                return CSPlayerState.Instance()->IsOrchestrionRollUnlocked(item.AdditionalData.RowId);
 
             case ItemActionType.FramersKit:
-                return PlayerState.Instance()->IsFramersKitUnlocked(item.AdditionalData.RowId);
+                return CSPlayerState.Instance()->IsFramersKitUnlocked(item.AdditionalData.RowId);
 
             case ItemActionType.Ornament:
-                return PlayerState.Instance()->IsOrnamentUnlocked(item.ItemAction.Value.Data[0]);
+                return CSPlayerState.Instance()->IsOrnamentUnlocked(item.ItemAction.Value.Data[0]);
 
             case ItemActionType.Glasses:
-                return PlayerState.Instance()->IsGlassesUnlocked((ushort)item.AdditionalData.RowId);
+                return CSPlayerState.Instance()->IsGlassesUnlocked((ushort)item.AdditionalData.RowId);
 
             case ItemActionType.CompanySealVouchers:
                 return false;
@@ -294,7 +247,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
     /// <inheritdoc/>
     public bool IsMcGuffinUnlocked(McGuffin row)
     {
-        return PlayerState.Instance()->IsMcGuffinUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsMcGuffinUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -309,7 +262,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsMountUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsMountUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -324,7 +277,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsOrchestrionRollUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsOrchestrionRollUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -333,7 +286,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsOrnamentUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsOrnamentUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -357,7 +310,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return false;
 
-        return PlayerState.Instance()->IsSecretRecipeBookUnlocked(row.RowId);
+        return CSPlayerState.Instance()->IsSecretRecipeBookUnlocked(row.RowId);
     }
 
     /// <inheritdoc/>
@@ -407,6 +360,9 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn || rowRef.IsUntyped)
             return false;
 
+        if (rowRef.TryGetValue<Lumina.Excel.Sheets.Action>(out var actionRow))
+            return this.IsActionUnlocked(actionRow);
+
         if (rowRef.TryGetValue<AetherCurrent>(out var aetherCurrentRow))
             return this.IsAetherCurrentUnlocked(aetherCurrentRow);
 
@@ -416,83 +372,11 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (rowRef.TryGetValue<AozAction>(out var aozActionRow))
             return this.IsAozActionUnlocked(aozActionRow);
 
-        if (rowRef.TryGetValue<BuddyEquip>(out var buddyEquipRow))
-            return this.IsBuddyEquipUnlocked(buddyEquipRow);
-
-        if (rowRef.TryGetValue<Companion>(out var companionRow))
-            return this.IsCompanionUnlocked(companionRow);
-
-        if (rowRef.TryGetValue<Glasses>(out var glassesRow))
-            return this.IsGlassesUnlocked(glassesRow);
-
-        if (rowRef.TryGetValue<Mount>(out var mountRow))
-            return this.IsMountUnlocked(mountRow);
-
-        if (rowRef.TryGetValue<SecretRecipeBook>(out var secretRecipeBookRow))
-            return this.IsSecretRecipeBookUnlocked(secretRecipeBookRow);
-
-        if (rowRef.TryGetValue<TripleTriadCard>(out var tripleTriadCardRow))
-            return this.IsTripleTriadCardUnlocked(tripleTriadCardRow);
-
-        if (rowRef.TryGetValue<Orchestrion>(out var orchestrionRow))
-            return this.IsOrchestrionUnlocked(orchestrionRow);
-
-        if (rowRef.TryGetValue<Ornament>(out var ornamentRow))
-            return this.IsOrnamentUnlocked(ornamentRow);
-
-        if (rowRef.TryGetValue<HowTo>(out var howToRow))
-            return this.IsHowToUnlocked(howToRow);
-
-        if (rowRef.TryGetValue<ChocoboTaxi>(out var chocoboTaxiRow))
-            return this.IsChocoboTaxiUnlocked(chocoboTaxiRow);
-
-        if (rowRef.TryGetValue<Lumina.Excel.Sheets.InstanceContent>(out var instanceContentRow))
-            return this.IsInstanceContentUnlocked(instanceContentRow);
-
-        if (rowRef.TryGetValue<PublicContent>(out var publicContentRow))
-            return this.IsPublicContentUnlocked(publicContentRow);
-
-        if (rowRef.TryGetValue<Lumina.Excel.Sheets.Action>(out var actionRow))
-            return this.IsActionUnlocked(actionRow);
-
-        if (rowRef.TryGetValue<GeneralAction>(out var generalActionRow))
-            return this.IsGeneralActionUnlocked(generalActionRow);
-
-        if (rowRef.TryGetValue<BuddyAction>(out var buddyActionRow))
-            return this.IsBuddyActionUnlocked(buddyActionRow);
-
-        if (rowRef.TryGetValue<CraftAction>(out var craftActionRow))
-            return this.IsCraftActionUnlocked(craftActionRow);
-
-        if (rowRef.TryGetValue<Emote>(out var emoteRow))
-            return this.IsEmoteUnlocked(emoteRow);
-
-        if (rowRef.TryGetValue<Perform>(out var performRow))
-            return this.IsPerformUnlocked(performRow);
-
-        if (rowRef.TryGetValue<MJILandmark>(out var mjiLandmarkRow))
-            return this.IsMJILandmarkUnlocked(mjiLandmarkRow);
-
-        if (rowRef.TryGetValue<CSBonusContentType>(out var csBonusContentTypeRow))
-            return this.IsCSBonusContentTypeUnlocked(csBonusContentTypeRow);
-
-        if (rowRef.TryGetValue<NotebookDivision>(out var notebookDivisionRow))
-            return this.IsNotebookDivisionUnlocked(notebookDivisionRow);
-
-        if (rowRef.TryGetValue<Trait>(out var traitRow))
-            return this.IsTraitUnlocked(traitRow);
-
-        if (rowRef.TryGetValue<CharaMakeCustomize>(out var charaMakeCustomizeRow))
-            return this.IsCharaMakeCustomizeUnlocked(charaMakeCustomizeRow);
-
-        if (rowRef.TryGetValue<BannerCondition>(out var bannerConditionRow))
-            return this.IsBannerConditionUnlocked(bannerConditionRow);
-
         if (rowRef.TryGetValue<BannerBg>(out var bannerBgRow))
             return this.IsBannerBgUnlocked(bannerBgRow);
 
-        if (rowRef.TryGetValue<BannerFrame>(out var bannerFrameRow))
-            return this.IsBannerFrameUnlocked(bannerFrameRow);
+        if (rowRef.TryGetValue<BannerCondition>(out var bannerConditionRow))
+            return this.IsBannerConditionUnlocked(bannerConditionRow);
 
         if (rowRef.TryGetValue<BannerDecoration>(out var bannerDecorationRow))
             return this.IsBannerDecorationUnlocked(bannerDecorationRow);
@@ -500,14 +384,83 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (rowRef.TryGetValue<BannerFacial>(out var bannerFacialRow))
             return this.IsBannerFacialUnlocked(bannerFacialRow);
 
+        if (rowRef.TryGetValue<BannerFrame>(out var bannerFrameRow))
+            return this.IsBannerFrameUnlocked(bannerFrameRow);
+
         if (rowRef.TryGetValue<BannerTimeline>(out var bannerTimelineRow))
             return this.IsBannerTimelineUnlocked(bannerTimelineRow);
+
+        if (rowRef.TryGetValue<BuddyAction>(out var buddyActionRow))
+            return this.IsBuddyActionUnlocked(buddyActionRow);
+
+        if (rowRef.TryGetValue<BuddyEquip>(out var buddyEquipRow))
+            return this.IsBuddyEquipUnlocked(buddyEquipRow);
+
+        if (rowRef.TryGetValue<CSBonusContentType>(out var csBonusContentTypeRow))
+            return this.IsCSBonusContentTypeUnlocked(csBonusContentTypeRow);
+
+        if (rowRef.TryGetValue<CharaMakeCustomize>(out var charaMakeCustomizeRow))
+            return this.IsCharaMakeCustomizeUnlocked(charaMakeCustomizeRow);
+
+        if (rowRef.TryGetValue<ChocoboTaxi>(out var chocoboTaxiRow))
+            return this.IsChocoboTaxiUnlocked(chocoboTaxiRow);
+
+        if (rowRef.TryGetValue<Companion>(out var companionRow))
+            return this.IsCompanionUnlocked(companionRow);
+
+        if (rowRef.TryGetValue<CraftAction>(out var craftActionRow))
+            return this.IsCraftActionUnlocked(craftActionRow);
+
+        if (rowRef.TryGetValue<Emote>(out var emoteRow))
+            return this.IsEmoteUnlocked(emoteRow);
+
+        if (rowRef.TryGetValue<GeneralAction>(out var generalActionRow))
+            return this.IsGeneralActionUnlocked(generalActionRow);
+
+        if (rowRef.TryGetValue<Glasses>(out var glassesRow))
+            return this.IsGlassesUnlocked(glassesRow);
+
+        if (rowRef.TryGetValue<HowTo>(out var howToRow))
+            return this.IsHowToUnlocked(howToRow);
+
+        if (rowRef.TryGetValue<Lumina.Excel.Sheets.InstanceContent>(out var instanceContentRow))
+            return this.IsInstanceContentUnlocked(instanceContentRow);
+
+        if (rowRef.TryGetValue<Item>(out var itemRow))
+            return this.IsItemUnlocked(itemRow);
+
+        if (rowRef.TryGetValue<MJILandmark>(out var mjiLandmarkRow))
+            return this.IsMJILandmarkUnlocked(mjiLandmarkRow);
 
         if (rowRef.TryGetValue<McGuffin>(out var mcGuffinRow))
             return this.IsMcGuffinUnlocked(mcGuffinRow);
 
-        if (rowRef.TryGetValue<Item>(out var itemRow))
-            return this.IsItemUnlocked(itemRow);
+        if (rowRef.TryGetValue<Mount>(out var mountRow))
+            return this.IsMountUnlocked(mountRow);
+
+        if (rowRef.TryGetValue<NotebookDivision>(out var notebookDivisionRow))
+            return this.IsNotebookDivisionUnlocked(notebookDivisionRow);
+
+        if (rowRef.TryGetValue<Orchestrion>(out var orchestrionRow))
+            return this.IsOrchestrionUnlocked(orchestrionRow);
+
+        if (rowRef.TryGetValue<Ornament>(out var ornamentRow))
+            return this.IsOrnamentUnlocked(ornamentRow);
+
+        if (rowRef.TryGetValue<Perform>(out var performRow))
+            return this.IsPerformUnlocked(performRow);
+
+        if (rowRef.TryGetValue<PublicContent>(out var publicContentRow))
+            return this.IsPublicContentUnlocked(publicContentRow);
+
+        if (rowRef.TryGetValue<SecretRecipeBook>(out var secretRecipeBookRow))
+            return this.IsSecretRecipeBookUnlocked(secretRecipeBookRow);
+
+        if (rowRef.TryGetValue<Trait>(out var traitRow))
+            return this.IsTraitUnlocked(traitRow);
+
+        if (rowRef.TryGetValue<TripleTriadCard>(out var tripleTriadCardRow))
+            return this.IsTripleTriadCardUnlocked(tripleTriadCardRow);
 
         return false;
     }
@@ -536,23 +489,6 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         return UIState.Instance()->IsUnlockLinkUnlockedOrQuestCompleted(unlockLink);
     }
 
-    private void OnLogin()
-    {
-        try
-        {
-            this.UpdateUnlocks(false);
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Error during initial unlock check");
-        }
-    }
-
-    private void OnLogout(int type, int code)
-    {
-        this.cachedUnlockedRowIds.Clear();
-    }
-
     private void PerformMateriaActionMigrationDetour(RaptureHotbarModule* thisPtr)
     {
         try
@@ -572,46 +508,46 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         if (!this.clientState.IsLoggedIn)
             return;
 
+        this.UpdateUnlocksForSheet<Lumina.Excel.Sheets.Action>(fireEvent);
         this.UpdateUnlocksForSheet<AetherCurrent>(fireEvent);
         this.UpdateUnlocksForSheet<AetherCurrentCompFlgSet>(fireEvent);
         this.UpdateUnlocksForSheet<AozAction>(fireEvent);
-        this.UpdateUnlocksForSheet<BuddyEquip>(fireEvent);
-        this.UpdateUnlocksForSheet<Companion>(fireEvent);
-        this.UpdateUnlocksForSheet<Glasses>(fireEvent);
-        this.UpdateUnlocksForSheet<Mount>(fireEvent);
-        this.UpdateUnlocksForSheet<SecretRecipeBook>(fireEvent);
-        this.UpdateUnlocksForSheet<TripleTriadCard>(fireEvent);
-        this.UpdateUnlocksForSheet<Orchestrion>(fireEvent);
-        this.UpdateUnlocksForSheet<Ornament>(fireEvent);
-        this.UpdateUnlocksForSheet<HowTo>(fireEvent);
-        this.UpdateUnlocksForSheet<ChocoboTaxi>(fireEvent);
-        this.UpdateUnlocksForSheet<Lumina.Excel.Sheets.InstanceContent>(fireEvent);
-        this.UpdateUnlocksForSheet<PublicContent>(fireEvent);
-        this.UpdateUnlocksForSheet<Lumina.Excel.Sheets.Action>(fireEvent);
-        this.UpdateUnlocksForSheet<GeneralAction>(fireEvent);
-        this.UpdateUnlocksForSheet<BuddyAction>(fireEvent);
-        this.UpdateUnlocksForSheet<CraftAction>(fireEvent);
-        this.UpdateUnlocksForSheet<Emote>(fireEvent);
-        this.UpdateUnlocksForSheet<Perform>(fireEvent);
-        this.UpdateUnlocksForSheet<MJILandmark>(fireEvent);
-        this.UpdateUnlocksForSheet<CSBonusContentType>(fireEvent);
-        this.UpdateUnlocksForSheet<NotebookDivision>(fireEvent);
-        this.UpdateUnlocksForSheet<Trait>(fireEvent);
-        this.UpdateUnlocksForSheet<CharaMakeCustomize>(fireEvent);
-        this.UpdateUnlocksForSheet<BannerCondition>(fireEvent);
         this.UpdateUnlocksForSheet<BannerBg>(fireEvent);
-        this.UpdateUnlocksForSheet<BannerFrame>(fireEvent);
+        this.UpdateUnlocksForSheet<BannerCondition>(fireEvent);
         this.UpdateUnlocksForSheet<BannerDecoration>(fireEvent);
         this.UpdateUnlocksForSheet<BannerFacial>(fireEvent);
+        this.UpdateUnlocksForSheet<BannerFrame>(fireEvent);
         this.UpdateUnlocksForSheet<BannerTimeline>(fireEvent);
-        this.UpdateUnlocksForSheet<McGuffin>(fireEvent);
+        this.UpdateUnlocksForSheet<BuddyAction>(fireEvent);
+        this.UpdateUnlocksForSheet<BuddyEquip>(fireEvent);
+        this.UpdateUnlocksForSheet<CSBonusContentType>(fireEvent);
+        this.UpdateUnlocksForSheet<CharaMakeCustomize>(fireEvent);
+        this.UpdateUnlocksForSheet<ChocoboTaxi>(fireEvent);
+        this.UpdateUnlocksForSheet<Companion>(fireEvent);
+        this.UpdateUnlocksForSheet<CraftAction>(fireEvent);
+        this.UpdateUnlocksForSheet<Emote>(fireEvent);
+        this.UpdateUnlocksForSheet<GeneralAction>(fireEvent);
+        this.UpdateUnlocksForSheet<Glasses>(fireEvent);
+        this.UpdateUnlocksForSheet<HowTo>(fireEvent);
+        this.UpdateUnlocksForSheet<Lumina.Excel.Sheets.InstanceContent>(fireEvent);
         this.UpdateUnlocksForSheet<Item>(fireEvent);
+        this.UpdateUnlocksForSheet<MJILandmark>(fireEvent);
+        this.UpdateUnlocksForSheet<McGuffin>(fireEvent);
+        this.UpdateUnlocksForSheet<Mount>(fireEvent);
+        this.UpdateUnlocksForSheet<NotebookDivision>(fireEvent);
+        this.UpdateUnlocksForSheet<Orchestrion>(fireEvent);
+        this.UpdateUnlocksForSheet<Ornament>(fireEvent);
+        this.UpdateUnlocksForSheet<Perform>(fireEvent);
+        this.UpdateUnlocksForSheet<PublicContent>(fireEvent);
+        this.UpdateUnlocksForSheet<SecretRecipeBook>(fireEvent);
+        this.UpdateUnlocksForSheet<Trait>(fireEvent);
+        this.UpdateUnlocksForSheet<TripleTriadCard>(fireEvent);
 
         // Not implemented:
         // - DescriptionPage: quite complex
         // - QuestAcceptAdditionCondition: ignored
 
-        // Maybe some day:
+        // For some other day:
         // - FishingSpot
         // - Spearfishing
         // - Adventure (Sightseeing)
@@ -619,7 +555,7 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         // - MinerFolkloreTome
         // - BotanistFolkloreTome
         // - FishingFolkloreTome
-        // - Other instances, like VVD?
+        // - VVD or is that unlocked via quest?
         // - VVDNotebookContents?
         // - FramersKit (is that just an Item?)
         // - ... more?
@@ -628,8 +564,6 @@ internal unsafe class UnlockState : IInternalDisposableService, IUnlockState
         // - Achievements
         // - Titles
         // - Bozjan Field Notes
-
-        // ... and I probably missed something. :D
     }
 
     private void UpdateUnlocksForSheet<T>(bool fireEvent = true) where T : struct, IExcelRow<T>

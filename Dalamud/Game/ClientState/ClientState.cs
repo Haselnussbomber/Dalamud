@@ -16,13 +16,13 @@ using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Application.Network;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 using Lumina.Excel.Sheets;
 
 using Action = System.Action;
+using CSPlayerState = FFXIVClientStructs.FFXIV.Client.Game.UI.PlayerState;
 
 namespace Dalamud.Game.ClientState;
 
@@ -120,7 +120,7 @@ internal sealed class ClientState : IInternalDisposableService, IClientState
     public IPlayerCharacter? LocalPlayer => Service<ObjectTable>.GetNullable()?[0] as IPlayerCharacter;
 
     /// <inheritdoc/>
-    public unsafe ulong LocalContentId => PlayerState.Instance()->ContentId;
+    public unsafe ulong LocalContentId => CSPlayerState.Instance()->ContentId;
 
     /// <inheritdoc/>
     public unsafe bool IsLoggedIn

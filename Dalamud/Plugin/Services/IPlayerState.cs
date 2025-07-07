@@ -6,7 +6,7 @@ namespace Dalamud.Plugin.Services;
 /// <summary>
 /// Interface for determining unlock state of various content in the game.
 /// </summary>
-public interface IUnlockState
+public interface IPlayerState
 {
     /// <summary>
     /// Event triggered when something was unlocked.
