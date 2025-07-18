@@ -8,6 +8,81 @@
 #include "ntdll.h"
 #include "utils.h"
 
+void xivfixes::smmalloc_allocator(bool bApply) {
+    static const char* LogTag = "[xivfixes:smmalloc_allocator]";
+
+    static sm_allocator g_smmalloc_allocator = nullptr;
+    static std::optional<hooks::direct_hook<decltype(_aligned_malloc)>> aligned_malloc_hook;
+    static std::optional<hooks::direct_hook<decltype(_aligned_free)>> aligned_free_hook;
+
+    if (bApply) {
+        const char* alignedMallocPtr = utils::signature_finder()
+            .look_in(utils::loaded_module(g_hGameInstance), ".text")
+            .look_for_hex("E9 ?? ?? ?? ?? ?? ?? ?? 4C 8B C3 48 8B D7")
+            .find_one()
+            .resolve_jump_target();
+        /*
+            SystemAllocator vf4 - need to fix arguments for aligned_malloc_hook
+            .look_for_hex("49 8B D1 49 8B C8 E9 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 FF 60")
+            .find_one()
+            .Match.data();
+        */
+
+        if (!alignedMallocPtr) {
+            logging::E("{} Failed to find signature for _aligned_malloc.", LogTag);
+            return;
+        }
+
+        const char* alignedFreePtr = utils::signature_finder()
+            .look_in(utils::loaded_module(g_hGameInstance), ".text")
+            .look_for_hex("E8 ?? ?? ?? ?? EB ?? 8B 15 ?? ?? ?? ?? 65 48 8B 04 25")
+            .find_one()
+            .resolve_jump_target();
+        /*
+            SystemAllocator vf7 - need to fix arguments for aligned_free_hook
+            .look_for_hex("48 8B CA E9 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 33 C0 C3 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 49 8D 40")
+            .find_one()
+            .Match.data();
+        */
+
+        if (!alignedFreePtr) {
+            logging::E("{} Failed to find signature for _aligned_free.", LogTag);
+            return;
+        }
+
+        g_smmalloc_allocator = _sm_allocator_create(16, 16 * 1024 * 1024); // 16 buckets, 16 MB each
+
+        if (!g_smmalloc_allocator) {
+            logging::E("{} Failed to create smmalloc allocator.", LogTag);
+            return;
+        }
+
+        logging::I("{} Hooking _aligned_malloc", LogTag);
+        aligned_malloc_hook.emplace("_aligned_malloc", reinterpret_cast<decltype(_aligned_malloc)*>(alignedMallocPtr));
+        aligned_malloc_hook->set_detour([](size_t size, size_t alignment) -> void* {
+            return _sm_malloc(g_smmalloc_allocator, size, alignment);
+        });
+
+        logging::I("{} Hooking _aligned_free", LogTag);
+        aligned_free_hook.emplace("_aligned_free", reinterpret_cast<decltype(_aligned_free)*>(alignedFreePtr));
+        aligned_free_hook->set_detour([](void* ptr) {
+            _sm_free(g_smmalloc_allocator, ptr);
+        });
+    } else {
+        logging::I("{} Disabling _aligned_malloc hook", LogTag);
+        aligned_malloc_hook.reset();
+
+        logging::I("{} Disabling aligned_free hook", LogTag);
+        aligned_free_hook.reset();
+
+        if (g_smmalloc_allocator)
+        {
+            logging::I("{} Destroying smmalloc allocator", LogTag);
+            _sm_allocator_destroy(g_smmalloc_allocator);
+        }
+    }
+}
+
 void xivfixes::unhook_dll(bool bApply) {
     static const auto LogTag = "[xivfixes:unhook_dll]";
     static const auto LogTagW = L"[xivfixes:unhook_dll]";
@@ -222,7 +297,7 @@ void xivfixes::prevent_devicechange_crashes(bool bApply) {
             // <pointer to new wndproc>
             memcpy(s_pfnBinder, "\xFF\x35\x01\x00\x00\x00\xC3", 7);
             *reinterpret_cast<void**>(reinterpret_cast<char*>(s_pfnBinder) + 7) = s_pfnAlternativeWndProc;
-            
+
             s_pfnGameWndProc = pWndClassExA->lpfnWndProc;
 
             WNDCLASSEXA wndClassExA = *pWndClassExA;
@@ -452,7 +527,7 @@ void xivfixes::backup_userdata_save(bool bApply) {
 
             const auto lock = std::lock_guard(s_mtx);
             s_handles.try_emplace(handle, std::move(temporaryPath), std::move(path));
-            
+
             return handle;
         });
 
@@ -599,7 +674,7 @@ void xivfixes::symbol_load_patches(bool bApply) {
         }
 
         for (const auto& mod : utils::loaded_module::all_modules())
-           RemoveFullPathPdbInfo(mod); 
+           RemoveFullPathPdbInfo(mod);
 
         if (!s_dllNotificationCookie) {
             const auto res = LdrRegisterDllNotification(
@@ -671,6 +746,7 @@ void xivfixes::apply_all(bool bApply) {
             { "prevent_icmphandle_crashes", &prevent_icmphandle_crashes },
             { "symbol_load_patches", &symbol_load_patches },
             { "disable_game_debugging_protection", &disable_game_debugging_protection },
+            { "smmalloc_allocator", &smmalloc_allocator },
         }
         ) {
         try {
