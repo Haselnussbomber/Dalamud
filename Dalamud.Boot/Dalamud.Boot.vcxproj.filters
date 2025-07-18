@@ -17,6 +17,9 @@
     <Filter Include="MinHook">
       <UniqueIdentifier>{6ec5597d-e293-4d2a-a307-7444c8fac04b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="smmalloc">
+      <UniqueIdentifier>{912eda72-acd3-4792-8e59-6eb447b6f04d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -66,6 +69,15 @@
     </ClCompile>
     <ClCompile Include="..\lib\TsudaKageyu-minhook\src\trampoline.c">
       <Filter>MinHook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\smmalloc\SmMalloc\smmalloc_tls.cpp">
+      <Filter>smmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\smmalloc\SmMalloc\smmalloc.cpp">
+      <Filter>smmalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\smmalloc\SmMalloc\smmalloc_generic.cpp">
+      <Filter>smmalloc</Filter>
     </ClCompile>
     <ClCompile Include="hooks.cpp">
       <Filter>Dalamud.Boot DLL</Filter>
@@ -140,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\lib\TsudaKageyu-minhook\src\HDE\table64.h">
       <Filter>MinHook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\smmalloc\SmMalloc\smmalloc.h">
+      <Filter>smmalloc</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="crashhandler_shared.h" />

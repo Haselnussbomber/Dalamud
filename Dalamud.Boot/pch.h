@@ -69,6 +69,9 @@
 // https://github.com/nlohmann/json
 #include "../lib/nlohmann-json/json.hpp"
 
+// https://github.com/SergeyMakeev/smmalloc
+#include "../lib/smmalloc/SmMalloc/smmalloc.h"
+
 #include "unicode.h"
 
 // Global variables
