@@ -21,224 +21,143 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
+		public static float DeclColumns(ref ImGuiMenuColumns self, float wIcon, float wLabel, float wShortcut, float wMark)
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
+			fixed (ImGuiMenuColumns* pself = &self)
 			{
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					return ret;
-				}
+				float ret = DeclColumnsNative((ImGuiMenuColumns*)pself, wIcon, wLabel, wShortcut, wMark);
+				return ret;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CalcNextTotalWidthNative(ImGuiMenuColumns* self, byte updateOffsets)
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
+			((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, byte, void>)funcTable[793])(self, updateOffsets);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcNextTotalWidth(ImGuiMenuColumnsPtr self, bool updateOffsets)
+		{
+			CalcNextTotalWidthNative(self, updateOffsets ? (byte)1 : (byte)0);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcNextTotalWidth(ref ImGuiMenuColumns self, bool updateOffsets)
+		{
+			fixed (ImGuiMenuColumns* pself = &self)
 			{
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					return ret;
-				}
+				CalcNextTotalWidthNative((ImGuiMenuColumns*)pself, updateOffsets ? (byte)1 : (byte)0);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiInputTextState* ImGuiInputTextStateNative()
 		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					return ret;
-				}
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*>)funcTable[794])();
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
+		public static ImGuiInputTextStatePtr ImGuiInputTextState()
 		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needle != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(needle);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte* ret = ImStristrNative(haystack, pStr0, pStr1, needleEnd);
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			ImGuiInputTextStatePtr ret = ImGuiInputTextStateNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, string needle, byte* needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearTextNative(ImGuiInputTextState* self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[795])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearText(ImGuiInputTextStatePtr self)
+		{
+			ClearTextNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearText(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
+				ClearTextNative((ImGuiInputTextState*)pself);
 			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needle != null)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearFreeMemoryNative(ImGuiInputTextState* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[796])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFreeMemory(ImGuiInputTextStatePtr self)
+		{
+			ClearFreeMemoryNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFreeMemory(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize1 = Utils.GetByteCountUTF8(needle);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
+				ClearFreeMemoryNative((ImGuiInputTextState*)pself);
 			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, pStr1, needleEnd));
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetUndoAvailCountNative(ImGuiInputTextState* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)funcTable[797])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetUndoAvailCount(ImGuiInputTextStatePtr self)
+		{
+			int ret = GetUndoAvailCountNative(self);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
+		public static int GetUndoAvailCount(ref ImGuiInputTextState self)
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needle != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, pStr0, needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				int ret = GetUndoAvailCountNative((ImGuiInputTextState*)pself);
 				return ret;
 			}
 		}
@@ -246,926 +165,201 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, string needle, byte* needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetRedoAvailCountNative(ImGuiInputTextState* self)
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needle != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, pStr0, needleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)funcTable[798])(self);
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
+		public static int GetRedoAvailCount(ImGuiInputTextStatePtr self)
 		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needle != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, pStr0, needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needle != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, pStr0, needleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedle = &needle)
-			{
-				byte* ret = ImStristrNative(haystack, pStr0, (byte*)pneedle, needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedle = &needle)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, (byte*)pneedle, needleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedle = needle)
-			{
-				byte* ret = ImStristrNative(haystack, pStr0, (byte*)pneedle, needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedle = needle)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, (byte*)pneedle, needleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, string haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte* pStr2 = null;
-			int pStrSize2 = 0;
-			if (needle != null)
-			{
-				pStrSize2 = Utils.GetByteCountUTF8(needle);
-				if (pStrSize2 >= Utils.MaxStackallocSize)
-				{
-					pStr2 = Utils.Alloc<byte>(pStrSize2 + 1);
-				}
-				else
-				{
-					byte* pStrStack2 = stackalloc byte[pStrSize2 + 1];
-					pStr2 = pStrStack2;
-				}
-				int pStrOffset2 = Utils.EncodeStringUTF8(needle, pStr2, pStrSize2);
-				pStr2[pStrOffset2] = 0;
-			}
-			byte* ret = ImStristrNative(pStr0, pStr1, pStr2, needleEnd);
-			if (pStrSize2 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr2);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			int ret = GetRedoAvailCountNative(self);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(string haystack, string haystackEnd, string needle, byte* needleEnd)
+		public static int GetRedoAvailCount(ref ImGuiInputTextState self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
+				int ret = GetRedoAvailCountNative((ImGuiInputTextState*)pself);
+				return ret;
 			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void OnKeyPressedNative(ImGuiInputTextState* self, int key)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int, void>)funcTable[799])(self, key);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void OnKeyPressed(ImGuiInputTextStatePtr self, int key)
+		{
+			OnKeyPressedNative(self, key);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void OnKeyPressed(ref ImGuiInputTextState self, int key)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
+				OnKeyPressedNative((ImGuiInputTextState*)pself, key);
 			}
-			byte* pStr2 = null;
-			int pStrSize2 = 0;
-			if (needle != null)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CursorAnimResetNative(ImGuiInputTextState* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[800])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CursorAnimReset(ImGuiInputTextStatePtr self)
+		{
+			CursorAnimResetNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CursorAnimReset(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize2 = Utils.GetByteCountUTF8(needle);
-				if (pStrSize2 >= Utils.MaxStackallocSize)
-				{
-					pStr2 = Utils.Alloc<byte>(pStrSize2 + 1);
-				}
-				else
-				{
-					byte* pStrStack2 = stackalloc byte[pStrSize2 + 1];
-					pStr2 = pStrStack2;
-				}
-				int pStrOffset2 = Utils.EncodeStringUTF8(needle, pStr2, pStrSize2);
-				pStr2[pStrOffset2] = 0;
+				CursorAnimResetNative((ImGuiInputTextState*)pself);
 			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, pStr1, pStr2, needleEnd));
-			if (pStrSize2 >= Utils.MaxStackallocSize)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CursorClampNative(ImGuiInputTextState* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[801])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CursorClamp(ImGuiInputTextStatePtr self)
+		{
+			CursorClampNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CursorClamp(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				Utils.Free(pStr2);
+				CursorClampNative((ImGuiInputTextState*)pself);
 			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte HasSelectionNative(ImGuiInputTextState* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, byte>)funcTable[802])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool HasSelection(ImGuiInputTextStatePtr self)
+		{
+			byte ret = HasSelectionNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool HasSelection(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				Utils.Free(pStr1);
+				byte ret = HasSelectionNative((ImGuiInputTextState*)pself);
+				return ret != 0;
 			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearSelectionNative(ImGuiInputTextState* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[803])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearSelection(ImGuiInputTextStatePtr self)
+		{
+			ClearSelectionNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearSelection(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				Utils.Free(pStr0);
+				ClearSelectionNative((ImGuiInputTextState*)pself);
 			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetCursorPosNative(ImGuiInputTextState* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)funcTable[804])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetCursorPos(ImGuiInputTextStatePtr self)
+		{
+			int ret = GetCursorPosNative(self);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
+		public static int GetCursorPos(ref ImGuiInputTextState self)
 		{
-			fixed (byte* phaystack = &haystack)
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, pStr0, pStr1, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				int ret = GetCursorPosNative((ImGuiInputTextState*)pself);
 				return ret;
 			}
 		}
@@ -1173,2591 +367,450 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, string needle, byte* needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetSelectionStartNative(ImGuiInputTextState* self)
 		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, pStr1, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)funcTable[805])(self);
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
+		public static int GetSelectionStart(ImGuiInputTextStatePtr self)
 		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedle = needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedle = &needle)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needle != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needle);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needle, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, pStr0, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, pStr0, pStr1, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, string needle, byte* needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, pStr1, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, pStr1, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, pStr1, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ReadOnlySpan<byte> haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = &needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ReadOnlySpan<byte> haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedle = needle)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, (byte*)pneedle, needleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, pStr1, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ReadOnlySpan<byte> haystackEnd, string needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needle != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needle);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needle, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, pStr1, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			fixed (byte* pneedle = &needle)
-			{
-				byte* ret = ImStristrNative(pStr0, pStr1, (byte*)pneedle, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, string haystackEnd, ref byte needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			fixed (byte* pneedle = &needle)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, pStr1, (byte*)pneedle, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			fixed (byte* pneedle = needle)
-			{
-				byte* ret = ImStristrNative(pStr0, pStr1, (byte*)pneedle, needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, string haystackEnd, ReadOnlySpan<byte> needle, byte* needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			fixed (byte* pneedle = needle)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, pStr1, (byte*)pneedle, needleEnd));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				byte* ret = ImStristrNative(haystack, haystackEnd, needle, (byte*)pneedleEnd);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, haystackEnd, needle, (byte*)pneedleEnd));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				byte* ret = ImStristrNative(haystack, haystackEnd, needle, (byte*)pneedleEnd);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, haystackEnd, needle, (byte*)pneedleEnd));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, byte* haystackEnd, byte* needle, string needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* ret = ImStristrNative(haystack, haystackEnd, needle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			int ret = GetSelectionStartNative(self);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, byte* haystackEnd, byte* needle, string needleEnd)
+		public static int GetSelectionStart(ref ImGuiInputTextState self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (needleEnd != null)
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
+				int ret = GetSelectionStartNative((ImGuiInputTextState*)pself);
+				return ret;
 			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, haystackEnd, needle, pStr0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetSelectionEndNative(ImGuiInputTextState* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)funcTable[806])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetSelectionEnd(ImGuiInputTextStatePtr self)
+		{
+			int ret = GetSelectionEndNative(self);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
+		public static int GetSelectionEnd(ref ImGuiInputTextState self)
 		{
-			fixed (byte* phaystack = &haystack)
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
+				int ret = GetSelectionEndNative((ImGuiInputTextState*)pself);
+				return ret;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SelectAllNative(ImGuiInputTextState* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)funcTable[807])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SelectAll(ImGuiInputTextStatePtr self)
+		{
+			SelectAllNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SelectAll(ref ImGuiInputTextState self)
+		{
+			fixed (ImGuiInputTextState* pself = &self)
 			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
+				SelectAllNative((ImGuiInputTextState*)pself);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiPopupData* ImGuiPopupDataNative()
 		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiPopupData*>)funcTable[808])();
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		public static ImGuiPopupDataPtr ImGuiPopupData()
 		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, byte* haystackEnd, byte* needle, string needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte* ret = ImStristrNative(pStr0, haystackEnd, needle, pStr1);
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			ImGuiPopupDataPtr ret = ImGuiPopupDataNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(string haystack, byte* haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiNextWindowData* ImGuiNextWindowDataNative()
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, haystackEnd, needle, pStr1));
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*>)funcTable[809])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiNextWindowDataPtr ImGuiNextWindowData()
+		{
+			ImGuiNextWindowDataPtr ret = ImGuiNextWindowDataNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearFlagsNative(ImGuiNextWindowData* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*, void>)funcTable[810])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFlags(ImGuiNextWindowDataPtr self)
+		{
+			ClearFlagsNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFlags(ref ImGuiNextWindowData self)
+		{
+			fixed (ImGuiNextWindowData* pself = &self)
 			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
+				ClearFlagsNative((ImGuiNextWindowData*)pself);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiNextItemData* ImGuiNextItemDataNative()
 		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiNextItemData*>)funcTable[811])();
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, byte* haystackEnd, byte* needle, string needleEnd)
+		public static ImGuiNextItemDataPtr ImGuiNextItemData()
 		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, byte* haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, pStr0));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, haystackEnd, needle, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, byte* haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, haystackEnd, needle, pStr0));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				byte* ret = ImStristrNative(pStr0, haystackEnd, needle, (byte*)pneedleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, byte* haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, haystackEnd, needle, (byte*)pneedleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				byte* ret = ImStristrNative(pStr0, haystackEnd, needle, (byte*)pneedleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, byte* haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, haystackEnd, needle, (byte*)pneedleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, byte* needle, string needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte* ret = ImStristrNative(haystack, pStr0, needle, pStr1);
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			ImGuiNextItemDataPtr ret = ImGuiNextItemDataNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearFlagsNative(ImGuiNextItemData* self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
+			((delegate* unmanaged[Cdecl]<ImGuiNextItemData*, void>)funcTable[812])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFlags(ImGuiNextItemDataPtr self)
+		{
+			ClearFlagsNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearFlags(ref ImGuiNextItemData self)
+		{
+			fixed (ImGuiNextItemData* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
+				ClearFlagsNative((ImGuiNextItemData*)pself);
 			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, needle, pStr1));
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiLastItemData* ImGuiLastItemDataNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiLastItemData*>)funcTable[813])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiLastItemDataPtr ImGuiLastItemData()
+		{
+			ImGuiLastItemDataPtr ret = ImGuiLastItemDataNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiStackSizes* ImGuiStackSizesNative()
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackSizes*>)funcTable[814])();
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		public static ImGuiStackSizesPtr ImGuiStackSizes()
 		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ref byte haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ref byte haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, pStr0));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* ret = ImStristrNative(haystack, (byte*)phaystackEnd, needle, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystackEnd = haystackEnd)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, (byte*)phaystackEnd, needle, pStr0));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				byte* ret = ImStristrNative(haystack, pStr0, needle, (byte*)pneedleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = &needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, needle, (byte*)pneedleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(byte* haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				byte* ret = ImStristrNative(haystack, pStr0, needle, (byte*)pneedleEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(byte* haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pneedleEnd = needleEnd)
-			{
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(haystack, pStr0, needle, (byte*)pneedleEnd));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, string haystackEnd, byte* needle, string needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
-			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte* pStr2 = null;
-			int pStrSize2 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize2 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize2 >= Utils.MaxStackallocSize)
-				{
-					pStr2 = Utils.Alloc<byte>(pStrSize2 + 1);
-				}
-				else
-				{
-					byte* pStrStack2 = stackalloc byte[pStrSize2 + 1];
-					pStr2 = pStrStack2;
-				}
-				int pStrOffset2 = Utils.EncodeStringUTF8(needleEnd, pStr2, pStrSize2);
-				pStr2[pStrOffset2] = 0;
-			}
-			byte* ret = ImStristrNative(pStr0, pStr1, needle, pStr2);
-			if (pStrSize2 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr2);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			ImGuiStackSizesPtr ret = ImGuiStackSizesNative();
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(string haystack, string haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetToCurrentStateNative(ImGuiStackSizes* self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)funcTable[815])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetToCurrentState(ImGuiStackSizesPtr self)
+		{
+			SetToCurrentStateNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetToCurrentState(ref ImGuiStackSizes self)
+		{
+			fixed (ImGuiStackSizes* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
+				SetToCurrentStateNative((ImGuiStackSizes*)pself);
 			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (haystackEnd != null)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CompareWithCurrentStateNative(ImGuiStackSizes* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)funcTable[816])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CompareWithCurrentState(ImGuiStackSizesPtr self)
+		{
+			CompareWithCurrentStateNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CompareWithCurrentState(ref ImGuiStackSizes self)
+		{
+			fixed (ImGuiStackSizes* pself = &self)
 			{
-				pStrSize1 = Utils.GetByteCountUTF8(haystackEnd);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(haystackEnd, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
+				CompareWithCurrentStateNative((ImGuiStackSizes*)pself);
 			}
-			byte* pStr2 = null;
-			int pStrSize2 = 0;
-			if (needleEnd != null)
-			{
-				pStrSize2 = Utils.GetByteCountUTF8(needleEnd);
-				if (pStrSize2 >= Utils.MaxStackallocSize)
-				{
-					pStr2 = Utils.Alloc<byte>(pStrSize2 + 1);
-				}
-				else
-				{
-					byte* pStrStack2 = stackalloc byte[pStrSize2 + 1];
-					pStr2 = pStrStack2;
-				}
-				int pStrOffset2 = Utils.EncodeStringUTF8(needleEnd, pStr2, pStrSize2);
-				pStr2[pStrOffset2] = 0;
-			}
-			string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, pStr1, needle, pStr2));
-			if (pStrSize2 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr2);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiPtrOrIndex* ImGuiPtrOrIndexNative(void* ptr)
+		{
+			return ((delegate* unmanaged[Cdecl]<void*, ImGuiPtrOrIndex*>)funcTable[817])(ptr);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiPtrOrIndexPtr ImGuiPtrOrIndex(void* ptr)
+		{
+			ImGuiPtrOrIndexPtr ret = ImGuiPtrOrIndexNative(ptr);
 			return ret;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiPtrOrIndex* ImGuiPtrOrIndexNative(int index)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<int, ImGuiPtrOrIndex*>)funcTable[818])(index);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiPtrOrIndexPtr ImGuiPtrOrIndex(int index)
+		{
+			ImGuiPtrOrIndexPtr ret = ImGuiPtrOrIndexNative(index);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiInputEvent* ImGuiInputEventNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputEvent*>)funcTable[819])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiInputEventPtr ImGuiInputEvent()
+		{
+			ImGuiInputEventPtr ret = ImGuiInputEventNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiListClipperRange FromIndicesNative(int min, int max)
+		{
+			return ((delegate* unmanaged[Cdecl]<int, int, ImGuiListClipperRange>)funcTable[820])(min, max);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiListClipperRange FromIndices(int min, int max)
+		{
+			ImGuiListClipperRange ret = FromIndicesNative(min, max);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiListClipperRange FromPositionsNative(float y1, float y2, int offMin, int offMax)
+		{
+			return ((delegate* unmanaged[Cdecl]<float, float, int, int, ImGuiListClipperRange>)funcTable[821])(y1, y2, offMin, offMax);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiListClipperRange FromPositions(float y1, float y2, int offMin, int offMax)
+		{
+			ImGuiListClipperRange ret = FromPositionsNative(y1, y2, offMin, offMax);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiListClipperData* ImGuiListClipperDataNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiListClipperData*>)funcTable[822])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiListClipperDataPtr ImGuiListClipperData()
+		{
+			ImGuiListClipperDataPtr ret = ImGuiListClipperDataNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ResetNative(ImGuiListClipperData* self, ImGuiListClipper* clipper)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiListClipperData*, ImGuiListClipper*, void>)funcTable[823])(self, clipper);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Reset(ImGuiListClipperDataPtr self, ImGuiListClipperPtr clipper)
+		{
+			ResetNative(self, clipper);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Reset(ref ImGuiListClipperData self, ImGuiListClipperPtr clipper)
+		{
+			fixed (ImGuiListClipperData* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
+				ResetNative((ImGuiListClipperData*)pself, clipper);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Reset(ImGuiListClipperDataPtr self, ref ImGuiListClipper clipper)
+		{
+			fixed (ImGuiListClipper* pclipper = &clipper)
+			{
+				ResetNative(self, (ImGuiListClipper*)pclipper);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Reset(ref ImGuiListClipperData self, ref ImGuiListClipper clipper)
+		{
+			fixed (ImGuiListClipperData* pself = &self)
+			{
+				fixed (ImGuiListClipper* pclipper = &clipper)
 				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
+					ResetNative((ImGuiListClipperData*)pself, (ImGuiListClipper*)pclipper);
 				}
 			}
 		}
@@ -3765,431 +818,440 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiNavItemData* ImGuiNavItemDataNative()
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavItemData*>)funcTable[824])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiNavItemDataPtr ImGuiNavItemData()
+		{
+			ImGuiNavItemDataPtr ret = ImGuiNavItemDataNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearNative(ImGuiNavItemData* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiNavItemData*, void>)funcTable[825])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Clear(ImGuiNavItemDataPtr self)
+		{
+			ClearNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Clear(ref ImGuiNavItemData self)
+		{
+			fixed (ImGuiNavItemData* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
+				ClearNative((ImGuiNavItemData*)pself);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ref byte haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiOldColumnData* ImGuiOldColumnDataNative()
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumnData*>)funcTable[826])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiOldColumnDataPtr ImGuiOldColumnData()
+		{
+			ImGuiOldColumnDataPtr ret = ImGuiOldColumnDataNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiOldColumns* ImGuiOldColumnsNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*>)funcTable[827])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiOldColumnsPtr ImGuiOldColumns()
+		{
+			ImGuiOldColumnsPtr ret = ImGuiOldColumnsNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiDockNode* ImGuiDockNodeNative(uint id)
+		{
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)funcTable[828])(id);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiDockNodePtr ImGuiDockNode(uint id)
+		{
+			ImGuiDockNodePtr ret = ImGuiDockNodeNative(id);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void DestroyNative(ImGuiDockNode* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)funcTable[829])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ImGuiDockNodePtr self)
+		{
+			DestroyNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				DestroyNative((ImGuiDockNode*)pself);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, ref byte haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsRootNodeNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[830])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsRootNode(ImGuiDockNodePtr self)
+		{
+			byte ret = IsRootNodeNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsRootNode(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				byte ret = IsRootNodeNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsDockSpaceNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[831])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsDockSpace(ImGuiDockNodePtr self)
+		{
+			byte ret = IsDockSpaceNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsDockSpace(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
+				byte ret = IsDockSpaceNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsFloatingNodeNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[832])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsFloatingNode(ImGuiDockNodePtr self)
+		{
+			byte ret = IsFloatingNodeNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsFloatingNode(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
+				byte ret = IsFloatingNodeNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsCentralNodeNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[833])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsCentralNode(ImGuiDockNodePtr self)
+		{
+			byte ret = IsCentralNodeNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsCentralNode(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
+				byte ret = IsCentralNodeNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsHiddenTabBarNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[834])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsHiddenTabBar(ImGuiDockNodePtr self)
+		{
+			byte ret = IsHiddenTabBarNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsHiddenTabBar(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
+				byte ret = IsHiddenTabBarNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsNoTabBarNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[835])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsNoTabBar(ImGuiDockNodePtr self)
+		{
+			byte ret = IsNoTabBarNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsNoTabBar(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				byte ret = IsNoTabBarNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsSplitNodeNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[836])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsSplitNode(ImGuiDockNodePtr self)
+		{
+			byte ret = IsSplitNodeNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsSplitNode(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				byte ret = IsSplitNodeNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsLeafNodeNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[837])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsLeafNode(ImGuiDockNodePtr self)
+		{
+			byte ret = IsLeafNodeNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsLeafNode(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				byte ret = IsLeafNodeNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsEmptyNative(ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)funcTable[838])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsEmpty(ImGuiDockNodePtr self)
+		{
+			byte ret = IsEmptyNative(self);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsEmpty(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				byte ret = IsEmptyNative((ImGuiDockNode*)pself);
+				return ret != 0;
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void RectNative(ImRect* pOut, ImGuiDockNode* self)
 		{
-			fixed (byte* phaystack = &haystack)
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiDockNode*, void>)funcTable[839])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect Rect(ImGuiDockNodePtr self)
+		{
+			ImRect ret;
+			RectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Rect(ref ImRect pOut, ImGuiDockNodePtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				RectNative((ImRect*)ppOut, self);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		public static ImRect Rect(ref ImGuiDockNode self)
 		{
-			fixed (byte* phaystack = &haystack)
+			fixed (ImGuiDockNode* pself = &self)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ref byte haystack, string haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = &haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, pStr1);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				ImRect ret;
+				RectNative(&ret, (ImGuiDockNode*)pself);
 				return ret;
 			}
 		}
@@ -4197,53 +1259,204 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ref byte haystack, string haystackEnd, byte* needle, string needleEnd)
+		public static void Rect(ref ImRect pOut, ref ImGuiDockNode self)
 		{
-			fixed (byte* phaystack = &haystack)
+			fixed (ImRect* ppOut = &pOut)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
+				fixed (ImGuiDockNode* pself = &self)
 				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
+					RectNative((ImRect*)ppOut, (ImGuiDockNode*)pself);
 				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, pStr1));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetLocalFlagsNative(ImGuiDockNode* self, ImGuiDockNodeFlags flags)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNodeFlags, void>)funcTable[840])(self, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetLocalFlags(ImGuiDockNodePtr self, ImGuiDockNodeFlags flags)
+		{
+			SetLocalFlagsNative(self, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetLocalFlags(ref ImGuiDockNode self, ImGuiDockNodeFlags flags)
+		{
+			fixed (ImGuiDockNode* pself = &self)
+			{
+				SetLocalFlagsNative((ImGuiDockNode*)pself, flags);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateMergedFlagsNative(ImGuiDockNode* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)funcTable[841])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateMergedFlags(ImGuiDockNodePtr self)
+		{
+			UpdateMergedFlagsNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateMergedFlags(ref ImGuiDockNode self)
+		{
+			fixed (ImGuiDockNode* pself = &self)
+			{
+				UpdateMergedFlagsNative((ImGuiDockNode*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiDockContext* ImGuiDockContextNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockContext*>)funcTable[842])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiDockContextPtr ImGuiDockContext()
+		{
+			ImGuiDockContextPtr ret = ImGuiDockContextNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiViewportP* ImGuiViewportPNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiViewportP*>)funcTable[843])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiViewportPPtr ImGuiViewportP()
+		{
+			ImGuiViewportPPtr ret = ImGuiViewportPNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void DestroyNative(ImGuiViewportP* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)funcTable[844])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ImGuiViewportPPtr self)
+		{
+			DestroyNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ref ImGuiViewportP self)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				DestroyNative((ImGuiViewportP*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearRequestFlagsNative(ImGuiViewportP* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)funcTable[845])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearRequestFlags(ImGuiViewportPPtr self)
+		{
+			ClearRequestFlagsNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearRequestFlags(ref ImGuiViewportP self)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				ClearRequestFlagsNative((ImGuiViewportP*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CalcWorkRectPosNative(Vector2* pOut, ImGuiViewportP* self, Vector2 offMin)
+		{
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, void>)funcTable[846])(pOut, self, offMin);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 CalcWorkRectPos(ImGuiViewportPPtr self, Vector2 offMin)
+		{
+			Vector2 ret;
+			CalcWorkRectPosNative(&ret, self, offMin);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWorkRectPos(ref Vector2 pOut, ImGuiViewportPPtr self, Vector2 offMin)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				CalcWorkRectPosNative((Vector2*)ppOut, self, offMin);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 CalcWorkRectPos(ref ImGuiViewportP self, Vector2 offMin)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				Vector2 ret;
+				CalcWorkRectPosNative(&ret, (ImGuiViewportP*)pself, offMin);
 				return ret;
 			}
 		}
@@ -4251,17 +1464,13 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
+		public static void CalcWorkRectPos(ref Vector2 pOut, ref ImGuiViewportP self, Vector2 offMin)
 		{
-			fixed (byte* phaystack = haystack)
+			fixed (Vector2* ppOut = &pOut)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
+				fixed (ImGuiViewportP* pself = &self)
 				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
+					CalcWorkRectPosNative((Vector2*)ppOut, (ImGuiViewportP*)pself, offMin);
 				}
 			}
 		}
@@ -4269,431 +1478,61 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
+		public static void CalcWorkRectPos(Vector2* pOut, ImGuiViewportPPtr self, Vector2 offMin)
 		{
-			fixed (byte* phaystack = haystack)
+			CalcWorkRectPosNative(pOut, self, offMin);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWorkRectPos(Vector2* pOut, ref ImGuiViewportP self, Vector2 offMin)
+		{
+			fixed (ImGuiViewportP* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
+				CalcWorkRectPosNative(pOut, (ImGuiViewportP*)pself, offMin);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CalcWorkRectSizeNative(Vector2* pOut, ImGuiViewportP* self, Vector2 offMin, Vector2 offMax)
 		{
-			fixed (byte* phaystack = haystack)
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, Vector2, void>)funcTable[847])(pOut, self, offMin, offMax);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 CalcWorkRectSize(ImGuiViewportPPtr self, Vector2 offMin, Vector2 offMax)
+		{
+			Vector2 ret;
+			CalcWorkRectSizeNative(&ret, self, offMin, offMax);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWorkRectSize(ref Vector2 pOut, ImGuiViewportPPtr self, Vector2 offMin, Vector2 offMax)
+		{
+			fixed (Vector2* ppOut = &pOut)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
+				CalcWorkRectSizeNative((Vector2*)ppOut, self, offMin, offMax);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		public static Vector2 CalcWorkRectSize(ref ImGuiViewportP self, Vector2 offMin, Vector2 offMax)
 		{
-			fixed (byte* phaystack = haystack)
+			fixed (ImGuiViewportP* pself = &self)
 			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					fixed (byte* pneedleEnd = needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ref byte haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = &haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					fixed (byte* pneedleEnd = &needleEnd)
-					{
-						string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					byte* ret = ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				fixed (byte* phaystackEnd = haystackEnd)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (needleEnd != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(needleEnd);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(needleEnd, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, (byte*)phaystackEnd, needle, pStr0));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, ref byte needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, string needleEnd)
-		{
-			fixed (byte* phaystack = haystack)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative((byte*)phaystack, pStr0, needle, pStr1);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				Vector2 ret;
+				CalcWorkRectSizeNative(&ret, (ImGuiViewportP*)pself, offMin, offMax);
 				return ret;
 			}
 		}
@@ -4701,53 +1540,103 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(ReadOnlySpan<byte> haystack, string haystackEnd, byte* needle, string needleEnd)
+		public static void CalcWorkRectSize(ref Vector2 pOut, ref ImGuiViewportP self, Vector2 offMin, Vector2 offMax)
 		{
-			fixed (byte* phaystack = haystack)
+			fixed (Vector2* ppOut = &pOut)
 			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (haystackEnd != null)
+				fixed (ImGuiViewportP* pself = &self)
 				{
-					pStrSize0 = Utils.GetByteCountUTF8(haystackEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(haystackEnd, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
+					CalcWorkRectSizeNative((Vector2*)ppOut, (ImGuiViewportP*)pself, offMin, offMax);
 				}
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative((byte*)phaystack, pStr0, needle, pStr1));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWorkRectSize(Vector2* pOut, ImGuiViewportPPtr self, Vector2 offMin, Vector2 offMax)
+		{
+			CalcWorkRectSizeNative(pOut, self, offMin, offMax);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWorkRectSize(Vector2* pOut, ref ImGuiViewportP self, Vector2 offMin, Vector2 offMax)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				CalcWorkRectSizeNative(pOut, (ImGuiViewportP*)pself, offMin, offMax);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateWorkRectNative(ImGuiViewportP* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)funcTable[848])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWorkRect(ImGuiViewportPPtr self)
+		{
+			UpdateWorkRectNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWorkRect(ref ImGuiViewportP self)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				UpdateWorkRectNative((ImGuiViewportP*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void GetMainRectNative(ImRect* pOut, ImGuiViewportP* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)funcTable[849])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect GetMainRect(ImGuiViewportPPtr self)
+		{
+			ImRect ret;
+			GetMainRectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void GetMainRect(ref ImRect pOut, ImGuiViewportPPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				GetMainRectNative((ImRect*)ppOut, self);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect GetMainRect(ref ImGuiViewportP self)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				ImRect ret;
+				GetMainRectNative(&ret, (ImGuiViewportP*)pself);
 				return ret;
 			}
 		}
@@ -4755,35 +1644,13 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
+		public static void GetMainRect(ref ImRect pOut, ref ImGuiViewportP self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			fixed (ImRect* ppOut = &pOut)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (ImGuiViewportP* pself = &self)
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
+					GetMainRectNative((ImRect*)ppOut, (ImGuiViewportP*)pself);
 				}
 			}
 		}
@@ -4791,161 +1658,42 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, byte* needle, ref byte needleEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void GetWorkRectNative(ImRect* pOut, ImGuiViewportP* self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)funcTable[850])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect GetWorkRect(ImGuiViewportPPtr self)
+		{
+			ImRect ret;
+			GetWorkRectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void GetWorkRect(ref ImRect pOut, ImGuiViewportPPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = &needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
+				GetWorkRectNative((ImRect*)ppOut, self);
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
+		public static ImRect GetWorkRect(ref ImGuiViewportP self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			fixed (ImGuiViewportP* pself = &self)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, byte* needle, ReadOnlySpan<byte> needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				fixed (byte* pneedleEnd = needleEnd)
-				{
-					string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, needle, (byte*)pneedleEnd));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static byte* ImStristr(string haystack, ref byte haystackEnd, byte* needle, string needleEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* phaystackEnd = &haystackEnd)
-			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, needle, pStr1);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				ImRect ret;
+				GetWorkRectNative(&ret, (ImGuiViewportP*)pself);
 				return ret;
 			}
 		}
@@ -4953,53 +1701,56 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static string ImStristrS(string haystack, ref byte haystackEnd, byte* needle, string needleEnd)
+		public static void GetWorkRect(ref ImRect pOut, ref ImGuiViewportP self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			fixed (ImRect* ppOut = &pOut)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (ImGuiViewportP* pself = &self)
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
+					GetWorkRectNative((ImRect*)ppOut, (ImGuiViewportP*)pself);
 				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
 			}
-			fixed (byte* phaystackEnd = &haystackEnd)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void GetBuildWorkRectNative(ImRect* pOut, ImGuiViewportP* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)funcTable[851])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect GetBuildWorkRect(ImGuiViewportPPtr self)
+		{
+			ImRect ret;
+			GetBuildWorkRectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void GetBuildWorkRect(ref ImRect pOut, ImGuiViewportPPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
 			{
-				byte* pStr1 = null;
-				int pStrSize1 = 0;
-				if (needleEnd != null)
-				{
-					pStrSize1 = Utils.GetByteCountUTF8(needleEnd);
-					if (pStrSize1 >= Utils.MaxStackallocSize)
-					{
-						pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-					}
-					else
-					{
-						byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-						pStr1 = pStrStack1;
-					}
-					int pStrOffset1 = Utils.EncodeStringUTF8(needleEnd, pStr1, pStrSize1);
-					pStr1[pStrOffset1] = 0;
-				}
-				string ret = Utils.DecodeStringUTF8(ImStristrNative(pStr0, (byte*)phaystackEnd, needle, pStr1));
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr1);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
+				GetBuildWorkRectNative((ImRect*)ppOut, self);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect GetBuildWorkRect(ref ImGuiViewportP self)
+		{
+			fixed (ImGuiViewportP* pself = &self)
+			{
+				ImRect ret;
+				GetBuildWorkRectNative(&ret, (ImGuiViewportP*)pself);
 				return ret;
 			}
 		}
@@ -5007,36 +1758,3267 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static byte* ImStristr(string haystack, ReadOnlySpan<byte> haystackEnd, byte* needle, ref byte needleEnd)
+		public static void GetBuildWorkRect(ref ImRect pOut, ref ImGuiViewportP self)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (haystack != null)
+			fixed (ImRect* ppOut = &pOut)
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(haystack);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (ImGuiViewportP* pself = &self)
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
+					GetBuildWorkRectNative((ImRect*)ppOut, (ImGuiViewportP*)pself);
 				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(haystack, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
 			}
-			fixed (byte* phaystackEnd = haystackEnd)
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindowSettings* ImGuiWindowSettingsNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*>)funcTable[852])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr ImGuiWindowSettings()
+		{
+			ImGuiWindowSettingsPtr ret = ImGuiWindowSettingsNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte* GetNameNative(ImGuiWindowSettings* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*, byte*>)funcTable[853])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetName(ImGuiWindowSettingsPtr self)
+		{
+			byte* ret = GetNameNative(self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetNameS(ImGuiWindowSettingsPtr self)
+		{
+			string ret = Utils.DecodeStringUTF8(GetNameNative(self));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetName(ref ImGuiWindowSettings self)
+		{
+			fixed (ImGuiWindowSettings* pself = &self)
 			{
-				fixed (byte* pneedleEnd = &needleEnd)
+				byte* ret = GetNameNative((ImGuiWindowSettings*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetNameS(ref ImGuiWindowSettings self)
+		{
+			fixed (ImGuiWindowSettings* pself = &self)
+			{
+				string ret = Utils.DecodeStringUTF8(GetNameNative((ImGuiWindowSettings*)pself));
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiSettingsHandler* ImGuiSettingsHandlerNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*>)funcTable[854])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiSettingsHandlerPtr ImGuiSettingsHandler()
+		{
+			ImGuiSettingsHandlerPtr ret = ImGuiSettingsHandlerNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiMetricsConfig* ImGuiMetricsConfigNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiMetricsConfig*>)funcTable[855])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiMetricsConfigPtr ImGuiMetricsConfig()
+		{
+			ImGuiMetricsConfigPtr ret = ImGuiMetricsConfigNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiStackLevelInfo* ImGuiStackLevelInfoNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackLevelInfo*>)funcTable[856])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiStackLevelInfoPtr ImGuiStackLevelInfo()
+		{
+			ImGuiStackLevelInfoPtr ret = ImGuiStackLevelInfoNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiStackTool* ImGuiStackToolNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackTool*>)funcTable[857])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiStackToolPtr ImGuiStackTool()
+		{
+			ImGuiStackToolPtr ret = ImGuiStackToolNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiContextHook* ImGuiContextHookNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiContextHook*>)funcTable[858])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiContextHookPtr ImGuiContextHook()
+		{
+			ImGuiContextHookPtr ret = ImGuiContextHookNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiContext* ImGuiContextNative(ImFontAtlas* sharedFontAtlas)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImGuiContext*>)funcTable[859])(sharedFontAtlas);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiContextPtr ImGuiContext(ImFontAtlasPtr sharedFontAtlas)
+		{
+			ImGuiContextPtr ret = ImGuiContextNative(sharedFontAtlas);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiContextPtr ImGuiContext(ref ImFontAtlas sharedFontAtlas)
+		{
+			fixed (ImFontAtlas* psharedFontAtlas = &sharedFontAtlas)
+			{
+				ImGuiContextPtr ret = ImGuiContextNative((ImFontAtlas*)psharedFontAtlas);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* ImGuiWindowNative(ImGuiContext* context, byte* name)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, byte*, ImGuiWindow*>)funcTable[860])(context, name);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr ImGuiWindow(ImGuiContextPtr context, byte* name)
+		{
+			ImGuiWindowPtr ret = ImGuiWindowNative(context, name);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr ImGuiWindow(ref ImGuiContext context, byte* name)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				ImGuiWindowPtr ret = ImGuiWindowNative((ImGuiContext*)pcontext, name);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr ImGuiWindow(ImGuiContextPtr context, ImU8String name)
+		{
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
+			{
+				ImGuiWindowPtr ret = ImGuiWindowNative(context, namePtr);
+				name.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr ImGuiWindow(ref ImGuiContext context, ImU8String name)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 				{
-					byte* ret = ImStristrNative(pStr0, (byte*)phaystackEnd, needle, (byte*)pneedleEnd);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
+					ImGuiWindowPtr ret = ImGuiWindowNative((ImGuiContext*)pcontext, namePtr);
+					name.Dispose();
 					return ret;
 				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void DestroyNative(ImGuiWindow* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[861])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ImGuiWindowPtr self)
+		{
+			DestroyNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				DestroyNative((ImGuiWindow*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(ImGuiWindow* self, byte* str, byte* strEnd)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte*, byte*, uint>)funcTable[862])(self, str, strEnd);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, byte* str, byte* strEnd)
+		{
+			uint ret = GetIDNative(self, str, strEnd);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, byte* str)
+		{
+			uint ret = GetIDNative(self, str, (byte*)(default));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, byte* str, byte* strEnd)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				uint ret = GetIDNative((ImGuiWindow*)pself, str, strEnd);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, byte* str)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				uint ret = GetIDNative((ImGuiWindow*)pself, str, (byte*)(default));
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, ImU8String str, byte* strEnd)
+		{
+			fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+			{
+				uint ret = GetIDNative(self, strPtr, strEnd);
+				str.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, ImU8String str)
+		{
+			fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+			{
+				uint ret = GetIDNative(self, strPtr, (byte*)(default));
+				str.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, ImU8String str, byte* strEnd)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+				{
+					uint ret = GetIDNative((ImGuiWindow*)pself, strPtr, strEnd);
+					str.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, ImU8String str)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+				{
+					uint ret = GetIDNative((ImGuiWindow*)pself, strPtr, (byte*)(default));
+					str.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, byte* str, ImU8String strEnd)
+		{
+			fixed (byte* strEndPtr = &strEnd.GetPinnableNullTerminatedReference())
+			{
+				uint ret = GetIDNative(self, str, strEndPtr);
+				strEnd.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, byte* str, ImU8String strEnd)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				fixed (byte* strEndPtr = &strEnd.GetPinnableNullTerminatedReference())
+				{
+					uint ret = GetIDNative((ImGuiWindow*)pself, str, strEndPtr);
+					strEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, ImU8String str, ImU8String strEnd)
+		{
+			fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* strEndPtr = &strEnd.GetPinnableNullTerminatedReference())
+				{
+					uint ret = GetIDNative(self, strPtr, strEndPtr);
+					strEnd.Dispose();
+					str.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, ImU8String str, ImU8String strEnd)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* strEndPtr = &strEnd.GetPinnableNullTerminatedReference())
+					{
+						uint ret = GetIDNative((ImGuiWindow*)pself, strPtr, strEndPtr);
+						strEnd.Dispose();
+						str.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(ImGuiWindow* self, void* ptr)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, void*, uint>)funcTable[863])(self, ptr);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, void* ptr)
+		{
+			uint ret = GetIDNative(self, ptr);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, void* ptr)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				uint ret = GetIDNative((ImGuiWindow*)pself, ptr);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(ImGuiWindow* self, int n)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int, uint>)funcTable[864])(self, n);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImGuiWindowPtr self, int n)
+		{
+			uint ret = GetIDNative(self, n);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ref ImGuiWindow self, int n)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				uint ret = GetIDNative((ImGuiWindow*)pself, n);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDFromRectangleNative(ImGuiWindow* self, ImRect rAbs)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, uint>)funcTable[865])(self, rAbs);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetIDFromRectangle(ImGuiWindowPtr self, ImRect rAbs)
+		{
+			uint ret = GetIDFromRectangleNative(self, rAbs);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetIDFromRectangle(ref ImGuiWindow self, ImRect rAbs)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				uint ret = GetIDFromRectangleNative((ImGuiWindow*)pself, rAbs);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void RectNative(ImRect* pOut, ImGuiWindow* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)funcTable[866])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect Rect(ImGuiWindowPtr self)
+		{
+			ImRect ret;
+			RectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Rect(ref ImRect pOut, ImGuiWindowPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				RectNative((ImRect*)ppOut, self);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect Rect(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				ImRect ret;
+				RectNative(&ret, (ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Rect(ref ImRect pOut, ref ImGuiWindow self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pself = &self)
+				{
+					RectNative((ImRect*)ppOut, (ImGuiWindow*)pself);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static float CalcFontSizeNative(ImGuiWindow* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)funcTable[867])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float CalcFontSize(ImGuiWindowPtr self)
+		{
+			float ret = CalcFontSizeNative(self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float CalcFontSize(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				float ret = CalcFontSizeNative((ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static float TitleBarHeightNative(ImGuiWindow* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)funcTable[868])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float TitleBarHeight(ImGuiWindowPtr self)
+		{
+			float ret = TitleBarHeightNative(self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float TitleBarHeight(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				float ret = TitleBarHeightNative((ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void TitleBarRectNative(ImRect* pOut, ImGuiWindow* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)funcTable[869])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect TitleBarRect(ImGuiWindowPtr self)
+		{
+			ImRect ret;
+			TitleBarRectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TitleBarRect(ref ImRect pOut, ImGuiWindowPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				TitleBarRectNative((ImRect*)ppOut, self);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect TitleBarRect(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				ImRect ret;
+				TitleBarRectNative(&ret, (ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TitleBarRect(ref ImRect pOut, ref ImGuiWindow self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pself = &self)
+				{
+					TitleBarRectNative((ImRect*)ppOut, (ImGuiWindow*)pself);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static float MenuBarHeightNative(ImGuiWindow* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)funcTable[870])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float MenuBarHeight(ImGuiWindowPtr self)
+		{
+			float ret = MenuBarHeightNative(self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static float MenuBarHeight(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				float ret = MenuBarHeightNative((ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void MenuBarRectNative(ImRect* pOut, ImGuiWindow* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)funcTable[871])(pOut, self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect MenuBarRect(ImGuiWindowPtr self)
+		{
+			ImRect ret;
+			MenuBarRectNative(&ret, self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void MenuBarRect(ref ImRect pOut, ImGuiWindowPtr self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				MenuBarRectNative((ImRect*)ppOut, self);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect MenuBarRect(ref ImGuiWindow self)
+		{
+			fixed (ImGuiWindow* pself = &self)
+			{
+				ImRect ret;
+				MenuBarRectNative(&ret, (ImGuiWindow*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void MenuBarRect(ref ImRect pOut, ref ImGuiWindow self)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pself = &self)
+				{
+					MenuBarRectNative((ImRect*)ppOut, (ImGuiWindow*)pself);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTabItem* ImGuiTabItemNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabItem*>)funcTable[872])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTabItemPtr ImGuiTabItem()
+		{
+			ImGuiTabItemPtr ret = ImGuiTabItemNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTabBar* ImGuiTabBarNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*>)funcTable[873])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTabBarPtr ImGuiTabBar()
+		{
+			ImGuiTabBarPtr ret = ImGuiTabBarNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int GetTabOrderNative(ImGuiTabBar* self, ImGuiTabItem* tab)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, int>)funcTable[874])(self, tab);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetTabOrder(ImGuiTabBarPtr self, ImGuiTabItemPtr tab)
+		{
+			int ret = GetTabOrderNative(self, tab);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetTabOrder(ref ImGuiTabBar self, ImGuiTabItemPtr tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				int ret = GetTabOrderNative((ImGuiTabBar*)pself, tab);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetTabOrder(ImGuiTabBarPtr self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabItem* ptab = &tab)
+			{
+				int ret = GetTabOrderNative(self, (ImGuiTabItem*)ptab);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int GetTabOrder(ref ImGuiTabBar self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				fixed (ImGuiTabItem* ptab = &tab)
+				{
+					int ret = GetTabOrderNative((ImGuiTabBar*)pself, (ImGuiTabItem*)ptab);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte* GetTabNameNative(ImGuiTabBar* self, ImGuiTabItem* tab)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, byte*>)funcTable[875])(self, tab);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetTabName(ImGuiTabBarPtr self, ImGuiTabItemPtr tab)
+		{
+			byte* ret = GetTabNameNative(self, tab);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetTabNameS(ImGuiTabBarPtr self, ImGuiTabItemPtr tab)
+		{
+			string ret = Utils.DecodeStringUTF8(GetTabNameNative(self, tab));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetTabName(ref ImGuiTabBar self, ImGuiTabItemPtr tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				byte* ret = GetTabNameNative((ImGuiTabBar*)pself, tab);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetTabNameS(ref ImGuiTabBar self, ImGuiTabItemPtr tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				string ret = Utils.DecodeStringUTF8(GetTabNameNative((ImGuiTabBar*)pself, tab));
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetTabName(ImGuiTabBarPtr self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabItem* ptab = &tab)
+			{
+				byte* ret = GetTabNameNative(self, (ImGuiTabItem*)ptab);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetTabNameS(ImGuiTabBarPtr self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabItem* ptab = &tab)
+			{
+				string ret = Utils.DecodeStringUTF8(GetTabNameNative(self, (ImGuiTabItem*)ptab));
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* GetTabName(ref ImGuiTabBar self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				fixed (ImGuiTabItem* ptab = &tab)
+				{
+					byte* ret = GetTabNameNative((ImGuiTabBar*)pself, (ImGuiTabItem*)ptab);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string GetTabNameS(ref ImGuiTabBar self, ref ImGuiTabItem tab)
+		{
+			fixed (ImGuiTabBar* pself = &self)
+			{
+				fixed (ImGuiTabItem* ptab = &tab)
+				{
+					string ret = Utils.DecodeStringUTF8(GetTabNameNative((ImGuiTabBar*)pself, (ImGuiTabItem*)ptab));
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableColumn* ImGuiTableColumnNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumn*>)funcTable[876])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableColumnPtr ImGuiTableColumn()
+		{
+			ImGuiTableColumnPtr ret = ImGuiTableColumnNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableInstanceData* ImGuiTableInstanceDataNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableInstanceData*>)funcTable[877])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableInstanceDataPtr ImGuiTableInstanceData()
+		{
+			ImGuiTableInstanceDataPtr ret = ImGuiTableInstanceDataNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTable* ImGuiTableNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*>)funcTable[878])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTablePtr ImGuiTable()
+		{
+			ImGuiTablePtr ret = ImGuiTableNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void DestroyNative(ImGuiTable* self)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)funcTable[879])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ImGuiTablePtr self)
+		{
+			DestroyNative(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Destroy(ref ImGuiTable self)
+		{
+			fixed (ImGuiTable* pself = &self)
+			{
+				DestroyNative((ImGuiTable*)pself);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableTempData* ImGuiTableTempDataNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableTempData*>)funcTable[880])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableTempDataPtr ImGuiTableTempData()
+		{
+			ImGuiTableTempDataPtr ret = ImGuiTableTempDataNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableColumnSettings* ImGuiTableColumnSettingsNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumnSettings*>)funcTable[881])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableColumnSettingsPtr ImGuiTableColumnSettings()
+		{
+			ImGuiTableColumnSettingsPtr ret = ImGuiTableColumnSettingsNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableSettings* ImGuiTableSettingsNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*>)funcTable[882])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableSettingsPtr ImGuiTableSettings()
+		{
+			ImGuiTableSettingsPtr ret = ImGuiTableSettingsNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiTableColumnSettings* GetColumnSettingsNative(ImGuiTableSettings* self)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*, ImGuiTableColumnSettings*>)funcTable[883])(self);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableColumnSettingsPtr GetColumnSettings(ImGuiTableSettingsPtr self)
+		{
+			ImGuiTableColumnSettingsPtr ret = GetColumnSettingsNative(self);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiTableColumnSettingsPtr GetColumnSettings(ref ImGuiTableSettings self)
+		{
+			fixed (ImGuiTableSettings* pself = &self)
+			{
+				ImGuiTableColumnSettingsPtr ret = GetColumnSettingsNative((ImGuiTableSettings*)pself);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* GetCurrentWindowReadNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)funcTable[884])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr GetCurrentWindowRead()
+		{
+			ImGuiWindowPtr ret = GetCurrentWindowReadNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* GetCurrentWindowNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)funcTable[885])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr GetCurrentWindow()
+		{
+			ImGuiWindowPtr ret = GetCurrentWindowNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* FindWindowByIDNative(uint id)
+		{
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*>)funcTable[886])(id);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr FindWindowByID(uint id)
+		{
+			ImGuiWindowPtr ret = FindWindowByIDNative(id);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* FindWindowByNameNative(byte* name)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindow*>)funcTable[887])(name);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr FindWindowByName(byte* name)
+		{
+			ImGuiWindowPtr ret = FindWindowByNameNative(name);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr FindWindowByName(ImU8String name)
+		{
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
+			{
+				ImGuiWindowPtr ret = FindWindowByNameNative(namePtr);
+				name.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateWindowParentAndRootLinksNative(ImGuiWindow* window, ImGuiWindowFlags flags, ImGuiWindow* parentWindow)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindowFlags, ImGuiWindow*, void>)funcTable[888])(window, flags, parentWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWindowParentAndRootLinks(ImGuiWindowPtr window, ImGuiWindowFlags flags, ImGuiWindowPtr parentWindow)
+		{
+			UpdateWindowParentAndRootLinksNative(window, flags, parentWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWindowParentAndRootLinks(ref ImGuiWindow window, ImGuiWindowFlags flags, ImGuiWindowPtr parentWindow)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				UpdateWindowParentAndRootLinksNative((ImGuiWindow*)pwindow, flags, parentWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWindowParentAndRootLinks(ImGuiWindowPtr window, ImGuiWindowFlags flags, ref ImGuiWindow parentWindow)
+		{
+			fixed (ImGuiWindow* pparentWindow = &parentWindow)
+			{
+				UpdateWindowParentAndRootLinksNative(window, flags, (ImGuiWindow*)pparentWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateWindowParentAndRootLinks(ref ImGuiWindow window, ImGuiWindowFlags flags, ref ImGuiWindow parentWindow)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiWindow* pparentWindow = &parentWindow)
+				{
+					UpdateWindowParentAndRootLinksNative((ImGuiWindow*)pwindow, flags, (ImGuiWindow*)pparentWindow);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CalcWindowNextAutoFitSizeNative(Vector2* pOut, ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, void>)funcTable[889])(pOut, window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 CalcWindowNextAutoFitSize(ImGuiWindowPtr window)
+		{
+			Vector2 ret;
+			CalcWindowNextAutoFitSizeNative(&ret, window);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWindowNextAutoFitSize(ref Vector2 pOut, ImGuiWindowPtr window)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				CalcWindowNextAutoFitSizeNative((Vector2*)ppOut, window);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 CalcWindowNextAutoFitSize(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				Vector2 ret;
+				CalcWindowNextAutoFitSizeNative(&ret, (ImGuiWindow*)pwindow);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CalcWindowNextAutoFitSize(ref Vector2 pOut, ref ImGuiWindow window)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pwindow = &window)
+				{
+					CalcWindowNextAutoFitSizeNative((Vector2*)ppOut, (ImGuiWindow*)pwindow);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsWindowChildOfNative(ImGuiWindow* window, ImGuiWindow* potentialParent, byte popupHierarchy, byte dockHierarchy)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte, byte, byte>)funcTable[890])(window, potentialParent, popupHierarchy, dockHierarchy);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowChildOf(ImGuiWindowPtr window, ImGuiWindowPtr potentialParent, bool popupHierarchy, bool dockHierarchy)
+		{
+			byte ret = IsWindowChildOfNative(window, potentialParent, popupHierarchy ? (byte)1 : (byte)0, dockHierarchy ? (byte)1 : (byte)0);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowChildOf(ref ImGuiWindow window, ImGuiWindowPtr potentialParent, bool popupHierarchy, bool dockHierarchy)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				byte ret = IsWindowChildOfNative((ImGuiWindow*)pwindow, potentialParent, popupHierarchy ? (byte)1 : (byte)0, dockHierarchy ? (byte)1 : (byte)0);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowChildOf(ImGuiWindowPtr window, ref ImGuiWindow potentialParent, bool popupHierarchy, bool dockHierarchy)
+		{
+			fixed (ImGuiWindow* ppotentialParent = &potentialParent)
+			{
+				byte ret = IsWindowChildOfNative(window, (ImGuiWindow*)ppotentialParent, popupHierarchy ? (byte)1 : (byte)0, dockHierarchy ? (byte)1 : (byte)0);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowChildOf(ref ImGuiWindow window, ref ImGuiWindow potentialParent, bool popupHierarchy, bool dockHierarchy)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiWindow* ppotentialParent = &potentialParent)
+				{
+					byte ret = IsWindowChildOfNative((ImGuiWindow*)pwindow, (ImGuiWindow*)ppotentialParent, popupHierarchy ? (byte)1 : (byte)0, dockHierarchy ? (byte)1 : (byte)0);
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsWindowWithinBeginStackOfNative(ImGuiWindow* window, ImGuiWindow* potentialParent)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)funcTable[891])(window, potentialParent);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowWithinBeginStackOf(ImGuiWindowPtr window, ImGuiWindowPtr potentialParent)
+		{
+			byte ret = IsWindowWithinBeginStackOfNative(window, potentialParent);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowWithinBeginStackOf(ref ImGuiWindow window, ImGuiWindowPtr potentialParent)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				byte ret = IsWindowWithinBeginStackOfNative((ImGuiWindow*)pwindow, potentialParent);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowWithinBeginStackOf(ImGuiWindowPtr window, ref ImGuiWindow potentialParent)
+		{
+			fixed (ImGuiWindow* ppotentialParent = &potentialParent)
+			{
+				byte ret = IsWindowWithinBeginStackOfNative(window, (ImGuiWindow*)ppotentialParent);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowWithinBeginStackOf(ref ImGuiWindow window, ref ImGuiWindow potentialParent)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiWindow* ppotentialParent = &potentialParent)
+				{
+					byte ret = IsWindowWithinBeginStackOfNative((ImGuiWindow*)pwindow, (ImGuiWindow*)ppotentialParent);
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsWindowAboveNative(ImGuiWindow* potentialAbove, ImGuiWindow* potentialBelow)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)funcTable[892])(potentialAbove, potentialBelow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowAbove(ImGuiWindowPtr potentialAbove, ImGuiWindowPtr potentialBelow)
+		{
+			byte ret = IsWindowAboveNative(potentialAbove, potentialBelow);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowAbove(ref ImGuiWindow potentialAbove, ImGuiWindowPtr potentialBelow)
+		{
+			fixed (ImGuiWindow* ppotentialAbove = &potentialAbove)
+			{
+				byte ret = IsWindowAboveNative((ImGuiWindow*)ppotentialAbove, potentialBelow);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowAbove(ImGuiWindowPtr potentialAbove, ref ImGuiWindow potentialBelow)
+		{
+			fixed (ImGuiWindow* ppotentialBelow = &potentialBelow)
+			{
+				byte ret = IsWindowAboveNative(potentialAbove, (ImGuiWindow*)ppotentialBelow);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowAbove(ref ImGuiWindow potentialAbove, ref ImGuiWindow potentialBelow)
+		{
+			fixed (ImGuiWindow* ppotentialAbove = &potentialAbove)
+			{
+				fixed (ImGuiWindow* ppotentialBelow = &potentialBelow)
+				{
+					byte ret = IsWindowAboveNative((ImGuiWindow*)ppotentialAbove, (ImGuiWindow*)ppotentialBelow);
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte IsWindowNavFocusableNative(ImGuiWindow* window)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte>)funcTable[893])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowNavFocusable(ImGuiWindowPtr window)
+		{
+			byte ret = IsWindowNavFocusableNative(window);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool IsWindowNavFocusable(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				byte ret = IsWindowNavFocusableNative((ImGuiWindow*)pwindow);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetWindowPosNative(ImGuiWindow* window, Vector2 pos, ImGuiCond cond)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)funcTable[894])(window, pos, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowPos(ImGuiWindowPtr window, Vector2 pos, ImGuiCond cond)
+		{
+			SetWindowPosNative(window, pos, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowPos(ImGuiWindowPtr window, Vector2 pos)
+		{
+			SetWindowPosNative(window, pos, (ImGuiCond)(0));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowPos(ref ImGuiWindow window, Vector2 pos, ImGuiCond cond)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowPosNative((ImGuiWindow*)pwindow, pos, cond);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowPos(ref ImGuiWindow window, Vector2 pos)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowPosNative((ImGuiWindow*)pwindow, pos, (ImGuiCond)(0));
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetWindowSizeNative(ImGuiWindow* window, Vector2 size, ImGuiCond cond)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)funcTable[895])(window, size, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowSize(ImGuiWindowPtr window, Vector2 size, ImGuiCond cond)
+		{
+			SetWindowSizeNative(window, size, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowSize(ImGuiWindowPtr window, Vector2 size)
+		{
+			SetWindowSizeNative(window, size, (ImGuiCond)(0));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowSize(ref ImGuiWindow window, Vector2 size, ImGuiCond cond)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowSizeNative((ImGuiWindow*)pwindow, size, cond);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowSize(ref ImGuiWindow window, Vector2 size)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowSizeNative((ImGuiWindow*)pwindow, size, (ImGuiCond)(0));
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetWindowCollapsedNative(ImGuiWindow* window, byte collapsed, ImGuiCond cond)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, ImGuiCond, void>)funcTable[896])(window, collapsed, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowCollapsed(ImGuiWindowPtr window, bool collapsed, ImGuiCond cond)
+		{
+			SetWindowCollapsedNative(window, collapsed ? (byte)1 : (byte)0, cond);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowCollapsed(ImGuiWindowPtr window, bool collapsed)
+		{
+			SetWindowCollapsedNative(window, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowCollapsed(ref ImGuiWindow window, bool collapsed, ImGuiCond cond)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowCollapsedNative((ImGuiWindow*)pwindow, collapsed ? (byte)1 : (byte)0, cond);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowCollapsed(ref ImGuiWindow window, bool collapsed)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowCollapsedNative((ImGuiWindow*)pwindow, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetWindowHitTestHoleNative(ImGuiWindow* window, Vector2 pos, Vector2 size)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, Vector2, void>)funcTable[897])(window, pos, size);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowHitTestHole(ImGuiWindowPtr window, Vector2 pos, Vector2 size)
+		{
+			SetWindowHitTestHoleNative(window, pos, size);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowHitTestHole(ref ImGuiWindow window, Vector2 pos, Vector2 size)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowHitTestHoleNative((ImGuiWindow*)pwindow, pos, size);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void WindowRectAbsToRelNative(ImRect* pOut, ImGuiWindow* window, ImRect r)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)funcTable[898])(pOut, window, r);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect WindowRectAbsToRel(ImGuiWindowPtr window, ImRect r)
+		{
+			ImRect ret;
+			WindowRectAbsToRelNative(&ret, window, r);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectAbsToRel(ref ImRect pOut, ImGuiWindowPtr window, ImRect r)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				WindowRectAbsToRelNative((ImRect*)ppOut, window, r);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect WindowRectAbsToRel(ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ImRect ret;
+				WindowRectAbsToRelNative(&ret, (ImGuiWindow*)pwindow, r);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectAbsToRel(ref ImRect pOut, ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pwindow = &window)
+				{
+					WindowRectAbsToRelNative((ImRect*)ppOut, (ImGuiWindow*)pwindow, r);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectAbsToRel(ImRectPtr pOut, ImGuiWindowPtr window, ImRect r)
+		{
+			WindowRectAbsToRelNative(pOut, window, r);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectAbsToRel(ImRectPtr pOut, ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				WindowRectAbsToRelNative(pOut, (ImGuiWindow*)pwindow, r);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void WindowRectRelToAbsNative(ImRect* pOut, ImGuiWindow* window, ImRect r)
+		{
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)funcTable[899])(pOut, window, r);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect WindowRectRelToAbs(ImGuiWindowPtr window, ImRect r)
+		{
+			ImRect ret;
+			WindowRectRelToAbsNative(&ret, window, r);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectRelToAbs(ref ImRect pOut, ImGuiWindowPtr window, ImRect r)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				WindowRectRelToAbsNative((ImRect*)ppOut, window, r);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImRect WindowRectRelToAbs(ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ImRect ret;
+				WindowRectRelToAbsNative(&ret, (ImGuiWindow*)pwindow, r);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectRelToAbs(ref ImRect pOut, ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImRect* ppOut = &pOut)
+			{
+				fixed (ImGuiWindow* pwindow = &window)
+				{
+					WindowRectRelToAbsNative((ImRect*)ppOut, (ImGuiWindow*)pwindow, r);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectRelToAbs(ImRectPtr pOut, ImGuiWindowPtr window, ImRect r)
+		{
+			WindowRectRelToAbsNative(pOut, window, r);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void WindowRectRelToAbs(ImRectPtr pOut, ref ImGuiWindow window, ImRect r)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				WindowRectRelToAbsNative(pOut, (ImGuiWindow*)pwindow, r);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void FocusWindowNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[900])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusWindow(ImGuiWindowPtr window)
+		{
+			FocusWindowNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusWindow(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				FocusWindowNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void FocusTopMostWindowUnderOneNative(ImGuiWindow* underThisWindow, ImGuiWindow* ignoreWindow)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)funcTable[901])(underThisWindow, ignoreWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusTopMostWindowUnderOne(ImGuiWindowPtr underThisWindow, ImGuiWindowPtr ignoreWindow)
+		{
+			FocusTopMostWindowUnderOneNative(underThisWindow, ignoreWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusTopMostWindowUnderOne(ref ImGuiWindow underThisWindow, ImGuiWindowPtr ignoreWindow)
+		{
+			fixed (ImGuiWindow* punderThisWindow = &underThisWindow)
+			{
+				FocusTopMostWindowUnderOneNative((ImGuiWindow*)punderThisWindow, ignoreWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusTopMostWindowUnderOne(ImGuiWindowPtr underThisWindow, ref ImGuiWindow ignoreWindow)
+		{
+			fixed (ImGuiWindow* pignoreWindow = &ignoreWindow)
+			{
+				FocusTopMostWindowUnderOneNative(underThisWindow, (ImGuiWindow*)pignoreWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void FocusTopMostWindowUnderOne(ref ImGuiWindow underThisWindow, ref ImGuiWindow ignoreWindow)
+		{
+			fixed (ImGuiWindow* punderThisWindow = &underThisWindow)
+			{
+				fixed (ImGuiWindow* pignoreWindow = &ignoreWindow)
+				{
+					FocusTopMostWindowUnderOneNative((ImGuiWindow*)punderThisWindow, (ImGuiWindow*)pignoreWindow);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void BringWindowToFocusFrontNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[902])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToFocusFront(ImGuiWindowPtr window)
+		{
+			BringWindowToFocusFrontNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToFocusFront(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				BringWindowToFocusFrontNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void BringWindowToDisplayFrontNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[903])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayFront(ImGuiWindowPtr window)
+		{
+			BringWindowToDisplayFrontNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayFront(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				BringWindowToDisplayFrontNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void BringWindowToDisplayBackNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[904])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBack(ImGuiWindowPtr window)
+		{
+			BringWindowToDisplayBackNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBack(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				BringWindowToDisplayBackNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void BringWindowToDisplayBehindNative(ImGuiWindow* window, ImGuiWindow* aboveWindow)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)funcTable[905])(window, aboveWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBehind(ImGuiWindowPtr window, ImGuiWindowPtr aboveWindow)
+		{
+			BringWindowToDisplayBehindNative(window, aboveWindow);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBehind(ref ImGuiWindow window, ImGuiWindowPtr aboveWindow)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				BringWindowToDisplayBehindNative((ImGuiWindow*)pwindow, aboveWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBehind(ImGuiWindowPtr window, ref ImGuiWindow aboveWindow)
+		{
+			fixed (ImGuiWindow* paboveWindow = &aboveWindow)
+			{
+				BringWindowToDisplayBehindNative(window, (ImGuiWindow*)paboveWindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void BringWindowToDisplayBehind(ref ImGuiWindow window, ref ImGuiWindow aboveWindow)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiWindow* paboveWindow = &aboveWindow)
+				{
+					BringWindowToDisplayBehindNative((ImGuiWindow*)pwindow, (ImGuiWindow*)paboveWindow);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int FindWindowDisplayIndexNative(ImGuiWindow* window)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int>)funcTable[906])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int FindWindowDisplayIndex(ImGuiWindowPtr window)
+		{
+			int ret = FindWindowDisplayIndexNative(window);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int FindWindowDisplayIndex(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				int ret = FindWindowDisplayIndexNative((ImGuiWindow*)pwindow);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindow* FindBottomMostVisibleWindowWithinBeginStackNative(ImGuiWindow* window)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*>)funcTable[907])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr FindBottomMostVisibleWindowWithinBeginStack(ImGuiWindowPtr window)
+		{
+			ImGuiWindowPtr ret = FindBottomMostVisibleWindowWithinBeginStackNative(window);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowPtr FindBottomMostVisibleWindowWithinBeginStack(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ImGuiWindowPtr ret = FindBottomMostVisibleWindowWithinBeginStackNative((ImGuiWindow*)pwindow);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetCurrentFontNative(ImFont* font)
+		{
+			((delegate* unmanaged[Cdecl]<ImFont*, void>)funcTable[908])(font);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentFont(ImFontPtr font)
+		{
+			SetCurrentFontNative(font);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentFont(ref ImFont font)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				SetCurrentFontNative((ImFont*)pfont);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImFont* GetDefaultFontNative()
+		{
+			return ((delegate* unmanaged[Cdecl]<ImFont*>)funcTable[909])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImFontPtr GetDefaultFont()
+		{
+			ImFontPtr ret = GetDefaultFontNative();
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImDrawList* GetForegroundDrawListNative(ImGuiWindow* window)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImDrawList*>)funcTable[910])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImDrawListPtr GetForegroundDrawList(ImGuiWindowPtr window)
+		{
+			ImDrawListPtr ret = GetForegroundDrawListNative(window);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImDrawListPtr GetForegroundDrawList(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ImDrawListPtr ret = GetForegroundDrawListNative((ImGuiWindow*)pwindow);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void InitializeNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[911])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Initialize()
+		{
+			InitializeNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ShutdownNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[912])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Shutdown()
+		{
+			ShutdownNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateInputEventsNative(byte trickleFastInputs)
+		{
+			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[913])(trickleFastInputs);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateInputEvents(bool trickleFastInputs)
+		{
+			UpdateInputEventsNative(trickleFastInputs ? (byte)1 : (byte)0);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateHoveredWindowAndCaptureFlagsNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[914])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateHoveredWindowAndCaptureFlags()
+		{
+			UpdateHoveredWindowAndCaptureFlagsNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void StartMouseMovingWindowNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[915])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindow(ImGuiWindowPtr window)
+		{
+			StartMouseMovingWindowNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindow(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				StartMouseMovingWindowNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void StartMouseMovingWindowOrNodeNative(ImGuiWindow* window, ImGuiDockNode* node, byte undockFloatingNode)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDockNode*, byte, void>)funcTable[916])(window, node, undockFloatingNode);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindowOrNode(ImGuiWindowPtr window, ImGuiDockNodePtr node, bool undockFloatingNode)
+		{
+			StartMouseMovingWindowOrNodeNative(window, node, undockFloatingNode ? (byte)1 : (byte)0);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindowOrNode(ref ImGuiWindow window, ImGuiDockNodePtr node, bool undockFloatingNode)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				StartMouseMovingWindowOrNodeNative((ImGuiWindow*)pwindow, node, undockFloatingNode ? (byte)1 : (byte)0);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindowOrNode(ImGuiWindowPtr window, ref ImGuiDockNode node, bool undockFloatingNode)
+		{
+			fixed (ImGuiDockNode* pnode = &node)
+			{
+				StartMouseMovingWindowOrNodeNative(window, (ImGuiDockNode*)pnode, undockFloatingNode ? (byte)1 : (byte)0);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void StartMouseMovingWindowOrNode(ref ImGuiWindow window, ref ImGuiDockNode node, bool undockFloatingNode)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiDockNode* pnode = &node)
+				{
+					StartMouseMovingWindowOrNodeNative((ImGuiWindow*)pwindow, (ImGuiDockNode*)pnode, undockFloatingNode ? (byte)1 : (byte)0);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateMouseMovingWindowNewFrameNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[917])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateMouseMovingWindowNewFrame()
+		{
+			UpdateMouseMovingWindowNewFrameNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void UpdateMouseMovingWindowEndFrameNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[918])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void UpdateMouseMovingWindowEndFrame()
+		{
+			UpdateMouseMovingWindowEndFrameNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint AddContextHookNative(ImGuiContext* context, ImGuiContextHook* hook)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHook*, uint>)funcTable[919])(context, hook);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint AddContextHook(ImGuiContextPtr context, ImGuiContextHookPtr hook)
+		{
+			uint ret = AddContextHookNative(context, hook);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint AddContextHook(ref ImGuiContext context, ImGuiContextHookPtr hook)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				uint ret = AddContextHookNative((ImGuiContext*)pcontext, hook);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint AddContextHook(ImGuiContextPtr context, ref ImGuiContextHook hook)
+		{
+			fixed (ImGuiContextHook* phook = &hook)
+			{
+				uint ret = AddContextHookNative(context, (ImGuiContextHook*)phook);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint AddContextHook(ref ImGuiContext context, ref ImGuiContextHook hook)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				fixed (ImGuiContextHook* phook = &hook)
+				{
+					uint ret = AddContextHookNative((ImGuiContext*)pcontext, (ImGuiContextHook*)phook);
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void RemoveContextHookNative(ImGuiContext* context, uint hookToRemove)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, uint, void>)funcTable[920])(context, hookToRemove);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void RemoveContextHook(ImGuiContextPtr context, uint hookToRemove)
+		{
+			RemoveContextHookNative(context, hookToRemove);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void RemoveContextHook(ref ImGuiContext context, uint hookToRemove)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				RemoveContextHookNative((ImGuiContext*)pcontext, hookToRemove);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void CallContextHooksNative(ImGuiContext* context, ImGuiContextHookType type)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHookType, void>)funcTable[921])(context, type);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CallContextHooks(ImGuiContextPtr context, ImGuiContextHookType type)
+		{
+			CallContextHooksNative(context, type);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void CallContextHooks(ref ImGuiContext context, ImGuiContextHookType type)
+		{
+			fixed (ImGuiContext* pcontext = &context)
+			{
+				CallContextHooksNative((ImGuiContext*)pcontext, type);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void TranslateWindowsInViewportNative(ImGuiViewportP* viewport, Vector2 oldPos, Vector2 newPos)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, Vector2, Vector2, void>)funcTable[922])(viewport, oldPos, newPos);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TranslateWindowsInViewport(ImGuiViewportPPtr viewport, Vector2 oldPos, Vector2 newPos)
+		{
+			TranslateWindowsInViewportNative(viewport, oldPos, newPos);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TranslateWindowsInViewport(ref ImGuiViewportP viewport, Vector2 oldPos, Vector2 newPos)
+		{
+			fixed (ImGuiViewportP* pviewport = &viewport)
+			{
+				TranslateWindowsInViewportNative((ImGuiViewportP*)pviewport, oldPos, newPos);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ScaleWindowsInViewportNative(ImGuiViewportP* viewport, float scale)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, float, void>)funcTable[923])(viewport, scale);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScaleWindowsInViewport(ImGuiViewportPPtr viewport, float scale)
+		{
+			ScaleWindowsInViewportNative(viewport, scale);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScaleWindowsInViewport(ref ImGuiViewportP viewport, float scale)
+		{
+			fixed (ImGuiViewportP* pviewport = &viewport)
+			{
+				ScaleWindowsInViewportNative((ImGuiViewportP*)pviewport, scale);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void DestroyPlatformWindowNative(ImGuiViewportP* viewport)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)funcTable[924])(viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void DestroyPlatformWindow(ImGuiViewportPPtr viewport)
+		{
+			DestroyPlatformWindowNative(viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void DestroyPlatformWindow(ref ImGuiViewportP viewport)
+		{
+			fixed (ImGuiViewportP* pviewport = &viewport)
+			{
+				DestroyPlatformWindowNative((ImGuiViewportP*)pviewport);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetWindowViewportNative(ImGuiWindow* window, ImGuiViewportP* viewport)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)funcTable[925])(window, viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowViewport(ImGuiWindowPtr window, ImGuiViewportPPtr viewport)
+		{
+			SetWindowViewportNative(window, viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowViewport(ref ImGuiWindow window, ImGuiViewportPPtr viewport)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetWindowViewportNative((ImGuiWindow*)pwindow, viewport);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowViewport(ImGuiWindowPtr window, ref ImGuiViewportP viewport)
+		{
+			fixed (ImGuiViewportP* pviewport = &viewport)
+			{
+				SetWindowViewportNative(window, (ImGuiViewportP*)pviewport);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetWindowViewport(ref ImGuiWindow window, ref ImGuiViewportP viewport)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiViewportP* pviewport = &viewport)
+				{
+					SetWindowViewportNative((ImGuiWindow*)pwindow, (ImGuiViewportP*)pviewport);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetCurrentViewportNative(ImGuiWindow* window, ImGuiViewportP* viewport)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)funcTable[926])(window, viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentViewport(ImGuiWindowPtr window, ImGuiViewportPPtr viewport)
+		{
+			SetCurrentViewportNative(window, viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentViewport(ref ImGuiWindow window, ImGuiViewportPPtr viewport)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetCurrentViewportNative((ImGuiWindow*)pwindow, viewport);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentViewport(ImGuiWindowPtr window, ref ImGuiViewportP viewport)
+		{
+			fixed (ImGuiViewportP* pviewport = &viewport)
+			{
+				SetCurrentViewportNative(window, (ImGuiViewportP*)pviewport);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetCurrentViewport(ref ImGuiWindow window, ref ImGuiViewportP viewport)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				fixed (ImGuiViewportP* pviewport = &viewport)
+				{
+					SetCurrentViewportNative((ImGuiWindow*)pwindow, (ImGuiViewportP*)pviewport);
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiPlatformMonitor* GetViewportPlatformMonitorNative(ImGuiViewport* viewport)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImGuiViewport*, ImGuiPlatformMonitor*>)funcTable[927])(viewport);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiPlatformMonitorPtr GetViewportPlatformMonitor(ImGuiViewportPtr viewport)
+		{
+			ImGuiPlatformMonitorPtr ret = GetViewportPlatformMonitorNative(viewport);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiPlatformMonitorPtr GetViewportPlatformMonitor(ref ImGuiViewport viewport)
+		{
+			fixed (ImGuiViewport* pviewport = &viewport)
+			{
+				ImGuiPlatformMonitorPtr ret = GetViewportPlatformMonitorNative((ImGuiViewport*)pviewport);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiViewportP* FindHoveredViewportFromPlatformWindowStackNative(Vector2 mousePlatformPos)
+		{
+			return ((delegate* unmanaged[Cdecl]<Vector2, ImGuiViewportP*>)funcTable[928])(mousePlatformPos);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiViewportPPtr FindHoveredViewportFromPlatformWindowStack(Vector2 mousePlatformPos)
+		{
+			ImGuiViewportPPtr ret = FindHoveredViewportFromPlatformWindowStackNative(mousePlatformPos);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void MarkIniSettingsDirtyNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[929])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void MarkIniSettingsDirty()
+		{
+			MarkIniSettingsDirtyNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void MarkIniSettingsDirtyNative(ImGuiWindow* window)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)funcTable[930])(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void MarkIniSettingsDirty(ImGuiWindowPtr window)
+		{
+			MarkIniSettingsDirtyNative(window);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void MarkIniSettingsDirty(ref ImGuiWindow window)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				MarkIniSettingsDirtyNative((ImGuiWindow*)pwindow);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ClearIniSettingsNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[931])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ClearIniSettings()
+		{
+			ClearIniSettingsNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindowSettings* CreateNewWindowSettingsNative(byte* name)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)funcTable[932])(name);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr CreateNewWindowSettings(byte* name)
+		{
+			ImGuiWindowSettingsPtr ret = CreateNewWindowSettingsNative(name);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr CreateNewWindowSettings(ImU8String name)
+		{
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
+			{
+				ImGuiWindowSettingsPtr ret = CreateNewWindowSettingsNative(namePtr);
+				name.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindowSettings* FindWindowSettingsNative(uint id)
+		{
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindowSettings*>)funcTable[933])(id);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr FindWindowSettings(uint id)
+		{
+			ImGuiWindowSettingsPtr ret = FindWindowSettingsNative(id);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiWindowSettings* FindOrCreateWindowSettingsNative(byte* name)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)funcTable[934])(name);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr FindOrCreateWindowSettings(byte* name)
+		{
+			ImGuiWindowSettingsPtr ret = FindOrCreateWindowSettingsNative(name);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiWindowSettingsPtr FindOrCreateWindowSettings(ImU8String name)
+		{
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
+			{
+				ImGuiWindowSettingsPtr ret = FindOrCreateWindowSettingsNative(namePtr);
+				name.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void AddSettingsHandlerNative(ImGuiSettingsHandler* handler)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*, void>)funcTable[935])(handler);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void AddSettingsHandler(ImGuiSettingsHandlerPtr handler)
+		{
+			AddSettingsHandlerNative(handler);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void AddSettingsHandler(ref ImGuiSettingsHandler handler)
+		{
+			fixed (ImGuiSettingsHandler* phandler = &handler)
+			{
+				AddSettingsHandlerNative((ImGuiSettingsHandler*)phandler);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void RemoveSettingsHandlerNative(byte* typeName)
+		{
+			((delegate* unmanaged[Cdecl]<byte*, void>)funcTable[936])(typeName);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void RemoveSettingsHandler(byte* typeName)
+		{
+			RemoveSettingsHandlerNative(typeName);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void RemoveSettingsHandler(ImU8String typeName)
+		{
+			fixed (byte* typeNamePtr = &typeName.GetPinnableNullTerminatedReference())
+			{
+				RemoveSettingsHandlerNative(typeNamePtr);
+				typeName.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static ImGuiSettingsHandler* FindSettingsHandlerNative(byte* typeName)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiSettingsHandler*>)funcTable[937])(typeName);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiSettingsHandlerPtr FindSettingsHandler(byte* typeName)
+		{
+			ImGuiSettingsHandlerPtr ret = FindSettingsHandlerNative(typeName);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static ImGuiSettingsHandlerPtr FindSettingsHandler(ImU8String typeName)
+		{
+			fixed (byte* typeNamePtr = &typeName.GetPinnableNullTerminatedReference())
+			{
+				ImGuiSettingsHandlerPtr ret = FindSettingsHandlerNative(typeNamePtr);
+				typeName.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetNextWindowScrollNative(Vector2 scroll)
+		{
+			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[938])(scroll);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetNextWindowScroll(Vector2 scroll)
+		{
+			SetNextWindowScrollNative(scroll);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetScrollXNative(ImGuiWindow* window, float scrollX)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)funcTable[939])(window, scrollX);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollX(ImGuiWindowPtr window, float scrollX)
+		{
+			SetScrollXNative(window, scrollX);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollX(ref ImGuiWindow window, float scrollX)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetScrollXNative((ImGuiWindow*)pwindow, scrollX);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetScrollYNative(ImGuiWindow* window, float scrollY)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)funcTable[940])(window, scrollY);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollY(ImGuiWindowPtr window, float scrollY)
+		{
+			SetScrollYNative(window, scrollY);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollY(ref ImGuiWindow window, float scrollY)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetScrollYNative((ImGuiWindow*)pwindow, scrollY);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetScrollFromPosXNative(ImGuiWindow* window, float localX, float centerXRatio)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)funcTable[941])(window, localX, centerXRatio);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollFromPosX(ImGuiWindowPtr window, float localX, float centerXRatio)
+		{
+			SetScrollFromPosXNative(window, localX, centerXRatio);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollFromPosX(ref ImGuiWindow window, float localX, float centerXRatio)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetScrollFromPosXNative((ImGuiWindow*)pwindow, localX, centerXRatio);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void SetScrollFromPosYNative(ImGuiWindow* window, float localY, float centerYRatio)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)funcTable[942])(window, localY, centerYRatio);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollFromPosY(ImGuiWindowPtr window, float localY, float centerYRatio)
+		{
+			SetScrollFromPosYNative(window, localY, centerYRatio);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void SetScrollFromPosY(ref ImGuiWindow window, float localY, float centerYRatio)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				SetScrollFromPosYNative((ImGuiWindow*)pwindow, localY, centerYRatio);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ScrollToItemNative(ImGuiScrollFlags flags)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiScrollFlags, void>)funcTable[943])(flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToItem(ImGuiScrollFlags flags)
+		{
+			ScrollToItemNative(flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToItem()
+		{
+			ScrollToItemNative((ImGuiScrollFlags)(0));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ScrollToRectNative(ImGuiWindow* window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)funcTable[944])(window, rect, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRect(ImGuiWindowPtr window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			ScrollToRectNative(window, rect, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRect(ImGuiWindowPtr window, ImRect rect)
+		{
+			ScrollToRectNative(window, rect, (ImGuiScrollFlags)(0));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRect(ref ImGuiWindow window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ScrollToRectNative((ImGuiWindow*)pwindow, rect, flags);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRect(ref ImGuiWindow window, ImRect rect)
+		{
+			fixed (ImGuiWindow* pwindow = &window)
+			{
+				ScrollToRectNative((ImGuiWindow*)pwindow, rect, (ImGuiScrollFlags)(0));
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ScrollToRectExNative(Vector2* pOut, ImGuiWindow* window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)funcTable[945])(pOut, window, rect, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 ScrollToRectEx(ImGuiWindowPtr window, ImRect rect)
+		{
+			Vector2 ret;
+			ScrollToRectExNative(&ret, window, rect, (ImGuiScrollFlags)(0));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static Vector2 ScrollToRectEx(ImGuiWindowPtr window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			Vector2 ret;
+			ScrollToRectExNative(&ret, window, rect, flags);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRectEx(ref Vector2 pOut, ImGuiWindowPtr window, ImRect rect, ImGuiScrollFlags flags)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ScrollToRectExNative((Vector2*)ppOut, window, rect, flags);
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ScrollToRectEx(ref Vector2 pOut, ImGuiWindowPtr window, ImRect rect)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ScrollToRectExNative((Vector2*)ppOut, window, rect, (ImGuiScrollFlags)(0));
 			}
 		}
 	}

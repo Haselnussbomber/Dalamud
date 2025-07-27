@@ -14,4055 +14,2867 @@ public unsafe partial class ImGuiPNative
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint ImHashData(void* data, nuint dataSize, uint seed)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<void*, nuint, uint, uint>)ImGuiP.funcTable[688])(data, dataSize, seed);
-
+			return ((delegate* unmanaged[Cdecl]<void*, nuint, uint, uint>)ImGuiP.funcTable[662])(data, dataSize, seed);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint ImHashStr(byte* data, nuint dataSize, uint seed)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, nuint, uint, uint>)ImGuiP.funcTable[689])(data, dataSize, seed);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, nuint, uint, uint>)ImGuiP.funcTable[663])(data, dataSize, seed);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImQsort(void* baseValue, nuint count, nuint sizeOfElement, delegate*<void*, nuint, nuint, delegate*<void*, void*, int>, int> compareFunc)
 		{
-
-			((delegate* unmanaged[Cdecl]<void*, nuint, nuint, delegate*<void*, nuint, nuint, delegate*<void*, void*, int>, int>, void>)ImGuiP.funcTable[690])(baseValue, count, sizeOfElement, compareFunc);
-
+			((delegate* unmanaged[Cdecl]<void*, nuint, nuint, delegate*<void*, nuint, nuint, delegate*<void*, void*, int>, int>, void>)ImGuiP.funcTable[664])(baseValue, count, sizeOfElement, compareFunc);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint ImAlphaBlendColors(uint colA, uint colB)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, uint, uint>)ImGuiP.funcTable[691])(colA, colB);
-
+			return ((delegate* unmanaged[Cdecl]<uint, uint, uint>)ImGuiP.funcTable[665])(colA, colB);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImIsPowerOfTwo(int v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, byte>)ImGuiP.funcTable[692])(v);
-
+			return ((delegate* unmanaged[Cdecl]<int, byte>)ImGuiP.funcTable[666])(v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImIsPowerOfTwo(ulong v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ulong, byte>)ImGuiP.funcTable[693])(v);
-
+			return ((delegate* unmanaged[Cdecl]<ulong, byte>)ImGuiP.funcTable[667])(v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImUpperPowerOfTwo(int v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, int>)ImGuiP.funcTable[694])(v);
-
+			return ((delegate* unmanaged[Cdecl]<int, int>)ImGuiP.funcTable[668])(v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImStricmp(byte* str1, byte* str2)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[695])(str1, str2);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[669])(str1, str2);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImStrnicmp(byte* str1, byte* str2, nuint count)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, int>)ImGuiP.funcTable[696])(str1, str2, count);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, int>)ImGuiP.funcTable[670])(str1, str2, count);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImStrncpy(byte* dst, byte* src, nuint count)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, void>)ImGuiP.funcTable[697])(dst, src, count);
-
+			((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, void>)ImGuiP.funcTable[671])(dst, src, count);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStrdup(byte* str)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[698])(str);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[672])(str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStrdupcpy(byte* dst, nuint* pDstSize, byte* str)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, nuint*, byte*, byte*>)ImGuiP.funcTable[699])(dst, pDstSize, str);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, nuint*, byte*, byte*>)ImGuiP.funcTable[673])(dst, pDstSize, str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStrchrRange(byte* strBegin, byte* strEnd, byte c)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte, byte*>)ImGuiP.funcTable[700])(strBegin, strEnd, c);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte, byte*>)ImGuiP.funcTable[674])(strBegin, strEnd, c);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImStrlenW(ushort* str)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ushort*, int>)ImGuiP.funcTable[701])(str);
-
+			return ((delegate* unmanaged[Cdecl]<ushort*, int>)ImGuiP.funcTable[675])(str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStreolRange(byte* str, byte* strEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*>)ImGuiP.funcTable[702])(str, strEnd);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*>)ImGuiP.funcTable[676])(str, strEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ushort* ImStrbolW(ushort* bufMidLine, ushort* bufBegin)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ushort*, ushort*, ushort*>)ImGuiP.funcTable[703])(bufMidLine, bufBegin);
-
+			return ((delegate* unmanaged[Cdecl]<ushort*, ushort*, ushort*>)ImGuiP.funcTable[677])(bufMidLine, bufBegin);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStristr(byte* haystack, byte* haystackEnd, byte* needle, byte* needleEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, byte*, byte*>)ImGuiP.funcTable[704])(haystack, haystackEnd, needle, needleEnd);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, byte*, byte*>)ImGuiP.funcTable[678])(haystack, haystackEnd, needle, needleEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImStrTrimBlanks(byte* str)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, void>)ImGuiP.funcTable[705])(str);
-
+			((delegate* unmanaged[Cdecl]<byte*, void>)ImGuiP.funcTable[679])(str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImStrSkipBlank(byte* str)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[706])(str);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[680])(str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImCharIsBlankA(byte c)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte, byte>)ImGuiP.funcTable[707])(c);
-
+			return ((delegate* unmanaged[Cdecl]<byte, byte>)ImGuiP.funcTable[681])(c);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImCharIsBlankW(uint c)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, byte>)ImGuiP.funcTable[708])(c);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void ImFormatStringToTempBuffer(byte** outBuf, byte** outBufEnd, byte* fmt)
-		{
-
-			((delegate* unmanaged[Cdecl]<byte**, byte**, byte*, void>)ImGuiP.funcTable[709])(outBuf, outBufEnd, fmt);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void ImFormatStringToTempBufferV(byte** outBuf, byte** outBufEnd, byte* fmt, nuint args)
-		{
-
-			((delegate* unmanaged[Cdecl]<byte**, byte**, byte*, nuint, void>)ImGuiP.funcTable[710])(outBuf, outBufEnd, fmt, args);
-
+			return ((delegate* unmanaged[Cdecl]<uint, byte>)ImGuiP.funcTable[682])(c);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImParseFormatFindStart(byte* format)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[711])(format);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[683])(format);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImParseFormatFindEnd(byte* format)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[712])(format);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void ImParseFormatSanitizeForPrinting(byte* fmtIn, byte* fmtOut, nuint fmtOutSize)
-		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, void>)ImGuiP.funcTable[713])(fmtIn, fmtOut, fmtOutSize);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static byte* ImParseFormatSanitizeForScanning(byte* fmtIn, byte* fmtOut, nuint fmtOutSize)
-		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, byte*>)ImGuiP.funcTable[714])(fmtIn, fmtOut, fmtOutSize);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*>)ImGuiP.funcTable[684])(format);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImParseFormatPrecision(byte* format, int defaultValue)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, int, int>)ImGuiP.funcTable[715])(format, defaultValue);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, int, int>)ImGuiP.funcTable[685])(format, defaultValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* ImTextCharToUtf8(byte* outBuf, uint c)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, uint, byte*>)ImGuiP.funcTable[716])(outBuf, c);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, uint, byte*>)ImGuiP.funcTable[686])(outBuf, c);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImTextCharFromUtf8(uint* outChar, byte* inText, byte* inTextEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint*, byte*, byte*, int>)ImGuiP.funcTable[717])(outChar, inText, inTextEnd);
-
+			return ((delegate* unmanaged[Cdecl]<uint*, byte*, byte*, int>)ImGuiP.funcTable[687])(outChar, inText, inTextEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImTextCountCharsFromUtf8(byte* inText, byte* inTextEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[718])(inText, inTextEnd);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[688])(inText, inTextEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImTextCountUtf8BytesFromChar(byte* inText, byte* inTextEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[719])(inText, inTextEnd);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, int>)ImGuiP.funcTable[689])(inText, inTextEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImTextCountUtf8BytesFromStr(ushort* inText, ushort* inTextEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ushort*, ushort*, int>)ImGuiP.funcTable[720])(inText, inTextEnd);
-
+			return ((delegate* unmanaged[Cdecl]<ushort*, ushort*, int>)ImGuiP.funcTable[690])(inText, inTextEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImFileHandle ImFileOpen(byte* filename, byte* mode)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, ImFileHandle>)ImGuiP.funcTable[721])(filename, mode);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, ImFileHandle>)ImGuiP.funcTable[691])(filename, mode);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImFileClose(ImFileHandle file)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImFileHandle, byte>)ImGuiP.funcTable[722])(file);
-
+			return ((delegate* unmanaged[Cdecl]<ImFileHandle, byte>)ImGuiP.funcTable[692])(file);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ulong ImFileGetSize(ImFileHandle file)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImFileHandle, ulong>)ImGuiP.funcTable[723])(file);
-
+			return ((delegate* unmanaged[Cdecl]<ImFileHandle, ulong>)ImGuiP.funcTable[693])(file);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ulong ImFileRead(void* data, ulong size, ulong count, ImFileHandle file)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<void*, ulong, ulong, ImFileHandle, ulong>)ImGuiP.funcTable[724])(data, size, count, file);
-
+			return ((delegate* unmanaged[Cdecl]<void*, ulong, ulong, ImFileHandle, ulong>)ImGuiP.funcTable[694])(data, size, count, file);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ulong ImFileWrite(void* data, ulong size, ulong count, ImFileHandle file)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<void*, ulong, ulong, ImFileHandle, ulong>)ImGuiP.funcTable[725])(data, size, count, file);
-
+			return ((delegate* unmanaged[Cdecl]<void*, ulong, ulong, ImFileHandle, ulong>)ImGuiP.funcTable[695])(data, size, count, file);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void* ImFileLoadToMemory(byte* filename, byte* mode, nuint* outFileSize, int paddingBytes)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint*, int, void*>)ImGuiP.funcTable[726])(filename, mode, outFileSize, paddingBytes);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint*, int, void*>)ImGuiP.funcTable[696])(filename, mode, outFileSize, paddingBytes);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImPow(float x, float y)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, float>)ImGuiP.funcTable[727])(x, y);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, float>)ImGuiP.funcTable[697])(x, y);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double ImPow(double x, double y)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<double, double, double>)ImGuiP.funcTable[728])(x, y);
-
+			return ((delegate* unmanaged[Cdecl]<double, double, double>)ImGuiP.funcTable[698])(x, y);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImLog(float x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[729])(x);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[699])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double ImLog(double x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[730])(x);
-
+			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[700])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImAbs(int x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, int>)ImGuiP.funcTable[731])(x);
-
+			return ((delegate* unmanaged[Cdecl]<int, int>)ImGuiP.funcTable[701])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImAbs(float x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[732])(x);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[702])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double ImAbs(double x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[733])(x);
-
+			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[703])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImSign(float x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[734])(x);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[704])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double ImSign(double x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[735])(x);
-
+			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[705])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImRsqrt(float x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[736])(x);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[706])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double ImRsqrt(double x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[737])(x);
-
+			return ((delegate* unmanaged[Cdecl]<double, double>)ImGuiP.funcTable[707])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImMin(Vector2* pOut, Vector2 lhs, Vector2 rhs)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[738])(pOut, lhs, rhs);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[708])(pOut, lhs, rhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImMax(Vector2* pOut, Vector2 lhs, Vector2 rhs)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[739])(pOut, lhs, rhs);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[709])(pOut, lhs, rhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImClamp(Vector2* pOut, Vector2 v, Vector2 mn, Vector2 mx)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[740])(pOut, v, mn, mx);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[710])(pOut, v, mn, mx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImLerp(Vector2* pOut, Vector2 a, Vector2 b, float t)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, float, void>)ImGuiP.funcTable[741])(pOut, a, b, t);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, float, void>)ImGuiP.funcTable[711])(pOut, a, b, t);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImLerp(Vector2* pOut, Vector2 a, Vector2 b, Vector2 t)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[742])(pOut, a, b, t);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[712])(pOut, a, b, t);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImLerp(Vector4* pOut, Vector4 a, Vector4 b, float t)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector4*, Vector4, Vector4, float, void>)ImGuiP.funcTable[743])(pOut, a, b, t);
-
+			((delegate* unmanaged[Cdecl]<Vector4*, Vector4, Vector4, float, void>)ImGuiP.funcTable[713])(pOut, a, b, t);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImSaturate(float f)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[744])(f);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[714])(f);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImLengthSqr(Vector2 lhs)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, float>)ImGuiP.funcTable[745])(lhs);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, float>)ImGuiP.funcTable[715])(lhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImLengthSqr(Vector4 lhs)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector4, float>)ImGuiP.funcTable[746])(lhs);
-
+			return ((delegate* unmanaged[Cdecl]<Vector4, float>)ImGuiP.funcTable[716])(lhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImInvLength(Vector2 lhs, float failValue)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, float, float>)ImGuiP.funcTable[747])(lhs, failValue);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, float, float>)ImGuiP.funcTable[717])(lhs, failValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImFloor(float f)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[748])(f);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[718])(f);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFloor(Vector2* pOut, Vector2 v)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, void>)ImGuiP.funcTable[750])(pOut, v);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, void>)ImGuiP.funcTable[720])(pOut, v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImFloorSigned(float f)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[749])(f);
-
+			return ((delegate* unmanaged[Cdecl]<float, float>)ImGuiP.funcTable[719])(f);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFloorSigned(Vector2* pOut, Vector2 v)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, void>)ImGuiP.funcTable[751])(pOut, v);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, void>)ImGuiP.funcTable[721])(pOut, v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int ImModPositive(int a, int b)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, int, int>)ImGuiP.funcTable[752])(a, b);
-
+			return ((delegate* unmanaged[Cdecl]<int, int, int>)ImGuiP.funcTable[722])(a, b);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImDot(Vector2 a, Vector2 b)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, float>)ImGuiP.funcTable[753])(a, b);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, float>)ImGuiP.funcTable[723])(a, b);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImRotate(Vector2* pOut, Vector2 v, float cosA, float sinA)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, float, float, void>)ImGuiP.funcTable[754])(pOut, v, cosA, sinA);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, float, float, void>)ImGuiP.funcTable[724])(pOut, v, cosA, sinA);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImLinearSweep(float current, float target, float speed)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, float, float>)ImGuiP.funcTable[755])(current, target, speed);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, float, float>)ImGuiP.funcTable[725])(current, target, speed);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImMul(Vector2* pOut, Vector2 lhs, Vector2 rhs)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[756])(pOut, lhs, rhs);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, void>)ImGuiP.funcTable[726])(pOut, lhs, rhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImIsFloatAboveGuaranteedIntegerPrecision(float f)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, byte>)ImGuiP.funcTable[757])(f);
-
+			return ((delegate* unmanaged[Cdecl]<float, byte>)ImGuiP.funcTable[727])(f);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBezierCubicCalc(Vector2* pOut, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[758])(pOut, p1, p2, p3, p4, t);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[728])(pOut, p1, p2, p3, p4, t);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBezierCubicClosestPoint(Vector2* pOut, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p, int numSegments)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, Vector2, int, void>)ImGuiP.funcTable[759])(pOut, p1, p2, p3, p4, p, numSegments);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, Vector2, int, void>)ImGuiP.funcTable[729])(pOut, p1, p2, p3, p4, p, numSegments);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBezierCubicClosestPointCasteljau(Vector2* pOut, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 p, float tessTol)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[760])(pOut, p1, p2, p3, p4, p, tessTol);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[730])(pOut, p1, p2, p3, p4, p, tessTol);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBezierQuadraticCalc(Vector2* pOut, Vector2 p1, Vector2 p2, Vector2 p3, float t)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[761])(pOut, p1, p2, p3, t);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, float, void>)ImGuiP.funcTable[731])(pOut, p1, p2, p3, t);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImLineClosestPoint(Vector2* pOut, Vector2 a, Vector2 b, Vector2 p)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[762])(pOut, a, b, p);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[732])(pOut, a, b, p);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImTriangleContainsPoint(Vector2 a, Vector2 b, Vector2 c, Vector2 p)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, Vector2, byte>)ImGuiP.funcTable[763])(a, b, c, p);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, Vector2, byte>)ImGuiP.funcTable[733])(a, b, c, p);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImTriangleClosestPoint(Vector2* pOut, Vector2 a, Vector2 b, Vector2 c, Vector2 p)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[764])(pOut, a, b, c, p);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, Vector2, Vector2, void>)ImGuiP.funcTable[734])(pOut, a, b, c, p);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImTriangleBarycentricCoords(Vector2 a, Vector2 b, Vector2 c, Vector2 p, float* outU, float* outV, float* outW)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, Vector2, float*, float*, float*, void>)ImGuiP.funcTable[765])(a, b, c, p, outU, outV, outW);
-
+			((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, Vector2, float*, float*, float*, void>)ImGuiP.funcTable[735])(a, b, c, p, outU, outV, outW);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float ImTriangleArea(Vector2 a, Vector2 b, Vector2 c)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, float>)ImGuiP.funcTable[766])(a, b, c);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, Vector2, float>)ImGuiP.funcTable[736])(a, b, c);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDir ImGetDirQuadrantFromDelta(float dx, float dy)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, ImGuiDir>)ImGuiP.funcTable[767])(dx, dy);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, ImGuiDir>)ImGuiP.funcTable[737])(dx, dy);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImVec1* ImVec1()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImVec1*>)ImGuiP.funcTable[768])();
-
+			return ((delegate* unmanaged[Cdecl]<ImVec1*>)ImGuiP.funcTable[738])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImVec1* ImVec1(float x)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, ImVec1*>)ImGuiP.funcTable[769])(x);
-
+			return ((delegate* unmanaged[Cdecl]<float, ImVec1*>)ImGuiP.funcTable[739])(x);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImVec2Ih* ImVec2ih()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImVec2Ih*>)ImGuiP.funcTable[770])();
-
+			return ((delegate* unmanaged[Cdecl]<ImVec2Ih*>)ImGuiP.funcTable[740])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImVec2Ih* ImVec2ih(short x, short y)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<short, short, ImVec2Ih*>)ImGuiP.funcTable[771])(x, y);
-
+			return ((delegate* unmanaged[Cdecl]<short, short, ImVec2Ih*>)ImGuiP.funcTable[741])(x, y);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImVec2Ih* ImVec2ih(Vector2 rhs)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, ImVec2Ih*>)ImGuiP.funcTable[772])(rhs);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, ImVec2Ih*>)ImGuiP.funcTable[742])(rhs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImRect* ImRect()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*>)ImGuiP.funcTable[773])();
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*>)ImGuiP.funcTable[743])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImRect* ImRect(Vector2 min, Vector2 max)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, ImRect*>)ImGuiP.funcTable[774])(min, max);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, Vector2, ImRect*>)ImGuiP.funcTable[744])(min, max);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImRect* ImRect(Vector4 v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector4, ImRect*>)ImGuiP.funcTable[775])(v);
-
+			return ((delegate* unmanaged[Cdecl]<Vector4, ImRect*>)ImGuiP.funcTable[745])(v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImRect* ImRect(float x1, float y1, float x2, float y2)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, float, float, ImRect*>)ImGuiP.funcTable[776])(x1, y1, x2, y2);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, float, float, ImRect*>)ImGuiP.funcTable[746])(x1, y1, x2, y2);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetCenter(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[777])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[747])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetSize(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[778])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[748])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetWidth(ImRect* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[779])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[749])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetHeight(ImRect* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[780])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[750])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetArea(ImRect* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[781])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, float>)ImGuiP.funcTable[751])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetTL(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[782])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[752])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetTR(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[783])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[753])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetBL(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[784])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[754])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetBR(Vector2* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[785])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImRect*, void>)ImGuiP.funcTable[755])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte Contains(ImRect* self, Vector2 p)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, Vector2, byte>)ImGuiP.funcTable[786])(self, p);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, Vector2, byte>)ImGuiP.funcTable[756])(self, p);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte Contains(ImRect* self, ImRect r)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, ImRect, byte>)ImGuiP.funcTable[787])(self, r);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, ImRect, byte>)ImGuiP.funcTable[757])(self, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte Overlaps(ImRect* self, ImRect r)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, ImRect, byte>)ImGuiP.funcTable[788])(self, r);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, ImRect, byte>)ImGuiP.funcTable[758])(self, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Add(ImRect* self, Vector2 p)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[789])(self, p);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[759])(self, p);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Add(ImRect* self, ImRect r)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[790])(self, r);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[760])(self, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Expand(ImRect* self, float amount)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[791])(self, amount);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[761])(self, amount);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Expand(ImRect* self, Vector2 amount)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[792])(self, amount);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[762])(self, amount);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Translate(ImRect* self, Vector2 d)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[793])(self, d);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, Vector2, void>)ImGuiP.funcTable[763])(self, d);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TranslateX(ImRect* self, float dx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[794])(self, dx);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[764])(self, dx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TranslateY(ImRect* self, float dy)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[795])(self, dy);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, float, void>)ImGuiP.funcTable[765])(self, dy);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClipWith(ImRect* self, ImRect r)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[796])(self, r);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[766])(self, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClipWithFull(ImRect* self, ImRect r)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[797])(self, r);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImRect, void>)ImGuiP.funcTable[767])(self, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Floor(ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, void>)ImGuiP.funcTable[798])(self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, void>)ImGuiP.funcTable[768])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsInverted(ImRect* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect*, byte>)ImGuiP.funcTable[799])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect*, byte>)ImGuiP.funcTable[769])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ToVec4(Vector4* pOut, ImRect* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector4*, ImRect*, void>)ImGuiP.funcTable[800])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<Vector4*, ImRect*, void>)ImGuiP.funcTable[770])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImBitArrayTestBit(uint* arr, int n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint*, int, byte>)ImGuiP.funcTable[801])(arr, n);
-
+			return ((delegate* unmanaged[Cdecl]<uint*, int, byte>)ImGuiP.funcTable[771])(arr, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBitArrayClearBit(uint* arr, int n)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint*, int, void>)ImGuiP.funcTable[802])(arr, n);
-
+			((delegate* unmanaged[Cdecl]<uint*, int, void>)ImGuiP.funcTable[772])(arr, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBitArraySetBit(uint* arr, int n)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint*, int, void>)ImGuiP.funcTable[803])(arr, n);
-
+			((delegate* unmanaged[Cdecl]<uint*, int, void>)ImGuiP.funcTable[773])(arr, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImBitArraySetBitRange(uint* arr, int n, int n2)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint*, int, int, void>)ImGuiP.funcTable[804])(arr, n, n2);
-
+			((delegate* unmanaged[Cdecl]<uint*, int, int, void>)ImGuiP.funcTable[774])(arr, n, n2);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Create(ImBitVector* self, int sz)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[805])(self, sz);
-
+			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[775])(self, sz);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Clear(ImBitVector* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImBitVector*, void>)ImGuiP.funcTable[806])(self);
-
+			((delegate* unmanaged[Cdecl]<ImBitVector*, void>)ImGuiP.funcTable[776])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Clear(ImDrawDataBuilder* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[812])(self);
-
+			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[782])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Clear(ImGuiNavItemData* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiNavItemData*, void>)ImGuiP.funcTable[855])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiNavItemData*, void>)ImGuiP.funcTable[825])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TestBit(ImBitVector* self, int n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImBitVector*, int, byte>)ImGuiP.funcTable[807])(self, n);
-
+			return ((delegate* unmanaged[Cdecl]<ImBitVector*, int, byte>)ImGuiP.funcTable[777])(self, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetBit(ImBitVector* self, int n)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[808])(self, n);
-
+			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[778])(self, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearBit(ImBitVector* self, int n)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[809])(self, n);
-
+			((delegate* unmanaged[Cdecl]<ImBitVector*, int, void>)ImGuiP.funcTable[779])(self, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImDrawListSharedData* ImDrawListSharedData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImDrawListSharedData*>)ImGuiP.funcTable[810])();
-
+			return ((delegate* unmanaged[Cdecl]<ImDrawListSharedData*>)ImGuiP.funcTable[780])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCircleTessellationMaxError(ImDrawListSharedData* self, float maxError)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawListSharedData*, float, void>)ImGuiP.funcTable[811])(self, maxError);
-
+			((delegate* unmanaged[Cdecl]<ImDrawListSharedData*, float, void>)ImGuiP.funcTable[781])(self, maxError);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearFreeMemory(ImDrawDataBuilder* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[813])(self);
-
+			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[783])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearFreeMemory(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[826])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[796])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetDrawListCount(ImDrawDataBuilder* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, int>)ImGuiP.funcTable[814])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, int>)ImGuiP.funcTable[784])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void FlattenIntoSingleLayer(ImDrawDataBuilder* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[815])(self);
-
+			((delegate* unmanaged[Cdecl]<ImDrawDataBuilder*, void>)ImGuiP.funcTable[785])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStyleMod* ImGuiStyleMod(ImGuiStyleVar idx, int v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, int, ImGuiStyleMod*>)ImGuiP.funcTable[816])(idx, v);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, int, ImGuiStyleMod*>)ImGuiP.funcTable[786])(idx, v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStyleMod* ImGuiStyleMod(ImGuiStyleVar idx, float v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, float, ImGuiStyleMod*>)ImGuiP.funcTable[817])(idx, v);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, float, ImGuiStyleMod*>)ImGuiP.funcTable[787])(idx, v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStyleMod* ImGuiStyleMod(ImGuiStyleVar idx, Vector2 v)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, Vector2, ImGuiStyleMod*>)ImGuiP.funcTable[818])(idx, v);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStyleVar, Vector2, ImGuiStyleMod*>)ImGuiP.funcTable[788])(idx, v);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiComboPreviewData* ImGuiComboPreviewData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiComboPreviewData*>)ImGuiP.funcTable[819])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiComboPreviewData*>)ImGuiP.funcTable[789])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiMenuColumns* ImGuiMenuColumns()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*>)ImGuiP.funcTable[820])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*>)ImGuiP.funcTable[790])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Update(ImGuiMenuColumns* self, float spacing, byte windowReappearing)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, float, byte, void>)ImGuiP.funcTable[821])(self, spacing, windowReappearing);
-
+			((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, float, byte, void>)ImGuiP.funcTable[791])(self, spacing, windowReappearing);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float DeclColumns(ImGuiMenuColumns* self, float wIcon, float wLabel, float wShortcut, float wMark)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, float, float, float, float, float>)ImGuiP.funcTable[822])(self, wIcon, wLabel, wShortcut, wMark);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, float, float, float, float, float>)ImGuiP.funcTable[792])(self, wIcon, wLabel, wShortcut, wMark);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CalcNextTotalWidth(ImGuiMenuColumns* self, byte updateOffsets)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, byte, void>)ImGuiP.funcTable[823])(self, updateOffsets);
-
+			((delegate* unmanaged[Cdecl]<ImGuiMenuColumns*, byte, void>)ImGuiP.funcTable[793])(self, updateOffsets);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiInputTextState* ImGuiInputTextState()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*>)ImGuiP.funcTable[824])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*>)ImGuiP.funcTable[794])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearText(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[825])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[795])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetUndoAvailCount(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[827])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[797])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetRedoAvailCount(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[828])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[798])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void OnKeyPressed(ImGuiInputTextState* self, int key)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int, void>)ImGuiP.funcTable[829])(self, key);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int, void>)ImGuiP.funcTable[799])(self, key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CursorAnimReset(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[830])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[800])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CursorClamp(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[831])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[801])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte HasSelection(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, byte>)ImGuiP.funcTable[832])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, byte>)ImGuiP.funcTable[802])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearSelection(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[833])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[803])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetCursorPos(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[834])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[804])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetSelectionStart(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[835])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[805])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetSelectionEnd(ImGuiInputTextState* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[836])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int>)ImGuiP.funcTable[806])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SelectAll(ImGuiInputTextState* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[837])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[807])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiPopupData* ImGuiPopupData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiPopupData*>)ImGuiP.funcTable[838])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiPopupData*>)ImGuiP.funcTable[808])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiNextWindowData* ImGuiNextWindowData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*>)ImGuiP.funcTable[839])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*>)ImGuiP.funcTable[809])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearFlags(ImGuiNextWindowData* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*, void>)ImGuiP.funcTable[840])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiNextWindowData*, void>)ImGuiP.funcTable[810])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearFlags(ImGuiNextItemData* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiNextItemData*, void>)ImGuiP.funcTable[842])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiNextItemData*, void>)ImGuiP.funcTable[812])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiNextItemData* ImGuiNextItemData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNextItemData*>)ImGuiP.funcTable[841])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNextItemData*>)ImGuiP.funcTable[811])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiLastItemData* ImGuiLastItemData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiLastItemData*>)ImGuiP.funcTable[843])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiLastItemData*>)ImGuiP.funcTable[813])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStackSizes* ImGuiStackSizes()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStackSizes*>)ImGuiP.funcTable[844])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackSizes*>)ImGuiP.funcTable[814])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetToCurrentState(ImGuiStackSizes* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)ImGuiP.funcTable[845])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)ImGuiP.funcTable[815])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CompareWithCurrentState(ImGuiStackSizes* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)ImGuiP.funcTable[846])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiStackSizes*, void>)ImGuiP.funcTable[816])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiPtrOrIndex* ImGuiPtrOrIndex(void* ptr)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<void*, ImGuiPtrOrIndex*>)ImGuiP.funcTable[847])(ptr);
-
+			return ((delegate* unmanaged[Cdecl]<void*, ImGuiPtrOrIndex*>)ImGuiP.funcTable[817])(ptr);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiPtrOrIndex* ImGuiPtrOrIndex(int index)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, ImGuiPtrOrIndex*>)ImGuiP.funcTable[848])(index);
-
+			return ((delegate* unmanaged[Cdecl]<int, ImGuiPtrOrIndex*>)ImGuiP.funcTable[818])(index);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiInputEvent* ImGuiInputEvent()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiInputEvent*>)ImGuiP.funcTable[849])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiInputEvent*>)ImGuiP.funcTable[819])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiListClipperRange FromIndices(int min, int max)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int, int, ImGuiListClipperRange>)ImGuiP.funcTable[850])(min, max);
-
+			return ((delegate* unmanaged[Cdecl]<int, int, ImGuiListClipperRange>)ImGuiP.funcTable[820])(min, max);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiListClipperRange FromPositions(float y1, float y2, int offMin, int offMax)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, int, int, ImGuiListClipperRange>)ImGuiP.funcTable[851])(y1, y2, offMin, offMax);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, int, int, ImGuiListClipperRange>)ImGuiP.funcTable[821])(y1, y2, offMin, offMax);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiListClipperData* ImGuiListClipperData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiListClipperData*>)ImGuiP.funcTable[852])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiListClipperData*>)ImGuiP.funcTable[822])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Reset(ImGuiListClipperData* self, ImGuiListClipper* clipper)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiListClipperData*, ImGuiListClipper*, void>)ImGuiP.funcTable[853])(self, clipper);
-
+			((delegate* unmanaged[Cdecl]<ImGuiListClipperData*, ImGuiListClipper*, void>)ImGuiP.funcTable[823])(self, clipper);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiNavItemData* ImGuiNavItemData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavItemData*>)ImGuiP.funcTable[854])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavItemData*>)ImGuiP.funcTable[824])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiOldColumnData* ImGuiOldColumnData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumnData*>)ImGuiP.funcTable[856])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumnData*>)ImGuiP.funcTable[826])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiOldColumns* ImGuiOldColumns()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*>)ImGuiP.funcTable[857])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*>)ImGuiP.funcTable[827])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockNode* ImGuiDockNode(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[858])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[828])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Destroy(ImGuiDockNode* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)ImGuiP.funcTable[859])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)ImGuiP.funcTable[829])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Destroy(ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[874])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[844])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Destroy(ImGuiWindow* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[891])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[861])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Destroy(ImGuiTable* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[909])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[879])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsRootNode(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[860])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[830])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsDockSpace(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[861])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[831])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsFloatingNode(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[862])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[832])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsCentralNode(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[863])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[833])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsHiddenTabBar(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[864])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[834])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsNoTabBar(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[865])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[835])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsSplitNode(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[866])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[836])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsLeafNode(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[867])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[837])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsEmpty(ImGuiDockNode* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[868])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[838])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Rect(ImRect* pOut, ImGuiDockNode* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiDockNode*, void>)ImGuiP.funcTable[869])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiDockNode*, void>)ImGuiP.funcTable[839])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Rect(ImRect* pOut, ImGuiWindow* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[896])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[866])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetLocalFlags(ImGuiDockNode* self, ImGuiDockNodeFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNodeFlags, void>)ImGuiP.funcTable[870])(self, flags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNodeFlags, void>)ImGuiP.funcTable[840])(self, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateMergedFlags(ImGuiDockNode* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)ImGuiP.funcTable[871])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, void>)ImGuiP.funcTable[841])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockContext* ImGuiDockContext()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockContext*>)ImGuiP.funcTable[872])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockContext*>)ImGuiP.funcTable[842])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiViewportP* ImGuiViewportP()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiViewportP*>)ImGuiP.funcTable[873])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiViewportP*>)ImGuiP.funcTable[843])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearRequestFlags(ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[875])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[845])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CalcWorkRectPos(Vector2* pOut, ImGuiViewportP* self, Vector2 offMin)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, void>)ImGuiP.funcTable[876])(pOut, self, offMin);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, void>)ImGuiP.funcTable[846])(pOut, self, offMin);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CalcWorkRectSize(Vector2* pOut, ImGuiViewportP* self, Vector2 offMin, Vector2 offMax)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, Vector2, void>)ImGuiP.funcTable[877])(pOut, self, offMin, offMax);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiViewportP*, Vector2, Vector2, void>)ImGuiP.funcTable[847])(pOut, self, offMin, offMax);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateWorkRect(ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[878])(self);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[848])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetMainRect(ImRect* pOut, ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[879])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[849])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetWorkRect(ImRect* pOut, ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[880])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[850])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetBuildWorkRect(ImRect* pOut, ImGuiViewportP* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[881])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiViewportP*, void>)ImGuiP.funcTable[851])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindowSettings* ImGuiWindowSettings()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*>)ImGuiP.funcTable[882])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*>)ImGuiP.funcTable[852])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* GetName(ImGuiWindowSettings* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*, byte*>)ImGuiP.funcTable[883])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*, byte*>)ImGuiP.funcTable[853])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiSettingsHandler* ImGuiSettingsHandler()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*>)ImGuiP.funcTable[884])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*>)ImGuiP.funcTable[854])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiMetricsConfig* ImGuiMetricsConfig()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiMetricsConfig*>)ImGuiP.funcTable[885])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiMetricsConfig*>)ImGuiP.funcTable[855])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStackLevelInfo* ImGuiStackLevelInfo()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStackLevelInfo*>)ImGuiP.funcTable[886])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackLevelInfo*>)ImGuiP.funcTable[856])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiStackTool* ImGuiStackTool()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiStackTool*>)ImGuiP.funcTable[887])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiStackTool*>)ImGuiP.funcTable[857])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiContextHook* ImGuiContextHook()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiContextHook*>)ImGuiP.funcTable[888])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiContextHook*>)ImGuiP.funcTable[858])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiContext* ImGuiContext(ImFontAtlas* sharedFontAtlas)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImGuiContext*>)ImGuiP.funcTable[889])(sharedFontAtlas);
-
+			return ((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImGuiContext*>)ImGuiP.funcTable[859])(sharedFontAtlas);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* ImGuiWindow(ImGuiContext* context, byte* name)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, byte*, ImGuiWindow*>)ImGuiP.funcTable[890])(context, name);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, byte*, ImGuiWindow*>)ImGuiP.funcTable[860])(context, name);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetID(ImGuiWindow* self, byte* str, byte* strEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte*, byte*, uint>)ImGuiP.funcTable[892])(self, str, strEnd);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte*, byte*, uint>)ImGuiP.funcTable[862])(self, str, strEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetID(ImGuiWindow* self, void* ptr)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, void*, uint>)ImGuiP.funcTable[893])(self, ptr);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, void*, uint>)ImGuiP.funcTable[863])(self, ptr);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetID(ImGuiWindow* self, int n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int, uint>)ImGuiP.funcTable[894])(self, n);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int, uint>)ImGuiP.funcTable[864])(self, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetIDFromRectangle(ImGuiWindow* self, ImRect rAbs)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, uint>)ImGuiP.funcTable[895])(self, rAbs);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, uint>)ImGuiP.funcTable[865])(self, rAbs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float CalcFontSize(ImGuiWindow* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[897])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[867])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float TitleBarHeight(ImGuiWindow* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[898])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[868])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TitleBarRect(ImRect* pOut, ImGuiWindow* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[899])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[869])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float MenuBarHeight(ImGuiWindow* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[900])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, float>)ImGuiP.funcTable[870])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void MenuBarRect(ImRect* pOut, ImGuiWindow* self)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[901])(pOut, self);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[871])(pOut, self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTabItem* ImGuiTabItem()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabItem*>)ImGuiP.funcTable[902])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabItem*>)ImGuiP.funcTable[872])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTabBar* ImGuiTabBar()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*>)ImGuiP.funcTable[903])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*>)ImGuiP.funcTable[873])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int GetTabOrder(ImGuiTabBar* self, ImGuiTabItem* tab)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, int>)ImGuiP.funcTable[904])(self, tab);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, int>)ImGuiP.funcTable[874])(self, tab);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* GetTabName(ImGuiTabBar* self, ImGuiTabItem* tab)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, byte*>)ImGuiP.funcTable[905])(self, tab);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, byte*>)ImGuiP.funcTable[875])(self, tab);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableColumn* ImGuiTableColumn()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumn*>)ImGuiP.funcTable[906])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumn*>)ImGuiP.funcTable[876])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableInstanceData* ImGuiTableInstanceData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableInstanceData*>)ImGuiP.funcTable[907])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableInstanceData*>)ImGuiP.funcTable[877])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTable* ImGuiTable()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*>)ImGuiP.funcTable[908])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*>)ImGuiP.funcTable[878])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableTempData* ImGuiTableTempData()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableTempData*>)ImGuiP.funcTable[910])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableTempData*>)ImGuiP.funcTable[880])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableColumnSettings* ImGuiTableColumnSettings()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumnSettings*>)ImGuiP.funcTable[911])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumnSettings*>)ImGuiP.funcTable[881])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableSettings* ImGuiTableSettings()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*>)ImGuiP.funcTable[912])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*>)ImGuiP.funcTable[882])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableColumnSettings* GetColumnSettings(ImGuiTableSettings* self)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*, ImGuiTableColumnSettings*>)ImGuiP.funcTable[913])(self);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableSettings*, ImGuiTableColumnSettings*>)ImGuiP.funcTable[883])(self);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* GetCurrentWindowRead()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[914])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[884])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* GetCurrentWindow()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[915])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[885])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* FindWindowByID(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*>)ImGuiP.funcTable[916])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*>)ImGuiP.funcTable[886])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* FindWindowByName(byte* name)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindow*>)ImGuiP.funcTable[917])(name);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindow*>)ImGuiP.funcTable[887])(name);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateWindowParentAndRootLinks(ImGuiWindow* window, ImGuiWindowFlags flags, ImGuiWindow* parentWindow)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindowFlags, ImGuiWindow*, void>)ImGuiP.funcTable[918])(window, flags, parentWindow);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindowFlags, ImGuiWindow*, void>)ImGuiP.funcTable[888])(window, flags, parentWindow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CalcWindowNextAutoFitSize(Vector2* pOut, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, void>)ImGuiP.funcTable[919])(pOut, window);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, void>)ImGuiP.funcTable[889])(pOut, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsWindowChildOf(ImGuiWindow* window, ImGuiWindow* potentialParent, byte popupHierarchy, byte dockHierarchy)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte, byte, byte>)ImGuiP.funcTable[920])(window, potentialParent, popupHierarchy, dockHierarchy);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte, byte, byte>)ImGuiP.funcTable[890])(window, potentialParent, popupHierarchy, dockHierarchy);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsWindowWithinBeginStackOf(ImGuiWindow* window, ImGuiWindow* potentialParent)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)ImGuiP.funcTable[921])(window, potentialParent);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)ImGuiP.funcTable[891])(window, potentialParent);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsWindowAbove(ImGuiWindow* potentialAbove, ImGuiWindow* potentialBelow)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)ImGuiP.funcTable[922])(potentialAbove, potentialBelow);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, byte>)ImGuiP.funcTable[892])(potentialAbove, potentialBelow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsWindowNavFocusable(ImGuiWindow* window)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte>)ImGuiP.funcTable[923])(window);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte>)ImGuiP.funcTable[893])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowPos(ImGuiWindow* window, Vector2 pos, ImGuiCond cond)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)ImGuiP.funcTable[924])(window, pos, cond);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)ImGuiP.funcTable[894])(window, pos, cond);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowSize(ImGuiWindow* window, Vector2 size, ImGuiCond cond)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)ImGuiP.funcTable[925])(window, size, cond);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, ImGuiCond, void>)ImGuiP.funcTable[895])(window, size, cond);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowCollapsed(ImGuiWindow* window, byte collapsed, ImGuiCond cond)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, ImGuiCond, void>)ImGuiP.funcTable[926])(window, collapsed, cond);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, ImGuiCond, void>)ImGuiP.funcTable[896])(window, collapsed, cond);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowHitTestHole(ImGuiWindow* window, Vector2 pos, Vector2 size)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, Vector2, void>)ImGuiP.funcTable[927])(window, pos, size);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, Vector2, Vector2, void>)ImGuiP.funcTable[897])(window, pos, size);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void WindowRectAbsToRel(ImRect* pOut, ImGuiWindow* window, ImRect r)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[928])(pOut, window, r);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[898])(pOut, window, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void WindowRectRelToAbs(ImRect* pOut, ImGuiWindow* window, ImRect r)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[929])(pOut, window, r);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[899])(pOut, window, r);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void FocusWindow(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[930])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[900])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void FocusTopMostWindowUnderOne(ImGuiWindow* underThisWindow, ImGuiWindow* ignoreWindow)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)ImGuiP.funcTable[931])(underThisWindow, ignoreWindow);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)ImGuiP.funcTable[901])(underThisWindow, ignoreWindow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BringWindowToFocusFront(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[932])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[902])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BringWindowToDisplayFront(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[933])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[903])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BringWindowToDisplayBack(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[934])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[904])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BringWindowToDisplayBehind(ImGuiWindow* window, ImGuiWindow* aboveWindow)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)ImGuiP.funcTable[935])(window, aboveWindow);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*, void>)ImGuiP.funcTable[905])(window, aboveWindow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int FindWindowDisplayIndex(ImGuiWindow* window)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int>)ImGuiP.funcTable[936])(window);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int>)ImGuiP.funcTable[906])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* FindBottomMostVisibleWindowWithinBeginStack(ImGuiWindow* window)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*>)ImGuiP.funcTable[937])(window);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiWindow*>)ImGuiP.funcTable[907])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCurrentFont(ImFont* font)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFont*, void>)ImGuiP.funcTable[938])(font);
-
+			((delegate* unmanaged[Cdecl]<ImFont*, void>)ImGuiP.funcTable[908])(font);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImFont* GetDefaultFont()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImFont*>)ImGuiP.funcTable[939])();
-
+			return ((delegate* unmanaged[Cdecl]<ImFont*>)ImGuiP.funcTable[909])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImDrawList* GetForegroundDrawList(ImGuiWindow* window)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImDrawList*>)ImGuiP.funcTable[940])(window);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImDrawList*>)ImGuiP.funcTable[910])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Initialize()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[941])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[911])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Shutdown()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[942])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[912])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateInputEvents(byte trickleFastInputs)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte, void>)ImGuiP.funcTable[943])(trickleFastInputs);
-
+			((delegate* unmanaged[Cdecl]<byte, void>)ImGuiP.funcTable[913])(trickleFastInputs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateHoveredWindowAndCaptureFlags()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[944])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[914])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void StartMouseMovingWindow(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[945])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[915])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void StartMouseMovingWindowOrNode(ImGuiWindow* window, ImGuiDockNode* node, byte undockFloatingNode)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDockNode*, byte, void>)ImGuiP.funcTable[946])(window, node, undockFloatingNode);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDockNode*, byte, void>)ImGuiP.funcTable[916])(window, node, undockFloatingNode);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateMouseMovingWindowNewFrame()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[947])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[917])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void UpdateMouseMovingWindowEndFrame()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[948])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[918])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint AddContextHook(ImGuiContext* context, ImGuiContextHook* hook)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHook*, uint>)ImGuiP.funcTable[949])(context, hook);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHook*, uint>)ImGuiP.funcTable[919])(context, hook);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RemoveContextHook(ImGuiContext* context, uint hookToRemove)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, uint, void>)ImGuiP.funcTable[950])(context, hookToRemove);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, uint, void>)ImGuiP.funcTable[920])(context, hookToRemove);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CallContextHooks(ImGuiContext* context, ImGuiContextHookType type)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHookType, void>)ImGuiP.funcTable[951])(context, type);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiContextHookType, void>)ImGuiP.funcTable[921])(context, type);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TranslateWindowsInViewport(ImGuiViewportP* viewport, Vector2 oldPos, Vector2 newPos)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, Vector2, Vector2, void>)ImGuiP.funcTable[952])(viewport, oldPos, newPos);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, Vector2, Vector2, void>)ImGuiP.funcTable[922])(viewport, oldPos, newPos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ScaleWindowsInViewport(ImGuiViewportP* viewport, float scale)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, float, void>)ImGuiP.funcTable[953])(viewport, scale);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, float, void>)ImGuiP.funcTable[923])(viewport, scale);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DestroyPlatformWindow(ImGuiViewportP* viewport)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[954])(viewport);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[924])(viewport);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowViewport(ImGuiWindow* window, ImGuiViewportP* viewport)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)ImGuiP.funcTable[955])(window, viewport);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)ImGuiP.funcTable[925])(window, viewport);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetCurrentViewport(ImGuiWindow* window, ImGuiViewportP* viewport)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)ImGuiP.funcTable[956])(window, viewport);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, void>)ImGuiP.funcTable[926])(window, viewport);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiPlatformMonitor* GetViewportPlatformMonitor(ImGuiViewport* viewport)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiViewport*, ImGuiPlatformMonitor*>)ImGuiP.funcTable[957])(viewport);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiViewport*, ImGuiPlatformMonitor*>)ImGuiP.funcTable[927])(viewport);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiViewportP* FindHoveredViewportFromPlatformWindowStack(Vector2 mousePlatformPos)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, ImGuiViewportP*>)ImGuiP.funcTable[958])(mousePlatformPos);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, ImGuiViewportP*>)ImGuiP.funcTable[928])(mousePlatformPos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void MarkIniSettingsDirty()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[959])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[929])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void MarkIniSettingsDirty(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[960])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[930])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearIniSettings()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[961])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[931])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindowSettings* CreateNewWindowSettings(byte* name)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)ImGuiP.funcTable[962])(name);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)ImGuiP.funcTable[932])(name);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindowSettings* FindWindowSettings(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindowSettings*>)ImGuiP.funcTable[963])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindowSettings*>)ImGuiP.funcTable[933])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindowSettings* FindOrCreateWindowSettings(byte* name)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)ImGuiP.funcTable[964])(name);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiWindowSettings*>)ImGuiP.funcTable[934])(name);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void AddSettingsHandler(ImGuiSettingsHandler* handler)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*, void>)ImGuiP.funcTable[965])(handler);
-
+			((delegate* unmanaged[Cdecl]<ImGuiSettingsHandler*, void>)ImGuiP.funcTable[935])(handler);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RemoveSettingsHandler(byte* typeName)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, void>)ImGuiP.funcTable[966])(typeName);
-
+			((delegate* unmanaged[Cdecl]<byte*, void>)ImGuiP.funcTable[936])(typeName);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiSettingsHandler* FindSettingsHandler(byte* typeName)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiSettingsHandler*>)ImGuiP.funcTable[967])(typeName);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiSettingsHandler*>)ImGuiP.funcTable[937])(typeName);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetNextWindowScroll(Vector2 scroll)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, void>)ImGuiP.funcTable[968])(scroll);
-
+			((delegate* unmanaged[Cdecl]<Vector2, void>)ImGuiP.funcTable[938])(scroll);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetScrollX(ImGuiWindow* window, float scrollX)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)ImGuiP.funcTable[969])(window, scrollX);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)ImGuiP.funcTable[939])(window, scrollX);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetScrollY(ImGuiWindow* window, float scrollY)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)ImGuiP.funcTable[970])(window, scrollY);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, void>)ImGuiP.funcTable[940])(window, scrollY);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetScrollFromPosX(ImGuiWindow* window, float localX, float centerXRatio)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)ImGuiP.funcTable[971])(window, localX, centerXRatio);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)ImGuiP.funcTable[941])(window, localX, centerXRatio);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetScrollFromPosY(ImGuiWindow* window, float localY, float centerYRatio)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)ImGuiP.funcTable[972])(window, localY, centerYRatio);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, float, float, void>)ImGuiP.funcTable[942])(window, localY, centerYRatio);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ScrollToItem(ImGuiScrollFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiScrollFlags, void>)ImGuiP.funcTable[973])(flags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiScrollFlags, void>)ImGuiP.funcTable[943])(flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ScrollToRect(ImGuiWindow* window, ImRect rect, ImGuiScrollFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)ImGuiP.funcTable[974])(window, rect, flags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)ImGuiP.funcTable[944])(window, rect, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ScrollToRectEx(Vector2* pOut, ImGuiWindow* window, ImRect rect, ImGuiScrollFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)ImGuiP.funcTable[975])(pOut, window, rect, flags);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, ImRect, ImGuiScrollFlags, void>)ImGuiP.funcTable[945])(pOut, window, rect, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ScrollToBringRectIntoView(ImGuiWindow* window, ImRect rect)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[976])(window, rect);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[946])(window, rect);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetItemID()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[977])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[947])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiItemStatusFlags GetItemStatusFlags()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiItemStatusFlags>)ImGuiP.funcTable[978])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiItemStatusFlags>)ImGuiP.funcTable[948])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiItemFlags GetItemFlags()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiItemFlags>)ImGuiP.funcTable[979])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiItemFlags>)ImGuiP.funcTable[949])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetActiveID()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[980])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[950])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetFocusID()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[981])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[951])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetActiveID(uint id, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*, void>)ImGuiP.funcTable[982])(id, window);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*, void>)ImGuiP.funcTable[952])(id, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetFocusID(uint id, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*, void>)ImGuiP.funcTable[983])(id, window);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiWindow*, void>)ImGuiP.funcTable[953])(id, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearActiveID()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[984])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[954])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetHoveredID()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[985])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[955])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetHoveredID(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[986])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[956])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void KeepAliveID(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[987])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[957])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void MarkItemEdited(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[988])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[958])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushOverrideID(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[989])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[959])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetIDWithSeed(byte* strIdBegin, byte* strIdEnd, uint seed)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, uint, uint>)ImGuiP.funcTable[990])(strIdBegin, strIdEnd, seed);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, uint, uint>)ImGuiP.funcTable[960])(strIdBegin, strIdEnd, seed);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ItemSize(Vector2 size, float textBaselineY)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, float, void>)ImGuiP.funcTable[991])(size, textBaselineY);
-
+			((delegate* unmanaged[Cdecl]<Vector2, float, void>)ImGuiP.funcTable[961])(size, textBaselineY);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ItemSize(ImRect bb, float textBaselineY)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect, float, void>)ImGuiP.funcTable[992])(bb, textBaselineY);
-
+			((delegate* unmanaged[Cdecl]<ImRect, float, void>)ImGuiP.funcTable[962])(bb, textBaselineY);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ItemAdd(ImRect bb, uint id, ImRect* navBb, ImGuiItemFlags extraFlags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImRect*, ImGuiItemFlags, byte>)ImGuiP.funcTable[993])(bb, id, navBb, extraFlags);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImRect*, ImGuiItemFlags, byte>)ImGuiP.funcTable[963])(bb, id, navBb, extraFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ItemHoverable(ImRect bb, uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[994])(bb, id);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[964])(bb, id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsClippedEx(ImRect bb, uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[995])(bb, id);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[965])(bb, id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetLastItemData(uint itemId, ImGuiItemFlags inFlags, ImGuiItemStatusFlags statusFlags, ImRect itemRect)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiItemFlags, ImGuiItemStatusFlags, ImRect, void>)ImGuiP.funcTable[996])(itemId, inFlags, statusFlags, itemRect);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiItemFlags, ImGuiItemStatusFlags, ImRect, void>)ImGuiP.funcTable[966])(itemId, inFlags, statusFlags, itemRect);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void CalcItemSize(Vector2* pOut, Vector2 size, float defaultW, float defaultH)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, float, float, void>)ImGuiP.funcTable[997])(pOut, size, defaultW, defaultH);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, float, float, void>)ImGuiP.funcTable[967])(pOut, size, defaultW, defaultH);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float CalcWrapWidthForPos(Vector2 pos, float wrapPosX)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<Vector2, float, float>)ImGuiP.funcTable[998])(pos, wrapPosX);
-
+			return ((delegate* unmanaged[Cdecl]<Vector2, float, float>)ImGuiP.funcTable[968])(pos, wrapPosX);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushMultiItemsWidths(int components, float widthFull)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, float, void>)ImGuiP.funcTable[999])(components, widthFull);
-
+			((delegate* unmanaged[Cdecl]<int, float, void>)ImGuiP.funcTable[969])(components, widthFull);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsItemToggledSelection()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1000])();
-
+			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[970])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetContentRegionMaxAbs(Vector2* pOut)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, void>)ImGuiP.funcTable[1001])(pOut);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, void>)ImGuiP.funcTable[971])(pOut);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ShrinkWidths(ImGuiShrinkWidthItem* items, int count, float widthExcess)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiShrinkWidthItem*, int, float, void>)ImGuiP.funcTable[1002])(items, count, widthExcess);
-
+			((delegate* unmanaged[Cdecl]<ImGuiShrinkWidthItem*, int, float, void>)ImGuiP.funcTable[972])(items, count, widthExcess);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushItemFlag(ImGuiItemFlags option, byte enabled)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiItemFlags, byte, void>)ImGuiP.funcTable[1003])(option, enabled);
-
+			((delegate* unmanaged[Cdecl]<ImGuiItemFlags, byte, void>)ImGuiP.funcTable[973])(option, enabled);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PopItemFlag()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1004])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[974])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void LogBegin(ImGuiLogType type, int autoOpenDepth)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiLogType, int, void>)ImGuiP.funcTable[1005])(type, autoOpenDepth);
-
+			((delegate* unmanaged[Cdecl]<ImGuiLogType, int, void>)ImGuiP.funcTable[975])(type, autoOpenDepth);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void LogToBuffer(int autoOpenDepth)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[1006])(autoOpenDepth);
-
+			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[976])(autoOpenDepth);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void LogRenderedText(Vector2* refPos, byte* text, byte* textEnd)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, byte*, byte*, void>)ImGuiP.funcTable[1007])(refPos, text, textEnd);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, byte*, byte*, void>)ImGuiP.funcTable[977])(refPos, text, textEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void LogSetNextTextDecoration(byte* prefix, byte* suffix)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)ImGuiP.funcTable[1008])(prefix, suffix);
-
+			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)ImGuiP.funcTable[978])(prefix, suffix);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginChildEx(byte* name, uint id, Vector2 sizeArg, byte border, ImGuiWindowFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, uint, Vector2, byte, ImGuiWindowFlags, byte>)ImGuiP.funcTable[1009])(name, id, sizeArg, border, flags);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, uint, Vector2, byte, ImGuiWindowFlags, byte>)ImGuiP.funcTable[979])(name, id, sizeArg, border, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void OpenPopupEx(uint id, ImGuiPopupFlags popupFlags)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiPopupFlags, void>)ImGuiP.funcTable[1010])(id, popupFlags);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiPopupFlags, void>)ImGuiP.funcTable[980])(id, popupFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClosePopupToLevel(int remaining, byte restoreFocusToWindowUnderPopup)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, byte, void>)ImGuiP.funcTable[1011])(remaining, restoreFocusToWindowUnderPopup);
-
+			((delegate* unmanaged[Cdecl]<int, byte, void>)ImGuiP.funcTable[981])(remaining, restoreFocusToWindowUnderPopup);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClosePopupsOverWindow(ImGuiWindow* refWindow, byte restoreFocusToWindowUnderPopup)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, void>)ImGuiP.funcTable[1012])(refWindow, restoreFocusToWindowUnderPopup);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, void>)ImGuiP.funcTable[982])(refWindow, restoreFocusToWindowUnderPopup);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClosePopupsExceptModals()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1013])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[983])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsPopupOpen(uint id, ImGuiPopupFlags popupFlags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiPopupFlags, byte>)ImGuiP.funcTable[1014])(id, popupFlags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiPopupFlags, byte>)ImGuiP.funcTable[984])(id, popupFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginPopupEx(uint id, ImGuiWindowFlags extraFlags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindowFlags, byte>)ImGuiP.funcTable[1015])(id, extraFlags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiWindowFlags, byte>)ImGuiP.funcTable[985])(id, extraFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BeginTooltipEx(ImGuiTooltipFlags tooltipFlags, ImGuiWindowFlags extraWindowFlags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTooltipFlags, ImGuiWindowFlags, void>)ImGuiP.funcTable[1016])(tooltipFlags, extraWindowFlags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTooltipFlags, ImGuiWindowFlags, void>)ImGuiP.funcTable[986])(tooltipFlags, extraWindowFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetPopupAllowedExtentRect(ImRect* pOut, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[1017])(pOut, window);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, void>)ImGuiP.funcTable[987])(pOut, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* GetTopMostPopupModal()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[1018])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[988])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiWindow* GetTopMostAndVisiblePopupModal()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[1019])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*>)ImGuiP.funcTable[989])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void FindBestWindowPosForPopup(Vector2* pOut, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, void>)ImGuiP.funcTable[1020])(pOut, window);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiWindow*, void>)ImGuiP.funcTable[990])(pOut, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void FindBestWindowPosForPopupEx(Vector2* pOut, Vector2 refPos, Vector2 size, ImGuiDir* lastDir, ImRect rOuter, ImRect rAvoid, ImGuiPopupPositionPolicy policy)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, ImGuiDir*, ImRect, ImRect, ImGuiPopupPositionPolicy, void>)ImGuiP.funcTable[1021])(pOut, refPos, size, lastDir, rOuter, rAvoid, policy);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, Vector2, Vector2, ImGuiDir*, ImRect, ImRect, ImGuiPopupPositionPolicy, void>)ImGuiP.funcTable[991])(pOut, refPos, size, lastDir, rOuter, rAvoid, policy);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginViewportSideBar(byte* name, ImGuiViewport* viewport, ImGuiDir dir, float size, ImGuiWindowFlags windowFlags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiViewport*, ImGuiDir, float, ImGuiWindowFlags, byte>)ImGuiP.funcTable[1022])(name, viewport, dir, size, windowFlags);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiViewport*, ImGuiDir, float, ImGuiWindowFlags, byte>)ImGuiP.funcTable[992])(name, viewport, dir, size, windowFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginMenuEx(byte* label, byte* icon, byte enabled)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte, byte>)ImGuiP.funcTable[1023])(label, icon, enabled);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte, byte>)ImGuiP.funcTable[993])(label, icon, enabled);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte MenuItemEx(byte* label, byte* icon, byte* shortcut, byte selected, byte enabled)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, byte, byte, byte>)ImGuiP.funcTable[1024])(label, icon, shortcut, selected, enabled);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, byte, byte, byte>)ImGuiP.funcTable[994])(label, icon, shortcut, selected, enabled);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginComboPopup(uint popupId, ImRect bb, ImGuiComboFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImRect, ImGuiComboFlags, byte>)ImGuiP.funcTable[1025])(popupId, bb, flags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImRect, ImGuiComboFlags, byte>)ImGuiP.funcTable[995])(popupId, bb, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginComboPreview()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1026])();
-
+			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[996])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void EndComboPreview()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1027])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[997])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavInitWindow(ImGuiWindow* window, byte forceReinit)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, void>)ImGuiP.funcTable[1028])(window, forceReinit);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte, void>)ImGuiP.funcTable[998])(window, forceReinit);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavInitRequestApplyResult()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1029])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[999])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte NavMoveRequestButNoResultYet()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1030])();
-
+			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1000])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestSubmit(ImGuiDir moveDir, ImGuiDir clipDir, ImGuiNavMoveFlags moveFlags, ImGuiScrollFlags scrollFlags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDir, ImGuiDir, ImGuiNavMoveFlags, ImGuiScrollFlags, void>)ImGuiP.funcTable[1031])(moveDir, clipDir, moveFlags, scrollFlags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDir, ImGuiDir, ImGuiNavMoveFlags, ImGuiScrollFlags, void>)ImGuiP.funcTable[1001])(moveDir, clipDir, moveFlags, scrollFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestForward(ImGuiDir moveDir, ImGuiDir clipDir, ImGuiNavMoveFlags moveFlags, ImGuiScrollFlags scrollFlags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDir, ImGuiDir, ImGuiNavMoveFlags, ImGuiScrollFlags, void>)ImGuiP.funcTable[1032])(moveDir, clipDir, moveFlags, scrollFlags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDir, ImGuiDir, ImGuiNavMoveFlags, ImGuiScrollFlags, void>)ImGuiP.funcTable[1002])(moveDir, clipDir, moveFlags, scrollFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestResolveWithLastItem(ImGuiNavItemData* result)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiNavItemData*, void>)ImGuiP.funcTable[1033])(result);
-
+			((delegate* unmanaged[Cdecl]<ImGuiNavItemData*, void>)ImGuiP.funcTable[1003])(result);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestCancel()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1034])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1004])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestApplyResult()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1035])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1005])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void NavMoveRequestTryWrapping(ImGuiWindow* window, ImGuiNavMoveFlags moveFlags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiNavMoveFlags, void>)ImGuiP.funcTable[1036])(window, moveFlags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiNavMoveFlags, void>)ImGuiP.funcTable[1006])(window, moveFlags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* GetNavInputName(ImGuiNavInput n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte*>)ImGuiP.funcTable[1037])(n);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte*>)ImGuiP.funcTable[1007])(n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetNavInputAmount(ImGuiNavInput n, ImGuiNavReadMode mode)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, ImGuiNavReadMode, float>)ImGuiP.funcTable[1038])(n, mode);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, ImGuiNavReadMode, float>)ImGuiP.funcTable[1008])(n, mode);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetNavInputAmount2d(Vector2* pOut, ImGuiNavDirSourceFlags dirSources, ImGuiNavReadMode mode, float slowFactor, float fastFactor)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiNavDirSourceFlags, ImGuiNavReadMode, float, float, void>)ImGuiP.funcTable[1039])(pOut, dirSources, mode, slowFactor, fastFactor);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, ImGuiNavDirSourceFlags, ImGuiNavReadMode, float, float, void>)ImGuiP.funcTable[1009])(pOut, dirSources, mode, slowFactor, fastFactor);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int CalcTypematicRepeatAmount(float t0, float t1, float repeatDelay, float repeatRate)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float, float, float, float, int>)ImGuiP.funcTable[1040])(t0, t1, repeatDelay, repeatRate);
-
+			return ((delegate* unmanaged[Cdecl]<float, float, float, float, int>)ImGuiP.funcTable[1010])(t0, t1, repeatDelay, repeatRate);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ActivateItem(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1041])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1011])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetNavWindow(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1042])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1012])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetNavID(uint id, ImGuiNavLayer navLayer, uint focusScopeId, ImRect rectRel)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiNavLayer, uint, ImRect, void>)ImGuiP.funcTable[1043])(id, navLayer, focusScopeId, rectRel);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiNavLayer, uint, ImRect, void>)ImGuiP.funcTable[1013])(id, navLayer, focusScopeId, rectRel);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushFocusScope(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1044])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1014])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PopFocusScope()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1045])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1015])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetFocusedFocusScope()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[1046])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[1016])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetFocusScope()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[1047])();
-
+			return ((delegate* unmanaged[Cdecl]<uint>)ImGuiP.funcTable[1017])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsNamedKey(ImGuiKey key)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1048])(key);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1018])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsLegacyKey(ImGuiKey key)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1049])(key);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1019])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsGamepadKey(ImGuiKey key)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1050])(key);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1020])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiKeyData* GetKeyData(ImGuiKey key)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, ImGuiKeyData*>)ImGuiP.funcTable[1051])(key);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, ImGuiKeyData*>)ImGuiP.funcTable[1021])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetItemUsingMouseWheel()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1052])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1022])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetActiveIdUsingNavAndKeys()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1053])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1023])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsActiveIdUsingNavDir(ImGuiDir dir)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDir, byte>)ImGuiP.funcTable[1054])(dir);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDir, byte>)ImGuiP.funcTable[1024])(dir);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsActiveIdUsingNavInput(ImGuiNavInput input)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte>)ImGuiP.funcTable[1055])(input);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte>)ImGuiP.funcTable[1025])(input);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsActiveIdUsingKey(ImGuiKey key)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1056])(key);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte>)ImGuiP.funcTable[1026])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetActiveIdUsingKey(ImGuiKey key)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiKey, void>)ImGuiP.funcTable[1057])(key);
-
+			((delegate* unmanaged[Cdecl]<ImGuiKey, void>)ImGuiP.funcTable[1027])(key);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsMouseDragPastThreshold(ImGuiMouseButton button, float lockThreshold)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiMouseButton, float, byte>)ImGuiP.funcTable[1058])(button, lockThreshold);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiMouseButton, float, byte>)ImGuiP.funcTable[1028])(button, lockThreshold);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsNavInputDown(ImGuiNavInput n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte>)ImGuiP.funcTable[1059])(n);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, byte>)ImGuiP.funcTable[1029])(n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsNavInputTest(ImGuiNavInput n, ImGuiNavReadMode rm)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, ImGuiNavReadMode, byte>)ImGuiP.funcTable[1060])(n, rm);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiNavInput, ImGuiNavReadMode, byte>)ImGuiP.funcTable[1030])(n, rm);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiModFlags GetMergedModFlags()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiModFlags>)ImGuiP.funcTable[1061])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiModFlags>)ImGuiP.funcTable[1031])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsKeyPressedMap(ImGuiKey key, byte repeat)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte, byte>)ImGuiP.funcTable[1062])(key, repeat);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiKey, byte, byte>)ImGuiP.funcTable[1032])(key, repeat);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextInitialize(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1063])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1033])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextShutdown(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1064])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1034])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextClearNodes(ImGuiContext* ctx, uint rootId, byte clearSettingsRefs)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, uint, byte, void>)ImGuiP.funcTable[1065])(ctx, rootId, clearSettingsRefs);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, uint, byte, void>)ImGuiP.funcTable[1035])(ctx, rootId, clearSettingsRefs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextRebuildNodes(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1066])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1036])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextNewFrameUpdateUndocking(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1067])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1037])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextNewFrameUpdateDocking(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1068])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1038])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextEndFrame(ImGuiContext* ctx)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1069])(ctx);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)ImGuiP.funcTable[1039])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint DockContextGenNodeID(ImGuiContext* ctx)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, uint>)ImGuiP.funcTable[1070])(ctx);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiContext*, uint>)ImGuiP.funcTable[1040])(ctx);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextQueueDock(ImGuiContext* ctx, ImGuiWindow* target, ImGuiDockNode* targetNode, ImGuiWindow* payload, ImGuiDir splitDir, float splitRatio, byte splitOuter)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiWindow*, ImGuiDockNode*, ImGuiWindow*, ImGuiDir, float, byte, void>)ImGuiP.funcTable[1071])(ctx, target, targetNode, payload, splitDir, splitRatio, splitOuter);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiWindow*, ImGuiDockNode*, ImGuiWindow*, ImGuiDir, float, byte, void>)ImGuiP.funcTable[1041])(ctx, target, targetNode, payload, splitDir, splitRatio, splitOuter);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextQueueUndockWindow(ImGuiContext* ctx, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiWindow*, void>)ImGuiP.funcTable[1072])(ctx, window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiWindow*, void>)ImGuiP.funcTable[1042])(ctx, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockContextQueueUndockNode(ImGuiContext* ctx, ImGuiDockNode* node)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiDockNode*, void>)ImGuiP.funcTable[1073])(ctx, node);
-
+			((delegate* unmanaged[Cdecl]<ImGuiContext*, ImGuiDockNode*, void>)ImGuiP.funcTable[1043])(ctx, node);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DockContextCalcDropPosForDocking(ImGuiWindow* target, ImGuiDockNode* targetNode, ImGuiWindow* payload, ImGuiDir splitDir, byte splitOuter, Vector2* outPos)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDockNode*, ImGuiWindow*, ImGuiDir, byte, Vector2*, byte>)ImGuiP.funcTable[1074])(target, targetNode, payload, splitDir, splitOuter, outPos);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDockNode*, ImGuiWindow*, ImGuiDir, byte, Vector2*, byte>)ImGuiP.funcTable[1044])(target, targetNode, payload, splitDir, splitOuter, outPos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DockNodeBeginAmendTabBar(ImGuiDockNode* node)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[1075])(node);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte>)ImGuiP.funcTable[1045])(node);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockNodeEndAmendTabBar()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1076])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1046])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockNode* DockNodeGetRootNode(ImGuiDockNode* node)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNode*>)ImGuiP.funcTable[1077])(node);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNode*>)ImGuiP.funcTable[1047])(node);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DockNodeIsInHierarchyOf(ImGuiDockNode* node, ImGuiDockNode* parent)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNode*, byte>)ImGuiP.funcTable[1078])(node, parent);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, ImGuiDockNode*, byte>)ImGuiP.funcTable[1048])(node, parent);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int DockNodeGetDepth(ImGuiDockNode* node)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, int>)ImGuiP.funcTable[1079])(node);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, int>)ImGuiP.funcTable[1049])(node);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint DockNodeGetWindowMenuButtonId(ImGuiDockNode* node)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, uint>)ImGuiP.funcTable[1080])(node);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*, uint>)ImGuiP.funcTable[1050])(node);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockNode* GetWindowDockNode()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*>)ImGuiP.funcTable[1081])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDockNode*>)ImGuiP.funcTable[1051])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte GetWindowAlwaysWantOwnTabBar(ImGuiWindow* window)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte>)ImGuiP.funcTable[1082])(window);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte>)ImGuiP.funcTable[1052])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BeginDocked(ImGuiWindow* window, bool* pOpen)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, bool*, void>)ImGuiP.funcTable[1083])(window, pOpen);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, bool*, void>)ImGuiP.funcTable[1053])(window, pOpen);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BeginDockableDragDropSource(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1084])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1054])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BeginDockableDragDropTarget(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1085])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1055])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowDock(ImGuiWindow* window, uint dockId, ImGuiCond cond)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, uint, ImGuiCond, void>)ImGuiP.funcTable[1086])(window, dockId, cond);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, uint, ImGuiCond, void>)ImGuiP.funcTable[1056])(window, dockId, cond);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderDockWindow(byte* windowName, uint nodeId)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, uint, void>)ImGuiP.funcTable[1087])(windowName, nodeId);
-
+			((delegate* unmanaged[Cdecl]<byte*, uint, void>)ImGuiP.funcTable[1057])(windowName, nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockNode* DockBuilderGetNode(uint nodeId)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[1088])(nodeId);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[1058])(nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDockNode* DockBuilderGetCentralNode(uint nodeId)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[1089])(nodeId);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNode*>)ImGuiP.funcTable[1059])(nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint DockBuilderAddNode(uint nodeId, ImGuiDockNodeFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNodeFlags, uint>)ImGuiP.funcTable[1090])(nodeId, flags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDockNodeFlags, uint>)ImGuiP.funcTable[1060])(nodeId, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderRemoveNode(uint nodeId)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1091])(nodeId);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1061])(nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderRemoveNodeDockedWindows(uint nodeId, byte clearSettingsRefs)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, byte, void>)ImGuiP.funcTable[1092])(nodeId, clearSettingsRefs);
-
+			((delegate* unmanaged[Cdecl]<uint, byte, void>)ImGuiP.funcTable[1062])(nodeId, clearSettingsRefs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderRemoveNodeChildNodes(uint nodeId)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1093])(nodeId);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1063])(nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderSetNodePos(uint nodeId, Vector2 pos)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, Vector2, void>)ImGuiP.funcTable[1094])(nodeId, pos);
-
+			((delegate* unmanaged[Cdecl]<uint, Vector2, void>)ImGuiP.funcTable[1064])(nodeId, pos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderSetNodeSize(uint nodeId, Vector2 size)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, Vector2, void>)ImGuiP.funcTable[1095])(nodeId, size);
-
+			((delegate* unmanaged[Cdecl]<uint, Vector2, void>)ImGuiP.funcTable[1065])(nodeId, size);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint DockBuilderSplitNode(uint nodeId, ImGuiDir splitDir, float sizeRatioForNodeAtDir, uint* outIdAtDir, uint* outIdAtOppositeDir)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDir, float, uint*, uint*, uint>)ImGuiP.funcTable[1096])(nodeId, splitDir, sizeRatioForNodeAtDir, outIdAtDir, outIdAtOppositeDir);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDir, float, uint*, uint*, uint>)ImGuiP.funcTable[1066])(nodeId, splitDir, sizeRatioForNodeAtDir, outIdAtDir, outIdAtOppositeDir);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderCopyDockSpace(uint srcDockspaceId, uint dstDockspaceId, ImVector<ConstPointer<byte>>* inWindowRemapPairs)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, uint, ImVector<ConstPointer<byte>>*, void>)ImGuiP.funcTable[1097])(srcDockspaceId, dstDockspaceId, inWindowRemapPairs);
-
+			((delegate* unmanaged[Cdecl]<uint, uint, ImVector<ConstPointer<byte>>*, void>)ImGuiP.funcTable[1067])(srcDockspaceId, dstDockspaceId, inWindowRemapPairs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderCopyNode(uint srcNodeId, uint dstNodeId, ImVector<uint>* outNodeRemapPairs)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, uint, ImVector<uint>*, void>)ImGuiP.funcTable[1098])(srcNodeId, dstNodeId, outNodeRemapPairs);
-
+			((delegate* unmanaged[Cdecl]<uint, uint, ImVector<uint>*, void>)ImGuiP.funcTable[1068])(srcNodeId, dstNodeId, outNodeRemapPairs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderCopyWindowSettings(byte* srcName, byte* dstName)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)ImGuiP.funcTable[1099])(srcName, dstName);
-
+			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)ImGuiP.funcTable[1069])(srcName, dstName);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DockBuilderFinish(uint nodeId)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1100])(nodeId);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1070])(nodeId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsDragDropActive()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1101])();
-
+			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1071])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginDragDropTargetCustom(ImRect bb, uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[1102])(bb, id);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte>)ImGuiP.funcTable[1072])(bb, id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ClearDragDrop()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1103])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1073])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte IsDragDropPayloadBeingAccepted()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1104])();
-
+			return ((delegate* unmanaged[Cdecl]<byte>)ImGuiP.funcTable[1074])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetWindowClipRectBeforeSetChannel(ImGuiWindow* window, ImRect clipRect)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[1105])(window, clipRect);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImRect, void>)ImGuiP.funcTable[1075])(window, clipRect);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void BeginColumns(byte* strId, int count, ImGuiOldColumnFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, int, ImGuiOldColumnFlags, void>)ImGuiP.funcTable[1106])(strId, count, flags);
-
+			((delegate* unmanaged[Cdecl]<byte*, int, ImGuiOldColumnFlags, void>)ImGuiP.funcTable[1076])(strId, count, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void EndColumns()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1107])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1077])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushColumnClipRect(int columnIndex)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[1108])(columnIndex);
-
+			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[1078])(columnIndex);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PushColumnsBackground()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1109])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1079])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void PopColumnsBackground()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1110])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1080])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetColumnsID(byte* strId, int count)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, int, uint>)ImGuiP.funcTable[1111])(strId, count);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, int, uint>)ImGuiP.funcTable[1081])(strId, count);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiOldColumns* FindOrCreateColumns(ImGuiWindow* window, uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, uint, ImGuiOldColumns*>)ImGuiP.funcTable[1112])(window, id);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, uint, ImGuiOldColumns*>)ImGuiP.funcTable[1082])(window, id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetColumnOffsetFromNorm(ImGuiOldColumns* columns, float offsetNorm)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, float, float>)ImGuiP.funcTable[1113])(columns, offsetNorm);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, float, float>)ImGuiP.funcTable[1083])(columns, offsetNorm);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float GetColumnNormFromOffset(ImGuiOldColumns* columns, float offset)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, float, float>)ImGuiP.funcTable[1114])(columns, offset);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, float, float>)ImGuiP.funcTable[1084])(columns, offset);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableOpenContextMenu(int columnN)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[1115])(columnN);
-
+			((delegate* unmanaged[Cdecl]<int, void>)ImGuiP.funcTable[1085])(columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSetColumnWidth(int columnN, float width)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, float, void>)ImGuiP.funcTable[1116])(columnN, width);
-
+			((delegate* unmanaged[Cdecl]<int, float, void>)ImGuiP.funcTable[1086])(columnN, width);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSetColumnSortDirection(int columnN, ImGuiSortDirection sortDirection, byte appendToSortSpecs)
 		{
-
-			((delegate* unmanaged[Cdecl]<int, ImGuiSortDirection, byte, void>)ImGuiP.funcTable[1117])(columnN, sortDirection, appendToSortSpecs);
-
+			((delegate* unmanaged[Cdecl]<int, ImGuiSortDirection, byte, void>)ImGuiP.funcTable[1087])(columnN, sortDirection, appendToSortSpecs);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int TableGetHoveredColumn()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<int>)ImGuiP.funcTable[1118])();
-
+			return ((delegate* unmanaged[Cdecl]<int>)ImGuiP.funcTable[1088])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float TableGetHeaderRowHeight()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<float>)ImGuiP.funcTable[1119])();
-
+			return ((delegate* unmanaged[Cdecl]<float>)ImGuiP.funcTable[1089])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TablePushBackgroundChannel()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1120])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1090])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TablePopBackgroundChannel()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1121])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1091])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTable* GetCurrentTable()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*>)ImGuiP.funcTable[1122])();
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*>)ImGuiP.funcTable[1092])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTable* TableFindByID(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTable*>)ImGuiP.funcTable[1123])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTable*>)ImGuiP.funcTable[1093])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginTableEx(byte* name, uint id, int columnsCount, ImGuiTableFlags flags, Vector2 outerSize, float innerWidth)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, uint, int, ImGuiTableFlags, Vector2, float, byte>)ImGuiP.funcTable[1124])(name, id, columnsCount, flags, outerSize, innerWidth);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, uint, int, ImGuiTableFlags, Vector2, float, byte>)ImGuiP.funcTable[1094])(name, id, columnsCount, flags, outerSize, innerWidth);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableBeginInitMemory(ImGuiTable* table, int columnsCount)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1125])(table, columnsCount);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1095])(table, columnsCount);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableBeginApplyRequests(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1126])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1096])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSetupDrawChannels(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1127])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1097])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableUpdateLayout(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1128])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1098])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableUpdateBorders(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1129])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1099])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableUpdateColumnsWeightFromWidth(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1130])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1100])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableDrawBorders(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1131])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1101])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableDrawContextMenu(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1132])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1102])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableMergeDrawChannels(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1133])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1103])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableInstanceData* TableGetInstanceData(ImGuiTable* table, int instanceNo)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, ImGuiTableInstanceData*>)ImGuiP.funcTable[1134])(table, instanceNo);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, ImGuiTableInstanceData*>)ImGuiP.funcTable[1104])(table, instanceNo);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSortSpecsSanitize(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1135])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1105])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSortSpecsBuild(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1136])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1106])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiSortDirection TableGetColumnNextSortDirection(ImGuiTableColumn* column)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumn*, ImGuiSortDirection>)ImGuiP.funcTable[1137])(column);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTableColumn*, ImGuiSortDirection>)ImGuiP.funcTable[1107])(column);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableFixColumnSortDirection(ImGuiTable* table, ImGuiTableColumn* column)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableColumn*, void>)ImGuiP.funcTable[1138])(table, column);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableColumn*, void>)ImGuiP.funcTable[1108])(table, column);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float TableGetColumnWidthAuto(ImGuiTable* table, ImGuiTableColumn* column)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableColumn*, float>)ImGuiP.funcTable[1139])(table, column);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableColumn*, float>)ImGuiP.funcTable[1109])(table, column);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableBeginRow(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1140])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1110])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableEndRow(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1141])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1111])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableBeginCell(ImGuiTable* table, int columnN)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1142])(table, columnN);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1112])(table, columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableEndCell(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1143])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1113])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableGetCellBgRect(ImRect* pOut, ImGuiTable* table, int columnN)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiTable*, int, void>)ImGuiP.funcTable[1144])(pOut, table, columnN);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiTable*, int, void>)ImGuiP.funcTable[1114])(pOut, table, columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* TableGetColumnName(ImGuiTable* table, int columnN)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, byte*>)ImGuiP.funcTable[1145])(table, columnN);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, byte*>)ImGuiP.funcTable[1115])(table, columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint TableGetColumnResizeID(ImGuiTable* table, int columnN, int instanceNo)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, int, uint>)ImGuiP.funcTable[1146])(table, columnN, instanceNo);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, int, uint>)ImGuiP.funcTable[1116])(table, columnN, instanceNo);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float TableGetMaxColumnWidth(ImGuiTable* table, int columnN)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, float>)ImGuiP.funcTable[1147])(table, columnN);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, int, float>)ImGuiP.funcTable[1117])(table, columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSetColumnWidthAutoSingle(ImGuiTable* table, int columnN)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1148])(table, columnN);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, int, void>)ImGuiP.funcTable[1118])(table, columnN);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSetColumnWidthAutoAll(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1149])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1119])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableRemove(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1150])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1120])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableGcCompactTransientBuffers(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1151])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1121])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableGcCompactTransientBuffers(ImGuiTableTempData* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTableTempData*, void>)ImGuiP.funcTable[1152])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTableTempData*, void>)ImGuiP.funcTable[1122])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableGcCompactSettings()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1153])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1123])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableLoadSettings(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1154])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1124])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSaveSettings(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1155])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1125])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableResetSettings(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1156])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1126])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableSettings* TableGetBoundSettings(ImGuiTable* table)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableSettings*>)ImGuiP.funcTable[1157])(table);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTable*, ImGuiTableSettings*>)ImGuiP.funcTable[1127])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TableSettingsAddSettingsHandler()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1158])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1128])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableSettings* TableSettingsCreate(uint id, int columnsCount)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, int, ImGuiTableSettings*>)ImGuiP.funcTable[1159])(id, columnsCount);
-
+			return ((delegate* unmanaged[Cdecl]<uint, int, ImGuiTableSettings*>)ImGuiP.funcTable[1129])(id, columnsCount);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTableSettings* TableSettingsFindByID(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTableSettings*>)ImGuiP.funcTable[1160])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTableSettings*>)ImGuiP.funcTable[1130])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte BeginTabBarEx(ImGuiTabBar* tabBar, ImRect bb, ImGuiTabBarFlags flags, ImGuiDockNode* dockNode)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImRect, ImGuiTabBarFlags, ImGuiDockNode*, byte>)ImGuiP.funcTable[1161])(tabBar, bb, flags, dockNode);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImRect, ImGuiTabBarFlags, ImGuiDockNode*, byte>)ImGuiP.funcTable[1131])(tabBar, bb, flags, dockNode);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTabItem* TabBarFindTabByID(ImGuiTabBar* tabBar, uint tabId)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, uint, ImGuiTabItem*>)ImGuiP.funcTable[1162])(tabBar, tabId);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, uint, ImGuiTabItem*>)ImGuiP.funcTable[1132])(tabBar, tabId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiTabItem* TabBarFindMostRecentlySelectedTabForActiveWindow(ImGuiTabBar* tabBar)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*>)ImGuiP.funcTable[1163])(tabBar);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*>)ImGuiP.funcTable[1133])(tabBar);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabBarAddTab(ImGuiTabBar* tabBar, ImGuiTabItemFlags tabFlags, ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItemFlags, ImGuiWindow*, void>)ImGuiP.funcTable[1164])(tabBar, tabFlags, window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItemFlags, ImGuiWindow*, void>)ImGuiP.funcTable[1134])(tabBar, tabFlags, window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabBarRemoveTab(ImGuiTabBar* tabBar, uint tabId)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, uint, void>)ImGuiP.funcTable[1165])(tabBar, tabId);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, uint, void>)ImGuiP.funcTable[1135])(tabBar, tabId);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabBarCloseTab(ImGuiTabBar* tabBar, ImGuiTabItem* tab)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, void>)ImGuiP.funcTable[1166])(tabBar, tab);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, void>)ImGuiP.funcTable[1136])(tabBar, tab);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabBarQueueReorder(ImGuiTabBar* tabBar, ImGuiTabItem* tab, int offset)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, int, void>)ImGuiP.funcTable[1167])(tabBar, tab, offset);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, int, void>)ImGuiP.funcTable[1137])(tabBar, tab, offset);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabBarQueueReorderFromMousePos(ImGuiTabBar* tabBar, ImGuiTabItem* tab, Vector2 mousePos)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, Vector2, void>)ImGuiP.funcTable[1168])(tabBar, tab, mousePos);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, ImGuiTabItem*, Vector2, void>)ImGuiP.funcTable[1138])(tabBar, tab, mousePos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TabBarProcessReorder(ImGuiTabBar* tabBar)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte>)ImGuiP.funcTable[1169])(tabBar);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte>)ImGuiP.funcTable[1139])(tabBar);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TabItemEx(ImGuiTabBar* tabBar, byte* label, bool* pOpen, ImGuiTabItemFlags flags, ImGuiWindow* dockedWindow)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte*, bool*, ImGuiTabItemFlags, ImGuiWindow*, byte>)ImGuiP.funcTable[1170])(tabBar, label, pOpen, flags, dockedWindow);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte*, bool*, ImGuiTabItemFlags, ImGuiWindow*, byte>)ImGuiP.funcTable[1140])(tabBar, label, pOpen, flags, dockedWindow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabItemCalcSize(Vector2* pOut, byte* label, byte hasCloseButton)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2*, byte*, byte, void>)ImGuiP.funcTable[1171])(pOut, label, hasCloseButton);
-
+			((delegate* unmanaged[Cdecl]<Vector2*, byte*, byte, void>)ImGuiP.funcTable[1141])(pOut, label, hasCloseButton);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabItemBackground(ImDrawList* drawList, ImRect bb, ImGuiTabItemFlags flags, uint col)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImGuiTabItemFlags, uint, void>)ImGuiP.funcTable[1172])(drawList, bb, flags, col);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImGuiTabItemFlags, uint, void>)ImGuiP.funcTable[1142])(drawList, bb, flags, col);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TabItemLabelAndCloseButton(ImDrawList* drawList, ImRect bb, ImGuiTabItemFlags flags, Vector2 framePadding, byte* label, uint tabId, uint closeButtonId, byte isContentsVisible, bool* outJustClosed, bool* outTextClipped)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImGuiTabItemFlags, Vector2, byte*, uint, uint, byte, bool*, bool*, void>)ImGuiP.funcTable[1173])(drawList, bb, flags, framePadding, label, tabId, closeButtonId, isContentsVisible, outJustClosed, outTextClipped);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImGuiTabItemFlags, Vector2, byte*, uint, uint, byte, bool*, bool*, void>)ImGuiP.funcTable[1143])(drawList, bb, flags, framePadding, label, tabId, closeButtonId, isContentsVisible, outJustClosed, outTextClipped);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderText(Vector2 pos, byte* text, byte* textEnd, byte hideTextAfterHash)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, byte*, byte*, byte, void>)ImGuiP.funcTable[1174])(pos, text, textEnd, hideTextAfterHash);
-
+			((delegate* unmanaged[Cdecl]<Vector2, byte*, byte*, byte, void>)ImGuiP.funcTable[1144])(pos, text, textEnd, hideTextAfterHash);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderTextWrapped(Vector2 pos, byte* text, byte* textEnd, float wrapWidth)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, byte*, byte*, float, void>)ImGuiP.funcTable[1175])(pos, text, textEnd, wrapWidth);
-
+			((delegate* unmanaged[Cdecl]<Vector2, byte*, byte*, float, void>)ImGuiP.funcTable[1145])(pos, text, textEnd, wrapWidth);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderTextClipped(Vector2 posMin, Vector2 posMax, byte* text, byte* textEnd, Vector2* textSizeIfKnown, Vector2 align, ImRect* clipRect)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, Vector2, byte*, byte*, Vector2*, Vector2, ImRect*, void>)ImGuiP.funcTable[1176])(posMin, posMax, text, textEnd, textSizeIfKnown, align, clipRect);
-
+			((delegate* unmanaged[Cdecl]<Vector2, Vector2, byte*, byte*, Vector2*, Vector2, ImRect*, void>)ImGuiP.funcTable[1146])(posMin, posMax, text, textEnd, textSizeIfKnown, align, clipRect);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderTextClippedEx(ImDrawList* drawList, Vector2 posMin, Vector2 posMax, byte* text, byte* textEnd, Vector2* textSizeIfKnown, Vector2 align, ImRect* clipRect)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, byte*, byte*, Vector2*, Vector2, ImRect*, void>)ImGuiP.funcTable[1177])(drawList, posMin, posMax, text, textEnd, textSizeIfKnown, align, clipRect);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, byte*, byte*, Vector2*, Vector2, ImRect*, void>)ImGuiP.funcTable[1147])(drawList, posMin, posMax, text, textEnd, textSizeIfKnown, align, clipRect);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderTextEllipsis(ImDrawList* drawList, Vector2 posMin, Vector2 posMax, float clipMaxX, float ellipsisMaxX, byte* text, byte* textEnd, Vector2* textSizeIfKnown)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, float, float, byte*, byte*, Vector2*, void>)ImGuiP.funcTable[1178])(drawList, posMin, posMax, clipMaxX, ellipsisMaxX, text, textEnd, textSizeIfKnown);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, float, float, byte*, byte*, Vector2*, void>)ImGuiP.funcTable[1148])(drawList, posMin, posMax, clipMaxX, ellipsisMaxX, text, textEnd, textSizeIfKnown);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderFrame(Vector2 pMin, Vector2 pMax, uint fillCol, byte border, float rounding)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, Vector2, uint, byte, float, void>)ImGuiP.funcTable[1179])(pMin, pMax, fillCol, border, rounding);
-
+			((delegate* unmanaged[Cdecl]<Vector2, Vector2, uint, byte, float, void>)ImGuiP.funcTable[1149])(pMin, pMax, fillCol, border, rounding);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderFrameBorder(Vector2 pMin, Vector2 pMax, float rounding)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, Vector2, float, void>)ImGuiP.funcTable[1180])(pMin, pMax, rounding);
-
+			((delegate* unmanaged[Cdecl]<Vector2, Vector2, float, void>)ImGuiP.funcTable[1150])(pMin, pMax, rounding);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderColorRectWithAlphaCheckerboard(ImDrawList* drawList, Vector2 pMin, Vector2 pMax, uint fillCol, float gridStep, Vector2 gridOff, float rounding, ImDrawFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, uint, float, Vector2, float, ImDrawFlags, void>)ImGuiP.funcTable[1181])(drawList, pMin, pMax, fillCol, gridStep, gridOff, rounding, flags);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, uint, float, Vector2, float, ImDrawFlags, void>)ImGuiP.funcTable[1151])(drawList, pMin, pMax, fillCol, gridStep, gridOff, rounding, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderNavHighlight(ImRect bb, uint id, ImGuiNavHighlightFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiNavHighlightFlags, void>)ImGuiP.funcTable[1182])(bb, id, flags);
-
+			((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiNavHighlightFlags, void>)ImGuiP.funcTable[1152])(bb, id, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte* FindRenderedTextEnd(byte* text, byte* textEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*>)ImGuiP.funcTable[1183])(text, textEnd);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*>)ImGuiP.funcTable[1153])(text, textEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderMouseCursor(Vector2 pos, float scale, ImGuiMouseCursor mouseCursor, uint colFill, uint colBorder, uint colShadow)
 		{
-
-			((delegate* unmanaged[Cdecl]<Vector2, float, ImGuiMouseCursor, uint, uint, uint, void>)ImGuiP.funcTable[1184])(pos, scale, mouseCursor, colFill, colBorder, colShadow);
-
+			((delegate* unmanaged[Cdecl]<Vector2, float, ImGuiMouseCursor, uint, uint, uint, void>)ImGuiP.funcTable[1154])(pos, scale, mouseCursor, colFill, colBorder, colShadow);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderArrow(ImDrawList* drawList, Vector2 pos, uint col, ImGuiDir dir, float scale)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, ImGuiDir, float, void>)ImGuiP.funcTable[1185])(drawList, pos, col, dir, scale);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, ImGuiDir, float, void>)ImGuiP.funcTable[1155])(drawList, pos, col, dir, scale);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderBullet(ImDrawList* drawList, Vector2 pos, uint col)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, void>)ImGuiP.funcTable[1186])(drawList, pos, col);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, void>)ImGuiP.funcTable[1156])(drawList, pos, col);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderCheckMark(ImDrawList* drawList, Vector2 pos, uint col, float sz)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, float, void>)ImGuiP.funcTable[1187])(drawList, pos, col, sz);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, uint, float, void>)ImGuiP.funcTable[1157])(drawList, pos, col, sz);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderArrowPointingAt(ImDrawList* drawList, Vector2 pos, Vector2 halfSz, ImGuiDir direction, uint col)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, ImGuiDir, uint, void>)ImGuiP.funcTable[1188])(drawList, pos, halfSz, direction, col);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, Vector2, ImGuiDir, uint, void>)ImGuiP.funcTable[1158])(drawList, pos, halfSz, direction, col);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderArrowDockMenu(ImDrawList* drawList, Vector2 pMin, float sz, uint col)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, float, uint, void>)ImGuiP.funcTable[1189])(drawList, pMin, sz, col);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, Vector2, float, uint, void>)ImGuiP.funcTable[1159])(drawList, pMin, sz, col);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderRectFilledRangeH(ImDrawList* drawList, ImRect rect, uint col, float xStartNorm, float xEndNorm, float rounding)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, uint, float, float, float, void>)ImGuiP.funcTable[1190])(drawList, rect, col, xStartNorm, xEndNorm, rounding);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, uint, float, float, float, void>)ImGuiP.funcTable[1160])(drawList, rect, col, xStartNorm, xEndNorm, rounding);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void RenderRectFilledWithHole(ImDrawList* drawList, ImRect outer, ImRect inner, uint col, float rounding)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImRect, uint, float, void>)ImGuiP.funcTable[1191])(drawList, outer, inner, col, rounding);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImRect, ImRect, uint, float, void>)ImGuiP.funcTable[1161])(drawList, outer, inner, col, rounding);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImDrawFlags CalcRoundingFlagsForRectInRect(ImRect rIn, ImRect rOuter, float threshold)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, ImRect, float, ImDrawFlags>)ImGuiP.funcTable[1192])(rIn, rOuter, threshold);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, ImRect, float, ImDrawFlags>)ImGuiP.funcTable[1162])(rIn, rOuter, threshold);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TextEx(byte* text, byte* textEnd, ImGuiTextFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, ImGuiTextFlags, void>)ImGuiP.funcTable[1193])(text, textEnd, flags);
-
+			((delegate* unmanaged[Cdecl]<byte*, byte*, ImGuiTextFlags, void>)ImGuiP.funcTable[1163])(text, textEnd, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ButtonEx(byte* label, Vector2 sizeArg, ImGuiButtonFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, Vector2, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1194])(label, sizeArg, flags);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, Vector2, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1164])(label, sizeArg, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte CloseButton(uint id, Vector2 pos)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, Vector2, byte>)ImGuiP.funcTable[1195])(id, pos);
-
+			return ((delegate* unmanaged[Cdecl]<uint, Vector2, byte>)ImGuiP.funcTable[1165])(id, pos);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte CollapseButton(uint id, Vector2 pos, ImGuiDockNode* dockNode)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, Vector2, ImGuiDockNode*, byte>)ImGuiP.funcTable[1196])(id, pos, dockNode);
-
+			return ((delegate* unmanaged[Cdecl]<uint, Vector2, ImGuiDockNode*, byte>)ImGuiP.funcTable[1166])(id, pos, dockNode);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ArrowButtonEx(byte* strId, ImGuiDir dir, Vector2 sizeArg, ImGuiButtonFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiDir, Vector2, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1197])(strId, dir, sizeArg, flags);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiDir, Vector2, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1167])(strId, dir, sizeArg, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Scrollbar(ImGuiAxis axis)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiAxis, void>)ImGuiP.funcTable[1198])(axis);
-
+			((delegate* unmanaged[Cdecl]<ImGuiAxis, void>)ImGuiP.funcTable[1168])(axis);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ScrollbarEx(ImRect bb, uint id, ImGuiAxis axis, long* pScrollV, long availV, long contentsV, ImDrawFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiAxis, long*, long, long, ImDrawFlags, byte>)ImGuiP.funcTable[1199])(bb, id, axis, pScrollV, availV, contentsV, flags);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiAxis, long*, long, long, ImDrawFlags, byte>)ImGuiP.funcTable[1169])(bb, id, axis, pScrollV, availV, contentsV, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ImageButtonEx(uint id, ImTextureID textureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector2 padding, Vector4 bgCol, Vector4 tintCol)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImTextureID, Vector2, Vector2, Vector2, Vector2, Vector4, Vector4, byte>)ImGuiP.funcTable[1200])(id, textureId, size, uv0, uv1, padding, bgCol, tintCol);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImTextureID, Vector2, Vector2, Vector2, Vector2, Vector4, Vector4, byte>)ImGuiP.funcTable[1170])(id, textureId, size, uv0, uv1, padding, bgCol, tintCol);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GetWindowScrollbarRect(ImRect* pOut, ImGuiWindow* window, ImGuiAxis axis)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImGuiAxis, void>)ImGuiP.funcTable[1201])(pOut, window, axis);
-
+			((delegate* unmanaged[Cdecl]<ImRect*, ImGuiWindow*, ImGuiAxis, void>)ImGuiP.funcTable[1171])(pOut, window, axis);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetWindowScrollbarID(ImGuiWindow* window, ImGuiAxis axis)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiAxis, uint>)ImGuiP.funcTable[1202])(window, axis);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiAxis, uint>)ImGuiP.funcTable[1172])(window, axis);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetWindowResizeCornerID(ImGuiWindow* window, int n)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int, uint>)ImGuiP.funcTable[1203])(window, n);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, int, uint>)ImGuiP.funcTable[1173])(window, n);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static uint GetWindowResizeBorderID(ImGuiWindow* window, ImGuiDir dir)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDir, uint>)ImGuiP.funcTable[1204])(window, dir);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiDir, uint>)ImGuiP.funcTable[1174])(window, dir);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SeparatorEx(ImGuiSeparatorFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiSeparatorFlags, void>)ImGuiP.funcTable[1205])(flags);
-
+			((delegate* unmanaged[Cdecl]<ImGuiSeparatorFlags, void>)ImGuiP.funcTable[1175])(flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte CheckboxFlags(byte* label, long* flags, long flagsValue)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, long*, long, byte>)ImGuiP.funcTable[1206])(label, flags, flagsValue);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, long*, long, byte>)ImGuiP.funcTable[1176])(label, flags, flagsValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte CheckboxFlags(byte* label, ulong* flags, ulong flagsValue)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ulong*, ulong, byte>)ImGuiP.funcTable[1207])(label, flags, flagsValue);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ulong*, ulong, byte>)ImGuiP.funcTable[1177])(label, flags, flagsValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte ButtonBehavior(ImRect bb, uint id, bool* outHovered, bool* outHeld, ImGuiButtonFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, bool*, bool*, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1208])(bb, id, outHovered, outHeld, flags);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, bool*, bool*, ImGuiButtonFlags, byte>)ImGuiP.funcTable[1178])(bb, id, outHovered, outHeld, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DragBehavior(uint id, ImGuiDataType dataType, void* pV, float vSpeed, void* pMin, void* pMax, byte* format, ImGuiSliderFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDataType, void*, float, void*, void*, byte*, ImGuiSliderFlags, byte>)ImGuiP.funcTable[1209])(id, dataType, pV, vSpeed, pMin, pMax, format, flags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiDataType, void*, float, void*, void*, byte*, ImGuiSliderFlags, byte>)ImGuiP.funcTable[1179])(id, dataType, pV, vSpeed, pMin, pMax, format, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte SliderBehavior(ImRect bb, uint id, ImGuiDataType dataType, void* pV, void* pMin, void* pMax, byte* format, ImGuiSliderFlags flags, ImRect* outGrabBb)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiDataType, void*, void*, void*, byte*, ImGuiSliderFlags, ImRect*, byte>)ImGuiP.funcTable[1210])(bb, id, dataType, pV, pMin, pMax, format, flags, outGrabBb);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiDataType, void*, void*, void*, byte*, ImGuiSliderFlags, ImRect*, byte>)ImGuiP.funcTable[1180])(bb, id, dataType, pV, pMin, pMax, format, flags, outGrabBb);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte SplitterBehavior(ImRect bb, uint id, ImGuiAxis axis, float* size1, float* size2, float minsize1, float minsize2, float hoverExtend, float hoverVisibilityDelay, uint bgCol)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiAxis, float*, float*, float, float, float, float, uint, byte>)ImGuiP.funcTable[1211])(bb, id, axis, size1, size2, minsize1, minsize2, hoverExtend, hoverVisibilityDelay, bgCol);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, ImGuiAxis, float*, float*, float, float, float, float, uint, byte>)ImGuiP.funcTable[1181])(bb, id, axis, size1, size2, minsize1, minsize2, hoverExtend, hoverVisibilityDelay, bgCol);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TreeNodeBehavior(uint id, ImGuiTreeNodeFlags flags, byte* label, byte* labelEnd)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTreeNodeFlags, byte*, byte*, byte>)ImGuiP.funcTable[1212])(id, flags, label, labelEnd);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTreeNodeFlags, byte*, byte*, byte>)ImGuiP.funcTable[1182])(id, flags, label, labelEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TreeNodeBehaviorIsOpen(uint id, ImGuiTreeNodeFlags flags)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTreeNodeFlags, byte>)ImGuiP.funcTable[1213])(id, flags);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiTreeNodeFlags, byte>)ImGuiP.funcTable[1183])(id, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void TreePushOverrideID(uint id)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1214])(id);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1184])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiDataTypeInfo* DataTypeGetInfo(ImGuiDataType dataType)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, ImGuiDataTypeInfo*>)ImGuiP.funcTable[1215])(dataType);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, ImGuiDataTypeInfo*>)ImGuiP.funcTable[1185])(dataType);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DataTypeApplyOp(ImGuiDataType dataType, int op, void* output, void* arg1, void* arg2)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDataType, int, void*, void*, void*, void>)ImGuiP.funcTable[1216])(dataType, op, output, arg1, arg2);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDataType, int, void*, void*, void*, void>)ImGuiP.funcTable[1186])(dataType, op, output, arg1, arg2);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DataTypeApplyFromText(byte* buf, ImGuiDataType dataType, void* pData, byte* format)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiDataType, void*, byte*, byte>)ImGuiP.funcTable[1217])(buf, dataType, pData, format);
-
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiDataType, void*, byte*, byte>)ImGuiP.funcTable[1187])(buf, dataType, pData, format);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int DataTypeCompare(ImGuiDataType dataType, void* arg1, void* arg2)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, void*, void*, int>)ImGuiP.funcTable[1218])(dataType, arg1, arg2);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, void*, void*, int>)ImGuiP.funcTable[1188])(dataType, arg1, arg2);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte DataTypeClamp(ImGuiDataType dataType, void* pData, void* pMin, void* pMax)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, void*, void*, void*, byte>)ImGuiP.funcTable[1219])(dataType, pData, pMin, pMax);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiDataType, void*, void*, void*, byte>)ImGuiP.funcTable[1189])(dataType, pData, pMin, pMax);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TempInputScalar(ImRect bb, uint id, byte* label, ImGuiDataType dataType, void* pData, byte* format, void* pClampMin, void* pClampMax)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte*, ImGuiDataType, void*, byte*, void*, void*, byte>)ImGuiP.funcTable[1220])(bb, id, label, dataType, pData, format, pClampMin, pClampMax);
-
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte*, ImGuiDataType, void*, byte*, void*, void*, byte>)ImGuiP.funcTable[1190])(bb, id, label, dataType, pData, format, pClampMin, pClampMax);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte TempInputIsActive(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, byte>)ImGuiP.funcTable[1221])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, byte>)ImGuiP.funcTable[1191])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImGuiInputTextState* GetInputTextState(uint id)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<uint, ImGuiInputTextState*>)ImGuiP.funcTable[1222])(id);
-
+			return ((delegate* unmanaged[Cdecl]<uint, ImGuiInputTextState*>)ImGuiP.funcTable[1192])(id);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Custom_StbTextMakeUndoReplace(ImGuiInputTextState* str, int where, int oldLength, int newLength)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int, int, int, void>)ImGuiP.funcTable[1223])(str, where, oldLength, newLength);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, int, int, int, void>)ImGuiP.funcTable[1193])(str, where, oldLength, newLength);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Custom_StbTextUndo(ImGuiInputTextState* str)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[1224])(str);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[1194])(str);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ColorTooltip(byte* text, float* col, ImGuiColorEditFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1225])(text, col, flags);
-
+			((delegate* unmanaged[Cdecl]<byte*, float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1195])(text, col, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ColorEditOptionsPopup(float* col, ImGuiColorEditFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1226])(col, flags);
-
+			((delegate* unmanaged[Cdecl]<float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1196])(col, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ColorPickerOptionsPopup(float* refCol, ImGuiColorEditFlags flags)
 		{
-
-			((delegate* unmanaged[Cdecl]<float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1227])(refCol, flags);
-
+			((delegate* unmanaged[Cdecl]<float*, ImGuiColorEditFlags, void>)ImGuiP.funcTable[1197])(refCol, flags);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int PlotEx(ImGuiPlotType plotType, byte* label, delegate*<ImGuiPlotType, byte*, delegate*<void*, int, float>, void*, int, int, byte*, float, float, Vector2, float> valuesGetter, void* data, int valuesCount, int valuesOffset, byte* overlayText, float scaleMin, float scaleMax, Vector2 frameSize)
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImGuiPlotType, byte*, delegate*<ImGuiPlotType, byte*, delegate*<void*, int, float>, void*, int, int, byte*, float, float, Vector2, float>, void*, int, int, byte*, float, float, Vector2, int>)ImGuiP.funcTable[1228])(plotType, label, valuesGetter, data, valuesCount, valuesOffset, overlayText, scaleMin, scaleMax, frameSize);
-
+			return ((delegate* unmanaged[Cdecl]<ImGuiPlotType, byte*, delegate*<ImGuiPlotType, byte*, delegate*<void*, int, float>, void*, int, int, byte*, float, float, Vector2, float>, void*, int, int, byte*, float, float, Vector2, int>)ImGuiP.funcTable[1198])(plotType, label, valuesGetter, data, valuesCount, valuesOffset, overlayText, scaleMin, scaleMax, frameSize);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ShadeVertsLinearColorGradientKeepAlpha(ImDrawList* drawList, int vertStartIdx, int vertEndIdx, Vector2 gradientp0, Vector2 gradientp1, uint col0, uint col1)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, int, int, Vector2, Vector2, uint, uint, void>)ImGuiP.funcTable[1229])(drawList, vertStartIdx, vertEndIdx, gradientp0, gradientp1, col0, col1);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, int, int, Vector2, Vector2, uint, uint, void>)ImGuiP.funcTable[1199])(drawList, vertStartIdx, vertEndIdx, gradientp0, gradientp1, col0, col1);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ShadeVertsLinearUV(ImDrawList* drawList, int vertStartIdx, int vertEndIdx, Vector2 a, Vector2 b, Vector2 uvA, Vector2 uvB, byte clamp)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, int, int, Vector2, Vector2, Vector2, Vector2, byte, void>)ImGuiP.funcTable[1230])(drawList, vertStartIdx, vertEndIdx, a, b, uvA, uvB, clamp);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, int, int, Vector2, Vector2, Vector2, Vector2, byte, void>)ImGuiP.funcTable[1200])(drawList, vertStartIdx, vertEndIdx, a, b, uvA, uvB, clamp);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GcCompactTransientMiscBuffers()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1231])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1201])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GcCompactTransientWindowBuffers(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1232])(window);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1202])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void GcAwakeTransientWindowBuffers(ImGuiWindow* window)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1233])(window);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void DebugLog(byte* fmt)
-		{
-
-			((delegate* unmanaged[Cdecl]<byte*, void>)ImGuiP.funcTable[1234])(fmt);
-
-		}
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void DebugLogV(byte* fmt, nuint args)
-		{
-
-			((delegate* unmanaged[Cdecl]<byte*, nuint, void>)ImGuiP.funcTable[1235])(fmt, args);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, void>)ImGuiP.funcTable[1203])(window);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ErrorCheckEndFrameRecover(ImGuiErrorLogCallback logCallback, void* userData)
 		{
-
-			((delegate* unmanaged[Cdecl]<delegate*<void*, byte*, void>, void*, void>)ImGuiP.funcTable[1236])((delegate*<void*, byte*, void>)Utils.GetFunctionPointerForDelegate(logCallback), userData);
-
+			((delegate* unmanaged[Cdecl]<delegate*<void*, byte*, void>, void*, void>)ImGuiP.funcTable[1204])((delegate*<void*, byte*, void>)Utils.GetFunctionPointerForDelegate(logCallback), userData);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ErrorCheckEndWindowRecover(ImGuiErrorLogCallback logCallback, void* userData)
 		{
-
-			((delegate* unmanaged[Cdecl]<delegate*<void*, byte*, void>, void*, void>)ImGuiP.funcTable[1237])((delegate*<void*, byte*, void>)Utils.GetFunctionPointerForDelegate(logCallback), userData);
-
+			((delegate* unmanaged[Cdecl]<delegate*<void*, byte*, void>, void*, void>)ImGuiP.funcTable[1205])((delegate*<void*, byte*, void>)Utils.GetFunctionPointerForDelegate(logCallback), userData);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugDrawItemRect(uint col)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1238])(col);
-
+			((delegate* unmanaged[Cdecl]<uint, void>)ImGuiP.funcTable[1206])(col);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugStartItemPicker()
 		{
-
-			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1239])();
-
+			((delegate* unmanaged[Cdecl]<void>)ImGuiP.funcTable[1207])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ShowFontAtlas(ImFontAtlas* atlas)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1240])(atlas);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1208])(atlas);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugHookIdInfo(uint id, ImGuiDataType dataType, void* dataId, void* dataIdEnd)
 		{
-
-			((delegate* unmanaged[Cdecl]<uint, ImGuiDataType, void*, void*, void>)ImGuiP.funcTable[1241])(id, dataType, dataId, dataIdEnd);
-
+			((delegate* unmanaged[Cdecl]<uint, ImGuiDataType, void*, void*, void>)ImGuiP.funcTable[1209])(id, dataType, dataId, dataIdEnd);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeColumns(ImGuiOldColumns* columns)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, void>)ImGuiP.funcTable[1242])(columns);
-
+			((delegate* unmanaged[Cdecl]<ImGuiOldColumns*, void>)ImGuiP.funcTable[1210])(columns);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeDockNode(ImGuiDockNode* node, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte*, void>)ImGuiP.funcTable[1243])(node, label);
-
+			((delegate* unmanaged[Cdecl]<ImGuiDockNode*, byte*, void>)ImGuiP.funcTable[1211])(node, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeDrawList(ImGuiWindow* window, ImGuiViewportP* viewport, ImDrawList* drawList, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, ImDrawList*, byte*, void>)ImGuiP.funcTable[1244])(window, viewport, drawList, label);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, ImGuiViewportP*, ImDrawList*, byte*, void>)ImGuiP.funcTable[1212])(window, viewport, drawList, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeDrawCmdShowMeshAndBoundingBox(ImDrawList* outDrawList, ImDrawList* drawList, ImDrawCmd* drawCmd, byte showMesh, byte showAabb)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImDrawList*, ImDrawCmd*, byte, byte, void>)ImGuiP.funcTable[1245])(outDrawList, drawList, drawCmd, showMesh, showAabb);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImDrawList*, ImDrawCmd*, byte, byte, void>)ImGuiP.funcTable[1213])(outDrawList, drawList, drawCmd, showMesh, showAabb);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeFont(ImFont* font)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFont*, void>)ImGuiP.funcTable[1246])(font);
-
+			((delegate* unmanaged[Cdecl]<ImFont*, void>)ImGuiP.funcTable[1214])(font);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeFontGlyph(ImFont* font, ImFontGlyph* glyph)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFont*, ImFontGlyph*, void>)ImGuiP.funcTable[1247])(font, glyph);
-
+			((delegate* unmanaged[Cdecl]<ImFont*, ImFontGlyph*, void>)ImGuiP.funcTable[1215])(font, glyph);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeStorage(ImGuiStorage* storage, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiStorage*, byte*, void>)ImGuiP.funcTable[1248])(storage, label);
-
+			((delegate* unmanaged[Cdecl]<ImGuiStorage*, byte*, void>)ImGuiP.funcTable[1216])(storage, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeTabBar(ImGuiTabBar* tabBar, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte*, void>)ImGuiP.funcTable[1249])(tabBar, label);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTabBar*, byte*, void>)ImGuiP.funcTable[1217])(tabBar, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeTable(ImGuiTable* table)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1250])(table);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTable*, void>)ImGuiP.funcTable[1218])(table);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeTableSettings(ImGuiTableSettings* settings)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiTableSettings*, void>)ImGuiP.funcTable[1251])(settings);
-
+			((delegate* unmanaged[Cdecl]<ImGuiTableSettings*, void>)ImGuiP.funcTable[1219])(settings);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeInputTextState(ImGuiInputTextState* state)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[1252])(state);
-
+			((delegate* unmanaged[Cdecl]<ImGuiInputTextState*, void>)ImGuiP.funcTable[1220])(state);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeWindow(ImGuiWindow* window, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte*, void>)ImGuiP.funcTable[1253])(window, label);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow*, byte*, void>)ImGuiP.funcTable[1221])(window, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeWindowSettings(ImGuiWindowSettings* settings)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*, void>)ImGuiP.funcTable[1254])(settings);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindowSettings*, void>)ImGuiP.funcTable[1222])(settings);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeWindowsList(ImVector<ImGuiWindowPtr>* windows, byte* label)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImVector<ImGuiWindowPtr>*, byte*, void>)ImGuiP.funcTable[1255])(windows, label);
-
+			((delegate* unmanaged[Cdecl]<ImVector<ImGuiWindowPtr>*, byte*, void>)ImGuiP.funcTable[1223])(windows, label);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeWindowsListByBeginStackParent(ImGuiWindow** windows, int windowsSize, ImGuiWindow* parentInBeginStack)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiWindow**, int, ImGuiWindow*, void>)ImGuiP.funcTable[1256])(windows, windowsSize, parentInBeginStack);
-
+			((delegate* unmanaged[Cdecl]<ImGuiWindow**, int, ImGuiWindow*, void>)ImGuiP.funcTable[1224])(windows, windowsSize, parentInBeginStack);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugNodeViewport(ImGuiViewportP* viewport)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[1257])(viewport);
-
+			((delegate* unmanaged[Cdecl]<ImGuiViewportP*, void>)ImGuiP.funcTable[1225])(viewport);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void DebugRenderViewportThumbnail(ImDrawList* drawList, ImGuiViewportP* viewport, ImRect bb)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImDrawList*, ImGuiViewportP*, ImRect, void>)ImGuiP.funcTable[1258])(drawList, viewport, bb);
-
+			((delegate* unmanaged[Cdecl]<ImDrawList*, ImGuiViewportP*, ImRect, void>)ImGuiP.funcTable[1226])(drawList, viewport, bb);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static ImFontBuilderIO* ImFontAtlasGetBuilderForStbTruetype()
 		{
-
-			return ((delegate* unmanaged[Cdecl]<ImFontBuilderIO*>)ImGuiP.funcTable[1259])();
-
+			return ((delegate* unmanaged[Cdecl]<ImFontBuilderIO*>)ImGuiP.funcTable[1227])();
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildInit(ImFontAtlas* atlas)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1260])(atlas);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1228])(atlas);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildSetupFont(ImFontAtlas* atlas, ImFont* font, ImFontConfig* fontConfig, float ascent, float descent)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImFont*, ImFontConfig*, float, float, void>)ImGuiP.funcTable[1261])(atlas, font, fontConfig, ascent, descent);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImFont*, ImFontConfig*, float, float, void>)ImGuiP.funcTable[1229])(atlas, font, fontConfig, ascent, descent);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildFinish(ImFontAtlas* atlas)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1263])(atlas);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, void>)ImGuiP.funcTable[1231])(atlas);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildRender8bppRectFromString(ImFontAtlas* atlas, int textureIndex, int x, int y, int w, int h, byte* inStr, byte inMarkerChar, byte inMarkerPixelValue)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, int, int, int, int, int, byte*, byte, byte, void>)ImGuiP.funcTable[1264])(atlas, textureIndex, x, y, w, h, inStr, inMarkerChar, inMarkerPixelValue);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, int, int, int, int, int, byte*, byte, byte, void>)ImGuiP.funcTable[1232])(atlas, textureIndex, x, y, w, h, inStr, inMarkerChar, inMarkerPixelValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildRender32bppRectFromString(ImFontAtlas* atlas, int textureIndex, int x, int y, int w, int h, byte* inStr, byte inMarkerChar, uint inMarkerPixelValue)
 		{
-
-			((delegate* unmanaged[Cdecl]<ImFontAtlas*, int, int, int, int, int, byte*, byte, uint, void>)ImGuiP.funcTable[1265])(atlas, textureIndex, x, y, w, h, inStr, inMarkerChar, inMarkerPixelValue);
-
+			((delegate* unmanaged[Cdecl]<ImFontAtlas*, int, int, int, int, int, byte*, byte, uint, void>)ImGuiP.funcTable[1233])(atlas, textureIndex, x, y, w, h, inStr, inMarkerChar, inMarkerPixelValue);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildMultiplyCalcLookupTable(byte* outTable, float inMultiplyFactor, float gammaFactor)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, float, float, void>)ImGuiP.funcTable[1266])(outTable, inMultiplyFactor, gammaFactor);
-
+			((delegate* unmanaged[Cdecl]<byte*, float, float, void>)ImGuiP.funcTable[1234])(outTable, inMultiplyFactor, gammaFactor);
 		}
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ImFontAtlasBuildMultiplyRectAlpha8(byte* table, byte* pixels, int x, int y, int w, int h, int stride)
 		{
-
-			((delegate* unmanaged[Cdecl]<byte*, byte*, int, int, int, int, int, void>)ImGuiP.funcTable[1267])(table, pixels, x, y, w, h, stride);
-
+			((delegate* unmanaged[Cdecl]<byte*, byte*, int, int, int, int, int, void>)ImGuiP.funcTable[1235])(table, pixels, x, y, w, h, stride);
 		}
 }
 

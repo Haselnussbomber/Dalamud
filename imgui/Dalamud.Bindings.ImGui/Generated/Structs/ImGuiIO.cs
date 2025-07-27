@@ -7052,59 +7052,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void AddInputCharactersUTF8(ref byte str)
+		public unsafe void AddInputCharactersUTF8(ImU8String str)
 		{
 			fixed (ImGuiIO* @this = &this)
 			{
-				fixed (byte* pstr = &str)
+				fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
 				{
-					ImGui.AddInputCharactersUTF8Native(@this, (byte*)pstr);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AddInputCharactersUTF8(ReadOnlySpan<byte> str)
-		{
-			fixed (ImGuiIO* @this = &this)
-			{
-				fixed (byte* pstr = str)
-				{
-					ImGui.AddInputCharactersUTF8Native(@this, (byte*)pstr);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AddInputCharactersUTF8(string str)
-		{
-			fixed (ImGuiIO* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (str != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(str);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(str, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImGui.AddInputCharactersUTF8Native(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
+					ImGui.AddInputCharactersUTF8Native(@this, strPtr);
+					str.Dispose();
 				}
 			}
 		}
@@ -7846,51 +7801,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void AddInputCharactersUTF8(ref byte str)
+		public unsafe void AddInputCharactersUTF8(ImU8String str)
 		{
-			fixed (byte* pstr = &str)
+			fixed (byte* strPtr = &str.GetPinnableNullTerminatedReference())
 			{
-				ImGui.AddInputCharactersUTF8Native(Handle, (byte*)pstr);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AddInputCharactersUTF8(ReadOnlySpan<byte> str)
-		{
-			fixed (byte* pstr = str)
-			{
-				ImGui.AddInputCharactersUTF8Native(Handle, (byte*)pstr);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AddInputCharactersUTF8(string str)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (str != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(str);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(str, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImGui.AddInputCharactersUTF8Native(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				ImGui.AddInputCharactersUTF8Native(Handle, strPtr);
+				str.Dispose();
 			}
 		}
 

@@ -584,13 +584,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, fontCfg, glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, fontCfg, glyphRanges);
+					filename.Dispose();
 					return ret;
 				}
 			}
@@ -599,13 +600,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ImFontConfig* fontCfg)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ImFontConfig* fontCfg)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, fontCfg, (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, fontCfg, (ushort*)(default));
+					filename.Dispose();
 					return ret;
 				}
 			}
@@ -614,13 +616,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+					filename.Dispose();
 					return ret;
 				}
 			}
@@ -629,207 +632,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, (ImFontConfig*)(default), glyphRanges);
+					filename.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, fontCfg, glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, fontCfg, (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, fontCfg, glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, fontCfg, (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, (ImFontConfig*)(default), glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -866,15 +678,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
 					fixed (ImFontConfig* pfontCfg = &fontCfg)
 					{
-						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+						filename.Dispose();
 						return ret;
 					}
 				}
@@ -884,125 +697,18 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ref ImFontConfig fontCfg)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ref ImFontConfig fontCfg)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pfilename = &filename)
+				fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 				{
 					fixed (ImFontConfig* pfontCfg = &fontCfg)
 					{
-						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, filenamePtr, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+						filename.Dispose();
 						return ret;
 					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					fixed (ImFontConfig* pfontCfg = &fontCfg)
-					{
-						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pfilename = filename)
-				{
-					fixed (ImFontConfig* pfontCfg = &fontCfg)
-					{
-						ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (filename != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(filename);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(@this, pStr0, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
 				}
 			}
 		}
@@ -1058,13 +764,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, fontCfg, glyphRanges);
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
 			}
@@ -1073,13 +780,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, fontCfg, (ushort*)(default));
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
 			}
@@ -1088,13 +796,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
 			}
@@ -1103,207 +812,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)(default), glyphRanges);
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, fontCfg, glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, fontCfg, (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, (ImFontConfig*)(default), glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -1340,15 +858,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
 					fixed (ImFontConfig* pfontCfg = &fontCfg)
 					{
-						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+						compressedFontDatabase85.Dispose();
 						return ret;
 					}
 				}
@@ -1358,125 +877,18 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
-				fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+				fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 				{
 					fixed (ImFontConfig* pfontCfg = &fontCfg)
 					{
-						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+						compressedFontDatabase85.Dispose();
 						return ret;
 					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					fixed (ImFontConfig* pfontCfg = &fontCfg)
-					{
-						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-				{
-					fixed (ImFontConfig* pfontCfg = &fontCfg)
-					{
-						ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-						return ret;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (compressedFontDatabase85 != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(@this, pStr0, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
-					}
-					return ret;
 				}
 			}
 		}
@@ -2025,21 +1437,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2058,24 +1455,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2083,24 +1462,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 						return ret != 0;
@@ -2133,47 +1494,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -2202,24 +1527,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2227,24 +1534,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -2277,27 +1566,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2305,24 +1573,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -2343,27 +1593,6 @@ namespace Dalamud.Bindings.ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 							return ret != 0;
@@ -2397,27 +1626,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2429,30 +1637,6 @@ namespace Dalamud.Bindings.ImGui
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 								return ret != 0;
@@ -2556,24 +1740,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2595,27 +1761,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2623,27 +1768,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -2682,53 +1806,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -2763,27 +1845,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2791,27 +1852,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -2850,30 +1890,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -2881,27 +1897,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -2925,30 +1920,6 @@ namespace Dalamud.Bindings.ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							fixed (int* ptextureIndex = &textureIndex)
 							{
@@ -2988,30 +1959,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -3023,33 +1970,6 @@ namespace Dalamud.Bindings.ImGui
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								fixed (int* ptextureIndex = &textureIndex)
-								{
-									byte ret = ImGui.GetMouseCursorTexDataNative(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-									return ret != 0;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								fixed (int* ptextureIndex = &textureIndex)
 								{
@@ -4157,11 +3077,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, fontCfg, glyphRanges);
+				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, fontCfg, glyphRanges);
+				filename.Dispose();
 				return ret;
 			}
 		}
@@ -4169,11 +3090,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ImFontConfig* fontCfg)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ImFontConfig* fontCfg)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, fontCfg, (ushort*)(default));
+				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, fontCfg, (ushort*)(default));
+				filename.Dispose();
 				return ret;
 			}
 		}
@@ -4181,11 +3103,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+				filename.Dispose();
 				return ret;
 			}
 		}
@@ -4193,181 +3116,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ushort* glyphRanges)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), glyphRanges);
+				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, (ImFontConfig*)(default), glyphRanges);
+				filename.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, fontCfg, glyphRanges);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, fontCfg, (ushort*)(default));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)(default), glyphRanges);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, fontCfg, glyphRanges);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ImFontConfig* fontCfg)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, fontCfg, (ushort*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)(default), glyphRanges);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>
@@ -4397,13 +3153,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
 				fixed (ImFontConfig* pfontCfg = &fontCfg)
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+					filename.Dispose();
 					return ret;
 				}
 			}
@@ -4412,111 +3169,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ref byte filename, float sizePixels, ref ImFontConfig fontCfg)
+		public unsafe ImFontPtr AddFontFromFileTTF(ImU8String filename, float sizePixels, ref ImFontConfig fontCfg)
 		{
-			fixed (byte* pfilename = &filename)
+			fixed (byte* filenamePtr = &filename.GetPinnableNullTerminatedReference())
 			{
 				fixed (ImFontConfig* pfontCfg = &fontCfg)
 				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, filenamePtr, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+					filename.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(ReadOnlySpan<byte> filename, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (byte* pfilename = filename)
-			{
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, (byte*)pfilename, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (ImFontConfig* pfontCfg = &fontCfg)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromFileTTF(string filename, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (filename != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(filename);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(filename, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (ImFontConfig* pfontCfg = &fontCfg)
-			{
-				ImFontPtr ret = ImGui.AddFontFromFileTTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -4559,11 +3221,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, glyphRanges);
+				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, fontCfg, glyphRanges);
+				compressedFontDatabase85.Dispose();
 				return ret;
 			}
 		}
@@ -4571,11 +3234,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, (ushort*)(default));
+				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, fontCfg, (ushort*)(default));
+				compressedFontDatabase85.Dispose();
 				return ret;
 			}
 		}
@@ -4583,11 +3247,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
+				compressedFontDatabase85.Dispose();
 				return ret;
 			}
 		}
@@ -4595,181 +3260,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), glyphRanges);
+				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)(default), glyphRanges);
+				compressedFontDatabase85.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, glyphRanges);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, fontCfg, (ushort*)(default));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)(default), glyphRanges);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, fontCfg, glyphRanges);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ImFontConfig* fontCfg)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, fontCfg, (ushort*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)(default), (ushort*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)(default), glyphRanges);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>
@@ -4799,13 +3297,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
 				fixed (ImFontConfig* pfontCfg = &fontCfg)
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
 			}
@@ -4814,111 +3313,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ref byte compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
+		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ImU8String compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
 		{
-			fixed (byte* pcompressedFontDatabase85 = &compressedFontDatabase85)
+			fixed (byte* compressedFontDatabase85Ptr = &compressedFontDatabase85.GetPinnableNullTerminatedReference())
 			{
 				fixed (ImFontConfig* pfontCfg = &fontCfg)
 				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, compressedFontDatabase85Ptr, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
+					compressedFontDatabase85.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(ReadOnlySpan<byte> compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			fixed (byte* pcompressedFontDatabase85 = compressedFontDatabase85)
-			{
-				fixed (ImFontConfig* pfontCfg = &fontCfg)
-				{
-					ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, (byte*)pcompressedFontDatabase85, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg, ushort* glyphRanges)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (ImFontConfig* pfontCfg = &fontCfg)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)pfontCfg, glyphRanges);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImFontPtr AddFontFromMemoryCompressedBase85TTF(string compressedFontDatabase85, float sizePixels, ref ImFontConfig fontCfg)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (compressedFontDatabase85 != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(compressedFontDatabase85);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(compressedFontDatabase85, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (ImFontConfig* pfontCfg = &fontCfg)
-			{
-				ImFontPtr ret = ImGui.AddFontFromMemoryCompressedBase85TTFNative(Handle, pStr0, sizePixels, (ImFontConfig*)pfontCfg, (ushort*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -5343,18 +3747,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -5370,41 +3762,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 					return ret != 0;
@@ -5433,39 +3795,9 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutUvFill = &outUvFill)
-			{
-				byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvFill = outUvFill)
 			{
 				byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 				return ret != 0;
@@ -5490,41 +3822,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -5553,44 +3855,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutUvBorder = &outUvBorder)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -5608,24 +3877,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -5655,24 +3906,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -5682,27 +3915,6 @@ namespace Dalamud.Bindings.ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 							return ret != 0;
@@ -5790,21 +4002,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (int* ptextureIndex = &textureIndex)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -5823,47 +4020,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -5898,45 +4059,9 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutUvFill = &outUvFill)
-			{
-				fixed (int* ptextureIndex = &textureIndex)
-				{
-					byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvFill = outUvFill)
 			{
 				fixed (int* ptextureIndex = &textureIndex)
 				{
@@ -5967,47 +4092,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -6042,50 +4131,11 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutUvBorder = &outUvBorder)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -6106,27 +4156,6 @@ namespace Dalamud.Bindings.ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -6162,27 +4191,6 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -6192,30 +4200,6 @@ namespace Dalamud.Bindings.ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGui.GetMouseCursorTexDataNative(Handle, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							fixed (int* ptextureIndex = &textureIndex)
 							{

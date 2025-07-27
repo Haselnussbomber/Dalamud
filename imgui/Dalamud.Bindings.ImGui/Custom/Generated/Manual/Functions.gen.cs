@@ -14,38 +14,3 @@ namespace Dalamud.Bindings.ImGui
 	{
 	}
 }
-/* Functions.001.cs */
-namespace Dalamud.Bindings.ImGui
-{
-	public unsafe partial class ImGui
-	{
-	}
-}
-/* Functions.002.cs */
-namespace Dalamud.Bindings.ImGui
-{
-	public unsafe partial class ImGui
-	{
-	}
-}
-/* Functions.003.cs */
-namespace Dalamud.Bindings.ImGui
-{
-	public unsafe partial class ImGui
-	{
-	}
-}
-/* Functions.004.cs */
-namespace Dalamud.Bindings.ImGui
-{
-	public unsafe partial class ImGui
-	{
-	}
-}
-/* Functions.005.cs */
-namespace Dalamud.Bindings.ImGui
-{
-	public unsafe partial class ImGui
-	{
-	}
-}

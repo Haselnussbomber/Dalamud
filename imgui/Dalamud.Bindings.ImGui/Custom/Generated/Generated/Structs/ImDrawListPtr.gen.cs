@@ -274,6 +274,758 @@ public unsafe partial struct ImDrawListPtr
 		{
 			ImGuiNative.AddRectFilledMultiColor(Handle, pMin, pMax, colUprLeft, colUprRight, colBotRight, colBotLeft);
 		}
+		public unsafe void AddText(Vector2 pos, uint col, byte* textBegin, byte* textEnd)
+		{
+			ImGuiNative.AddText(Handle, pos, col, textBegin, textEnd);
+		}
+		public unsafe void AddText(Vector2 pos, uint col, byte* textBegin)
+		{
+			ImGuiNative.AddText(Handle, pos, col, textBegin, (byte*)(default));
+		}
+		public unsafe void AddText(Vector2 pos, uint col, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, pos, col, textBeginPtr, textEnd);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(Vector2 pos, uint col, ImU8String textBegin)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, pos, col, textBeginPtr, (byte*)(default));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(Vector2 pos, uint col, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, pos, col, textBegin, textEndPtr);
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void AddText(Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, pos, col, textBeginPtr, textEndPtr);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, wrapWidth, cpuFineClipRect);
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, wrapWidth, (Vector4*)(default));
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), (Vector4*)(default));
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), (Vector4*)(default));
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, (Vector4*)(default));
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, Vector4* cpuFineClipRect)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), cpuFineClipRect);
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, Vector4* cpuFineClipRect)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), cpuFineClipRect);
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, cpuFineClipRect);
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, wrapWidth, cpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, wrapWidth, (Vector4*)(default));
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), (Vector4*)(default));
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), (Vector4*)(default));
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, (Vector4*)(default));
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), cpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), cpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, cpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, cpuFineClipRect);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, (Vector4*)(default));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), (Vector4*)(default));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), (Vector4*)(default));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, (Vector4*)(default));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), cpuFineClipRect);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), cpuFineClipRect);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, cpuFineClipRect);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, cpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, (Vector4*)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), (Vector4*)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), (Vector4*)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, (Vector4*)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), cpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), cpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, cpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, cpuFineClipRect);
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, (Vector4*)(default));
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), (Vector4*)(default));
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), cpuFineClipRect);
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, cpuFineClipRect);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, (Vector4*)(default));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), (Vector4*)(default));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), cpuFineClipRect);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, cpuFineClipRect);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, (Vector4*)(default));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), (Vector4*)(default));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClipRect);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, cpuFineClipRect);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, (Vector4*)(default));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), (Vector4*)(default));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, Vector4* cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClipRect);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, wrapWidth, (Vector4*)pcpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ref Vector4 cpuFineClipRect)
+		{
+			fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), (Vector4*)pcpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+			{
+				ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, (Vector4*)pcpuFineClipRect);
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, wrapWidth, (Vector4*)pcpuFineClipRect);
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEnd, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), (float)(0.0f), (Vector4*)pcpuFineClipRect);
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, (byte*)(default), wrapWidth, (Vector4*)pcpuFineClipRect);
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, (Vector4*)pcpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), (Vector4*)pcpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, (Vector4*)pcpuFineClipRect);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, wrapWidth, (Vector4*)pcpuFineClipRect);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, byte* textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEnd, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), (float)(0.0f), (Vector4*)pcpuFineClipRect);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, (byte*)(default), wrapWidth, (Vector4*)pcpuFineClipRect);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, (Vector4*)pcpuFineClipRect);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+				{
+					ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, wrapWidth, (Vector4*)pcpuFineClipRect);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, byte* textBegin, ImU8String textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBegin, textEndPtr, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, (Vector4*)pcpuFineClipRect);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ImFont* font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+					{
+						ImGuiNative.AddText(Handle, font, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, float wrapWidth, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+						{
+							ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, wrapWidth, (Vector4*)pcpuFineClipRect);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public unsafe void AddText(ref ImFont font, float fontSize, Vector2 pos, uint col, ImU8String textBegin, ImU8String textEnd, ref Vector4 cpuFineClipRect)
+		{
+			fixed (ImFont* pfont = &font)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (Vector4* pcpuFineClipRect = &cpuFineClipRect)
+						{
+							ImGuiNative.AddText(Handle, (ImFont*)pfont, fontSize, pos, col, textBeginPtr, textEndPtr, (float)(0.0f), (Vector4*)pcpuFineClipRect);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
 		public unsafe void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness)
 		{
 			ImGuiNative.AddTriangle(Handle, p1, p2, p3, col, thickness);
@@ -440,5 +1192,4 @@ public unsafe partial struct ImDrawListPtr
 			ImGuiNative.PushTextureID(Handle, textureId);
 		}
 }
-// DISCARDED: AddText
 

@@ -23,11 +23,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Vector2* ImVec2Native()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Vector2*>)funcTable[0])();
-			#else
-			return (Vector2*)((delegate* unmanaged[Cdecl]<nint>)funcTable[0])();
-			#endif
 		}
 
 		/// <summary>
@@ -45,11 +41,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void DestroyNative(Vector2* self)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[1])(self);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[1])((nint)self);
-			#endif
 		}
 
 		/// <summary>
@@ -77,11 +69,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Vector2* ImVec2Native(float x, float y)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float, float, Vector2*>)funcTable[2])(x, y);
-			#else
-			return (Vector2*)((delegate* unmanaged[Cdecl]<float, float, nint>)funcTable[2])(x, y);
-			#endif
 		}
 
 		/// <summary>
@@ -99,11 +87,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Vector4* ImVec4Native()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Vector4*>)funcTable[3])();
-			#else
-			return (Vector4*)((delegate* unmanaged[Cdecl]<nint>)funcTable[3])();
-			#endif
 		}
 
 		/// <summary>
@@ -121,11 +105,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void DestroyNative(Vector4* self)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector4*, void>)funcTable[4])(self);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[4])((nint)self);
-			#endif
 		}
 
 		/// <summary>
@@ -153,11 +133,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Vector4* ImVec4Native(float x, float y, float z, float w)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float, float, float, float, Vector4*>)funcTable[5])(x, y, z, w);
-			#else
-			return (Vector4*)((delegate* unmanaged[Cdecl]<float, float, float, float, nint>)funcTable[5])(x, y, z, w);
-			#endif
 		}
 
 		/// <summary>
@@ -175,11 +151,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImGuiContext* CreateContextNative(ImFontAtlas* sharedFontAtlas)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImFontAtlas*, ImGuiContext*>)funcTable[6])(sharedFontAtlas);
-			#else
-			return (ImGuiContext*)((delegate* unmanaged[Cdecl]<nint, nint>)funcTable[6])((nint)sharedFontAtlas);
-			#endif
 		}
 
 		/// <summary>
@@ -218,11 +190,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void DestroyContextNative(ImGuiContext* ctx)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)funcTable[7])(ctx);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[7])((nint)ctx);
-			#endif
 		}
 
 		/// <summary>
@@ -258,11 +226,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImGuiContext* GetCurrentContextNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiContext*>)funcTable[8])();
-			#else
-			return (ImGuiContext*)((delegate* unmanaged[Cdecl]<nint>)funcTable[8])();
-			#endif
 		}
 
 		/// <summary>
@@ -280,11 +244,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetCurrentContextNative(ImGuiContext* ctx)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiContext*, void>)funcTable[9])(ctx);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[9])((nint)ctx);
-			#endif
 		}
 
 		/// <summary>
@@ -312,11 +272,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImGuiIO* GetIONative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiIO*>)funcTable[10])();
-			#else
-			return (ImGuiIO*)((delegate* unmanaged[Cdecl]<nint>)funcTable[10])();
-			#endif
 		}
 
 		/// <summary>
@@ -334,11 +290,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImGuiStyle* GetStyleNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiStyle*>)funcTable[11])();
-			#else
-			return (ImGuiStyle*)((delegate* unmanaged[Cdecl]<nint>)funcTable[11])();
-			#endif
 		}
 
 		/// <summary>
@@ -356,11 +308,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void NewFrameNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[12])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[12])();
-			#endif
 		}
 
 		/// <summary>
@@ -377,11 +325,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void EndFrameNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[13])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[13])();
-			#endif
 		}
 
 		/// <summary>
@@ -398,11 +342,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void RenderNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[14])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[14])();
-			#endif
 		}
 
 		/// <summary>
@@ -419,11 +359,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImDrawData* GetDrawDataNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImDrawData*>)funcTable[15])();
-			#else
-			return (ImDrawData*)((delegate* unmanaged[Cdecl]<nint>)funcTable[15])();
-			#endif
 		}
 
 		/// <summary>
@@ -441,11 +377,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowDemoWindowNative(bool* pOpen)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<bool*, void>)funcTable[16])(pOpen);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[16])((nint)pOpen);
-			#endif
 		}
 
 		/// <summary>
@@ -481,11 +413,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowMetricsWindowNative(bool* pOpen)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<bool*, void>)funcTable[17])(pOpen);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[17])((nint)pOpen);
-			#endif
 		}
 
 		/// <summary>
@@ -521,11 +449,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowDebugLogWindowNative(bool* pOpen)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<bool*, void>)funcTable[18])(pOpen);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[18])((nint)pOpen);
-			#endif
 		}
 
 		/// <summary>
@@ -561,11 +485,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowStackToolWindowNative(bool* pOpen)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<bool*, void>)funcTable[19])(pOpen);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[19])((nint)pOpen);
-			#endif
 		}
 
 		/// <summary>
@@ -601,11 +521,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowAboutWindowNative(bool* pOpen)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<bool*, void>)funcTable[20])(pOpen);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[20])((nint)pOpen);
-			#endif
 		}
 
 		/// <summary>
@@ -641,11 +557,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowStyleEditorNative(ImGuiStyle* reference)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyle*, void>)funcTable[21])(reference);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[21])((nint)reference);
-			#endif
 		}
 
 		/// <summary>
@@ -681,11 +593,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte ShowStyleSelectorNative(byte* label)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte*, byte>)funcTable[22])(label);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<nint, byte>)funcTable[22])((nint)label);
-			#endif
 		}
 
 		/// <summary>
@@ -700,55 +608,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool ShowStyleSelector(ref byte label)
+		public static bool ShowStyleSelector(ImU8String label)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = ShowStyleSelectorNative((byte*)plabel);
+				byte ret = ShowStyleSelectorNative(labelPtr);
+				label.Dispose();
 				return ret != 0;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool ShowStyleSelector(ReadOnlySpan<byte> label)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte ret = ShowStyleSelectorNative((byte*)plabel);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool ShowStyleSelector(string label)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = ShowStyleSelectorNative(pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
 		}
 
 		/// <summary>
@@ -757,11 +624,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowFontSelectorNative(byte* label)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, void>)funcTable[23])(label);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[23])((nint)label);
-			#endif
 		}
 
 		/// <summary>
@@ -775,51 +638,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void ShowFontSelector(ref byte label)
+		public static void ShowFontSelector(ImU8String label)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				ShowFontSelectorNative((byte*)plabel);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void ShowFontSelector(ReadOnlySpan<byte> label)
-		{
-			fixed (byte* plabel = label)
-			{
-				ShowFontSelectorNative((byte*)plabel);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void ShowFontSelector(string label)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ShowFontSelectorNative(pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				ShowFontSelectorNative(labelPtr);
+				label.Dispose();
 			}
 		}
 
@@ -829,11 +653,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ShowUserGuideNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[24])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[24])();
-			#endif
 		}
 
 		/// <summary>
@@ -850,11 +670,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte* GetVersionNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte*>)funcTable[25])();
-			#else
-			return (byte*)((delegate* unmanaged[Cdecl]<nint>)funcTable[25])();
-			#endif
 		}
 
 		/// <summary>
@@ -881,11 +697,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void StyleColorsDarkNative(ImGuiStyle* dst)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyle*, void>)funcTable[26])(dst);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[26])((nint)dst);
-			#endif
 		}
 
 		/// <summary>
@@ -921,11 +733,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void StyleColorsLightNative(ImGuiStyle* dst)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyle*, void>)funcTable[27])(dst);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[27])((nint)dst);
-			#endif
 		}
 
 		/// <summary>
@@ -961,11 +769,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void StyleColorsClassicNative(ImGuiStyle* dst)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyle*, void>)funcTable[28])(dst);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[28])((nint)dst);
-			#endif
 		}
 
 		/// <summary>
@@ -1001,11 +805,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte BeginNative(byte* name, bool* pOpen, ImGuiWindowFlags flags)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte*, bool*, ImGuiWindowFlags, byte>)funcTable[29])(name, pOpen, flags);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<nint, nint, ImGuiWindowFlags, byte>)funcTable[29])((nint)name, (nint)pOpen, flags);
-			#endif
 		}
 
 		/// <summary>
@@ -1047,11 +847,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name, bool* pOpen, ImGuiWindowFlags flags)
+		public static bool Begin(ImU8String name, bool* pOpen, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginNative((byte*)pname, pOpen, flags);
+				byte ret = BeginNative(namePtr, pOpen, flags);
+				name.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1059,11 +860,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name, bool* pOpen)
+		public static bool Begin(ImU8String name, bool* pOpen)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginNative((byte*)pname, pOpen, (ImGuiWindowFlags)(0));
+				byte ret = BeginNative(namePtr, pOpen, (ImGuiWindowFlags)(0));
+				name.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1071,11 +873,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name)
+		public static bool Begin(ImU8String name)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginNative((byte*)pname, (bool*)(default), (ImGuiWindowFlags)(0));
+				byte ret = BeginNative(namePtr, (bool*)(default), (ImGuiWindowFlags)(0));
+				name.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1083,181 +886,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name, ImGuiWindowFlags flags)
+		public static bool Begin(ImU8String name, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginNative((byte*)pname, (bool*)(default), flags);
+				byte ret = BeginNative(namePtr, (bool*)(default), flags);
+				name.Dispose();
 				return ret != 0;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name, bool* pOpen, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pname = name)
-			{
-				byte ret = BeginNative((byte*)pname, pOpen, flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name, bool* pOpen)
-		{
-			fixed (byte* pname = name)
-			{
-				byte ret = BeginNative((byte*)pname, pOpen, (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name)
-		{
-			fixed (byte* pname = name)
-			{
-				byte ret = BeginNative((byte*)pname, (bool*)(default), (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pname = name)
-			{
-				byte ret = BeginNative((byte*)pname, (bool*)(default), flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name, bool* pOpen, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginNative(pStr0, pOpen, flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name, bool* pOpen)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginNative(pStr0, pOpen, (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginNative(pStr0, (bool*)(default), (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginNative(pStr0, (bool*)(default), flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
 		}
 
 		/// <summary>
@@ -1287,13 +923,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name, ref bool pOpen, ImGuiWindowFlags flags)
+		public static bool Begin(ImU8String name, ref bool pOpen, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
 				fixed (bool* ppOpen = &pOpen)
 				{
-					byte ret = BeginNative((byte*)pname, (bool*)ppOpen, flags);
+					byte ret = BeginNative(namePtr, (bool*)ppOpen, flags);
+					name.Dispose();
 					return ret != 0;
 				}
 			}
@@ -1302,111 +939,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Begin(ref byte name, ref bool pOpen)
+		public static bool Begin(ImU8String name, ref bool pOpen)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
 				fixed (bool* ppOpen = &pOpen)
 				{
-					byte ret = BeginNative((byte*)pname, (bool*)ppOpen, (ImGuiWindowFlags)(0));
+					byte ret = BeginNative(namePtr, (bool*)ppOpen, (ImGuiWindowFlags)(0));
+					name.Dispose();
 					return ret != 0;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name, ref bool pOpen, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pname = name)
-			{
-				fixed (bool* ppOpen = &pOpen)
-				{
-					byte ret = BeginNative((byte*)pname, (bool*)ppOpen, flags);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(ReadOnlySpan<byte> name, ref bool pOpen)
-		{
-			fixed (byte* pname = name)
-			{
-				fixed (bool* ppOpen = &pOpen)
-				{
-					byte ret = BeginNative((byte*)pname, (bool*)ppOpen, (ImGuiWindowFlags)(0));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name, ref bool pOpen, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (bool* ppOpen = &pOpen)
-			{
-				byte ret = BeginNative(pStr0, (bool*)ppOpen, flags);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Begin(string name, ref bool pOpen)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (bool* ppOpen = &pOpen)
-			{
-				byte ret = BeginNative(pStr0, (bool*)ppOpen, (ImGuiWindowFlags)(0));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
 			}
 		}
 
@@ -1416,11 +958,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void EndNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[30])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[30])();
-			#endif
 		}
 
 		/// <summary>
@@ -1437,11 +975,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte BeginChildNative(byte* strId, Vector2 size, byte border, ImGuiWindowFlags flags)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte*, Vector2, byte, ImGuiWindowFlags, byte>)funcTable[31])(strId, size, border, flags);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<nint, Vector2, byte, ImGuiWindowFlags, byte>)funcTable[31])((nint)strId, size, border, flags);
-			#endif
 		}
 
 		/// <summary>
@@ -1519,11 +1053,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, Vector2 size, bool border, ImGuiWindowFlags flags)
+		public static bool BeginChild(ImU8String strId, Vector2 size, bool border, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, size, border ? (byte)1 : (byte)0, flags);
+				byte ret = BeginChildNative(strIdPtr, size, border ? (byte)1 : (byte)0, flags);
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1531,11 +1066,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, Vector2 size, bool border)
+		public static bool BeginChild(ImU8String strId, Vector2 size, bool border)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, size, border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
+				byte ret = BeginChildNative(strIdPtr, size, border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1543,11 +1079,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, Vector2 size)
+		public static bool BeginChild(ImU8String strId, Vector2 size)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, size, (byte)(0), (ImGuiWindowFlags)(0));
+				byte ret = BeginChildNative(strIdPtr, size, (byte)(0), (ImGuiWindowFlags)(0));
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1555,11 +1092,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId)
+		public static bool BeginChild(ImU8String strId)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), (byte)(0), (ImGuiWindowFlags)(0));
+				byte ret = BeginChildNative(strIdPtr, (Vector2)(new Vector2(0,0)), (byte)(0), (ImGuiWindowFlags)(0));
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1567,11 +1105,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, bool border)
+		public static bool BeginChild(ImU8String strId, bool border)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
+				byte ret = BeginChildNative(strIdPtr, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1579,11 +1118,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, Vector2 size, ImGuiWindowFlags flags)
+		public static bool BeginChild(ImU8String strId, Vector2 size, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, size, (byte)(0), flags);
+				byte ret = BeginChildNative(strIdPtr, size, (byte)(0), flags);
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1591,11 +1131,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, ImGuiWindowFlags flags)
+		public static bool BeginChild(ImU8String strId, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), (byte)(0), flags);
+				byte ret = BeginChildNative(strIdPtr, (Vector2)(new Vector2(0,0)), (byte)(0), flags);
+				strId.Dispose();
 				return ret != 0;
 			}
 		}
@@ -1603,349 +1144,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool BeginChild(ref byte strId, bool border, ImGuiWindowFlags flags)
+		public static bool BeginChild(ImU8String strId, bool border, ImGuiWindowFlags flags)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, flags);
+				byte ret = BeginChildNative(strIdPtr, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, flags);
+				strId.Dispose();
 				return ret != 0;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, Vector2 size, bool border, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, size, border ? (byte)1 : (byte)0, flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, Vector2 size, bool border)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, size, border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, Vector2 size)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, size, (byte)(0), (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), (byte)(0), (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, bool border)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, Vector2 size, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, size, (byte)(0), flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), (byte)(0), flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(ReadOnlySpan<byte> strId, bool border, ImGuiWindowFlags flags)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				byte ret = BeginChildNative((byte*)pstrId, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, flags);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, Vector2 size, bool border, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, size, border ? (byte)1 : (byte)0, flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, Vector2 size, bool border)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, size, border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, Vector2 size)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, size, (byte)(0), (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, (Vector2)(new Vector2(0,0)), (byte)(0), (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, bool border)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, (ImGuiWindowFlags)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, Vector2 size, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, size, (byte)(0), flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, (Vector2)(new Vector2(0,0)), (byte)(0), flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool BeginChild(string strId, bool border, ImGuiWindowFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = BeginChildNative(pStr0, (Vector2)(new Vector2(0,0)), border ? (byte)1 : (byte)0, flags);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
 		}
 
 		/// <summary>
@@ -1954,11 +1160,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte BeginChildNative(uint id, Vector2 size, byte border, ImGuiWindowFlags flags)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<uint, Vector2, byte, ImGuiWindowFlags, byte>)funcTable[32])(id, size, border, flags);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<uint, Vector2, byte, ImGuiWindowFlags, byte>)funcTable[32])(id, size, border, flags);
-			#endif
 		}
 
 		/// <summary>
@@ -2039,11 +1241,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void EndChildNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[33])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[33])();
-			#endif
 		}
 
 		/// <summary>
@@ -2060,11 +1258,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte IsWindowAppearingNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte>)funcTable[34])();
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<byte>)funcTable[34])();
-			#endif
 		}
 
 		/// <summary>
@@ -2082,11 +1276,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte IsWindowCollapsedNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<byte>)funcTable[35])();
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<byte>)funcTable[35])();
-			#endif
 		}
 
 		/// <summary>
@@ -2104,11 +1294,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte IsWindowFocusedNative(ImGuiFocusedFlags flags)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiFocusedFlags, byte>)funcTable[36])(flags);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<ImGuiFocusedFlags, byte>)funcTable[36])(flags);
-			#endif
 		}
 
 		/// <summary>
@@ -2135,11 +1321,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte IsWindowHoveredNative(ImGuiHoveredFlags flags)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiHoveredFlags, byte>)funcTable[37])(flags);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<ImGuiHoveredFlags, byte>)funcTable[37])(flags);
-			#endif
 		}
 
 		/// <summary>
@@ -2166,11 +1348,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImDrawList* GetWindowDrawListNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImDrawList*>)funcTable[38])();
-			#else
-			return (ImDrawList*)((delegate* unmanaged[Cdecl]<nint>)funcTable[38])();
-			#endif
 		}
 
 		/// <summary>
@@ -2188,11 +1366,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetWindowDpiScaleNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[39])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[39])();
-			#endif
 		}
 
 		/// <summary>
@@ -2210,11 +1384,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetWindowPosNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[40])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[40])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -2225,14 +1395,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetWindowPosNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetWindowPos(Vector2* pOut)
-		{
-			GetWindowPosNative(pOut);
 		}
 
 		/// <summary>
@@ -2252,11 +1414,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetWindowSizeNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[41])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[41])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -2267,14 +1425,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetWindowSizeNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetWindowSize(Vector2* pOut)
-		{
-			GetWindowSizeNative(pOut);
 		}
 
 		/// <summary>
@@ -2294,11 +1444,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetWindowWidthNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[42])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[42])();
-			#endif
 		}
 
 		/// <summary>
@@ -2316,11 +1462,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetWindowHeightNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[43])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[43])();
-			#endif
 		}
 
 		/// <summary>
@@ -2338,11 +1480,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImGuiViewport* GetWindowViewportNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiViewport*>)funcTable[44])();
-			#else
-			return (ImGuiViewport*)((delegate* unmanaged[Cdecl]<nint>)funcTable[44])();
-			#endif
 		}
 
 		/// <summary>
@@ -2360,11 +1498,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowPosNative(Vector2 pos, ImGuiCond cond, Vector2 pivot)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, Vector2, void>)funcTable[45])(pos, cond, pivot);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, Vector2, void>)funcTable[45])(pos, cond, pivot);
-			#endif
 		}
 
 		/// <summary>
@@ -2405,11 +1539,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowSizeNative(Vector2 size, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[46])(size, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[46])(size, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2434,11 +1564,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowSizeConstraintsNative(Vector2 sizeMin, Vector2 sizeMax, ImGuiSizeCallback customCallback, void* customCallbackData)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, Vector2, delegate*<ImGuiSizeCallbackData*, void>, void*, void>)funcTable[47])(sizeMin, sizeMax, (delegate*<ImGuiSizeCallbackData*, void>)Utils.GetFunctionPointerForDelegate(customCallback), customCallbackData);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, Vector2, nint, nint, void>)funcTable[47])(sizeMin, sizeMax, (nint)Utils.GetFunctionPointerForDelegate(customCallback), (nint)customCallbackData);
-			#endif
 		}
 
 		/// <summary>
@@ -2479,11 +1605,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowContentSizeNative(Vector2 size)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[48])(size);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[48])(size);
-			#endif
 		}
 
 		/// <summary>
@@ -2500,11 +1622,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowCollapsedNative(byte collapsed, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte, ImGuiCond, void>)funcTable[49])(collapsed, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<byte, ImGuiCond, void>)funcTable[49])(collapsed, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2529,11 +1647,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowFocusNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[50])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[50])();
-			#endif
 		}
 
 		/// <summary>
@@ -2550,11 +1664,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowBgAlphaNative(float alpha)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[51])(alpha);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[51])(alpha);
-			#endif
 		}
 
 		/// <summary>
@@ -2571,11 +1681,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextWindowViewportNative(uint viewportId)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<uint, void>)funcTable[52])(viewportId);
-			#else
-			((delegate* unmanaged[Cdecl]<uint, void>)funcTable[52])(viewportId);
-			#endif
 		}
 
 		/// <summary>
@@ -2592,11 +1698,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowPosNative(Vector2 pos, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[53])(pos, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[53])(pos, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2621,11 +1723,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowSizeNative(Vector2 size, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[54])(size, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, ImGuiCond, void>)funcTable[54])(size, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2650,11 +1748,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowCollapsedNative(byte collapsed, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte, ImGuiCond, void>)funcTable[55])(collapsed, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<byte, ImGuiCond, void>)funcTable[55])(collapsed, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2679,11 +1773,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowFocusNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[56])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[56])();
-			#endif
 		}
 
 		/// <summary>
@@ -2700,11 +1790,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowFontScaleNative(float scale)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[57])(scale);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[57])(scale);
-			#endif
 		}
 
 		/// <summary>
@@ -2721,11 +1807,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowPosNative(byte* name, Vector2 pos, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, Vector2, ImGuiCond, void>)funcTable[58])(name, pos, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, Vector2, ImGuiCond, void>)funcTable[58])((nint)name, pos, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2747,102 +1829,24 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowPos(ref byte name, Vector2 pos, ImGuiCond cond)
+		public static void SetWindowPos(ImU8String name, Vector2 pos, ImGuiCond cond)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowPosNative((byte*)pname, pos, cond);
+				SetWindowPosNative(namePtr, pos, cond);
+				name.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowPos(ref byte name, Vector2 pos)
+		public static void SetWindowPos(ImU8String name, Vector2 pos)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowPosNative((byte*)pname, pos, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowPos(ReadOnlySpan<byte> name, Vector2 pos, ImGuiCond cond)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowPosNative((byte*)pname, pos, cond);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowPos(ReadOnlySpan<byte> name, Vector2 pos)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowPosNative((byte*)pname, pos, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowPos(string name, Vector2 pos, ImGuiCond cond)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowPosNative(pStr0, pos, cond);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowPos(string name, Vector2 pos)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowPosNative(pStr0, pos, (ImGuiCond)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				SetWindowPosNative(namePtr, pos, (ImGuiCond)(0));
+				name.Dispose();
 			}
 		}
 
@@ -2852,11 +1856,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowSizeNative(byte* name, Vector2 size, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, Vector2, ImGuiCond, void>)funcTable[59])(name, size, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, Vector2, ImGuiCond, void>)funcTable[59])((nint)name, size, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -2878,102 +1878,24 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowSize(ref byte name, Vector2 size, ImGuiCond cond)
+		public static void SetWindowSize(ImU8String name, Vector2 size, ImGuiCond cond)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowSizeNative((byte*)pname, size, cond);
+				SetWindowSizeNative(namePtr, size, cond);
+				name.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowSize(ref byte name, Vector2 size)
+		public static void SetWindowSize(ImU8String name, Vector2 size)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowSizeNative((byte*)pname, size, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowSize(ReadOnlySpan<byte> name, Vector2 size, ImGuiCond cond)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowSizeNative((byte*)pname, size, cond);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowSize(ReadOnlySpan<byte> name, Vector2 size)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowSizeNative((byte*)pname, size, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowSize(string name, Vector2 size, ImGuiCond cond)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowSizeNative(pStr0, size, cond);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowSize(string name, Vector2 size)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowSizeNative(pStr0, size, (ImGuiCond)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				SetWindowSizeNative(namePtr, size, (ImGuiCond)(0));
+				name.Dispose();
 			}
 		}
 
@@ -2983,11 +1905,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowCollapsedNative(byte* name, byte collapsed, ImGuiCond cond)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, byte, ImGuiCond, void>)funcTable[60])(name, collapsed, cond);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, byte, ImGuiCond, void>)funcTable[60])((nint)name, collapsed, cond);
-			#endif
 		}
 
 		/// <summary>
@@ -3009,102 +1927,24 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowCollapsed(ref byte name, bool collapsed, ImGuiCond cond)
+		public static void SetWindowCollapsed(ImU8String name, bool collapsed, ImGuiCond cond)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowCollapsedNative((byte*)pname, collapsed ? (byte)1 : (byte)0, cond);
+				SetWindowCollapsedNative(namePtr, collapsed ? (byte)1 : (byte)0, cond);
+				name.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowCollapsed(ref byte name, bool collapsed)
+		public static void SetWindowCollapsed(ImU8String name, bool collapsed)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowCollapsedNative((byte*)pname, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowCollapsed(ReadOnlySpan<byte> name, bool collapsed, ImGuiCond cond)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowCollapsedNative((byte*)pname, collapsed ? (byte)1 : (byte)0, cond);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowCollapsed(ReadOnlySpan<byte> name, bool collapsed)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowCollapsedNative((byte*)pname, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowCollapsed(string name, bool collapsed, ImGuiCond cond)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowCollapsedNative(pStr0, collapsed ? (byte)1 : (byte)0, cond);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowCollapsed(string name, bool collapsed)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowCollapsedNative(pStr0, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				SetWindowCollapsedNative(namePtr, collapsed ? (byte)1 : (byte)0, (ImGuiCond)(0));
+				name.Dispose();
 			}
 		}
 
@@ -3114,11 +1954,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetWindowFocusNative(byte* name)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, void>)funcTable[61])(name);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[61])((nint)name);
-			#endif
 		}
 
 		/// <summary>
@@ -3132,51 +1968,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void SetWindowFocus(ref byte name)
+		public static void SetWindowFocus(ImU8String name)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				SetWindowFocusNative((byte*)pname);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowFocus(ReadOnlySpan<byte> name)
-		{
-			fixed (byte* pname = name)
-			{
-				SetWindowFocusNative((byte*)pname);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void SetWindowFocus(string name)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			SetWindowFocusNative(pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				SetWindowFocusNative(namePtr);
+				name.Dispose();
 			}
 		}
 
@@ -3186,11 +1983,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetContentRegionAvailNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[62])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[62])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -3201,14 +1994,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetContentRegionAvailNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetContentRegionAvail(Vector2* pOut)
-		{
-			GetContentRegionAvailNative(pOut);
 		}
 
 		/// <summary>
@@ -3228,11 +2013,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetContentRegionMaxNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[63])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[63])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -3243,14 +2024,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetContentRegionMaxNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetContentRegionMax(Vector2* pOut)
-		{
-			GetContentRegionMaxNative(pOut);
 		}
 
 		/// <summary>
@@ -3270,11 +2043,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetWindowContentRegionMinNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[64])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[64])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -3285,14 +2054,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetWindowContentRegionMinNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetWindowContentRegionMin(Vector2* pOut)
-		{
-			GetWindowContentRegionMinNative(pOut);
 		}
 
 		/// <summary>
@@ -3312,11 +2073,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetWindowContentRegionMaxNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[65])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[65])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -3327,14 +2084,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetWindowContentRegionMaxNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetWindowContentRegionMax(Vector2* pOut)
-		{
-			GetWindowContentRegionMaxNative(pOut);
 		}
 
 		/// <summary>
@@ -3354,11 +2103,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetScrollXNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[66])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[66])();
-			#endif
 		}
 
 		/// <summary>
@@ -3376,11 +2121,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetScrollYNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[67])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[67])();
-			#endif
 		}
 
 		/// <summary>
@@ -3398,11 +2139,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollXNative(float scrollX)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[68])(scrollX);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[68])(scrollX);
-			#endif
 		}
 
 		/// <summary>
@@ -3419,11 +2156,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollYNative(float scrollY)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[69])(scrollY);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[69])(scrollY);
-			#endif
 		}
 
 		/// <summary>
@@ -3440,11 +2173,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetScrollMaxXNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[70])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[70])();
-			#endif
 		}
 
 		/// <summary>
@@ -3462,11 +2191,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetScrollMaxYNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[71])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[71])();
-			#endif
 		}
 
 		/// <summary>
@@ -3484,11 +2209,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollHereXNative(float centerXRatio)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[72])(centerXRatio);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[72])(centerXRatio);
-			#endif
 		}
 
 		/// <summary>
@@ -3513,11 +2234,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollHereYNative(float centerYRatio)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[73])(centerYRatio);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[73])(centerYRatio);
-			#endif
 		}
 
 		/// <summary>
@@ -3542,11 +2259,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollFromPosXNative(float localX, float centerXRatio)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[74])(localX, centerXRatio);
-			#else
-			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[74])(localX, centerXRatio);
-			#endif
 		}
 
 		/// <summary>
@@ -3571,11 +2284,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetScrollFromPosYNative(float localY, float centerYRatio)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[75])(localY, centerYRatio);
-			#else
-			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[75])(localY, centerYRatio);
-			#endif
 		}
 
 		/// <summary>
@@ -3600,11 +2309,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushFontNative(ImFont* font)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImFont*, void>)funcTable[76])(font);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[76])((nint)font);
-			#endif
 		}
 
 		/// <summary>
@@ -3632,11 +2337,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopFontNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[77])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[77])();
-			#endif
 		}
 
 		/// <summary>
@@ -3653,11 +2354,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushStyleColorNative(ImGuiCol idx, uint col)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiCol, uint, void>)funcTable[78])(idx, col);
-			#else
-			((delegate* unmanaged[Cdecl]<ImGuiCol, uint, void>)funcTable[78])(idx, col);
-			#endif
 		}
 
 		/// <summary>
@@ -3674,11 +2371,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushStyleColorNative(ImGuiCol idx, Vector4 col)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiCol, Vector4, void>)funcTable[79])(idx, col);
-			#else
-			((delegate* unmanaged[Cdecl]<ImGuiCol, Vector4, void>)funcTable[79])(idx, col);
-			#endif
 		}
 
 		/// <summary>
@@ -3695,11 +2388,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopStyleColorNative(int count)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<int, void>)funcTable[80])(count);
-			#else
-			((delegate* unmanaged[Cdecl]<int, void>)funcTable[80])(count);
-			#endif
 		}
 
 		/// <summary>
@@ -3724,11 +2413,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushStyleVarNative(ImGuiStyleVar idx, float val)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyleVar, float, void>)funcTable[81])(idx, val);
-			#else
-			((delegate* unmanaged[Cdecl]<ImGuiStyleVar, float, void>)funcTable[81])(idx, val);
-			#endif
 		}
 
 		/// <summary>
@@ -3745,11 +2430,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushStyleVarNative(ImGuiStyleVar idx, Vector2 val)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<ImGuiStyleVar, Vector2, void>)funcTable[82])(idx, val);
-			#else
-			((delegate* unmanaged[Cdecl]<ImGuiStyleVar, Vector2, void>)funcTable[82])(idx, val);
-			#endif
 		}
 
 		/// <summary>
@@ -3766,11 +2447,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopStyleVarNative(int count)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<int, void>)funcTable[83])(count);
-			#else
-			((delegate* unmanaged[Cdecl]<int, void>)funcTable[83])(count);
-			#endif
 		}
 
 		/// <summary>
@@ -3795,11 +2472,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushAllowKeyboardFocusNative(byte allowKeyboardFocus)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[84])(allowKeyboardFocus);
-			#else
-			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[84])(allowKeyboardFocus);
-			#endif
 		}
 
 		/// <summary>
@@ -3816,11 +2489,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopAllowKeyboardFocusNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[85])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[85])();
-			#endif
 		}
 
 		/// <summary>
@@ -3837,11 +2506,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushButtonRepeatNative(byte repeat)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[86])(repeat);
-			#else
-			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[86])(repeat);
-			#endif
 		}
 
 		/// <summary>
@@ -3858,11 +2523,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopButtonRepeatNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[87])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[87])();
-			#endif
 		}
 
 		/// <summary>
@@ -3879,11 +2540,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushItemWidthNative(float itemWidth)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[88])(itemWidth);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[88])(itemWidth);
-			#endif
 		}
 
 		/// <summary>
@@ -3900,11 +2557,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopItemWidthNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[89])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[89])();
-			#endif
 		}
 
 		/// <summary>
@@ -3921,11 +2574,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetNextItemWidthNative(float itemWidth)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[90])(itemWidth);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[90])(itemWidth);
-			#endif
 		}
 
 		/// <summary>
@@ -3942,11 +2591,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float CalcItemWidthNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[91])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[91])();
-			#endif
 		}
 
 		/// <summary>
@@ -3964,11 +2609,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushTextWrapPosNative(float wrapLocalPosX)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[92])(wrapLocalPosX);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[92])(wrapLocalPosX);
-			#endif
 		}
 
 		/// <summary>
@@ -3993,11 +2634,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PopTextWrapPosNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[93])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[93])();
-			#endif
 		}
 
 		/// <summary>
@@ -4014,11 +2651,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImFont* GetFontNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImFont*>)funcTable[94])();
-			#else
-			return (ImFont*)((delegate* unmanaged[Cdecl]<nint>)funcTable[94])();
-			#endif
 		}
 
 		/// <summary>
@@ -4036,11 +2669,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetFontSizeNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[95])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[95])();
-			#endif
 		}
 
 		/// <summary>
@@ -4058,11 +2687,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static ImTextureID GetFontTexIdWhitePixelNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImTextureID>)funcTable[96])();
-			#else
-			return (ImTextureID)((delegate* unmanaged[Cdecl]<ImTextureID>)funcTable[96])();
-			#endif
 		}
 
 		/// <summary>
@@ -4080,11 +2705,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetFontTexUvWhitePixelNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[97])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[97])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -4095,14 +2716,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetFontTexUvWhitePixelNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetFontTexUvWhitePixel(Vector2* pOut)
-		{
-			GetFontTexUvWhitePixelNative(pOut);
 		}
 
 		/// <summary>
@@ -4122,11 +2735,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static uint GetColorU32Native(ImGuiCol idx, float alphaMul)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiCol, float, uint>)funcTable[98])(idx, alphaMul);
-			#else
-			return (uint)((delegate* unmanaged[Cdecl]<ImGuiCol, float, uint>)funcTable[98])(idx, alphaMul);
-			#endif
 		}
 
 		/// <summary>
@@ -4153,11 +2762,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static uint GetColorU32Native(Vector4 col)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<Vector4, uint>)funcTable[99])(col);
-			#else
-			return (uint)((delegate* unmanaged[Cdecl]<Vector4, uint>)funcTable[99])(col);
-			#endif
 		}
 
 		/// <summary>
@@ -4175,11 +2780,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static uint GetColorU32Native(uint col)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<uint, uint>)funcTable[100])(col);
-			#else
-			return (uint)((delegate* unmanaged[Cdecl]<uint, uint>)funcTable[100])(col);
-			#endif
 		}
 
 		/// <summary>
@@ -4197,11 +2798,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Vector4* GetStyleColorVec4Native(ImGuiCol idx)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuiCol, Vector4*>)funcTable[101])(idx);
-			#else
-			return (Vector4*)((delegate* unmanaged[Cdecl]<ImGuiCol, nint>)funcTable[101])(idx);
-			#endif
 		}
 
 		/// <summary>
@@ -4219,11 +2816,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SeparatorNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[102])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[102])();
-			#endif
 		}
 
 		/// <summary>
@@ -4240,11 +2833,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SameLineNative(float offsetFromStartX, float spacing)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[103])(offsetFromStartX, spacing);
-			#else
-			((delegate* unmanaged[Cdecl]<float, float, void>)funcTable[103])(offsetFromStartX, spacing);
-			#endif
 		}
 
 		/// <summary>
@@ -4277,11 +2866,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void NewLineNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[104])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[104])();
-			#endif
 		}
 
 		/// <summary>
@@ -4298,11 +2883,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SpacingNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[105])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[105])();
-			#endif
 		}
 
 		/// <summary>
@@ -4319,11 +2900,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void DummyNative(Vector2 size)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[106])(size);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[106])(size);
-			#endif
 		}
 
 		/// <summary>
@@ -4340,11 +2917,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void IndentNative(float indentW)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[107])(indentW);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[107])(indentW);
-			#endif
 		}
 
 		/// <summary>
@@ -4369,11 +2942,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void UnindentNative(float indentW)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[108])(indentW);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[108])(indentW);
-			#endif
 		}
 
 		/// <summary>
@@ -4398,11 +2967,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void BeginGroupNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[109])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[109])();
-			#endif
 		}
 
 		/// <summary>
@@ -4419,11 +2984,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void EndGroupNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[110])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[110])();
-			#endif
 		}
 
 		/// <summary>
@@ -4440,11 +3001,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetCursorPosNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[111])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[111])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -4455,14 +3012,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetCursorPosNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetCursorPos(Vector2* pOut)
-		{
-			GetCursorPosNative(pOut);
 		}
 
 		/// <summary>
@@ -4482,11 +3031,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetCursorPosXNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[112])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[112])();
-			#endif
 		}
 
 		/// <summary>
@@ -4504,11 +3049,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetCursorPosYNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[113])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[113])();
-			#endif
 		}
 
 		/// <summary>
@@ -4526,11 +3067,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetCursorPosNative(Vector2 localPos)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[114])(localPos);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[114])(localPos);
-			#endif
 		}
 
 		/// <summary>
@@ -4547,11 +3084,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetCursorPosXNative(float localX)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[115])(localX);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[115])(localX);
-			#endif
 		}
 
 		/// <summary>
@@ -4568,11 +3101,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetCursorPosYNative(float localY)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[116])(localY);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[116])(localY);
-			#endif
 		}
 
 		/// <summary>
@@ -4589,11 +3118,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetCursorStartPosNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[117])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[117])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -4604,14 +3129,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetCursorStartPosNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetCursorStartPos(Vector2* pOut)
-		{
-			GetCursorStartPosNative(pOut);
 		}
 
 		/// <summary>
@@ -4631,11 +3148,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void GetCursorScreenPosNative(Vector2* pOut)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2*, void>)funcTable[118])(pOut);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[118])((nint)pOut);
-			#endif
 		}
 
 		/// <summary>
@@ -4646,14 +3159,6 @@ namespace Dalamud.Bindings.ImGui
 			Vector2 ret;
 			GetCursorScreenPosNative(&ret);
 			return ret;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void GetCursorScreenPos(Vector2* pOut)
-		{
-			GetCursorScreenPosNative(pOut);
 		}
 
 		/// <summary>
@@ -4673,11 +3178,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetCursorScreenPosNative(Vector2 pos)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[119])(pos);
-			#else
-			((delegate* unmanaged[Cdecl]<Vector2, void>)funcTable[119])(pos);
-			#endif
 		}
 
 		/// <summary>
@@ -4694,11 +3195,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void AlignTextToFramePaddingNative()
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<void>)funcTable[120])();
-			#else
-			((delegate* unmanaged[Cdecl]<void>)funcTable[120])();
-			#endif
 		}
 
 		/// <summary>
@@ -4715,11 +3212,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetTextLineHeightNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[121])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[121])();
-			#endif
 		}
 
 		/// <summary>
@@ -4737,11 +3230,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetTextLineHeightWithSpacingNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[122])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[122])();
-			#endif
 		}
 
 		/// <summary>
@@ -4759,11 +3248,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetFrameHeightNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[123])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[123])();
-			#endif
 		}
 
 		/// <summary>
@@ -4781,11 +3266,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static float GetFrameHeightWithSpacingNative()
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<float>)funcTable[124])();
-			#else
-			return (float)((delegate* unmanaged[Cdecl]<float>)funcTable[124])();
-			#endif
 		}
 
 		/// <summary>
@@ -4803,11 +3284,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushIDNative(byte* strId)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, void>)funcTable[125])(strId);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, void>)funcTable[125])((nint)strId);
-			#endif
 		}
 
 		/// <summary>
@@ -4821,51 +3298,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void PushID(ref byte strId)
+		public static void PushID(ImU8String strId)
 		{
-			fixed (byte* pstrId = &strId)
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				PushIDNative((byte*)pstrId);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(ReadOnlySpan<byte> strId)
-		{
-			fixed (byte* pstrId = strId)
-			{
-				PushIDNative((byte*)pstrId);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(string strId)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			PushIDNative(pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				PushIDNative(strIdPtr);
+				strId.Dispose();
 			}
 		}
 
@@ -4875,11 +3313,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void PushIDNative(byte* strIdBegin, byte* strIdEnd)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)funcTable[126])(strIdBegin, strIdEnd);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, nint, void>)funcTable[126])((nint)strIdBegin, (nint)strIdEnd);
-			#endif
 		}
 
 		/// <summary>
@@ -4893,115 +3327,39 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void PushID(ref byte strIdBegin, byte* strIdEnd)
+		public static void PushID(ImU8String strIdBegin, byte* strIdEnd)
 		{
-			fixed (byte* pstrIdBegin = &strIdBegin)
+			fixed (byte* strIdBeginPtr = &strIdBegin.GetPinnableNullTerminatedReference())
 			{
-				PushIDNative((byte*)pstrIdBegin, strIdEnd);
+				PushIDNative(strIdBeginPtr, strIdEnd);
+				strIdBegin.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void PushID(ReadOnlySpan<byte> strIdBegin, byte* strIdEnd)
+		public static void PushID(byte* strIdBegin, ImU8String strIdEnd)
 		{
-			fixed (byte* pstrIdBegin = strIdBegin)
+			fixed (byte* strIdEndPtr = &strIdEnd.GetPinnableNullTerminatedReference())
 			{
-				PushIDNative((byte*)pstrIdBegin, strIdEnd);
+				PushIDNative(strIdBegin, strIdEndPtr);
+				strIdEnd.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void PushID(string strIdBegin, byte* strIdEnd)
+		public static void PushID(ImU8String strIdBegin, ImU8String strIdEnd)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strIdBegin != null)
+			fixed (byte* strIdBeginPtr = &strIdBegin.GetPinnableNullTerminatedReference())
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(strIdBegin);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (byte* strIdEndPtr = &strIdEnd.GetPinnableNullTerminatedReference())
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strIdBegin, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			PushIDNative(pStr0, strIdEnd);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(byte* strIdBegin, ref byte strIdEnd)
-		{
-			fixed (byte* pstrIdEnd = &strIdEnd)
-			{
-				PushIDNative(strIdBegin, (byte*)pstrIdEnd);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(byte* strIdBegin, ReadOnlySpan<byte> strIdEnd)
-		{
-			fixed (byte* pstrIdEnd = strIdEnd)
-			{
-				PushIDNative(strIdBegin, (byte*)pstrIdEnd);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(byte* strIdBegin, string strIdEnd)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (strIdEnd != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(strIdEnd);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(strIdEnd, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			PushIDNative(strIdBegin, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static void PushID(ref byte strIdBegin, ref byte strIdEnd)
-		{
-			fixed (byte* pstrIdBegin = &strIdBegin)
-			{
-				fixed (byte* pstrIdEnd = &strIdEnd)
-				{
-					PushIDNative((byte*)pstrIdBegin, (byte*)pstrIdEnd);
+					PushIDNative(strIdBeginPtr, strIdEndPtr);
+					strIdEnd.Dispose();
+					strIdBegin.Dispose();
 				}
 			}
 		}
@@ -5009,14 +3367,1651 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static void PushID(ReadOnlySpan<byte> strIdBegin, ReadOnlySpan<byte> strIdEnd)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void PushIDNative(void* ptrId)
 		{
-			fixed (byte* pstrIdBegin = strIdBegin)
+			((delegate* unmanaged[Cdecl]<void*, void>)funcTable[127])(ptrId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void PushID(void* ptrId)
+		{
+			PushIDNative(ptrId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void PushIDNative(int intId)
+		{
+			((delegate* unmanaged[Cdecl]<int, void>)funcTable[128])(intId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void PushID(int intId)
+		{
+			PushIDNative(intId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void PopIDNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[129])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void PopID()
+		{
+			PopIDNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(byte* strId)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, uint>)funcTable[130])(strId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(byte* strId)
+		{
+			uint ret = GetIDNative(strId);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImU8String strId)
+		{
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pstrIdEnd = strIdEnd)
+				uint ret = GetIDNative(strIdPtr);
+				strId.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(byte* strIdBegin, byte* strIdEnd)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, uint>)funcTable[131])(strIdBegin, strIdEnd);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(byte* strIdBegin, byte* strIdEnd)
+		{
+			uint ret = GetIDNative(strIdBegin, strIdEnd);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImU8String strIdBegin, byte* strIdEnd)
+		{
+			fixed (byte* strIdBeginPtr = &strIdBegin.GetPinnableNullTerminatedReference())
+			{
+				uint ret = GetIDNative(strIdBeginPtr, strIdEnd);
+				strIdBegin.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(byte* strIdBegin, ImU8String strIdEnd)
+		{
+			fixed (byte* strIdEndPtr = &strIdEnd.GetPinnableNullTerminatedReference())
+			{
+				uint ret = GetIDNative(strIdBegin, strIdEndPtr);
+				strIdEnd.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(ImU8String strIdBegin, ImU8String strIdEnd)
+		{
+			fixed (byte* strIdBeginPtr = &strIdBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* strIdEndPtr = &strIdEnd.GetPinnableNullTerminatedReference())
 				{
-					PushIDNative((byte*)pstrIdBegin, (byte*)pstrIdEnd);
+					uint ret = GetIDNative(strIdBeginPtr, strIdEndPtr);
+					strIdEnd.Dispose();
+					strIdBegin.Dispose();
+					return ret;
 				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static uint GetIDNative(void* ptrId)
+		{
+			return ((delegate* unmanaged[Cdecl]<void*, uint>)funcTable[132])(ptrId);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static uint GetID(void* ptrId)
+		{
+			uint ret = GetIDNative(ptrId);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void TextUnformattedNative(byte* text, byte* textEnd)
+		{
+			((delegate* unmanaged[Cdecl]<byte*, byte*, void>)funcTable[133])(text, textEnd);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(byte* text, byte* textEnd)
+		{
+			TextUnformattedNative(text, textEnd);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(byte* text)
+		{
+			TextUnformattedNative(text, (byte*)(default));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(ImU8String text, byte* textEnd)
+		{
+			fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
+			{
+				TextUnformattedNative(textPtr, textEnd);
+				text.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(ImU8String text)
+		{
+			fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
+			{
+				TextUnformattedNative(textPtr, (byte*)(default));
+				text.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(byte* text, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				TextUnformattedNative(text, textEndPtr);
+				textEnd.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void TextUnformatted(ImU8String text, ImU8String textEnd)
+		{
+			fixed (byte* textPtr = &text.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					TextUnformattedNative(textPtr, textEndPtr);
+					textEnd.Dispose();
+					text.Dispose();
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ButtonNative(byte* label, Vector2 size)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, Vector2, byte>)funcTable[134])(label, size);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Button(byte* label, Vector2 size)
+		{
+			byte ret = ButtonNative(label, size);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Button(byte* label)
+		{
+			byte ret = ButtonNative(label, (Vector2)(new Vector2(0,0)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Button(ImU8String label, Vector2 size)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ButtonNative(labelPtr, size);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Button(ImU8String label)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ButtonNative(labelPtr, (Vector2)(new Vector2(0,0)));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte SmallButtonNative(byte* label)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte>)funcTable[135])(label);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool SmallButton(byte* label)
+		{
+			byte ret = SmallButtonNative(label);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool SmallButton(ImU8String label)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = SmallButtonNative(labelPtr);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte InvisibleButtonNative(byte* strId, Vector2 size, ImGuiButtonFlags flags)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, Vector2, ImGuiButtonFlags, byte>)funcTable[136])(strId, size, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InvisibleButton(byte* strId, Vector2 size, ImGuiButtonFlags flags)
+		{
+			byte ret = InvisibleButtonNative(strId, size, flags);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InvisibleButton(byte* strId, Vector2 size)
+		{
+			byte ret = InvisibleButtonNative(strId, size, (ImGuiButtonFlags)(0));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InvisibleButton(ImU8String strId, Vector2 size, ImGuiButtonFlags flags)
+		{
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InvisibleButtonNative(strIdPtr, size, flags);
+				strId.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InvisibleButton(ImU8String strId, Vector2 size)
+		{
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InvisibleButtonNative(strIdPtr, size, (ImGuiButtonFlags)(0));
+				strId.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ArrowButtonNative(byte* strId, ImGuiDir dir)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, ImGuiDir, byte>)funcTable[137])(strId, dir);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ArrowButton(byte* strId, ImGuiDir dir)
+		{
+			byte ret = ArrowButtonNative(strId, dir);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ArrowButton(ImU8String strId, ImGuiDir dir)
+		{
+			fixed (byte* strIdPtr = &strId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ArrowButtonNative(strIdPtr, dir);
+				strId.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ImageNative(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 tintCol, Vector4 borderCol)
+		{
+			((delegate* unmanaged[Cdecl]<ImTextureID, Vector2, Vector2, Vector2, Vector4, Vector4, void>)funcTable[138])(userTextureId, size, uv0, uv1, tintCol, borderCol);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 tintCol, Vector4 borderCol)
+		{
+			ImageNative(userTextureId, size, uv0, uv1, tintCol, borderCol);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 tintCol)
+		{
+			ImageNative(userTextureId, size, uv0, uv1, tintCol, (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1)
+		{
+			ImageNative(userTextureId, size, uv0, uv1, (Vector4)(new Vector4(1,1,1,1)), (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0)
+		{
+			ImageNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), (Vector4)(new Vector4(1,1,1,1)), (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size)
+		{
+			ImageNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), (Vector4)(new Vector4(1,1,1,1)), (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector4 tintCol)
+		{
+			ImageNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), tintCol, (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector4 tintCol)
+		{
+			ImageNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), tintCol, (Vector4)(new Vector4(0,0,0,0)));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector4 tintCol, Vector4 borderCol)
+		{
+			ImageNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), tintCol, borderCol);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Image(ImTextureID userTextureId, Vector2 size, Vector4 tintCol, Vector4 borderCol)
+		{
+			ImageNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), tintCol, borderCol);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ImageButtonNative(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, int framePadding, Vector4 bgCol, Vector4 tintCol)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImTextureID, Vector2, Vector2, Vector2, int, Vector4, Vector4, byte>)funcTable[139])(userTextureId, size, uv0, uv1, framePadding, bgCol, tintCol);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, int framePadding, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, framePadding, bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, int framePadding, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, framePadding, bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, int framePadding)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, framePadding, (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, (int)(-1), (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), (int)(-1), (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), (int)(-1), (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, int framePadding)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), framePadding, (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, int framePadding)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), framePadding, (Vector4)(new Vector4(0,0,0,0)), (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, (int)(-1), bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), (int)(-1), bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), (int)(-1), bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, int framePadding, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), framePadding, bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, int framePadding, Vector4 bgCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), framePadding, bgCol, (Vector4)(new Vector4(1,1,1,1)));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, uv1, (int)(-1), bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), (int)(-1), bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), (int)(-1), bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, Vector2 uv0, int framePadding, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, uv0, (Vector2)(new Vector2(1,1)), framePadding, bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool ImageButton(ImTextureID userTextureId, Vector2 size, int framePadding, Vector4 bgCol, Vector4 tintCol)
+		{
+			byte ret = ImageButtonNative(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), framePadding, bgCol, tintCol);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte CheckboxNative(byte* label, bool* v)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, bool*, byte>)funcTable[140])(label, v);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Checkbox(byte* label, bool* v)
+		{
+			byte ret = CheckboxNative(label, v);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Checkbox(ImU8String label, bool* v)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = CheckboxNative(labelPtr, v);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Checkbox(byte* label, ref bool v)
+		{
+			fixed (bool* pv = &v)
+			{
+				byte ret = CheckboxNative(label, (bool*)pv);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Checkbox(ImU8String label, ref bool v)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (bool* pv = &v)
+				{
+					byte ret = CheckboxNative(labelPtr, (bool*)pv);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte CheckboxFlagsNative(byte* label, int* flags, int flagsValue)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int*, int, byte>)funcTable[141])(label, flags, flagsValue);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(byte* label, int* flags, int flagsValue)
+		{
+			byte ret = CheckboxFlagsNative(label, flags, flagsValue);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(ImU8String label, int* flags, int flagsValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = CheckboxFlagsNative(labelPtr, flags, flagsValue);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(byte* label, ref int flags, int flagsValue)
+		{
+			fixed (int* pflags = &flags)
+			{
+				byte ret = CheckboxFlagsNative(label, (int*)pflags, flagsValue);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(ImU8String label, ref int flags, int flagsValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pflags = &flags)
+				{
+					byte ret = CheckboxFlagsNative(labelPtr, (int*)pflags, flagsValue);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte CheckboxFlagsNative(byte* label, uint* flags, uint flagsValue)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, uint*, uint, byte>)funcTable[142])(label, flags, flagsValue);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(byte* label, uint* flags, uint flagsValue)
+		{
+			byte ret = CheckboxFlagsNative(label, flags, flagsValue);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(ImU8String label, uint* flags, uint flagsValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = CheckboxFlagsNative(labelPtr, flags, flagsValue);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(byte* label, ref uint flags, uint flagsValue)
+		{
+			fixed (uint* pflags = &flags)
+			{
+				byte ret = CheckboxFlagsNative(label, (uint*)pflags, flagsValue);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool CheckboxFlags(ImU8String label, ref uint flags, uint flagsValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (uint* pflags = &flags)
+				{
+					byte ret = CheckboxFlagsNative(labelPtr, (uint*)pflags, flagsValue);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte RadioButtonNative(byte* label, byte active)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte, byte>)funcTable[143])(label, active);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(byte* label, bool active)
+		{
+			byte ret = RadioButtonNative(label, active ? (byte)1 : (byte)0);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(ImU8String label, bool active)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = RadioButtonNative(labelPtr, active ? (byte)1 : (byte)0);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte RadioButtonNative(byte* label, int* v, int vButton)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int*, int, byte>)funcTable[144])(label, v, vButton);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(byte* label, int* v, int vButton)
+		{
+			byte ret = RadioButtonNative(label, v, vButton);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(ImU8String label, int* v, int vButton)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = RadioButtonNative(labelPtr, v, vButton);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(byte* label, ref int v, int vButton)
+		{
+			fixed (int* pv = &v)
+			{
+				byte ret = RadioButtonNative(label, (int*)pv, vButton);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool RadioButton(ImU8String label, ref int v, int vButton)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pv = &v)
+				{
+					byte ret = RadioButtonNative(labelPtr, (int*)pv, vButton);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void ProgressBarNative(float fraction, Vector2 sizeArg, byte* overlay)
+		{
+			((delegate* unmanaged[Cdecl]<float, Vector2, byte*, void>)funcTable[145])(fraction, sizeArg, overlay);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction, Vector2 sizeArg, byte* overlay)
+		{
+			ProgressBarNative(fraction, sizeArg, overlay);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction, Vector2 sizeArg)
+		{
+			ProgressBarNative(fraction, sizeArg, (byte*)(default));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction)
+		{
+			ProgressBarNative(fraction, (Vector2)(new Vector2(-float.MinValue,0)), (byte*)(default));
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction, byte* overlay)
+		{
+			ProgressBarNative(fraction, (Vector2)(new Vector2(-float.MinValue,0)), overlay);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction, Vector2 sizeArg, ImU8String overlay)
+		{
+			fixed (byte* overlayPtr = &overlay.GetPinnableNullTerminatedReference())
+			{
+				ProgressBarNative(fraction, sizeArg, overlayPtr);
+				overlay.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void ProgressBar(float fraction, ImU8String overlay)
+		{
+			fixed (byte* overlayPtr = &overlay.GetPinnableNullTerminatedReference())
+			{
+				ProgressBarNative(fraction, (Vector2)(new Vector2(-float.MinValue,0)), overlayPtr);
+				overlay.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void BulletNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[146])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void Bullet()
+		{
+			BulletNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte BeginComboNative(byte* label, byte* previewValue, ImGuiComboFlags flags)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, ImGuiComboFlags, byte>)funcTable[147])(label, previewValue, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(byte* label, byte* previewValue, ImGuiComboFlags flags)
+		{
+			byte ret = BeginComboNative(label, previewValue, flags);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(byte* label, byte* previewValue)
+		{
+			byte ret = BeginComboNative(label, previewValue, (ImGuiComboFlags)(0));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(ImU8String label, byte* previewValue, ImGuiComboFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = BeginComboNative(labelPtr, previewValue, flags);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(ImU8String label, byte* previewValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = BeginComboNative(labelPtr, previewValue, (ImGuiComboFlags)(0));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(byte* label, ImU8String previewValue, ImGuiComboFlags flags)
+		{
+			fixed (byte* previewValuePtr = &previewValue.GetPinnableNullTerminatedReference())
+			{
+				byte ret = BeginComboNative(label, previewValuePtr, flags);
+				previewValue.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(byte* label, ImU8String previewValue)
+		{
+			fixed (byte* previewValuePtr = &previewValue.GetPinnableNullTerminatedReference())
+			{
+				byte ret = BeginComboNative(label, previewValuePtr, (ImGuiComboFlags)(0));
+				previewValue.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(ImU8String label, ImU8String previewValue, ImGuiComboFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* previewValuePtr = &previewValue.GetPinnableNullTerminatedReference())
+				{
+					byte ret = BeginComboNative(labelPtr, previewValuePtr, flags);
+					previewValue.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool BeginCombo(ImU8String label, ImU8String previewValue)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* previewValuePtr = &previewValue.GetPinnableNullTerminatedReference())
+				{
+					byte ret = BeginComboNative(labelPtr, previewValuePtr, (ImGuiComboFlags)(0));
+					previewValue.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static void EndComboNative()
+		{
+			((delegate* unmanaged[Cdecl]<void>)funcTable[148])();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static void EndCombo()
+		{
+			EndComboNative();
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ComboNative(byte* label, int* currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int*, byte**, int, int, byte>)funcTable[149])(label, currentItem, items, itemsCount, popupMaxHeightInItems);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
+		{
+			byte ret = ComboNative(label, currentItem, items, itemsCount, popupMaxHeightInItems);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, byte** items, int itemsCount)
+		{
+			byte ret = ComboNative(label, currentItem, items, itemsCount, (int)(-1));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(labelPtr, currentItem, items, itemsCount, popupMaxHeightInItems);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, byte** items, int itemsCount)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(labelPtr, currentItem, items, itemsCount, (int)(-1));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				byte ret = ComboNative(label, (int*)pcurrentItem, items, itemsCount, popupMaxHeightInItems);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, byte** items, int itemsCount)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				byte ret = ComboNative(label, (int*)pcurrentItem, items, itemsCount, (int)(-1));
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					byte ret = ComboNative(labelPtr, (int*)pcurrentItem, items, itemsCount, popupMaxHeightInItems);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, byte** items, int itemsCount)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					byte ret = ComboNative(labelPtr, (int*)pcurrentItem, items, itemsCount, (int)(-1));
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, string[] items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (string* pitems = items)
+			{
+				byte ret = ComboNative(label, currentItem, (byte**)pitems, itemsCount, popupMaxHeightInItems);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, string[] items, int itemsCount)
+		{
+			fixed (string* pitems = items)
+			{
+				byte ret = ComboNative(label, currentItem, (byte**)pitems, itemsCount, (int)(-1));
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, string[] items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (string* pitems = items)
+				{
+					byte ret = ComboNative(labelPtr, currentItem, (byte**)pitems, itemsCount, popupMaxHeightInItems);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, string[] items, int itemsCount)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (string* pitems = items)
+				{
+					byte ret = ComboNative(labelPtr, currentItem, (byte**)pitems, itemsCount, (int)(-1));
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, string[] items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				fixed (string* pitems = items)
+				{
+					byte ret = ComboNative(label, (int*)pcurrentItem, (byte**)pitems, itemsCount, popupMaxHeightInItems);
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, string[] items, int itemsCount)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				fixed (string* pitems = items)
+				{
+					byte ret = ComboNative(label, (int*)pcurrentItem, (byte**)pitems, itemsCount, (int)(-1));
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, string[] items, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					fixed (string* pitems = items)
+					{
+						byte ret = ComboNative(labelPtr, (int*)pcurrentItem, (byte**)pitems, itemsCount, popupMaxHeightInItems);
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, string[] items, int itemsCount)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					fixed (string* pitems = items)
+					{
+						byte ret = ComboNative(labelPtr, (int*)pcurrentItem, (byte**)pitems, itemsCount, (int)(-1));
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ComboNative(byte* label, int* currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int*, byte*, int, byte>)funcTable[150])(label, currentItem, itemsSeparatedByZeros, popupMaxHeightInItems);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			byte ret = ComboNative(label, currentItem, itemsSeparatedByZeros, popupMaxHeightInItems);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, byte* itemsSeparatedByZeros)
+		{
+			byte ret = ComboNative(label, currentItem, itemsSeparatedByZeros, (int)(-1));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(labelPtr, currentItem, itemsSeparatedByZeros, popupMaxHeightInItems);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, byte* itemsSeparatedByZeros)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(labelPtr, currentItem, itemsSeparatedByZeros, (int)(-1));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				byte ret = ComboNative(label, (int*)pcurrentItem, itemsSeparatedByZeros, popupMaxHeightInItems);
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, byte* itemsSeparatedByZeros)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				byte ret = ComboNative(label, (int*)pcurrentItem, itemsSeparatedByZeros, (int)(-1));
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					byte ret = ComboNative(labelPtr, (int*)pcurrentItem, itemsSeparatedByZeros, popupMaxHeightInItems);
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, byte* itemsSeparatedByZeros)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					byte ret = ComboNative(labelPtr, (int*)pcurrentItem, itemsSeparatedByZeros, (int)(-1));
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, ImU8String itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(label, currentItem, itemsSeparatedByZerosPtr, popupMaxHeightInItems);
+				itemsSeparatedByZeros.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, ImU8String itemsSeparatedByZeros)
+		{
+			fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(label, currentItem, itemsSeparatedByZerosPtr, (int)(-1));
+				itemsSeparatedByZeros.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, ImU8String itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+				{
+					byte ret = ComboNative(labelPtr, currentItem, itemsSeparatedByZerosPtr, popupMaxHeightInItems);
+					itemsSeparatedByZeros.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, ImU8String itemsSeparatedByZeros)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+				{
+					byte ret = ComboNative(labelPtr, currentItem, itemsSeparatedByZerosPtr, (int)(-1));
+					itemsSeparatedByZeros.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, ImU8String itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+				{
+					byte ret = ComboNative(label, (int*)pcurrentItem, itemsSeparatedByZerosPtr, popupMaxHeightInItems);
+					itemsSeparatedByZeros.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, ref int currentItem, ImU8String itemsSeparatedByZeros)
+		{
+			fixed (int* pcurrentItem = &currentItem)
+			{
+				fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+				{
+					byte ret = ComboNative(label, (int*)pcurrentItem, itemsSeparatedByZerosPtr, (int)(-1));
+					itemsSeparatedByZeros.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, ImU8String itemsSeparatedByZeros, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+					{
+						byte ret = ComboNative(labelPtr, (int*)pcurrentItem, itemsSeparatedByZerosPtr, popupMaxHeightInItems);
+						itemsSeparatedByZeros.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, ref int currentItem, ImU8String itemsSeparatedByZeros)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (int* pcurrentItem = &currentItem)
+				{
+					fixed (byte* itemsSeparatedByZerosPtr = &itemsSeparatedByZeros.GetPinnableNullTerminatedReference())
+					{
+						byte ret = ComboNative(labelPtr, (int*)pcurrentItem, itemsSeparatedByZerosPtr, (int)(-1));
+						itemsSeparatedByZeros.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte ComboNative(byte* label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount, int popupMaxHeightInItems)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int*, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool>, void*, int, int, byte>)funcTable[151])(label, currentItem, itemsGetter, data, itemsCount, popupMaxHeightInItems);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount, int popupMaxHeightInItems)
+		{
+			byte ret = ComboNative(label, currentItem, itemsGetter, data, itemsCount, popupMaxHeightInItems);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(byte* label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount)
+		{
+			byte ret = ComboNative(label, currentItem, itemsGetter, data, itemsCount, (int)(-1));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool Combo(ImU8String label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount, int popupMaxHeightInItems)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ComboNative(labelPtr, currentItem, itemsGetter, data, itemsCount, popupMaxHeightInItems);
+				label.Dispose();
+				return ret != 0;
 			}
 		}
 	}

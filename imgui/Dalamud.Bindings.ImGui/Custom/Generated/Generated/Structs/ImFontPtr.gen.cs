@@ -114,6 +114,310 @@ public unsafe partial struct ImFontPtr
 				ImGuiNative.RenderChar(Handle, (ImDrawList*)pdrawList, size, pos, col, c);
 			}
 		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+				textBegin.Dispose();
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+				textEnd.Dispose();
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(Handle, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public unsafe void RenderText(ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(Handle, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
 		public unsafe void SetGlyphVisible(ushort c, bool visible)
 		{
 			ImGuiNative.SetGlyphVisible(Handle, c, visible ? (byte)1 : (byte)0);
@@ -121,5 +425,4 @@ public unsafe partial struct ImFontPtr
 }
 // DISCARDED: CalcWordWrapPositionA
 // DISCARDED: CalcWordWrapPositionAS
-// DISCARDED: RenderText
 

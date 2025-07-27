@@ -94,63 +94,16 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImPlotItem* GetItem(ref byte labelId)
+		public unsafe ImPlotItem* GetItem(ImU8String labelId)
 		{
 			fixed (ImPlotItemGroup* @this = &this)
 			{
-				fixed (byte* plabelId = &labelId)
+				fixed (byte* labelIdPtr = &labelId.GetPinnableNullTerminatedReference())
 				{
-					ImPlotItem* ret = ImPlot.GetItemNative(@this, (byte*)plabelId);
+					ImPlotItem* ret = ImPlot.GetItemNative(@this, labelIdPtr);
+					labelId.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotItem* GetItem(ReadOnlySpan<byte> labelId)
-		{
-			fixed (ImPlotItemGroup* @this = &this)
-			{
-				fixed (byte* plabelId = labelId)
-				{
-					ImPlotItem* ret = ImPlot.GetItemNative(@this, (byte*)plabelId);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotItem* GetItem(string labelId)
-		{
-			fixed (ImPlotItemGroup* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (labelId != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(labelId);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(labelId, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlotItem* ret = ImPlot.GetItemNative(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -193,63 +146,16 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe uint GetItemID(ref byte labelId)
+		public unsafe uint GetItemID(ImU8String labelId)
 		{
 			fixed (ImPlotItemGroup* @this = &this)
 			{
-				fixed (byte* plabelId = &labelId)
+				fixed (byte* labelIdPtr = &labelId.GetPinnableNullTerminatedReference())
 				{
-					uint ret = ImPlot.GetItemIDNative(@this, (byte*)plabelId);
+					uint ret = ImPlot.GetItemIDNative(@this, labelIdPtr);
+					labelId.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe uint GetItemID(ReadOnlySpan<byte> labelId)
-		{
-			fixed (ImPlotItemGroup* @this = &this)
-			{
-				fixed (byte* plabelId = labelId)
-				{
-					uint ret = ImPlot.GetItemIDNative(@this, (byte*)plabelId);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe uint GetItemID(string labelId)
-		{
-			fixed (ImPlotItemGroup* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (labelId != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(labelId);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(labelId, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				uint ret = ImPlot.GetItemIDNative(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -439,55 +345,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImPlotItem* GetItem(ref byte labelId)
+		public unsafe ImPlotItem* GetItem(ImU8String labelId)
 		{
-			fixed (byte* plabelId = &labelId)
+			fixed (byte* labelIdPtr = &labelId.GetPinnableNullTerminatedReference())
 			{
-				ImPlotItem* ret = ImPlot.GetItemNative(Handle, (byte*)plabelId);
+				ImPlotItem* ret = ImPlot.GetItemNative(Handle, labelIdPtr);
+				labelId.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotItem* GetItem(ReadOnlySpan<byte> labelId)
-		{
-			fixed (byte* plabelId = labelId)
-			{
-				ImPlotItem* ret = ImPlot.GetItemNative(Handle, (byte*)plabelId);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotItem* GetItem(string labelId)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (labelId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(labelId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(labelId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlotItem* ret = ImPlot.GetItemNative(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>
@@ -520,55 +385,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe uint GetItemID(ref byte labelId)
+		public unsafe uint GetItemID(ImU8String labelId)
 		{
-			fixed (byte* plabelId = &labelId)
+			fixed (byte* labelIdPtr = &labelId.GetPinnableNullTerminatedReference())
 			{
-				uint ret = ImPlot.GetItemIDNative(Handle, (byte*)plabelId);
+				uint ret = ImPlot.GetItemIDNative(Handle, labelIdPtr);
+				labelId.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe uint GetItemID(ReadOnlySpan<byte> labelId)
-		{
-			fixed (byte* plabelId = labelId)
-			{
-				uint ret = ImPlot.GetItemIDNative(Handle, (byte*)plabelId);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe uint GetItemID(string labelId)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (labelId != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(labelId);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(labelId, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			uint ret = ImPlot.GetItemIDNative(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>

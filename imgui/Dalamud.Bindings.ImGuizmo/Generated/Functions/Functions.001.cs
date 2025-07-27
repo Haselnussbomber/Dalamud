@@ -22,57 +22,6 @@ namespace Dalamud.Bindings.ImGuizmo
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool Manipulate(float* view, float* projection, ImGuizmoOperation operation, ImGuizmoMode mode, float* matrix, float* deltaMatrix, float* snap, ref float localBounds, ref float boundsSnap)
-		{
-			fixed (float* plocalBounds = &localBounds)
-			{
-				fixed (float* pboundsSnap = &boundsSnap)
-				{
-					byte ret = ManipulateNative(view, projection, operation, mode, matrix, deltaMatrix, snap, (float*)plocalBounds, (float*)pboundsSnap);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Manipulate(ref float view, float* projection, ImGuizmoOperation operation, ImGuizmoMode mode, float* matrix, float* deltaMatrix, float* snap, ref float localBounds, ref float boundsSnap)
-		{
-			fixed (float* pview = &view)
-			{
-				fixed (float* plocalBounds = &localBounds)
-				{
-					fixed (float* pboundsSnap = &boundsSnap)
-					{
-						byte ret = ManipulateNative((float*)pview, projection, operation, mode, matrix, deltaMatrix, snap, (float*)plocalBounds, (float*)pboundsSnap);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool Manipulate(float* view, ref float projection, ImGuizmoOperation operation, ImGuizmoMode mode, float* matrix, float* deltaMatrix, float* snap, ref float localBounds, ref float boundsSnap)
-		{
-			fixed (float* pprojection = &projection)
-			{
-				fixed (float* plocalBounds = &localBounds)
-				{
-					fixed (float* pboundsSnap = &boundsSnap)
-					{
-						byte ret = ManipulateNative(view, (float*)pprojection, operation, mode, matrix, deltaMatrix, snap, (float*)plocalBounds, (float*)pboundsSnap);
-						return ret != 0;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
 		public static bool Manipulate(ref float view, ref float projection, ImGuizmoOperation operation, ImGuizmoMode mode, float* matrix, float* deltaMatrix, float* snap, ref float localBounds, ref float boundsSnap)
 		{
 			fixed (float* pview = &view)
@@ -745,11 +694,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ViewManipulateNative(float* view, float length, Vector2 position, Vector2 size, uint backgroundColor)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float*, float, Vector2, Vector2, uint, void>)funcTable[13])(view, length, position, size, backgroundColor);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, float, Vector2, Vector2, uint, void>)funcTable[13])((nint)view, length, position, size, backgroundColor);
-			#endif
 		}
 
 		/// <summary>
@@ -788,11 +733,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void ViewManipulateNative(float* view, float* projection, ImGuizmoOperation operation, ImGuizmoMode mode, float* matrix, float length, Vector2 position, Vector2 size, uint backgroundColor)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float*, float*, ImGuizmoOperation, ImGuizmoMode, float*, float, Vector2, Vector2, uint, void>)funcTable[14])(view, projection, operation, mode, matrix, length, position, size, backgroundColor);
-			#else
-			((delegate* unmanaged[Cdecl]<nint, nint, ImGuizmoOperation, ImGuizmoMode, nint, float, Vector2, Vector2, uint, void>)funcTable[14])((nint)view, (nint)projection, operation, mode, (nint)matrix, length, position, size, backgroundColor);
-			#endif
 		}
 
 		/// <summary>
@@ -918,11 +859,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetIDNative(int id)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<int, void>)funcTable[15])(id);
-			#else
-			((delegate* unmanaged[Cdecl]<int, void>)funcTable[15])(id);
-			#endif
 		}
 
 		/// <summary>
@@ -939,11 +876,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte IsOverNative(ImGuizmoOperation op)
 		{
-			#if NET5_0_OR_GREATER
 			return ((delegate* unmanaged[Cdecl]<ImGuizmoOperation, byte>)funcTable[16])(op);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<ImGuizmoOperation, byte>)funcTable[16])(op);
-			#endif
 		}
 
 		/// <summary>
@@ -961,11 +894,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void SetGizmoSizeClipSpaceNative(float value)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<float, void>)funcTable[17])(value);
-			#else
-			((delegate* unmanaged[Cdecl]<float, void>)funcTable[17])(value);
-			#endif
 		}
 
 		/// <summary>
@@ -982,11 +911,7 @@ namespace Dalamud.Bindings.ImGuizmo
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static void AllowAxisFlipNative(byte value)
 		{
-			#if NET5_0_OR_GREATER
 			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[18])(value);
-			#else
-			((delegate* unmanaged[Cdecl]<byte, void>)funcTable[18])(value);
-			#endif
 		}
 
 		/// <summary>

@@ -124,63 +124,16 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe int Append(ref byte name, uint* keys, int count, bool qual)
+		public unsafe int Append(ImU8String name, uint* keys, int count, bool qual)
 		{
 			fixed (ImPlotColormapData* @this = &this)
 			{
-				fixed (byte* pname = &name)
+				fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 				{
-					int ret = ImPlot.AppendNative(@this, (byte*)pname, keys, count, qual ? (byte)1 : (byte)0);
+					int ret = ImPlot.AppendNative(@this, namePtr, keys, count, qual ? (byte)1 : (byte)0);
+					name.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe int Append(ReadOnlySpan<byte> name, uint* keys, int count, bool qual)
-		{
-			fixed (ImPlotColormapData* @this = &this)
-			{
-				fixed (byte* pname = name)
-				{
-					int ret = ImPlot.AppendNative(@this, (byte*)pname, keys, count, qual ? (byte)1 : (byte)0);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe int Append(string name, uint* keys, int count, bool qual)
-		{
-			fixed (ImPlotColormapData* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (name != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(name);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				int ret = ImPlot.AppendNative(@this, pStr0, keys, count, qual ? (byte)1 : (byte)0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -210,63 +163,16 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImPlotColormap GetIndex(ref byte name)
+		public unsafe ImPlotColormap GetIndex(ImU8String name)
 		{
 			fixed (ImPlotColormapData* @this = &this)
 			{
-				fixed (byte* pname = &name)
+				fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 				{
-					ImPlotColormap ret = ImPlot.GetIndexNative(@this, (byte*)pname);
+					ImPlotColormap ret = ImPlot.GetIndexNative(@this, namePtr);
+					name.Dispose();
 					return ret;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotColormap GetIndex(ReadOnlySpan<byte> name)
-		{
-			fixed (ImPlotColormapData* @this = &this)
-			{
-				fixed (byte* pname = name)
-				{
-					ImPlotColormap ret = ImPlot.GetIndexNative(@this, (byte*)pname);
-					return ret;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotColormap GetIndex(string name)
-		{
-			fixed (ImPlotColormapData* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (name != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(name);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlotColormap ret = ImPlot.GetIndexNative(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret;
 			}
 		}
 
@@ -519,55 +425,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe int Append(ref byte name, uint* keys, int count, bool qual)
+		public unsafe int Append(ImU8String name, uint* keys, int count, bool qual)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				int ret = ImPlot.AppendNative(Handle, (byte*)pname, keys, count, qual ? (byte)1 : (byte)0);
+				int ret = ImPlot.AppendNative(Handle, namePtr, keys, count, qual ? (byte)1 : (byte)0);
+				name.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe int Append(ReadOnlySpan<byte> name, uint* keys, int count, bool qual)
-		{
-			fixed (byte* pname = name)
-			{
-				int ret = ImPlot.AppendNative(Handle, (byte*)pname, keys, count, qual ? (byte)1 : (byte)0);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe int Append(string name, uint* keys, int count, bool qual)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			int ret = ImPlot.AppendNative(Handle, pStr0, keys, count, qual ? (byte)1 : (byte)0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>
@@ -590,55 +455,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe ImPlotColormap GetIndex(ref byte name)
+		public unsafe ImPlotColormap GetIndex(ImU8String name)
 		{
-			fixed (byte* pname = &name)
+			fixed (byte* namePtr = &name.GetPinnableNullTerminatedReference())
 			{
-				ImPlotColormap ret = ImPlot.GetIndexNative(Handle, (byte*)pname);
+				ImPlotColormap ret = ImPlot.GetIndexNative(Handle, namePtr);
+				name.Dispose();
 				return ret;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotColormap GetIndex(ReadOnlySpan<byte> name)
-		{
-			fixed (byte* pname = name)
-			{
-				ImPlotColormap ret = ImPlot.GetIndexNative(Handle, (byte*)pname);
-				return ret;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe ImPlotColormap GetIndex(string name)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (name != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(name);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(name, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlotColormap ret = ImPlot.GetIndexNative(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret;
 		}
 
 		/// <summary>

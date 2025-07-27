@@ -11,14 +11,249 @@ namespace Dalamud.Bindings.ImGui;
 
 public unsafe partial class ImGui
 {
+		public static byte* ImParseFormatTrimDecorations(byte* format, byte* buf, nuint bufSize)
+		{
+			byte* ret = ImGuiNative.ImParseFormatTrimDecorations(format, buf, bufSize);
+			return ret;
+		}
+		public static byte* ImParseFormatTrimDecorations(ImU8String format, byte* buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				byte* ret = ImGuiNative.ImParseFormatTrimDecorations(formatPtr, buf, bufSize);
+				format.Dispose();
+				return ret;
+			}
+		}
+		public static byte* ImParseFormatTrimDecorations(byte* format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte* ret = ImGuiNative.ImParseFormatTrimDecorations(format, bufPtr, bufSize);
+				buf.Dispose();
+				return ret;
+			}
+		}
+		public static byte* ImParseFormatTrimDecorations(ImU8String format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte* ret = ImGuiNative.ImParseFormatTrimDecorations(formatPtr, bufPtr, bufSize);
+					buf.Dispose();
+					format.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static string ImParseFormatTrimDecorationsS(byte* format, byte* buf, nuint bufSize)
+		{
+			string ret = Utils.DecodeStringUTF8(ImGuiNative.ImParseFormatTrimDecorations(format, buf, bufSize));
+			return ret;
+		}
+		public static string ImParseFormatTrimDecorationsS(ImU8String format, byte* buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				string ret = Utils.DecodeStringUTF8(ImGuiNative.ImParseFormatTrimDecorations(formatPtr, buf, bufSize));
+				format.Dispose();
+				return ret;
+			}
+		}
+		public static string ImParseFormatTrimDecorationsS(byte* format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				string ret = Utils.DecodeStringUTF8(ImGuiNative.ImParseFormatTrimDecorations(format, bufPtr, bufSize));
+				buf.Dispose();
+				return ret;
+			}
+		}
+		public static string ImParseFormatTrimDecorationsS(ImU8String format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					string ret = Utils.DecodeStringUTF8(ImGuiNative.ImParseFormatTrimDecorations(formatPtr, bufPtr, bufSize));
+					buf.Dispose();
+					format.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static int ImTextStrToUtf8(byte* outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
+		{
+			int ret = ImGuiNative.ImTextStrToUtf8(outBuf, outBufSize, inText, inTextEnd);
+			return ret;
+		}
+		public static int ImTextStrToUtf8(ImU8String outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
+		{
+			fixed (byte* outBufPtr = &outBuf.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.ImTextStrToUtf8(outBufPtr, outBufSize, inText, inTextEnd);
+				outBuf.Dispose();
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, byte** inRemaining)
+		{
+			int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEnd, inRemaining);
+			return ret;
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd)
+		{
+			int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEnd, (byte**)(default));
+			return ret;
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEnd, inRemaining);
+				inText.Dispose();
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEnd, (byte**)(default));
+				inText.Dispose();
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEndPtr, inRemaining);
+				inTextEnd.Dispose();
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEndPtr, (byte**)(default));
+				inTextEnd.Dispose();
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEndPtr, inRemaining);
+					inTextEnd.Dispose();
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEndPtr, (byte**)(default));
+					inTextEnd.Dispose();
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte** pinRemaining = &inRemaining)
+			{
+				int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEnd, (byte**)pinRemaining);
+				return ret;
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** pinRemaining = &inRemaining)
+				{
+					int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEnd, (byte**)pinRemaining);
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** pinRemaining = &inRemaining)
+				{
+					int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inText, inTextEndPtr, (byte**)pinRemaining);
+					inTextEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** pinRemaining = &inRemaining)
+					{
+						int ret = ImGuiNative.ImTextStrFromUtf8(outBuf, outBufSize, inTextPtr, inTextEndPtr, (byte**)pinRemaining);
+						inTextEnd.Dispose();
+						inText.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static int DataTypeFormatString(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
+		{
+			int ret = ImGuiNative.DataTypeFormatString(buf, bufSize, dataType, pData, format);
+			return ret;
+		}
+		public static int DataTypeFormatString(ImU8String buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.DataTypeFormatString(bufPtr, bufSize, dataType, pData, format);
+				buf.Dispose();
+				return ret;
+			}
+		}
+		public static int DataTypeFormatString(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, ImU8String format)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImGuiNative.DataTypeFormatString(buf, bufSize, dataType, pData, formatPtr);
+				format.Dispose();
+				return ret;
+			}
+		}
+		public static int DataTypeFormatString(ImU8String buf, int bufSize, ImGuiDataType dataType, void* pData, ImU8String format)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+				{
+					int ret = ImGuiNative.DataTypeFormatString(bufPtr, bufSize, dataType, pData, formatPtr);
+					format.Dispose();
+					buf.Dispose();
+					return ret;
+				}
+			}
+		}
 }
-// DISCARDED: internal static int DataTypeFormatStringNative(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
-// DISCARDED: internal static int ImFormatStringNative(byte* buf, nuint bufSize, byte* fmt)
-// DISCARDED: internal static int ImFormatStringVNative(byte* buf, nuint bufSize, byte* fmt, nuint args)
-// DISCARDED: internal static byte* ImParseFormatTrimDecorationsNative(byte* format, byte* buf, nuint bufSize)
-// DISCARDED: ImParseFormatTrimDecorationsS
-// DISCARDED: internal static int ImTextStrFromUtf8Native(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, byte** inRemaining)
-// DISCARDED: internal static int ImTextStrToUtf8Native(byte* outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
 // DISCARDED: internal static byte InputTextNative(byte* label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 // DISCARDED: internal static byte InputTextExNative(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 // DISCARDED: internal static byte InputTextMultilineNative(byte* label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)

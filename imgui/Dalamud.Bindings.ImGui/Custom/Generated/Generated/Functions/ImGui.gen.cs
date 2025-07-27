@@ -1014,10 +1014,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetWindowPos(&ret);
 			return ret;
 		}
-		public static void GetWindowPos(Vector2* pOut)
-		{
-			ImGuiNative.GetWindowPos(pOut);
-		}
 		public static void GetWindowPos(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1030,10 +1026,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetWindowSize(&ret);
 			return ret;
-		}
-		public static void GetWindowSize(Vector2* pOut)
-		{
-			ImGuiNative.GetWindowSize(pOut);
 		}
 		public static void GetWindowSize(ref Vector2 pOut)
 		{
@@ -1131,10 +1123,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetContentRegionAvail(&ret);
 			return ret;
 		}
-		public static void GetContentRegionAvail(Vector2* pOut)
-		{
-			ImGuiNative.GetContentRegionAvail(pOut);
-		}
 		public static void GetContentRegionAvail(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1147,10 +1135,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetContentRegionMax(&ret);
 			return ret;
-		}
-		public static void GetContentRegionMax(Vector2* pOut)
-		{
-			ImGuiNative.GetContentRegionMax(pOut);
 		}
 		public static void GetContentRegionMax(ref Vector2 pOut)
 		{
@@ -1165,10 +1149,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetWindowContentRegionMin(&ret);
 			return ret;
 		}
-		public static void GetWindowContentRegionMin(Vector2* pOut)
-		{
-			ImGuiNative.GetWindowContentRegionMin(pOut);
-		}
 		public static void GetWindowContentRegionMin(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1181,10 +1161,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetWindowContentRegionMax(&ret);
 			return ret;
-		}
-		public static void GetWindowContentRegionMax(Vector2* pOut)
-		{
-			ImGuiNative.GetWindowContentRegionMax(pOut);
 		}
 		public static void GetWindowContentRegionMax(ref Vector2 pOut)
 		{
@@ -1366,10 +1342,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetFontTexUvWhitePixel(&ret);
 			return ret;
 		}
-		public static void GetFontTexUvWhitePixel(Vector2* pOut)
-		{
-			ImGuiNative.GetFontTexUvWhitePixel(pOut);
-		}
 		public static void GetFontTexUvWhitePixel(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1460,10 +1432,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetCursorPos(&ret);
 			return ret;
 		}
-		public static void GetCursorPos(Vector2* pOut)
-		{
-			ImGuiNative.GetCursorPos(pOut);
-		}
 		public static void GetCursorPos(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1499,10 +1467,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetCursorStartPos(&ret);
 			return ret;
 		}
-		public static void GetCursorStartPos(Vector2* pOut)
-		{
-			ImGuiNative.GetCursorStartPos(pOut);
-		}
 		public static void GetCursorStartPos(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -1515,10 +1479,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetCursorScreenPos(&ret);
 			return ret;
-		}
-		public static void GetCursorScreenPos(Vector2* pOut)
-		{
-			ImGuiNative.GetCursorScreenPos(pOut);
 		}
 		public static void GetCursorScreenPos(ref Vector2 pOut)
 		{
@@ -1685,6 +1645,38 @@ public unsafe partial class ImGui
 			byte ret = ImGuiNative.ImageButton(userTextureId, size, (Vector2)(new Vector2(0,0)), (Vector2)(new Vector2(1,1)), framePadding, bgCol, tintCol);
 			return ret != 0;
 		}
+		public static void ProgressBar(float fraction, Vector2 sizeArg, byte* overlay)
+		{
+			ImGuiNative.ProgressBar(fraction, sizeArg, overlay);
+		}
+		public static void ProgressBar(float fraction, Vector2 sizeArg)
+		{
+			ImGuiNative.ProgressBar(fraction, sizeArg, (byte*)(default));
+		}
+		public static void ProgressBar(float fraction)
+		{
+			ImGuiNative.ProgressBar(fraction, (Vector2)(new Vector2(-float.MinValue,0)), (byte*)(default));
+		}
+		public static void ProgressBar(float fraction, byte* overlay)
+		{
+			ImGuiNative.ProgressBar(fraction, (Vector2)(new Vector2(-float.MinValue,0)), overlay);
+		}
+		public static void ProgressBar(float fraction, Vector2 sizeArg, ImU8String overlay)
+		{
+			fixed (byte* overlayPtr = &overlay.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.ProgressBar(fraction, sizeArg, overlayPtr);
+				overlay.Dispose();
+			}
+		}
+		public static void ProgressBar(float fraction, ImU8String overlay)
+		{
+			fixed (byte* overlayPtr = &overlay.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.ProgressBar(fraction, (Vector2)(new Vector2(-float.MinValue,0)), overlayPtr);
+				overlay.Dispose();
+			}
+		}
 		public static void Bullet()
 		{
 			ImGuiNative.Bullet();
@@ -1692,6 +1684,62 @@ public unsafe partial class ImGui
 		public static void EndCombo()
 		{
 			ImGuiNative.EndCombo();
+		}
+		public static bool ColorButton(byte* descId, Vector4 col, ImGuiColorEditFlags flags, Vector2 size)
+		{
+			byte ret = ImGuiNative.ColorButton(descId, col, flags, size);
+			return ret != 0;
+		}
+		public static bool ColorButton(byte* descId, Vector4 col, ImGuiColorEditFlags flags)
+		{
+			byte ret = ImGuiNative.ColorButton(descId, col, flags, (Vector2)(new Vector2(0,0)));
+			return ret != 0;
+		}
+		public static bool ColorButton(byte* descId, Vector4 col)
+		{
+			byte ret = ImGuiNative.ColorButton(descId, col, (ImGuiColorEditFlags)(0), (Vector2)(new Vector2(0,0)));
+			return ret != 0;
+		}
+		public static bool ColorButton(byte* descId, Vector4 col, Vector2 size)
+		{
+			byte ret = ImGuiNative.ColorButton(descId, col, (ImGuiColorEditFlags)(0), size);
+			return ret != 0;
+		}
+		public static bool ColorButton(ImU8String descId, Vector4 col, ImGuiColorEditFlags flags, Vector2 size)
+		{
+			fixed (byte* descIdPtr = &descId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ImGuiNative.ColorButton(descIdPtr, col, flags, size);
+				descId.Dispose();
+				return ret != 0;
+			}
+		}
+		public static bool ColorButton(ImU8String descId, Vector4 col, ImGuiColorEditFlags flags)
+		{
+			fixed (byte* descIdPtr = &descId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ImGuiNative.ColorButton(descIdPtr, col, flags, (Vector2)(new Vector2(0,0)));
+				descId.Dispose();
+				return ret != 0;
+			}
+		}
+		public static bool ColorButton(ImU8String descId, Vector4 col)
+		{
+			fixed (byte* descIdPtr = &descId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ImGuiNative.ColorButton(descIdPtr, col, (ImGuiColorEditFlags)(0), (Vector2)(new Vector2(0,0)));
+				descId.Dispose();
+				return ret != 0;
+			}
+		}
+		public static bool ColorButton(ImU8String descId, Vector4 col, Vector2 size)
+		{
+			fixed (byte* descIdPtr = &descId.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ImGuiNative.ColorButton(descIdPtr, col, (ImGuiColorEditFlags)(0), size);
+				descId.Dispose();
+				return ret != 0;
+			}
 		}
 		public static void SetColorEditOptions(ImGuiColorEditFlags flags)
 		{
@@ -1856,6 +1904,70 @@ public unsafe partial class ImGui
 		{
 			ImGuiNative.TableSetBgColor(target, color, (int)(-1));
 		}
+		public static void Columns(int count, byte* id, bool border)
+		{
+			ImGuiNative.Columns(count, id, border ? (byte)1 : (byte)0);
+		}
+		public static void Columns(int count, byte* id)
+		{
+			ImGuiNative.Columns(count, id, (byte)(1));
+		}
+		public static void Columns(int count)
+		{
+			ImGuiNative.Columns(count, (byte*)(default), (byte)(1));
+		}
+		public static void Columns()
+		{
+			ImGuiNative.Columns((int)(1), (byte*)(default), (byte)(1));
+		}
+		public static void Columns(byte* id)
+		{
+			ImGuiNative.Columns((int)(1), id, (byte)(1));
+		}
+		public static void Columns(int count, bool border)
+		{
+			ImGuiNative.Columns(count, (byte*)(default), border ? (byte)1 : (byte)0);
+		}
+		public static void Columns(bool border)
+		{
+			ImGuiNative.Columns((int)(1), (byte*)(default), border ? (byte)1 : (byte)0);
+		}
+		public static void Columns(byte* id, bool border)
+		{
+			ImGuiNative.Columns((int)(1), id, border ? (byte)1 : (byte)0);
+		}
+		public static void Columns(int count, ImU8String id, bool border)
+		{
+			fixed (byte* idPtr = &id.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.Columns(count, idPtr, border ? (byte)1 : (byte)0);
+				id.Dispose();
+			}
+		}
+		public static void Columns(int count, ImU8String id)
+		{
+			fixed (byte* idPtr = &id.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.Columns(count, idPtr, (byte)(1));
+				id.Dispose();
+			}
+		}
+		public static void Columns(ImU8String id)
+		{
+			fixed (byte* idPtr = &id.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.Columns((int)(1), idPtr, (byte)(1));
+				id.Dispose();
+			}
+		}
+		public static void Columns(ImU8String id, bool border)
+		{
+			fixed (byte* idPtr = &id.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.Columns((int)(1), idPtr, border ? (byte)1 : (byte)0);
+				id.Dispose();
+			}
+		}
 		public static void NextColumn()
 		{
 			ImGuiNative.NextColumn();
@@ -1905,6 +2017,18 @@ public unsafe partial class ImGui
 		public static void EndTabItem()
 		{
 			ImGuiNative.EndTabItem();
+		}
+		public static void SetTabItemClosed(byte* tabOrDockedWindowLabel)
+		{
+			ImGuiNative.SetTabItemClosed(tabOrDockedWindowLabel);
+		}
+		public static void SetTabItemClosed(ImU8String tabOrDockedWindowLabel)
+		{
+			fixed (byte* tabOrDockedWindowLabelPtr = &tabOrDockedWindowLabel.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.SetTabItemClosed(tabOrDockedWindowLabelPtr);
+				tabOrDockedWindowLabel.Dispose();
+			}
 		}
 		public static uint DockSpace(uint id, Vector2 size, ImGuiDockNodeFlags flags, ImGuiWindowClassPtr windowClass)
 		{
@@ -2331,10 +2455,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetItemRectMin(&ret);
 			return ret;
 		}
-		public static void GetItemRectMin(Vector2* pOut)
-		{
-			ImGuiNative.GetItemRectMin(pOut);
-		}
 		public static void GetItemRectMin(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -2348,10 +2468,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetItemRectMax(&ret);
 			return ret;
 		}
-		public static void GetItemRectMax(Vector2* pOut)
-		{
-			ImGuiNative.GetItemRectMax(pOut);
-		}
 		public static void GetItemRectMax(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -2364,10 +2480,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetItemRectSize(&ret);
 			return ret;
-		}
-		public static void GetItemRectSize(Vector2* pOut)
-		{
-			ImGuiNative.GetItemRectSize(pOut);
 		}
 		public static void GetItemRectSize(ref Vector2 pOut)
 		{
@@ -2492,16 +2604,16 @@ public unsafe partial class ImGui
 			ImGuiNative.ColorConvertU32ToFloat4(&ret, input);
 			return ret;
 		}
-		public static void ColorConvertU32ToFloat4(Vector4* pOut, uint input)
-		{
-			ImGuiNative.ColorConvertU32ToFloat4(pOut, input);
-		}
 		public static void ColorConvertU32ToFloat4(ref Vector4 pOut, uint input)
 		{
 			fixed (Vector4* ppOut = &pOut)
 			{
 				ImGuiNative.ColorConvertU32ToFloat4((Vector4*)ppOut, input);
 			}
+		}
+		public static void ColorConvertU32ToFloat4(Vector4* pOut, uint input)
+		{
+			ImGuiNative.ColorConvertU32ToFloat4(pOut, input);
 		}
 		public static uint ColorConvertFloat4ToU32(Vector4 input)
 		{
@@ -2752,10 +2864,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetMousePos(&ret);
 			return ret;
 		}
-		public static void GetMousePos(Vector2* pOut)
-		{
-			ImGuiNative.GetMousePos(pOut);
-		}
 		public static void GetMousePos(ref Vector2 pOut)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -2768,10 +2876,6 @@ public unsafe partial class ImGui
 			Vector2 ret;
 			ImGuiNative.GetMousePosOnOpeningCurrentPopup(&ret);
 			return ret;
-		}
-		public static void GetMousePosOnOpeningCurrentPopup(Vector2* pOut)
-		{
-			ImGuiNative.GetMousePosOnOpeningCurrentPopup(pOut);
 		}
 		public static void GetMousePosOnOpeningCurrentPopup(ref Vector2 pOut)
 		{
@@ -2818,18 +2922,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetMouseDragDelta(&ret, button, lockThreshold);
 			return ret;
 		}
-		public static void GetMouseDragDelta(Vector2* pOut, ImGuiMouseButton button, float lockThreshold)
-		{
-			ImGuiNative.GetMouseDragDelta(pOut, button, lockThreshold);
-		}
-		public static void GetMouseDragDelta(Vector2* pOut, ImGuiMouseButton button)
-		{
-			ImGuiNative.GetMouseDragDelta(pOut, button, (float)(-1.0f));
-		}
-		public static void GetMouseDragDelta(Vector2* pOut, float lockThreshold)
-		{
-			ImGuiNative.GetMouseDragDelta(pOut, (ImGuiMouseButton)(0), lockThreshold);
-		}
 		public static void GetMouseDragDelta(ref Vector2 pOut, ImGuiMouseButton button, float lockThreshold)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -2857,6 +2949,18 @@ public unsafe partial class ImGui
 			{
 				ImGuiNative.GetMouseDragDelta((Vector2*)ppOut, (ImGuiMouseButton)(0), lockThreshold);
 			}
+		}
+		public static void GetMouseDragDelta(Vector2* pOut, ImGuiMouseButton button, float lockThreshold)
+		{
+			ImGuiNative.GetMouseDragDelta(pOut, button, lockThreshold);
+		}
+		public static void GetMouseDragDelta(Vector2* pOut, ImGuiMouseButton button)
+		{
+			ImGuiNative.GetMouseDragDelta(pOut, button, (float)(-1.0f));
+		}
+		public static void GetMouseDragDelta(Vector2* pOut, float lockThreshold)
+		{
+			ImGuiNative.GetMouseDragDelta(pOut, (ImGuiMouseButton)(0), lockThreshold);
 		}
 		public static void ResetMouseDragDelta(ImGuiMouseButton button)
 		{
@@ -2908,6 +3012,20 @@ public unsafe partial class ImGui
 		{
 			string ret = Utils.DecodeStringUTF8(ImGuiNative.SaveIniSettingsToMemory(outIniSize));
 			return ret;
+		}
+		public static bool DebugCheckVersionAndDataLayout(byte* versionStr, nuint szIo, nuint szStyle, nuint szvec2, nuint szvec4, nuint szDrawvert, nuint szDrawidx)
+		{
+			byte ret = ImGuiNative.DebugCheckVersionAndDataLayout(versionStr, szIo, szStyle, szvec2, szvec4, szDrawvert, szDrawidx);
+			return ret != 0;
+		}
+		public static bool DebugCheckVersionAndDataLayout(ImU8String versionStr, nuint szIo, nuint szStyle, nuint szvec2, nuint szvec4, nuint szDrawvert, nuint szDrawidx)
+		{
+			fixed (byte* versionStrPtr = &versionStr.GetPinnableNullTerminatedReference())
+			{
+				byte ret = ImGuiNative.DebugCheckVersionAndDataLayout(versionStrPtr, szIo, szStyle, szvec2, szvec4, szDrawvert, szDrawidx);
+				versionStr.Dispose();
+				return ret != 0;
+			}
 		}
 		public static void SetAllocatorFunctions(ImGuiMemAllocFunc allocFunc, ImGuiMemFreeFunc freeFunc, void* userData)
 		{
@@ -3296,6 +3414,25 @@ public unsafe partial class ImGui
 		{
 			ImGuiOnceUponAFramePtr ret = ImGuiNative.ImGuiOnceUponAFrame();
 			return ret;
+		}
+		public static ImGuiTextFilterPtr ImGuiTextFilter(byte* defaultFilter)
+		{
+			ImGuiTextFilterPtr ret = ImGuiNative.ImGuiTextFilter(defaultFilter);
+			return ret;
+		}
+		public static ImGuiTextFilterPtr ImGuiTextFilter()
+		{
+			ImGuiTextFilterPtr ret = ImGuiTextFilter((string)"");
+			return ret;
+		}
+		public static ImGuiTextFilterPtr ImGuiTextFilter(ImU8String defaultFilter)
+		{
+			fixed (byte* defaultFilterPtr = &defaultFilter.GetPinnableNullTerminatedReference())
+			{
+				ImGuiTextFilterPtr ret = ImGuiNative.ImGuiTextFilter(defaultFilterPtr);
+				defaultFilter.Dispose();
+				return ret;
+			}
 		}
 		public static void Build(ImGuiTextFilterPtr self)
 		{
@@ -3776,14 +3913,6 @@ public unsafe partial class ImGui
 			ImGuiNative.HSV(&ret, h, s, v, a);
 			return ret;
 		}
-		public static void HSV(ImColorPtr pOut, float h, float s, float v, float a)
-		{
-			ImGuiNative.HSV(pOut, h, s, v, a);
-		}
-		public static void HSV(ImColorPtr pOut, float h, float s, float v)
-		{
-			ImGuiNative.HSV(pOut, h, s, v, (float)(1.0f));
-		}
 		public static void HSV(ref ImColor pOut, float h, float s, float v, float a)
 		{
 			fixed (ImColor* ppOut = &pOut)
@@ -3797,6 +3926,14 @@ public unsafe partial class ImGui
 			{
 				ImGuiNative.HSV((ImColor*)ppOut, h, s, v, (float)(1.0f));
 			}
+		}
+		public static void HSV(ImColorPtr pOut, float h, float s, float v, float a)
+		{
+			ImGuiNative.HSV(pOut, h, s, v, a);
+		}
+		public static void HSV(ImColorPtr pOut, float h, float s, float v)
+		{
+			ImGuiNative.HSV(pOut, h, s, v, (float)(1.0f));
 		}
 		public static ImDrawCmdPtr ImDrawCmd()
 		{
@@ -3968,10 +4105,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetClipRectMin(&ret, self);
 			return ret;
 		}
-		public static void GetClipRectMin(Vector2* pOut, ImDrawListPtr self)
-		{
-			ImGuiNative.GetClipRectMin(pOut, self);
-		}
 		public static void GetClipRectMin(ref Vector2 pOut, ImDrawListPtr self)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -3986,13 +4119,6 @@ public unsafe partial class ImGui
 				Vector2 ret;
 				ImGuiNative.GetClipRectMin(&ret, (ImDrawList*)pself);
 				return ret;
-			}
-		}
-		public static void GetClipRectMin(Vector2* pOut, ref ImDrawList self)
-		{
-			fixed (ImDrawList* pself = &self)
-			{
-				ImGuiNative.GetClipRectMin(pOut, (ImDrawList*)pself);
 			}
 		}
 		public static void GetClipRectMin(ref Vector2 pOut, ref ImDrawList self)
@@ -4011,10 +4137,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetClipRectMax(&ret, self);
 			return ret;
 		}
-		public static void GetClipRectMax(Vector2* pOut, ImDrawListPtr self)
-		{
-			ImGuiNative.GetClipRectMax(pOut, self);
-		}
 		public static void GetClipRectMax(ref Vector2 pOut, ImDrawListPtr self)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -4029,13 +4151,6 @@ public unsafe partial class ImGui
 				Vector2 ret;
 				ImGuiNative.GetClipRectMax(&ret, (ImDrawList*)pself);
 				return ret;
-			}
-		}
-		public static void GetClipRectMax(Vector2* pOut, ref ImDrawList self)
-		{
-			fixed (ImDrawList* pself = &self)
-			{
-				ImGuiNative.GetClipRectMax(pOut, (ImDrawList*)pself);
 			}
 		}
 		public static void GetClipRectMax(ref Vector2 pOut, ref ImDrawList self)
@@ -6915,14 +7030,6 @@ public unsafe partial class ImGui
 				return ret != 0;
 			}
 		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-				return ret != 0;
-			}
-		}
 		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* pself = &self)
@@ -6934,33 +7041,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 					return ret != 0;
@@ -6981,36 +7066,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 					return ret != 0;
@@ -7031,20 +7091,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -7052,20 +7098,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 						return ret != 0;
@@ -7090,34 +7122,9 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutUvFill = &outUvFill)
-			{
-				byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-				return ret != 0;
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvFill = outUvFill)
 			{
 				byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 				return ret != 0;
@@ -7134,33 +7141,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -7181,36 +7166,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -7231,20 +7191,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -7252,20 +7198,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -7290,39 +7222,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutUvBorder = &outUvBorder)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -7343,20 +7247,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -7364,20 +7254,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -7402,23 +7278,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
@@ -7426,20 +7285,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -7456,23 +7301,6 @@ public unsafe partial class ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 							return ret != 0;
@@ -7498,23 +7326,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* pself = &self)
@@ -7526,26 +7337,6 @@ public unsafe partial class ImGui
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 								return ret != 0;
@@ -7666,17 +7457,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (int* ptextureIndex = &textureIndex)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-					return ret != 0;
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* pself = &self)
@@ -7691,39 +7471,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -7750,42 +7502,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvBorder = &outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -7812,23 +7533,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -7836,23 +7540,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -7883,40 +7570,9 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutUvFill = &outUvFill)
-			{
-				fixed (int* ptextureIndex = &textureIndex)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvFill = outUvFill)
 			{
 				fixed (int* ptextureIndex = &textureIndex)
 				{
@@ -7939,39 +7595,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -7998,42 +7626,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -8060,23 +7657,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -8084,23 +7664,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -8131,45 +7694,11 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutUvBorder = &outUvBorder)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutUvBorder = outUvBorder)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -8196,23 +7725,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutOffset = &outOffset)
@@ -8220,23 +7732,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -8267,26 +7762,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (Vector2* poutSize = &outSize)
@@ -8294,23 +7769,6 @@ public unsafe partial class ImGui
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutSize = &outSize)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -8330,26 +7788,6 @@ public unsafe partial class ImGui
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							fixed (int* ptextureIndex = &textureIndex)
 							{
@@ -8381,26 +7819,6 @@ public unsafe partial class ImGui
 				}
 			}
 		}
-		public static bool GetMouseCursorTexData(ImFontAtlasPtr self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (Vector2* poutOffset = &outOffset)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(self, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* pself = &self)
@@ -8412,29 +7830,6 @@ public unsafe partial class ImGui
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								fixed (int* ptextureIndex = &textureIndex)
-								{
-									byte ret = ImGuiNative.GetMouseCursorTexData((ImFontAtlas*)pself, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-									return ret != 0;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		public static bool GetMouseCursorTexData(ref ImFontAtlas self, ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* pself = &self)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								fixed (int* ptextureIndex = &textureIndex)
 								{
@@ -8543,6 +7938,1248 @@ public unsafe partial class ImGui
 				return ret;
 			}
 		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			Vector2 ret;
+			ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+			return ret;
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			Vector2 ret;
+			ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+			return ret;
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			Vector2 ret;
+			ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+			return ret;
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			Vector2 ret;
+			ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+			return ret;
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)(default));
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, remaining);
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)(default));
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), remaining);
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+				textBegin.Dispose();
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+				textBegin.Dispose();
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+				textBegin.Dispose();
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+				textBegin.Dispose();
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+				textBegin.Dispose();
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)(default));
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+				textBegin.Dispose();
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+				textBegin.Dispose();
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+				textBegin.Dispose();
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, remaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)(default));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), remaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+				textEnd.Dispose();
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+				textEnd.Dispose();
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+					textEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+					textEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+				textEnd.Dispose();
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+				textEnd.Dispose();
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, remaining);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)(default));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+					textEnd.Dispose();
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+					textEnd.Dispose();
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+						textEnd.Dispose();
+						textBegin.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+						textEnd.Dispose();
+						textBegin.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, byte** remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, remaining);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)(default));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (byte** premaining = &remaining)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+				return ret;
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (byte** premaining = &remaining)
+			{
+				Vector2 ret;
+				ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+				return ret;
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (byte** premaining = &remaining)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (byte** premaining = &remaining)
+			{
+				ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEnd, (byte**)premaining);
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, (byte*)(default), (byte**)premaining);
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+					textBegin.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+						textBegin.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+						textBegin.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, byte* textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEnd, (byte**)premaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, (byte*)(default), (byte**)premaining);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					Vector2 ret;
+					ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+					textEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+						textEnd.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+							textEnd.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** premaining = &remaining)
+				{
+					ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, byte* textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBegin, textEndPtr, (byte**)premaining);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						Vector2 ret;
+						ImGuiNative.CalcTextSizeA(&ret, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+						textEnd.Dispose();
+						textBegin.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							ImGuiNative.CalcTextSizeA((Vector2*)ppOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static Vector2 CalcTextSizeA(ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							Vector2 ret;
+							ImGuiNative.CalcTextSizeA(&ret, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+							textEnd.Dispose();
+							textBegin.Dispose();
+							return ret;
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(ref Vector2 pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (Vector2* ppOut = &pOut)
+			{
+				fixed (ImFont* pself = &self)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							fixed (byte** premaining = &remaining)
+							{
+								ImGuiNative.CalcTextSizeA((Vector2*)ppOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+								textEnd.Dispose();
+								textBegin.Dispose();
+							}
+						}
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ImFontPtr self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** premaining = &remaining)
+					{
+						ImGuiNative.CalcTextSizeA(pOut, self, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void CalcTextSizeA(Vector2* pOut, ref ImFont self, float size, float maxWidth, float wrapWidth, ImU8String textBegin, ImU8String textEnd, ref byte* remaining)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte** premaining = &remaining)
+						{
+							ImGuiNative.CalcTextSizeA(pOut, (ImFont*)pself, size, maxWidth, wrapWidth, textBeginPtr, textEndPtr, (byte**)premaining);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
 		public static void RenderChar(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, ushort c)
 		{
 			ImGuiNative.RenderChar(self, drawList, size, pos, col, c);
@@ -8568,6 +9205,710 @@ public unsafe partial class ImGui
 				fixed (ImDrawList* pdrawList = &drawList)
 				{
 					ImGuiNative.RenderChar((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, c);
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, wrapWidth, (byte)(0));
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), (byte)(0));
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+				textBegin.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+				textBegin.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+				textBegin.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+				textBegin.Dispose();
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, wrapWidth, (byte)(0));
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), (byte)(0));
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, byte* textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEnd, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+				textEnd.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+				textEnd.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+				textEnd.Dispose();
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+			{
+				ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+				textEnd.Dispose();
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, wrapWidth, (byte)(0));
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), (byte)(0));
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBegin, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+				{
+					ImGuiNative.RenderText(self, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+					textEnd.Dispose();
+					textBegin.Dispose();
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ImDrawListPtr drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText((ImFont*)pself, drawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ImFontPtr self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImDrawList* pdrawList = &drawList)
+			{
+				fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+					{
+						ImGuiNative.RenderText(self, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+						textEnd.Dispose();
+						textBegin.Dispose();
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, cpuFineClip ? (byte)1 : (byte)0);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, float wrapWidth)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, wrapWidth, (byte)(0));
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), (byte)(0));
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
+				}
+			}
+		}
+		public static void RenderText(ref ImFont self, ref ImDrawList drawList, float size, Vector2 pos, uint col, Vector4 clipRect, ImU8String textBegin, ImU8String textEnd, bool cpuFineClip)
+		{
+			fixed (ImFont* pself = &self)
+			{
+				fixed (ImDrawList* pdrawList = &drawList)
+				{
+					fixed (byte* textBeginPtr = &textBegin.GetPinnableNullTerminatedReference())
+					{
+						fixed (byte* textEndPtr = &textEnd.GetPinnableNullTerminatedReference())
+						{
+							ImGuiNative.RenderText((ImFont*)pself, (ImDrawList*)pdrawList, size, pos, col, clipRect, textBeginPtr, textEndPtr, (float)(0.0f), cpuFineClip ? (byte)1 : (byte)0);
+							textEnd.Dispose();
+							textBegin.Dispose();
+						}
+					}
 				}
 			}
 		}
@@ -8732,10 +10073,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetCenter(&ret, self);
 			return ret;
 		}
-		public static void GetCenter(Vector2* pOut, ImGuiViewportPtr self)
-		{
-			ImGuiNative.GetCenter(pOut, self);
-		}
 		public static void GetCenter(ref Vector2 pOut, ImGuiViewportPtr self)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -8750,13 +10087,6 @@ public unsafe partial class ImGui
 				Vector2 ret;
 				ImGuiNative.GetCenter(&ret, (ImGuiViewport*)pself);
 				return ret;
-			}
-		}
-		public static void GetCenter(Vector2* pOut, ref ImGuiViewport self)
-		{
-			fixed (ImGuiViewport* pself = &self)
-			{
-				ImGuiNative.GetCenter(pOut, (ImGuiViewport*)pself);
 			}
 		}
 		public static void GetCenter(ref Vector2 pOut, ref ImGuiViewport self)
@@ -8775,10 +10105,6 @@ public unsafe partial class ImGui
 			ImGuiNative.GetWorkCenter(&ret, self);
 			return ret;
 		}
-		public static void GetWorkCenter(Vector2* pOut, ImGuiViewportPtr self)
-		{
-			ImGuiNative.GetWorkCenter(pOut, self);
-		}
 		public static void GetWorkCenter(ref Vector2 pOut, ImGuiViewportPtr self)
 		{
 			fixed (Vector2* ppOut = &pOut)
@@ -8793,13 +10119,6 @@ public unsafe partial class ImGui
 				Vector2 ret;
 				ImGuiNative.GetWorkCenter(&ret, (ImGuiViewport*)pself);
 				return ret;
-			}
-		}
-		public static void GetWorkCenter(Vector2* pOut, ref ImGuiViewport self)
-		{
-			fixed (ImGuiViewport* pself = &self)
-			{
-				ImGuiNative.GetWorkCenter(pOut, (ImGuiViewport*)pself);
 			}
 		}
 		public static void GetWorkCenter(ref Vector2 pOut, ref ImGuiViewport self)
@@ -8893,8 +10212,6 @@ public unsafe partial class ImGui
 // DISCARDED: internal static void AddTextNative(ImDrawList* self, ImFont* font, float fontSize, Vector2 pos, uint col, byte* textBegin, byte* textEnd, float wrapWidth, Vector4* cpuFineClipRect)
 // DISCARDED: internal static void AddTextNative(ImFontGlyphRangesBuilder* self, byte* text, byte* textEnd)
 // DISCARDED: internal static void appendNative(ImGuiTextBuffer* self, byte* str, byte* strEnd)
-// DISCARDED: internal static void appendfNative(ImGuiTextBuffer* buffer, byte* fmt)
-// DISCARDED: internal static void appendfvNative(ImGuiTextBuffer* self, byte* fmt, nuint args)
 // DISCARDED: internal static byte ArrowButtonNative(byte* strId, ImGuiDir dir)
 // DISCARDED: internal static byte BeginNative(byte* name, bool* pOpen, ImGuiWindowFlags flags)
 // DISCARDED: internal static void BeginNative(ImGuiListClipper* self, int itemsCount, float itemsHeight)
@@ -8911,11 +10228,8 @@ public unsafe partial class ImGui
 // DISCARDED: internal static byte BeginTabBarNative(byte* strId, ImGuiTabBarFlags flags)
 // DISCARDED: internal static byte BeginTabItemNative(byte* label, bool* pOpen, ImGuiTabItemFlags flags)
 // DISCARDED: internal static byte BeginTableNative(byte* strId, int column, ImGuiTableFlags flags, Vector2 outerSize, float innerWidth)
-// DISCARDED: internal static void BulletTextNative(byte* fmt)
-// DISCARDED: internal static void BulletTextVNative(byte* fmt, nuint args)
 // DISCARDED: internal static byte ButtonNative(byte* label, Vector2 size)
 // DISCARDED: internal static void CalcTextSizeNative(Vector2* pOut, byte* text, byte* textEnd, byte hideTextAfterDoubleHash, float wrapWidth)
-// DISCARDED: internal static void CalcTextSizeANative(Vector2* pOut, ImFont* self, float size, float maxWidth, float wrapWidth, byte* textBegin, byte* textEnd, byte** remaining)
 // DISCARDED: internal static byte* CalcWordWrapPositionANative(ImFont* self, float scale, byte* text, byte* textEnd, float wrapWidth)
 // DISCARDED: CalcWordWrapPositionAS
 // DISCARDED: internal static byte CheckboxNative(byte* label, bool* v)
@@ -8923,16 +10237,13 @@ public unsafe partial class ImGui
 // DISCARDED: internal static byte CheckboxFlagsNative(byte* label, uint* flags, uint flagsValue)
 // DISCARDED: internal static byte CollapsingHeaderNative(byte* label, ImGuiTreeNodeFlags flags)
 // DISCARDED: internal static byte CollapsingHeaderNative(byte* label, bool* pVisible, ImGuiTreeNodeFlags flags)
-// DISCARDED: internal static byte ColorButtonNative(byte* descId, Vector4 col, ImGuiColorEditFlags flags, Vector2 size)
 // DISCARDED: internal static byte ColorEdit3Native(byte* label, float* col, ImGuiColorEditFlags flags)
 // DISCARDED: internal static byte ColorEdit4Native(byte* label, float* col, ImGuiColorEditFlags flags)
 // DISCARDED: internal static byte ColorPicker3Native(byte* label, float* col, ImGuiColorEditFlags flags)
 // DISCARDED: internal static byte ColorPicker4Native(byte* label, float* col, ImGuiColorEditFlags flags, float* refCol)
-// DISCARDED: internal static void ColumnsNative(int count, byte* id, byte border)
 // DISCARDED: internal static byte ComboNative(byte* label, int* currentItem, byte** items, int itemsCount, int popupMaxHeightInItems)
 // DISCARDED: internal static byte ComboNative(byte* label, int* currentItem, byte* itemsSeparatedByZeros, int popupMaxHeightInItems)
 // DISCARDED: internal static byte ComboNative(byte* label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount, int popupMaxHeightInItems)
-// DISCARDED: internal static byte DebugCheckVersionAndDataLayoutNative(byte* versionStr, nuint szIo, nuint szStyle, nuint szvec2, nuint szvec4, nuint szDrawvert, nuint szDrawidx)
 // DISCARDED: internal static void DebugTextEncodingNative(byte* text)
 // DISCARDED: internal static byte DragFloatNative(byte* label, float* v, float vSpeed, float vMin, float vMax, byte* format, ImGuiSliderFlags flags)
 // DISCARDED: internal static byte DragFloat2Native(byte* label, float* v, float vSpeed, float vMin, float vMax, byte* format, ImGuiSliderFlags flags)
@@ -8954,7 +10265,6 @@ public unsafe partial class ImGui
 // DISCARDED: internal static uint GetIDNative(void* ptrId)
 // DISCARDED: internal static int* GetIntRefNative(ImGuiStorage* self, uint key, int defaultVal)
 // DISCARDED: internal static void** GetVoidPtrRefNative(ImGuiStorage* self, uint key, void* defaultVal)
-// DISCARDED: internal static ImGuiTextFilter* ImGuiTextFilterNative(byte* defaultFilter)
 // DISCARDED: internal static ImGuiTextRange* ImGuiTextRangeNative()
 // DISCARDED: internal static ImGuiTextRange* ImGuiTextRangeNative(byte* b, byte* e)
 // DISCARDED: internal static byte InputDoubleNative(byte* label, double* v, double step, double stepFast, byte* format, ImGuiInputTextFlags flags)
@@ -8972,14 +10282,10 @@ public unsafe partial class ImGui
 // DISCARDED: internal static byte InvisibleButtonNative(byte* strId, Vector2 size, ImGuiButtonFlags flags)
 // DISCARDED: internal static byte IsDataTypeNative(ImGuiPayload* self, byte* type)
 // DISCARDED: internal static byte IsPopupOpenNative(byte* strId, ImGuiPopupFlags flags)
-// DISCARDED: internal static void LabelTextNative(byte* label, byte* fmt)
-// DISCARDED: internal static void LabelTextVNative(byte* label, byte* fmt, nuint args)
 // DISCARDED: internal static byte ListBoxNative(byte* label, int* currentItem, byte** items, int itemsCount, int heightInItems)
 // DISCARDED: internal static byte ListBoxNative(byte* label, int* currentItem, delegate*<byte*, int*, delegate*<void*, int, byte**, bool>, void*, int, int, bool> itemsGetter, void* data, int itemsCount, int heightInItems)
 // DISCARDED: internal static void LoadIniSettingsFromDiskNative(byte* iniFilename)
 // DISCARDED: internal static void LoadIniSettingsFromMemoryNative(byte* iniData, nuint iniSize)
-// DISCARDED: internal static void LogTextNative(byte* fmt)
-// DISCARDED: internal static void LogTextVNative(byte* fmt, nuint args)
 // DISCARDED: internal static void LogToFileNative(int autoOpenDepth, byte* filename)
 // DISCARDED: internal static byte MenuItemNative(byte* label, byte* shortcut, byte selected, byte enabled)
 // DISCARDED: internal static byte MenuItemNative(byte* label, byte* shortcut, bool* pSelected, byte enabled)
@@ -8991,22 +10297,17 @@ public unsafe partial class ImGui
 // DISCARDED: internal static void PlotHistogramNative(byte* label, delegate*<byte*, delegate*<void*, int, float>, void*, int, int, byte*, float, float, Vector2, float> valuesGetter, void* data, int valuesCount, int valuesOffset, byte* overlayText, float scaleMin, float scaleMax, Vector2 graphSize)
 // DISCARDED: internal static void PlotLinesNative(byte* label, float* values, int valuesCount, int valuesOffset, byte* overlayText, float scaleMin, float scaleMax, Vector2 graphSize, int stride)
 // DISCARDED: internal static void PlotLinesNative(byte* label, delegate*<byte*, delegate*<void*, int, float>, void*, int, int, byte*, float, float, Vector2, float> valuesGetter, void* data, int valuesCount, int valuesOffset, byte* overlayText, float scaleMin, float scaleMax, Vector2 graphSize)
-// DISCARDED: internal static void ProgressBarNative(float fraction, Vector2 sizeArg, byte* overlay)
 // DISCARDED: internal static void PushIDNative(byte* strId)
 // DISCARDED: internal static void PushIDNative(byte* strIdBegin, byte* strIdEnd)
 // DISCARDED: internal static void PushIDNative(void* ptrId)
 // DISCARDED: internal static void PushIDNative(int intId)
 // DISCARDED: internal static byte RadioButtonNative(byte* label, byte active)
 // DISCARDED: internal static byte RadioButtonNative(byte* label, int* v, int vButton)
-// DISCARDED: internal static void RenderTextNative(ImFont* self, ImDrawList* drawList, float size, Vector2 pos, uint col, Vector4 clipRect, byte* textBegin, byte* textEnd, float wrapWidth, byte cpuFineClip)
 // DISCARDED: internal static void SaveIniSettingsToDiskNative(byte* iniFilename)
 // DISCARDED: internal static byte SelectableNative(byte* label, byte selected, ImGuiSelectableFlags flags, Vector2 size)
 // DISCARDED: internal static byte SelectableNative(byte* label, bool* pSelected, ImGuiSelectableFlags flags, Vector2 size)
 // DISCARDED: internal static void SetClipboardTextNative(byte* text)
 // DISCARDED: internal static byte SetDragDropPayloadNative(byte* type, void* data, nuint sz, ImGuiCond cond)
-// DISCARDED: internal static void SetTabItemClosedNative(byte* tabOrDockedWindowLabel)
-// DISCARDED: internal static void SetTooltipNative(byte* fmt)
-// DISCARDED: internal static void SetTooltipVNative(byte* fmt, nuint args)
 // DISCARDED: internal static void SetWindowCollapsedNative(byte collapsed, ImGuiCond cond)
 // DISCARDED: internal static void SetWindowCollapsedNative(byte* name, byte collapsed, ImGuiCond cond)
 // DISCARDED: internal static void SetWindowFocusNative()
@@ -9032,25 +10333,9 @@ public unsafe partial class ImGui
 // DISCARDED: internal static byte TabItemButtonNative(byte* label, ImGuiTabItemFlags flags)
 // DISCARDED: internal static void TableHeaderNative(byte* label)
 // DISCARDED: internal static void TableSetupColumnNative(byte* label, ImGuiTableColumnFlags flags, float initWidthOrWeight, uint userId)
-// DISCARDED: internal static void TextNative(byte* fmt)
-// DISCARDED: internal static void TextColoredNative(Vector4 col, byte* fmt)
-// DISCARDED: internal static void TextColoredVNative(Vector4 col, byte* fmt, nuint args)
-// DISCARDED: internal static void TextDisabledNative(byte* fmt)
-// DISCARDED: internal static void TextDisabledVNative(byte* fmt, nuint args)
 // DISCARDED: internal static void TextUnformattedNative(byte* text, byte* textEnd)
-// DISCARDED: internal static void TextVNative(byte* fmt, nuint args)
-// DISCARDED: internal static void TextWrappedNative(byte* fmt)
-// DISCARDED: internal static void TextWrappedVNative(byte* fmt, nuint args)
 // DISCARDED: internal static byte TreeNodeNative(byte* label)
-// DISCARDED: internal static byte TreeNodeNative(byte* strId, byte* fmt)
-// DISCARDED: internal static byte TreeNodeNative(void* ptrId, byte* fmt)
 // DISCARDED: internal static byte TreeNodeExNative(byte* label, ImGuiTreeNodeFlags flags)
-// DISCARDED: internal static byte TreeNodeExNative(byte* strId, ImGuiTreeNodeFlags flags, byte* fmt)
-// DISCARDED: internal static byte TreeNodeExNative(void* ptrId, ImGuiTreeNodeFlags flags, byte* fmt)
-// DISCARDED: internal static byte TreeNodeExVNative(byte* strId, ImGuiTreeNodeFlags flags, byte* fmt, nuint args)
-// DISCARDED: internal static byte TreeNodeExVNative(void* ptrId, ImGuiTreeNodeFlags flags, byte* fmt, nuint args)
-// DISCARDED: internal static byte TreeNodeVNative(byte* strId, byte* fmt, nuint args)
-// DISCARDED: internal static byte TreeNodeVNative(void* ptrId, byte* fmt, nuint args)
 // DISCARDED: internal static void TreePushNative(byte* strId)
 // DISCARDED: internal static void TreePushNative(void* ptrId)
 // DISCARDED: internal static void ValueNative(byte* prefix, byte b)

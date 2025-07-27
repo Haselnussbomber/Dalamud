@@ -233,63 +233,16 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool IsDataType(ref byte type)
+		public unsafe bool IsDataType(ImU8String type)
 		{
 			fixed (ImGuiPayload* @this = &this)
 			{
-				fixed (byte* ptype = &type)
+				fixed (byte* typePtr = &type.GetPinnableNullTerminatedReference())
 				{
-					byte ret = ImGui.IsDataTypeNative(@this, (byte*)ptype);
+					byte ret = ImGui.IsDataTypeNative(@this, typePtr);
+					type.Dispose();
 					return ret != 0;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool IsDataType(ReadOnlySpan<byte> type)
-		{
-			fixed (ImGuiPayload* @this = &this)
-			{
-				fixed (byte* ptype = type)
-				{
-					byte ret = ImGui.IsDataTypeNative(@this, (byte*)ptype);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool IsDataType(string type)
-		{
-			fixed (ImGuiPayload* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (type != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(type);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(type, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = ImGui.IsDataTypeNative(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
 			}
 		}
 
@@ -427,55 +380,14 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe bool IsDataType(ref byte type)
+		public unsafe bool IsDataType(ImU8String type)
 		{
-			fixed (byte* ptype = &type)
+			fixed (byte* typePtr = &type.GetPinnableNullTerminatedReference())
 			{
-				byte ret = ImGui.IsDataTypeNative(Handle, (byte*)ptype);
+				byte ret = ImGui.IsDataTypeNative(Handle, typePtr);
+				type.Dispose();
 				return ret != 0;
 			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool IsDataType(ReadOnlySpan<byte> type)
-		{
-			fixed (byte* ptype = type)
-			{
-				byte ret = ImGui.IsDataTypeNative(Handle, (byte*)ptype);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe bool IsDataType(string type)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (type != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(type);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(type, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = ImGui.IsDataTypeNative(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
 		}
 
 		/// <summary>

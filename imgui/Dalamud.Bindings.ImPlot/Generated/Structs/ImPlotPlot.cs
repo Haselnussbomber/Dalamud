@@ -402,13 +402,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, ref byte label)
+		public unsafe void SetAxisLabel(ImPlotAxis* axis, ImU8String label)
 		{
 			fixed (ImPlotPlot* @this = &this)
 			{
-				fixed (byte* plabel = &label)
+				fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 				{
-					ImPlot.SetAxisLabelNative(@this, axis, (byte*)plabel);
+					ImPlot.SetAxisLabelNative(@this, axis, labelPtr);
+					label.Dispose();
 				}
 			}
 		}
@@ -416,113 +417,16 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, ReadOnlySpan<byte> label)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				fixed (byte* plabel = label)
-				{
-					ImPlot.SetAxisLabelNative(@this, axis, (byte*)plabel);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, string label)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (label != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(label);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlot.SetAxisLabelNative(@this, axis, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ref byte label)
+		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ImU8String label)
 		{
 			fixed (ImPlotPlot* @this = &this)
 			{
 				fixed (ImPlotAxis* paxis = &axis)
 				{
-					fixed (byte* plabel = &label)
+					fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 					{
-						ImPlot.SetAxisLabelNative(@this, (ImPlotAxis*)paxis, (byte*)plabel);
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ReadOnlySpan<byte> label)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				fixed (ImPlotAxis* paxis = &axis)
-				{
-					fixed (byte* plabel = label)
-					{
-						ImPlot.SetAxisLabelNative(@this, (ImPlotAxis*)paxis, (byte*)plabel);
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, string label)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				fixed (ImPlotAxis* paxis = &axis)
-				{
-					byte* pStr0 = null;
-					int pStrSize0 = 0;
-					if (label != null)
-					{
-						pStrSize0 = Utils.GetByteCountUTF8(label);
-						if (pStrSize0 >= Utils.MaxStackallocSize)
-						{
-							pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-						}
-						else
-						{
-							byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-							pStr0 = pStrStack0;
-						}
-						int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-						pStr0[pStrOffset0] = 0;
-					}
-					ImPlot.SetAxisLabelNative(@this, (ImPlotAxis*)paxis, pStr0);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						Utils.Free(pStr0);
+						ImPlot.SetAxisLabelNative(@this, (ImPlotAxis*)paxis, labelPtr);
+						label.Dispose();
 					}
 				}
 			}
@@ -542,59 +446,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetTitle(ref byte title)
+		public unsafe void SetTitle(ImU8String title)
 		{
 			fixed (ImPlotPlot* @this = &this)
 			{
-				fixed (byte* ptitle = &title)
+				fixed (byte* titlePtr = &title.GetPinnableNullTerminatedReference())
 				{
-					ImPlot.SetTitleNative(@this, (byte*)ptitle);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetTitle(ReadOnlySpan<byte> title)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				fixed (byte* ptitle = title)
-				{
-					ImPlot.SetTitleNative(@this, (byte*)ptitle);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetTitle(string title)
-		{
-			fixed (ImPlotPlot* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (title != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(title);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(title, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlot.SetTitleNative(@this, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
+					ImPlot.SetTitleNative(@this, titlePtr);
+					title.Dispose();
 				}
 			}
 		}
@@ -911,110 +770,26 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, ref byte label)
+		public unsafe void SetAxisLabel(ImPlotAxis* axis, ImU8String label)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				ImPlot.SetAxisLabelNative(Handle, axis, (byte*)plabel);
+				ImPlot.SetAxisLabelNative(Handle, axis, labelPtr);
+				label.Dispose();
 			}
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, ReadOnlySpan<byte> label)
-		{
-			fixed (byte* plabel = label)
-			{
-				ImPlot.SetAxisLabelNative(Handle, axis, (byte*)plabel);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ImPlotAxis* axis, string label)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlot.SetAxisLabelNative(Handle, axis, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ref byte label)
+		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ImU8String label)
 		{
 			fixed (ImPlotAxis* paxis = &axis)
 			{
-				fixed (byte* plabel = &label)
+				fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 				{
-					ImPlot.SetAxisLabelNative(Handle, (ImPlotAxis*)paxis, (byte*)plabel);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, ReadOnlySpan<byte> label)
-		{
-			fixed (ImPlotAxis* paxis = &axis)
-			{
-				fixed (byte* plabel = label)
-				{
-					ImPlot.SetAxisLabelNative(Handle, (ImPlotAxis*)paxis, (byte*)plabel);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetAxisLabel(ref ImPlotAxis axis, string label)
-		{
-			fixed (ImPlotAxis* paxis = &axis)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (label != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(label);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlot.SetAxisLabelNative(Handle, (ImPlotAxis*)paxis, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
+					ImPlot.SetAxisLabelNative(Handle, (ImPlotAxis*)paxis, labelPtr);
+					label.Dispose();
 				}
 			}
 		}
@@ -1030,51 +805,12 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void SetTitle(ref byte title)
+		public unsafe void SetTitle(ImU8String title)
 		{
-			fixed (byte* ptitle = &title)
+			fixed (byte* titlePtr = &title.GetPinnableNullTerminatedReference())
 			{
-				ImPlot.SetTitleNative(Handle, (byte*)ptitle);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetTitle(ReadOnlySpan<byte> title)
-		{
-			fixed (byte* ptitle = title)
-			{
-				ImPlot.SetTitleNative(Handle, (byte*)ptitle);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void SetTitle(string title)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (title != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(title);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(title, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlot.SetTitleNative(Handle, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				ImPlot.SetTitleNative(Handle, titlePtr);
+				title.Dispose();
 			}
 		}
 

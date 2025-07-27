@@ -64,59 +64,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ref byte fmt)
+		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ImU8String fmt)
 		{
 			fixed (ImPlotTagCollection* @this = &this)
 			{
-				fixed (byte* pfmt = &fmt)
+				fixed (byte* fmtPtr = &fmt.GetPinnableNullTerminatedReference())
 				{
-					ImPlot.AppendNative(@this, axis, value, bg, fg, (byte*)pfmt);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ReadOnlySpan<byte> fmt)
-		{
-			fixed (ImPlotTagCollection* @this = &this)
-			{
-				fixed (byte* pfmt = fmt)
-				{
-					ImPlot.AppendNative(@this, axis, value, bg, fg, (byte*)pfmt);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, string fmt)
-		{
-			fixed (ImPlotTagCollection* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (fmt != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(fmt);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(fmt, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlot.AppendNative(@this, axis, value, bg, fg, pStr0);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
+					ImPlot.AppendNative(@this, axis, value, bg, fg, fmtPtr);
+					fmt.Dispose();
 				}
 			}
 		}
@@ -135,59 +90,14 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ref byte fmt, nuint args)
+		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ImU8String fmt, nuint args)
 		{
 			fixed (ImPlotTagCollection* @this = &this)
 			{
-				fixed (byte* pfmt = &fmt)
+				fixed (byte* fmtPtr = &fmt.GetPinnableNullTerminatedReference())
 				{
-					ImPlot.AppendVNative(@this, axis, value, bg, fg, (byte*)pfmt, args);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ReadOnlySpan<byte> fmt, nuint args)
-		{
-			fixed (ImPlotTagCollection* @this = &this)
-			{
-				fixed (byte* pfmt = fmt)
-				{
-					ImPlot.AppendVNative(@this, axis, value, bg, fg, (byte*)pfmt, args);
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, string fmt, nuint args)
-		{
-			fixed (ImPlotTagCollection* @this = &this)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (fmt != null)
-				{
-					pStrSize0 = Utils.GetByteCountUTF8(fmt);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(fmt, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				ImPlot.AppendVNative(@this, axis, value, bg, fg, pStr0, args);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
+					ImPlot.AppendVNative(@this, axis, value, bg, fg, fmtPtr, args);
+					fmt.Dispose();
 				}
 			}
 		}
@@ -304,51 +214,12 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ref byte fmt)
+		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ImU8String fmt)
 		{
-			fixed (byte* pfmt = &fmt)
+			fixed (byte* fmtPtr = &fmt.GetPinnableNullTerminatedReference())
 			{
-				ImPlot.AppendNative(Handle, axis, value, bg, fg, (byte*)pfmt);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, ReadOnlySpan<byte> fmt)
-		{
-			fixed (byte* pfmt = fmt)
-			{
-				ImPlot.AppendNative(Handle, axis, value, bg, fg, (byte*)pfmt);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void Append(ImAxis axis, double value, uint bg, uint fg, string fmt)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (fmt != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(fmt);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(fmt, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlot.AppendNative(Handle, axis, value, bg, fg, pStr0);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				ImPlot.AppendNative(Handle, axis, value, bg, fg, fmtPtr);
+				fmt.Dispose();
 			}
 		}
 
@@ -363,51 +234,12 @@ namespace Dalamud.Bindings.ImPlot
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ref byte fmt, nuint args)
+		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ImU8String fmt, nuint args)
 		{
-			fixed (byte* pfmt = &fmt)
+			fixed (byte* fmtPtr = &fmt.GetPinnableNullTerminatedReference())
 			{
-				ImPlot.AppendVNative(Handle, axis, value, bg, fg, (byte*)pfmt, args);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, ReadOnlySpan<byte> fmt, nuint args)
-		{
-			fixed (byte* pfmt = fmt)
-			{
-				ImPlot.AppendVNative(Handle, axis, value, bg, fg, (byte*)pfmt, args);
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public unsafe void AppendV(ImAxis axis, double value, uint bg, uint fg, string fmt, nuint args)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (fmt != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(fmt);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(fmt, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			ImPlot.AppendVNative(Handle, axis, value, bg, fg, pStr0, args);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
+				ImPlot.AppendVNative(Handle, axis, value, bg, fg, fmtPtr, args);
+				fmt.Dispose();
 			}
 		}
 

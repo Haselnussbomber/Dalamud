@@ -23,11 +23,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte InputTextNative(byte* label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			#if NET5_0_OR_GREATER
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1268])(label, buf, bufSize, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<nint, nint, nuint, ImGuiInputTextFlags, nint, nint, byte>)funcTable[1268])((nint)label, (nint)buf, bufSize, flags, (nint)Utils.GetFunctionPointerForDelegate(callback), (nint)userData);
-			#endif
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1236])(label, buf, bufSize, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
 		}
 
 		/// <summary>
@@ -105,11 +101,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, callback, userData);
+				byte ret = InputTextNative(labelPtr, buf, bufSize, flags, callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -117,11 +114,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, callback, (void*)(default));
+				byte ret = InputTextNative(labelPtr, buf, bufSize, flags, callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -129,11 +127,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextNative(labelPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -141,11 +140,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextNative(labelPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -153,11 +153,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextNative(labelPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -165,11 +166,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextNative(labelPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -177,11 +179,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, void* userData)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextNative(labelPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -189,11 +192,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextNative(labelPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -201,11 +205,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, callback, userData);
+				byte ret = InputTextNative(label, bufPtr, bufSize, flags, callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -213,11 +218,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, callback, (void*)(default));
+				byte ret = InputTextNative(label, bufPtr, bufSize, flags, callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -225,11 +231,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextNative(label, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -237,11 +244,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextNative(label, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -249,11 +257,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextNative(label, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -261,11 +270,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextNative(label, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -273,11 +283,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, void* userData)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextNative(label, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -285,11 +296,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextNative((byte*)plabel, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextNative(label, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -297,621 +309,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, flags, callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, flags, callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(pStr0, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, flags, callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, flags, callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(label, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, flags, callback, userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, flags, callback, (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(byte* label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextNative(label, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, callback, userData);
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, flags, callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -920,13 +326,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, callback, (void*)(default));
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, flags, callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -935,13 +343,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -950,13 +360,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -965,13 +377,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -980,13 +394,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -995,13 +411,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, void* userData)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -1010,1431 +428,17 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputText(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputText(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+					byte ret = InputTextNative(labelPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, callback, userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextNative((byte*)plabel, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, flags, callback, userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, flags, callback, (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextNative(pStr0, pStr1, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, callback, userData);
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, callback, (void*)(default));
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ref byte label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, callback, userData);
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, callback, (void*)(default));
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-				if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(ReadOnlySpan<byte> label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				byte* pStr0 = null;
-				int pStrSize0 = 0;
-				if (buf != null)
-				{
-					pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-					if (pStrSize0 >= Utils.MaxStackallocSize)
-					{
-						pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-					}
-					else
-					{
-						byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-						pStr0 = pStrStack0;
-					}
-					int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-					pStr0[pStrOffset0] = 0;
-				}
-				byte ret = InputTextNative((byte*)plabel, pStr0, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-				if (ret != 0)
-				{
-					buf = Utils.DecodeStringUTF8(pStr0);
-				}
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, flags, callback, userData);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, flags, callback, (void*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputText(string label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextNative(pStr0, (byte*)pbuf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					Utils.Free(pStr0);
-				}
-				return ret != 0;
 			}
 		}
 
@@ -2444,11 +448,7 @@ namespace Dalamud.Bindings.ImGui
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static byte InputTextMultilineNative(byte* label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			#if NET5_0_OR_GREATER
-			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, Vector2, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1269])(label, buf, bufSize, size, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
-			#else
-			return (byte)((delegate* unmanaged[Cdecl]<nint, nint, nuint, Vector2, ImGuiInputTextFlags, nint, nint, byte>)funcTable[1269])((nint)label, (nint)buf, bufSize, size, flags, (nint)Utils.GetFunctionPointerForDelegate(callback), (nint)userData);
-			#endif
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, Vector2, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1237])(label, buf, bufSize, size, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
 		}
 
 		/// <summary>
@@ -2598,11 +598,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, callback, userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, flags, callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2610,11 +611,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, callback, (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, flags, callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2622,11 +624,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2634,11 +637,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2646,11 +650,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2658,11 +663,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2670,11 +676,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2682,11 +689,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2694,11 +702,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2706,11 +715,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2718,11 +728,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2730,11 +741,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2742,11 +754,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2754,11 +767,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2766,11 +780,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2778,11 +793,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+				byte ret = InputTextMultilineNative(labelPtr, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+				label.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2790,11 +806,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, callback, userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, flags, callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2802,11 +819,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, callback, (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, flags, callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2814,11 +832,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2826,11 +845,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2838,11 +858,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2850,11 +871,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2862,11 +884,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2874,11 +897,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2886,11 +910,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2898,11 +923,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2910,11 +936,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2922,11 +949,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2934,11 +962,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2946,11 +975,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2958,11 +988,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2970,11 +1001,12 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(byte* label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 			{
-				byte ret = InputTextMultilineNative((byte*)plabel, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+				byte ret = InputTextMultilineNative(label, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+				buf.Dispose();
 				return ret != 0;
 			}
 		}
@@ -2982,1229 +1014,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, flags, callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, flags, callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, buf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, flags, callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, flags, callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* pbuf = &buf)
-			{
-				byte ret = InputTextMultilineNative(label, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
-				return ret != 0;
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, flags, callback, userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, flags, callback, (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(byte* label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (buf != null)
-			{
-				pStrSize0 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(buf, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte ret = InputTextMultilineNative(label, pStr0, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr0);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
-			return ret != 0;
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = &label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, callback, userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, flags, callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4213,13 +1031,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, callback, (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, flags, callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4228,13 +1048,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4243,13 +1065,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4258,13 +1082,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4273,13 +1099,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4288,13 +1116,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4303,13 +1133,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4318,13 +1150,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4333,13 +1167,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4348,13 +1184,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4363,13 +1201,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4378,13 +1218,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4393,13 +1235,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4408,13 +1252,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4423,13 +1269,15 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ref byte label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		public static bool InputTextMultiline(ImU8String label, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = &label)
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
 			{
-				fixed (byte* pbuf = &buf)
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
 				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+					byte ret = InputTextMultilineNative(labelPtr, bufPtr, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
+					buf.Dispose();
+					label.Dispose();
 					return ret != 0;
 				}
 			}
@@ -4438,626 +1286,3173 @@ namespace Dalamud.Bindings.ImGui
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte InputTextWithHintNative(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, callback, userData);
-					return ret != 0;
-				}
-			}
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, nuint, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1238])(label, hint, buf, bufSize, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
 		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, (void*)(default));
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, flags, (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, size, (ImGuiInputTextFlags)(0), callback, userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), callback, userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(ReadOnlySpan<byte> label, ref byte buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			fixed (byte* plabel = label)
-			{
-				fixed (byte* pbuf = &buf)
-				{
-					byte ret = InputTextMultilineNative((byte*)plabel, (byte*)pbuf, bufSize, (Vector2)(new Vector2(0,0)), flags, callback, userData);
-					return ret != 0;
-				}
-			}
-		}
-
-		/// <summary>
-		/// To be documented.
-		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
-		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, size, flags, callback, userData);
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, flags, callback, userData);
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, size, flags, callback, (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, flags, callback, (void*)(default));
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextFlags flags)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, size, flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, Vector2 size)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, size, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, (Vector2)(new Vector2(0,0)), (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, ImGuiInputTextFlags flags)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, (Vector2)(new Vector2(0,0)), flags, (ImGuiInputTextCallback)(default), (void*)(default));
-			if (ret != 0 || ((flags & ImGuiInputTextFlags.EnterReturnsTrue) != 0 && IsItemDeactivatedAfterEdit()))
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
 			return ret != 0;
 		}
 
 		/// <summary>
 		/// To be documented.
 		/// </summary>
-		public static bool InputTextMultiline(string label, ref string buf, nuint bufSize, Vector2 size, ImGuiInputTextCallback callback)
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, void* userData)
 		{
-			byte* pStr0 = null;
-			int pStrSize0 = 0;
-			if (label != null)
-			{
-				pStrSize0 = Utils.GetByteCountUTF8(label);
-				if (pStrSize0 >= Utils.MaxStackallocSize)
-				{
-					pStr0 = Utils.Alloc<byte>(pStrSize0 + 1);
-				}
-				else
-				{
-					byte* pStrStack0 = stackalloc byte[pStrSize0 + 1];
-					pStr0 = pStrStack0;
-				}
-				int pStrOffset0 = Utils.EncodeStringUTF8(label, pStr0, pStrSize0);
-				pStr0[pStrOffset0] = 0;
-			}
-			byte* pStr1 = null;
-			int pStrSize1 = 0;
-			if (buf != null)
-			{
-				pStrSize1 = Math.Max(Utils.GetByteCountUTF8(buf), (int)bufSize);
-				if (pStrSize1 >= Utils.MaxStackallocSize)
-				{
-					pStr1 = Utils.Alloc<byte>(pStrSize1 + 1);
-				}
-				else
-				{
-					byte* pStrStack1 = stackalloc byte[pStrSize1 + 1];
-					pStr1 = pStrStack1;
-				}
-				int pStrOffset1 = Utils.EncodeStringUTF8(buf, pStr1, pStrSize1);
-				pStr1[pStrOffset1] = 0;
-			}
-			byte ret = InputTextMultilineNative(pStr0, pStr1, bufSize, size, (ImGuiInputTextFlags)(0), callback, (void*)(default));
-			if (ret != 0)
-			{
-				buf = Utils.DecodeStringUTF8(pStr1);
-			}
-			if (pStrSize1 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr1);
-			}
-			if (pStrSize0 >= Utils.MaxStackallocSize)
-			{
-				Utils.Free(pStr0);
-			}
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
 			return ret != 0;
 		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			byte ret = InputTextWithHintNative(label, hint, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, flags, callback, userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, flags, callback, (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(labelPtr, hint, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, flags, callback, userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, flags, callback, (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, flags, callback, userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, flags, callback, (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, byte* buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hintPtr, buf, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, flags, callback, userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, flags, callback, (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextWithHintNative(label, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, flags, callback, userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, flags, callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, byte* hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(labelPtr, hint, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, flags, callback, userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, flags, callback, (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(byte* label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextWithHintNative(label, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, flags, callback, userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, flags, callback, (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, flags, (ImGuiInputTextCallback)(default), userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), (ImGuiInputTextCallback)(default), userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextWithHint(ImU8String label, ImU8String hint, ImU8String buf, nuint bufSize, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextWithHintNative(labelPtr, hintPtr, bufPtr, bufSize, (ImGuiInputTextFlags)(0), callback, userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte* ImParseFormatTrimDecorationsNative(byte* format, byte* buf, nuint bufSize)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, nuint, byte*>)funcTable[1239])(format, buf, bufSize);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* ImParseFormatTrimDecorations(byte* format, byte* buf, nuint bufSize)
+		{
+			byte* ret = ImParseFormatTrimDecorationsNative(format, buf, bufSize);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string ImParseFormatTrimDecorationsS(byte* format, byte* buf, nuint bufSize)
+		{
+			string ret = Utils.DecodeStringUTF8(ImParseFormatTrimDecorationsNative(format, buf, bufSize));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* ImParseFormatTrimDecorations(ImU8String format, byte* buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				byte* ret = ImParseFormatTrimDecorationsNative(formatPtr, buf, bufSize);
+				format.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string ImParseFormatTrimDecorationsS(ImU8String format, byte* buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				string ret = Utils.DecodeStringUTF8(ImParseFormatTrimDecorationsNative(formatPtr, buf, bufSize));
+				format.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* ImParseFormatTrimDecorations(byte* format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte* ret = ImParseFormatTrimDecorationsNative(format, bufPtr, bufSize);
+				buf.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string ImParseFormatTrimDecorationsS(byte* format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				string ret = Utils.DecodeStringUTF8(ImParseFormatTrimDecorationsNative(format, bufPtr, bufSize));
+				buf.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static byte* ImParseFormatTrimDecorations(ImU8String format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte* ret = ImParseFormatTrimDecorationsNative(formatPtr, bufPtr, bufSize);
+					buf.Dispose();
+					format.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static string ImParseFormatTrimDecorationsS(ImU8String format, ImU8String buf, nuint bufSize)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					string ret = Utils.DecodeStringUTF8(ImParseFormatTrimDecorationsNative(formatPtr, bufPtr, bufSize));
+					buf.Dispose();
+					format.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int ImTextStrToUtf8Native(byte* outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int, ushort*, ushort*, int>)funcTable[1240])(outBuf, outBufSize, inText, inTextEnd);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrToUtf8(byte* outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
+		{
+			int ret = ImTextStrToUtf8Native(outBuf, outBufSize, inText, inTextEnd);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrToUtf8(ImU8String outBuf, int outBufSize, ushort* inText, ushort* inTextEnd)
+		{
+			fixed (byte* outBufPtr = &outBuf.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImTextStrToUtf8Native(outBufPtr, outBufSize, inText, inTextEnd);
+				outBuf.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int ImTextStrFromUtf8Native(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, byte** inRemaining)
+		{
+			return ((delegate* unmanaged[Cdecl]<ushort*, int, byte*, byte*, byte**, int>)funcTable[1241])(outBuf, outBufSize, inText, inTextEnd, inRemaining);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, byte** inRemaining)
+		{
+			int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEnd, inRemaining);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd)
+		{
+			int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEnd, (byte**)(default));
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEnd, inRemaining);
+				inText.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEnd, (byte**)(default));
+				inText.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEndPtr, inRemaining);
+				inTextEnd.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEndPtr, (byte**)(default));
+				inTextEnd.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd, byte** inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEndPtr, inRemaining);
+					inTextEnd.Dispose();
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEndPtr, (byte**)(default));
+					inTextEnd.Dispose();
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, byte* inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte** pinRemaining = &inRemaining)
+			{
+				int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEnd, (byte**)pinRemaining);
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, byte* inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** pinRemaining = &inRemaining)
+				{
+					int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEnd, (byte**)pinRemaining);
+					inText.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, byte* inText, ImU8String inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte** pinRemaining = &inRemaining)
+				{
+					int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inText, inTextEndPtr, (byte**)pinRemaining);
+					inTextEnd.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int ImTextStrFromUtf8(ushort* outBuf, int outBufSize, ImU8String inText, ImU8String inTextEnd, ref byte* inRemaining)
+		{
+			fixed (byte* inTextPtr = &inText.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* inTextEndPtr = &inTextEnd.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte** pinRemaining = &inRemaining)
+					{
+						int ret = ImTextStrFromUtf8Native(outBuf, outBufSize, inTextPtr, inTextEndPtr, (byte**)pinRemaining);
+						inTextEnd.Dispose();
+						inText.Dispose();
+						return ret;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static int DataTypeFormatStringNative(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, int, ImGuiDataType, void*, byte*, int>)funcTable[1242])(buf, bufSize, dataType, pData, format);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int DataTypeFormatString(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
+		{
+			int ret = DataTypeFormatStringNative(buf, bufSize, dataType, pData, format);
+			return ret;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int DataTypeFormatString(ImU8String buf, int bufSize, ImGuiDataType dataType, void* pData, byte* format)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				int ret = DataTypeFormatStringNative(bufPtr, bufSize, dataType, pData, format);
+				buf.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int DataTypeFormatString(byte* buf, int bufSize, ImGuiDataType dataType, void* pData, ImU8String format)
+		{
+			fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+			{
+				int ret = DataTypeFormatStringNative(buf, bufSize, dataType, pData, formatPtr);
+				format.Dispose();
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static int DataTypeFormatString(ImU8String buf, int bufSize, ImGuiDataType dataType, void* pData, ImU8String format)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* formatPtr = &format.GetPinnableNullTerminatedReference())
+				{
+					int ret = DataTypeFormatStringNative(bufPtr, bufSize, dataType, pData, formatPtr);
+					format.Dispose();
+					buf.Dispose();
+					return ret;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte InputTextExNative(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			return ((delegate* unmanaged[Cdecl]<byte*, byte*, byte*, int, Vector2, ImGuiInputTextFlags, delegate*<ImGuiInputTextCallbackData*, int>, void*, byte>)funcTable[1243])(label, hint, buf, bufSize, sizeArg, flags, (delegate*<ImGuiInputTextCallbackData*, int>)Utils.GetFunctionPointerForDelegate(callback), userData);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			byte ret = InputTextExNative(label, hint, buf, bufSize, sizeArg, flags, callback, userData);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			byte ret = InputTextExNative(label, hint, buf, bufSize, sizeArg, flags, callback, (void*)(default));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			byte ret = InputTextExNative(label, hint, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			byte ret = InputTextExNative(label, hint, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(labelPtr, hint, buf, bufSize, sizeArg, flags, callback, userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(labelPtr, hint, buf, bufSize, sizeArg, flags, callback, (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(labelPtr, hint, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(labelPtr, hint, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hintPtr, buf, bufSize, sizeArg, flags, callback, userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hintPtr, buf, bufSize, sizeArg, flags, callback, (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hintPtr, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hintPtr, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+				hint.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hintPtr, buf, bufSize, sizeArg, flags, callback, userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hintPtr, buf, bufSize, sizeArg, flags, callback, (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hintPtr, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, byte* buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hintPtr, buf, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+					hint.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hint, bufPtr, bufSize, sizeArg, flags, callback, userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hint, bufPtr, bufSize, sizeArg, flags, callback, (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hint, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = InputTextExNative(label, hint, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hint, bufPtr, bufSize, sizeArg, flags, callback, userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hint, bufPtr, bufSize, sizeArg, flags, callback, (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hint, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, byte* hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(labelPtr, hint, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(label, hintPtr, bufPtr, bufSize, sizeArg, flags, callback, userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(label, hintPtr, bufPtr, bufSize, sizeArg, flags, callback, (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(label, hintPtr, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(byte* label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = InputTextExNative(label, hintPtr, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+					buf.Dispose();
+					hint.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextExNative(labelPtr, hintPtr, bufPtr, bufSize, sizeArg, flags, callback, userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextExNative(labelPtr, hintPtr, bufPtr, bufSize, sizeArg, flags, callback, (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextExNative(labelPtr, hintPtr, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), (void*)(default));
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool InputTextEx(ImU8String label, ImU8String hint, ImU8String buf, int bufSize, Vector2 sizeArg, ImGuiInputTextFlags flags, void* userData)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* hintPtr = &hint.GetPinnableNullTerminatedReference())
+				{
+					fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+					{
+						byte ret = InputTextExNative(labelPtr, hintPtr, bufPtr, bufSize, sizeArg, flags, (ImGuiInputTextCallback)(default), userData);
+						buf.Dispose();
+						hint.Dispose();
+						label.Dispose();
+						return ret != 0;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static byte TempInputTextNative(ImRect bb, uint id, byte* label, byte* buf, int bufSize, ImGuiInputTextFlags flags)
+		{
+			return ((delegate* unmanaged[Cdecl]<ImRect, uint, byte*, byte*, int, ImGuiInputTextFlags, byte>)funcTable[1244])(bb, id, label, buf, bufSize, flags);
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool TempInputText(ImRect bb, uint id, byte* label, byte* buf, int bufSize, ImGuiInputTextFlags flags)
+		{
+			byte ret = TempInputTextNative(bb, id, label, buf, bufSize, flags);
+			return ret != 0;
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool TempInputText(ImRect bb, uint id, ImU8String label, byte* buf, int bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				byte ret = TempInputTextNative(bb, id, labelPtr, buf, bufSize, flags);
+				label.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool TempInputText(ImRect bb, uint id, byte* label, ImU8String buf, int bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+			{
+				byte ret = TempInputTextNative(bb, id, label, bufPtr, bufSize, flags);
+				buf.Dispose();
+				return ret != 0;
+			}
+		}
+
+		/// <summary>
+		/// To be documented.
+		/// </summary>
+		public static bool TempInputText(ImRect bb, uint id, ImU8String label, ImU8String buf, int bufSize, ImGuiInputTextFlags flags)
+		{
+			fixed (byte* labelPtr = &label.GetPinnableNullTerminatedReference())
+			{
+				fixed (byte* bufPtr = &buf.GetPinnableNullTerminatedReference())
+				{
+					byte ret = TempInputTextNative(bb, id, labelPtr, bufPtr, bufSize, flags);
+					buf.Dispose();
+					label.Dispose();
+					return ret != 0;
+				}
+			}
+		}
+
 	}
+	// DISCARDED by Dalamud: int igImFormatString(char* buf, size_t buf_size, const char* fmt, ...)
+	// DISCARDED by Dalamud: int igImFormatStringV(char* buf, size_t buf_size, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: bool igArrowButton(const char* str_id, ImGuiDir dir)
+	// DISCARDED by HexaGen: bool igArrowButtonEx(const char* str_id, ImGuiDir dir, ImVec2 size_arg, ImGuiButtonFlags flags)
+	// DISCARDED by HexaGen: bool igBegin(const char* name, bool* p_open, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginChild_ID(ImGuiID id, const ImVec2 size, bool border, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginChild_Str(const char* str_id, const ImVec2 size, bool border, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginChildEx(const char* name, ImGuiID id, const ImVec2 size_arg, bool border, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginChildFrame(ImGuiID id, const ImVec2 size, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginCombo(const char* label, const char* preview_value, ImGuiComboFlags flags)
+	// DISCARDED by HexaGen: bool igBeginComboPopup(ImGuiID popup_id, const ImRect bb, ImGuiComboFlags flags)
+	// DISCARDED by HexaGen: bool igBeginComboPreview()
+	// DISCARDED by HexaGen: bool igBeginDragDropSource(ImGuiDragDropFlags flags)
+	// DISCARDED by HexaGen: bool igBeginDragDropTarget()
+	// DISCARDED by HexaGen: bool igBeginDragDropTargetCustom(const ImRect bb, ImGuiID id)
+	// DISCARDED by HexaGen: bool igBeginListBox(const char* label, const ImVec2 size)
+	// DISCARDED by HexaGen: bool igBeginMainMenuBar()
+	// DISCARDED by HexaGen: bool igBeginMenu(const char* label, bool enabled)
+	// DISCARDED by HexaGen: bool igBeginMenuBar()
+	// DISCARDED by HexaGen: bool igBeginMenuEx(const char* label, const char* icon, bool enabled)
+	// DISCARDED by HexaGen: bool igBeginPopup(const char* str_id, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginPopupContextItem(const char* str_id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: bool igBeginPopupContextVoid(const char* str_id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: bool igBeginPopupContextWindow(const char* str_id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: bool igBeginPopupEx(ImGuiID id, ImGuiWindowFlags extra_flags)
+	// DISCARDED by HexaGen: bool igBeginPopupModal(const char* name, bool* p_open, ImGuiWindowFlags flags)
+	// DISCARDED by HexaGen: bool igBeginTabBar(const char* str_id, ImGuiTabBarFlags flags)
+	// DISCARDED by HexaGen: bool igBeginTabBarEx(ImGuiTabBar* tab_bar, const ImRect bb, ImGuiTabBarFlags flags, ImGuiDockNode* dock_node)
+	// DISCARDED by HexaGen: bool igBeginTabItem(const char* label, bool* p_open, ImGuiTabItemFlags flags)
+	// DISCARDED by HexaGen: bool igBeginTable(const char* str_id, int column, ImGuiTableFlags flags, const ImVec2 outer_size, float inner_width)
+	// DISCARDED by HexaGen: bool igBeginTableEx(const char* name, ImGuiID id, int columns_count, ImGuiTableFlags flags, const ImVec2 outer_size, float inner_width)
+	// DISCARDED by HexaGen: bool igBeginViewportSideBar(const char* name, ImGuiViewport* viewport, ImGuiDir dir, float size, ImGuiWindowFlags window_flags)
+	// DISCARDED by HexaGen: bool igButton(const char* label, const ImVec2 size)
+	// DISCARDED by HexaGen: bool igButtonBehavior(const ImRect bb, ImGuiID id, bool* out_hovered, bool* out_held, ImGuiButtonFlags flags)
+	// DISCARDED by HexaGen: bool igButtonEx(const char* label, const ImVec2 size_arg, ImGuiButtonFlags flags)
+	// DISCARDED by HexaGen: bool igCheckbox(const char* label, bool* v)
+	// DISCARDED by HexaGen: bool igCheckboxFlags_IntPtr(const char* label, int* flags, int flags_value)
+	// DISCARDED by HexaGen: bool igCheckboxFlags_S64Ptr(const char* label, ImS64* flags, ImS64 flags_value)
+	// DISCARDED by HexaGen: bool igCheckboxFlags_U64Ptr(const char* label, ImU64* flags, ImU64 flags_value)
+	// DISCARDED by HexaGen: bool igCheckboxFlags_UintPtr(const char* label, unsigned int* flags, unsigned int flags_value)
+	// DISCARDED by HexaGen: bool igCloseButton(ImGuiID id, const ImVec2 pos)
+	// DISCARDED by HexaGen: bool igCollapseButton(ImGuiID id, const ImVec2 pos, ImGuiDockNode* dock_node)
+	// DISCARDED by HexaGen: bool igCollapsingHeader_BoolPtr(const char* label, bool* p_visible, ImGuiTreeNodeFlags flags)
+	// DISCARDED by HexaGen: bool igCollapsingHeader_TreeNodeFlags(const char* label, ImGuiTreeNodeFlags flags)
+	// DISCARDED by HexaGen: bool igColorButton(const char* desc_id, const ImVec4 col, ImGuiColorEditFlags flags, const ImVec2 size)
+	// DISCARDED by HexaGen: bool igColorEdit3(const char* label, float[3] col = 3, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: bool igColorEdit4(const char* label, float[4] col = 4, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: bool igColorPicker3(const char* label, float[3] col = 3, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: bool igColorPicker4(const char* label, float[4] col = 4, ImGuiColorEditFlags flags, const float* ref_col)
+	// DISCARDED by HexaGen: bool igCombo_FnBoolPtr(const char* label, int* current_item, bool (*)(const char* label, int* current_item, bool (*)(void* data, int idx, const char** out_text)* items_getter, void* data, int items_count, int popup_max_height_in_items)* items_getter, void* data, int items_count, int popup_max_height_in_items)
+	// DISCARDED by HexaGen: bool igCombo_Str_arr(const char* label, int* current_item, const const char*[-1] items, int items_count, int popup_max_height_in_items)
+	// DISCARDED by HexaGen: bool igCombo_Str(const char* label, int* current_item, const char* items_separated_by_zeros, int popup_max_height_in_items)
+	// DISCARDED by HexaGen: bool igDataTypeApplyFromText(const char* buf, ImGuiDataType data_type, void* p_data, const char* format)
+	// DISCARDED by HexaGen: bool igDataTypeClamp(ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max)
+	// DISCARDED by HexaGen: bool igDebugCheckVersionAndDataLayout(const char* version_str, size_t sz_io, size_t sz_style, size_t sz_vec2, size_t sz_vec4, size_t sz_drawvert, size_t sz_drawidx)
+	// DISCARDED by HexaGen: bool igDockContextCalcDropPosForDocking(ImGuiWindow* target, ImGuiDockNode* target_node, ImGuiWindow* payload, ImGuiDir split_dir, bool split_outer, ImVec2* out_pos)
+	// DISCARDED by HexaGen: bool igDockNodeBeginAmendTabBar(ImGuiDockNode* node)
+	// DISCARDED by HexaGen: bool igDockNodeIsInHierarchyOf(ImGuiDockNode* node, ImGuiDockNode* parent)
+	// DISCARDED by HexaGen: bool igDragBehavior(ImGuiID id, ImGuiDataType data_type, void* p_v, float v_speed, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragFloat(const char* label, float* v, float v_speed, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragFloat2(const char* label, float[2] v = 2, float v_speed, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragFloat3(const char* label, float[3] v = 3, float v_speed, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragFloat4(const char* label, float[4] v = 4, float v_speed, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragFloatRange2(const char* label, float* v_current_min, float* v_current_max, float v_speed, float v_min, float v_max, const char* format, const char* format_max, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragInt(const char* label, int* v, float v_speed, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragInt2(const char* label, int[2] v = 2, float v_speed, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragInt3(const char* label, int[3] v = 3, float v_speed, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragInt4(const char* label, int[4] v = 4, float v_speed, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragIntRange2(const char* label, int* v_current_min, int* v_current_max, float v_speed, int v_min, int v_max, const char* format, const char* format_max, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragScalar(const char* label, ImGuiDataType data_type, void* p_data, float v_speed, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igDragScalarN(const char* label, ImGuiDataType data_type, void* p_data, int components, float v_speed, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igGetWindowAlwaysWantOwnTabBar(ImGuiWindow* window)
+	// DISCARDED by HexaGen: bool igImageButton(ImTextureID user_texture_id, const ImVec2 size, const ImVec2 uv0, const ImVec2 uv1, int frame_padding, const ImVec4 bg_col, const ImVec4 tint_col)
+	// DISCARDED by HexaGen: bool igImageButtonEx(ImGuiID id, ImTextureID texture_id, const ImVec2 size, const ImVec2 uv0, const ImVec2 uv1, const ImVec2 padding, const ImVec4 bg_col, const ImVec4 tint_col)
+	// DISCARDED by HexaGen: bool igImBitArrayTestBit(const ImU32* arr, int n)
+	// DISCARDED by HexaGen: bool igImCharIsBlankA(char c)
+	// DISCARDED by HexaGen: bool igImCharIsBlankW(unsigned int c)
+	// DISCARDED by HexaGen: bool igImFileClose(ImFileHandle file)
+	// DISCARDED by HexaGen: bool igImIsFloatAboveGuaranteedIntegerPrecision(float f)
+	// DISCARDED by HexaGen: bool igImIsPowerOfTwo_Int(int v)
+	// DISCARDED by HexaGen: bool igImIsPowerOfTwo_U64(ImU64 v)
+	// DISCARDED by HexaGen: bool igImTriangleContainsPoint(const ImVec2 a, const ImVec2 b, const ImVec2 c, const ImVec2 p)
+	// DISCARDED by HexaGen: bool igInputDouble(const char* label, double* v, double step, double step_fast, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputFloat(const char* label, float* v, float step, float step_fast, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputFloat2(const char* label, float[2] v = 2, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputFloat3(const char* label, float[3] v = 3, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputFloat4(const char* label, float[4] v = 4, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputInt(const char* label, int* v, int step, int step_fast, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputInt2(const char* label, int[2] v = 2, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputInt3(const char* label, int[3] v = 3, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputInt4(const char* label, int[4] v = 4, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputScalar(const char* label, ImGuiDataType data_type, void* p_data, const void* p_step, const void* p_step_fast, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInputScalarN(const char* label, ImGuiDataType data_type, void* p_data, int components, const void* p_step, const void* p_step_fast, const char* format, ImGuiInputTextFlags flags)
+	// DISCARDED by HexaGen: bool igInvisibleButton(const char* str_id, const ImVec2 size, ImGuiButtonFlags flags)
+	// DISCARDED by HexaGen: bool igIsActiveIdUsingKey(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsActiveIdUsingNavDir(ImGuiDir dir)
+	// DISCARDED by HexaGen: bool igIsActiveIdUsingNavInput(ImGuiNavInput input)
+	// DISCARDED by HexaGen: bool igIsAnyItemActive()
+	// DISCARDED by HexaGen: bool igIsAnyItemFocused()
+	// DISCARDED by HexaGen: bool igIsAnyItemHovered()
+	// DISCARDED by HexaGen: bool igIsAnyMouseDown()
+	// DISCARDED by HexaGen: bool igIsClippedEx(const ImRect bb, ImGuiID id)
+	// DISCARDED by HexaGen: bool igIsDragDropActive()
+	// DISCARDED by HexaGen: bool igIsDragDropPayloadBeingAccepted()
+	// DISCARDED by HexaGen: bool igIsGamepadKey(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsItemActivated()
+	// DISCARDED by HexaGen: bool igIsItemActive()
+	// DISCARDED by HexaGen: bool igIsItemClicked(ImGuiMouseButton mouse_button)
+	// DISCARDED by HexaGen: bool igIsItemDeactivated()
+	// DISCARDED by HexaGen: bool igIsItemDeactivatedAfterEdit()
+	// DISCARDED by HexaGen: bool igIsItemEdited()
+	// DISCARDED by HexaGen: bool igIsItemFocused()
+	// DISCARDED by HexaGen: bool igIsItemHovered(ImGuiHoveredFlags flags)
+	// DISCARDED by HexaGen: bool igIsItemToggledOpen()
+	// DISCARDED by HexaGen: bool igIsItemToggledSelection()
+	// DISCARDED by HexaGen: bool igIsItemVisible()
+	// DISCARDED by HexaGen: bool igIsKeyDown(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsKeyPressed(ImGuiKey key, bool repeat)
+	// DISCARDED by HexaGen: bool igIsKeyPressedMap(ImGuiKey key, bool repeat)
+	// DISCARDED by HexaGen: bool igIsKeyReleased(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsLegacyKey(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsMouseClicked(ImGuiMouseButton button, bool repeat)
+	// DISCARDED by HexaGen: bool igIsMouseDoubleClicked(ImGuiMouseButton button)
+	// DISCARDED by HexaGen: bool igIsMouseDown(ImGuiMouseButton button)
+	// DISCARDED by HexaGen: bool igIsMouseDragging(ImGuiMouseButton button, float lock_threshold)
+	// DISCARDED by HexaGen: bool igIsMouseDragPastThreshold(ImGuiMouseButton button, float lock_threshold)
+	// DISCARDED by HexaGen: bool igIsMouseHoveringRect(const ImVec2 r_min, const ImVec2 r_max, bool clip)
+	// DISCARDED by HexaGen: bool igIsMousePosValid(const ImVec2* mouse_pos)
+	// DISCARDED by HexaGen: bool igIsMouseReleased(ImGuiMouseButton button)
+	// DISCARDED by HexaGen: bool igIsNamedKey(ImGuiKey key)
+	// DISCARDED by HexaGen: bool igIsNavInputDown(ImGuiNavInput n)
+	// DISCARDED by HexaGen: bool igIsNavInputTest(ImGuiNavInput n, ImGuiNavReadMode rm)
+	// DISCARDED by HexaGen: bool igIsPopupOpen_ID(ImGuiID id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: bool igIsPopupOpen_Str(const char* str_id, ImGuiPopupFlags flags)
+	// DISCARDED by HexaGen: bool igIsRectVisible_Nil(const ImVec2 size)
+	// DISCARDED by HexaGen: bool igIsRectVisible_Vec2(const ImVec2 rect_min, const ImVec2 rect_max)
+	// DISCARDED by HexaGen: bool igIsWindowAbove(ImGuiWindow* potential_above, ImGuiWindow* potential_below)
+	// DISCARDED by HexaGen: bool igIsWindowAppearing()
+	// DISCARDED by HexaGen: bool igIsWindowChildOf(ImGuiWindow* window, ImGuiWindow* potential_parent, bool popup_hierarchy, bool dock_hierarchy)
+	// DISCARDED by HexaGen: bool igIsWindowCollapsed()
+	// DISCARDED by HexaGen: bool igIsWindowDocked()
+	// DISCARDED by HexaGen: bool igIsWindowFocused(ImGuiFocusedFlags flags)
+	// DISCARDED by HexaGen: bool igIsWindowHovered(ImGuiHoveredFlags flags)
+	// DISCARDED by HexaGen: bool igIsWindowNavFocusable(ImGuiWindow* window)
+	// DISCARDED by HexaGen: bool igIsWindowWithinBeginStackOf(ImGuiWindow* window, ImGuiWindow* potential_parent)
+	// DISCARDED by HexaGen: bool igItemAdd(const ImRect bb, ImGuiID id, const ImRect* nav_bb, ImGuiItemFlags extra_flags)
+	// DISCARDED by HexaGen: bool igItemHoverable(const ImRect bb, ImGuiID id)
+	// DISCARDED by HexaGen: bool igListBox_FnBoolPtr(const char* label, int* current_item, bool (*)(const char* label, int* current_item, bool (*)(void* data, int idx, const char** out_text)* items_getter, void* data, int items_count, int height_in_items)* items_getter, void* data, int items_count, int height_in_items)
+	// DISCARDED by HexaGen: bool igListBox_Str_arr(const char* label, int* current_item, const const char*[-1] items, int items_count, int height_in_items)
+	// DISCARDED by HexaGen: bool igMenuItem_Bool(const char* label, const char* shortcut, bool selected, bool enabled)
+	// DISCARDED by HexaGen: bool igMenuItem_BoolPtr(const char* label, const char* shortcut, bool* p_selected, bool enabled)
+	// DISCARDED by HexaGen: bool igMenuItemEx(const char* label, const char* icon, const char* shortcut, bool selected, bool enabled)
+	// DISCARDED by HexaGen: bool igNavMoveRequestButNoResultYet()
+	// DISCARDED by HexaGen: bool igRadioButton_Bool(const char* label, bool active)
+	// DISCARDED by HexaGen: bool igRadioButton_IntPtr(const char* label, int* v, int v_button)
+	// DISCARDED by HexaGen: bool igScrollbarEx(const ImRect bb, ImGuiID id, ImGuiAxis axis, ImS64* p_scroll_v, ImS64 avail_v, ImS64 contents_v, ImDrawFlags flags)
+	// DISCARDED by HexaGen: bool igSelectable_Bool(const char* label, bool selected, ImGuiSelectableFlags flags, const ImVec2 size)
+	// DISCARDED by HexaGen: bool igSelectable_BoolPtr(const char* label, bool* p_selected, ImGuiSelectableFlags flags, const ImVec2 size)
+	// DISCARDED by HexaGen: bool igSetDragDropPayload(const char* type, const void* data, size_t sz, ImGuiCond cond)
+	// DISCARDED by HexaGen: bool igShowStyleSelector(const char* label)
+	// DISCARDED by HexaGen: bool igSliderAngle(const char* label, float* v_rad, float v_degrees_min, float v_degrees_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderBehavior(const ImRect bb, ImGuiID id, ImGuiDataType data_type, void* p_v, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags, ImRect* out_grab_bb)
+	// DISCARDED by HexaGen: bool igSliderFloat(const char* label, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderFloat2(const char* label, float[2] v = 2, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderFloat3(const char* label, float[3] v = 3, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderFloat4(const char* label, float[4] v = 4, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderInt(const char* label, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderInt2(const char* label, int[2] v = 2, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderInt3(const char* label, int[3] v = 3, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderInt4(const char* label, int[4] v = 4, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderScalar(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSliderScalarN(const char* label, ImGuiDataType data_type, void* p_data, int components, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igSmallButton(const char* label)
+	// DISCARDED by HexaGen: bool igSplitterBehavior(const ImRect bb, ImGuiID id, ImGuiAxis axis, float* size1, float* size2, float min_size1, float min_size2, float hover_extend, float hover_visibility_delay, ImU32 bg_col)
+	// DISCARDED by HexaGen: bool igTabBarProcessReorder(ImGuiTabBar* tab_bar)
+	// DISCARDED by HexaGen: bool igTabItemButton(const char* label, ImGuiTabItemFlags flags)
+	// DISCARDED by HexaGen: bool igTabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, ImGuiTabItemFlags flags, ImGuiWindow* docked_window)
+	// DISCARDED by HexaGen: bool igTableNextColumn()
+	// DISCARDED by HexaGen: bool igTableSetColumnIndex(int column_n)
+	// DISCARDED by HexaGen: bool igTempInputIsActive(ImGuiID id)
+	// DISCARDED by HexaGen: bool igTempInputScalar(const ImRect bb, ImGuiID id, const char* label, ImGuiDataType data_type, void* p_data, const char* format, const void* p_clamp_min, const void* p_clamp_max)
+	// DISCARDED by HexaGen: bool igTreeNode_Ptr(const void* ptr_id, const char* fmt, ...)
+	// DISCARDED by HexaGen: bool igTreeNode_Str(const char* label)
+	// DISCARDED by HexaGen: bool igTreeNode_StrStr(const char* str_id, const char* fmt, ...)
+	// DISCARDED by HexaGen: bool igTreeNodeBehavior(ImGuiID id, ImGuiTreeNodeFlags flags, const char* label, const char* label_end)
+	// DISCARDED by HexaGen: bool igTreeNodeBehaviorIsOpen(ImGuiID id, ImGuiTreeNodeFlags flags)
+	// DISCARDED by HexaGen: bool igTreeNodeEx_Ptr(const void* ptr_id, ImGuiTreeNodeFlags flags, const char* fmt, ...)
+	// DISCARDED by HexaGen: bool igTreeNodeEx_Str(const char* label, ImGuiTreeNodeFlags flags)
+	// DISCARDED by HexaGen: bool igTreeNodeEx_StrStr(const char* str_id, ImGuiTreeNodeFlags flags, const char* fmt, ...)
+	// DISCARDED by HexaGen: bool igTreeNodeExV_Ptr(const void* ptr_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: bool igTreeNodeExV_Str(const char* str_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: bool igTreeNodeV_Ptr(const void* ptr_id, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: bool igTreeNodeV_Str(const char* str_id, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: bool igVSliderFloat(const char* label, const ImVec2 size, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igVSliderInt(const char* label, const ImVec2 size, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool igVSliderScalar(const char* label, const ImVec2 size, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	// DISCARDED by HexaGen: bool ImBitVector_TestBit(ImBitVector* self, int n)
+	// DISCARDED by HexaGen: bool ImFont_IsGlyphRangeUnused(ImFont* self, unsigned int c_begin, unsigned int c_last)
+	// DISCARDED by HexaGen: bool ImFont_IsLoaded(ImFont* self)
+	// DISCARDED by HexaGen: bool ImFontAtlas_Build(ImFontAtlas* self)
+	// DISCARDED by HexaGen: bool ImFontAtlas_GetMouseCursorTexData(ImFontAtlas* self, ImGuiMouseCursor cursor, ImVec2* out_offset, ImVec2* out_size, ImVec2[2] out_uv_border = 2, ImVec2[2] out_uv_fill = 2, int* texture_index)
+	// DISCARDED by HexaGen: bool ImFontAtlas_IsBuilt(ImFontAtlas* self)
+	// DISCARDED by HexaGen: bool ImFontAtlasCustomRect_IsPacked(ImFontAtlasCustomRect* self)
+	// DISCARDED by HexaGen: bool ImFontGlyphRangesBuilder_GetBit(ImFontGlyphRangesBuilder* self, size_t n)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsCentralNode(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsDockSpace(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsEmpty(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsFloatingNode(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsHiddenTabBar(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsLeafNode(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsNoTabBar(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsRootNode(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiDockNode_IsSplitNode(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: bool ImGuiInputTextCallbackData_HasSelection(ImGuiInputTextCallbackData* self)
+	// DISCARDED by HexaGen: bool ImGuiInputTextState_HasSelection(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: bool ImGuiListClipper_Step(ImGuiListClipper* self)
+	// DISCARDED by HexaGen: bool ImGuiPayload_IsDataType(ImGuiPayload* self, const char* type)
+	// DISCARDED by HexaGen: bool ImGuiPayload_IsDelivery(ImGuiPayload* self)
+	// DISCARDED by HexaGen: bool ImGuiPayload_IsPreview(ImGuiPayload* self)
+	// DISCARDED by HexaGen: bool ImGuiStorage_GetBool(ImGuiStorage* self, ImGuiID key, bool default_val)
+	// DISCARDED by HexaGen: bool ImGuiTextBuffer_empty(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: bool ImGuiTextFilter_Draw(ImGuiTextFilter* self, const char* label, float width)
+	// DISCARDED by HexaGen: bool ImGuiTextFilter_IsActive(ImGuiTextFilter* self)
+	// DISCARDED by HexaGen: bool ImGuiTextFilter_PassFilter(ImGuiTextFilter* self, const char* text, const char* text_end)
+	// DISCARDED by HexaGen: bool ImGuiTextRange_empty(ImGuiTextRange* self)
+	// DISCARDED by HexaGen: bool ImRect_Contains_Rect(ImRect* self, const ImRect r)
+	// DISCARDED by HexaGen: bool ImRect_Contains_Vec2(ImRect* self, const ImVec2 p)
+	// DISCARDED by HexaGen: bool ImRect_IsInverted(ImRect* self)
+	// DISCARDED by HexaGen: bool ImRect_Overlaps(ImRect* self, const ImRect r)
+	// DISCARDED by HexaGen: bool* ImGuiStorage_GetBoolRef(ImGuiStorage* self, ImGuiID key, bool default_val)
+	// DISCARDED by HexaGen: char* igImStrdup(const char* str)
+	// DISCARDED by HexaGen: char* igImStrdupcpy(char* dst, size_t* p_dst_size, const char* str)
+	// DISCARDED by HexaGen: char* ImGuiWindowSettings_GetName(ImGuiWindowSettings* self)
+	// DISCARDED by HexaGen: const char* igFindRenderedTextEnd(const char* text, const char* text_end)
+	// DISCARDED by HexaGen: const char* igGetClipboardText()
+	// DISCARDED by HexaGen: const char* igGetKeyName(ImGuiKey key)
+	// DISCARDED by HexaGen: const char* igGetNavInputName(ImGuiNavInput n)
+	// DISCARDED by HexaGen: const char* igGetStyleColorName(ImGuiCol idx)
+	// DISCARDED by HexaGen: const char* igGetVersion()
+	// DISCARDED by HexaGen: const char* igImParseFormatFindEnd(const char* format)
+	// DISCARDED by HexaGen: const char* igImParseFormatFindStart(const char* format)
+	// DISCARDED by HexaGen: const char* igImParseFormatSanitizeForScanning(const char* fmt_in, char* fmt_out, size_t fmt_out_size)
+	// DISCARDED by HexaGen: const char* igImStrchrRange(const char* str_begin, const char* str_end, char c)
+	// DISCARDED by HexaGen: const char* igImStreolRange(const char* str, const char* str_end)
+	// DISCARDED by HexaGen: const char* igImStristr(const char* haystack, const char* haystack_end, const char* needle, const char* needle_end)
+	// DISCARDED by HexaGen: const char* igImStrSkipBlank(const char* str)
+	// DISCARDED by HexaGen: const char* igImTextCharToUtf8(char[5] out_buf = 5, unsigned int c)
+	// DISCARDED by HexaGen: const char* igSaveIniSettingsToMemory(size_t* out_ini_size)
+	// DISCARDED by HexaGen: const char* igTableGetColumnName_Int(int column_n)
+	// DISCARDED by HexaGen: const char* igTableGetColumnName_TablePtr(const ImGuiTable* table, int column_n)
+	// DISCARDED by HexaGen: const char* ImFont_CalcWordWrapPositionA(ImFont* self, float scale, const char* text, const char* text_end, float wrap_width)
+	// DISCARDED by HexaGen: const char* ImFont_GetDebugName(ImFont* self)
+	// DISCARDED by HexaGen: const char* ImGuiTabBar_GetTabName(ImGuiTabBar* self, const ImGuiTabItem* tab)
+	// DISCARDED by HexaGen: const char* ImGuiTextBuffer_begin(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: const char* ImGuiTextBuffer_c_str(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: const char* ImGuiTextBuffer_end(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: const ImFontBuilderIO* igImFontAtlasGetBuilderForStbTruetype()
+	// DISCARDED by HexaGen: const ImFontGlyph* ImFont_FindGlyph(ImFont* self, ImWchar c)
+	// DISCARDED by HexaGen: const ImFontGlyph* ImFont_FindGlyphNoFallback(ImFont* self, ImWchar c)
+	// DISCARDED by HexaGen: const ImGuiDataTypeInfo* igDataTypeGetInfo(ImGuiDataType data_type)
+	// DISCARDED by HexaGen: const ImGuiPayload* igAcceptDragDropPayload(const char* type, ImGuiDragDropFlags flags)
+	// DISCARDED by HexaGen: const ImGuiPayload* igGetDragDropPayload()
+	// DISCARDED by HexaGen: const ImGuiPlatformMonitor* igGetViewportPlatformMonitor(ImGuiViewport* viewport)
+	// DISCARDED by HexaGen: const ImVec4* igGetStyleColorVec4(ImGuiCol idx)
+	// DISCARDED by HexaGen: const ImWchar* igImStrbolW(const ImWchar* buf_mid_line, const ImWchar* buf_begin)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesChineseFull(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesCyrillic(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesDefault(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesJapanese(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesKorean(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesThai(ImFontAtlas* self)
+	// DISCARDED by HexaGen: const ImWchar* ImFontAtlas_GetGlyphRangesVietnamese(ImFontAtlas* self)
+	// DISCARDED by HexaGen: double igGetTime()
+	// DISCARDED by HexaGen: double igImAbs_double(double x)
+	// DISCARDED by HexaGen: double igImLog_double(double x)
+	// DISCARDED by HexaGen: double igImPow_double(double x, double y)
+	// DISCARDED by HexaGen: double igImRsqrt_double(double x)
+	// DISCARDED by HexaGen: double igImSign_double(double x)
+	// DISCARDED by HexaGen: float igCalcItemWidth()
+	// DISCARDED by HexaGen: float igCalcWrapWidthForPos(const ImVec2 pos, float wrap_pos_x)
+	// DISCARDED by HexaGen: float igGET_FLT_MAX()
+	// DISCARDED by HexaGen: float igGET_FLT_MIN()
+	// DISCARDED by HexaGen: float igGetColumnNormFromOffset(const ImGuiOldColumns* columns, float offset)
+	// DISCARDED by HexaGen: float igGetColumnOffset(int column_index)
+	// DISCARDED by HexaGen: float igGetColumnOffsetFromNorm(const ImGuiOldColumns* columns, float offset_norm)
+	// DISCARDED by HexaGen: float igGetColumnWidth(int column_index)
+	// DISCARDED by HexaGen: float igGetCursorPosX()
+	// DISCARDED by HexaGen: float igGetCursorPosY()
+	// DISCARDED by HexaGen: float igGetFontSize()
+	// DISCARDED by HexaGen: float igGetFrameHeight()
+	// DISCARDED by HexaGen: float igGetFrameHeightWithSpacing()
+	// DISCARDED by HexaGen: float igGetNavInputAmount(ImGuiNavInput n, ImGuiNavReadMode mode)
+	// DISCARDED by HexaGen: float igGetScrollMaxX()
+	// DISCARDED by HexaGen: float igGetScrollMaxY()
+	// DISCARDED by HexaGen: float igGetScrollX()
+	// DISCARDED by HexaGen: float igGetScrollY()
+	// DISCARDED by HexaGen: float igGetTextLineHeight()
+	// DISCARDED by HexaGen: float igGetTextLineHeightWithSpacing()
+	// DISCARDED by HexaGen: float igGetTreeNodeToLabelSpacing()
+	// DISCARDED by HexaGen: float igGetWindowDpiScale()
+	// DISCARDED by HexaGen: float igGetWindowHeight()
+	// DISCARDED by HexaGen: float igGetWindowWidth()
+	// DISCARDED by HexaGen: float igImAbs_Float(float x)
+	// DISCARDED by HexaGen: float igImDot(const ImVec2 a, const ImVec2 b)
+	// DISCARDED by HexaGen: float igImFloor_Float(float f)
+	// DISCARDED by HexaGen: float igImFloorSigned_Float(float f)
+	// DISCARDED by HexaGen: float igImInvLength(const ImVec2 lhs, float fail_value)
+	// DISCARDED by HexaGen: float igImLengthSqr_Vec2(const ImVec2 lhs)
+	// DISCARDED by HexaGen: float igImLengthSqr_Vec4(const ImVec4 lhs)
+	// DISCARDED by HexaGen: float igImLinearSweep(float current, float target, float speed)
+	// DISCARDED by HexaGen: float igImLog_Float(float x)
+	// DISCARDED by HexaGen: float igImPow_Float(float x, float y)
+	// DISCARDED by HexaGen: float igImRsqrt_Float(float x)
+	// DISCARDED by HexaGen: float igImSaturate(float f)
+	// DISCARDED by HexaGen: float igImSign_Float(float x)
+	// DISCARDED by HexaGen: float igImTriangleArea(const ImVec2 a, const ImVec2 b, const ImVec2 c)
+	// DISCARDED by HexaGen: float igTableGetColumnWidthAuto(ImGuiTable* table, ImGuiTableColumn* column)
+	// DISCARDED by HexaGen: float igTableGetHeaderRowHeight()
+	// DISCARDED by HexaGen: float igTableGetMaxColumnWidth(const ImGuiTable* table, int column_n)
+	// DISCARDED by HexaGen: float ImFont_GetCharAdvance(ImFont* self, ImWchar c)
+	// DISCARDED by HexaGen: float ImFont_GetDistanceAdjustmentForPair(ImFont* self, ImWchar left_c, ImWchar right_c)
+	// DISCARDED by HexaGen: float ImFont_GetDistanceAdjustmentForPairFromHotData(ImFont* self, ImWchar left_c, const ImFontGlyphHotData* right_c_info)
+	// DISCARDED by HexaGen: float ImGuiMenuColumns_DeclColumns(ImGuiMenuColumns* self, float w_icon, float w_label, float w_shortcut, float w_mark)
+	// DISCARDED by HexaGen: float ImGuiStorage_GetFloat(ImGuiStorage* self, ImGuiID key, float default_val)
+	// DISCARDED by HexaGen: float ImGuiWindow_CalcFontSize(ImGuiWindow* self)
+	// DISCARDED by HexaGen: float ImGuiWindow_MenuBarHeight(ImGuiWindow* self)
+	// DISCARDED by HexaGen: float ImGuiWindow_TitleBarHeight(ImGuiWindow* self)
+	// DISCARDED by HexaGen: float ImRect_GetArea(ImRect* self)
+	// DISCARDED by HexaGen: float ImRect_GetHeight(ImRect* self)
+	// DISCARDED by HexaGen: float ImRect_GetWidth(ImRect* self)
+	// DISCARDED by HexaGen: float* ImGuiStorage_GetFloatRef(ImGuiStorage* self, ImGuiID key, float default_val)
+	// DISCARDED by HexaGen: ImColor* ImColor_ImColor_Float(float r, float g, float b, float a)
+	// DISCARDED by HexaGen: ImColor* ImColor_ImColor_Int(int r, int g, int b, int a)
+	// DISCARDED by HexaGen: ImColor* ImColor_ImColor_Nil()
+	// DISCARDED by HexaGen: ImColor* ImColor_ImColor_U32(ImU32 rgba)
+	// DISCARDED by HexaGen: ImColor* ImColor_ImColor_Vec4(const ImVec4 col)
+	// DISCARDED by HexaGen: ImDrawCmd* ImDrawCmd_ImDrawCmd()
+	// DISCARDED by HexaGen: ImDrawData* igGetDrawData()
+	// DISCARDED by HexaGen: ImDrawData* ImDrawData_ImDrawData()
+	// DISCARDED by HexaGen: ImDrawFlags igCalcRoundingFlagsForRectInRect(const ImRect r_in, const ImRect r_outer, float threshold)
+	// DISCARDED by HexaGen: ImDrawList* igGetBackgroundDrawList_Nil()
+	// DISCARDED by HexaGen: ImDrawList* igGetBackgroundDrawList_ViewportPtr(ImGuiViewport* viewport)
+	// DISCARDED by HexaGen: ImDrawList* igGetForegroundDrawList_Nil()
+	// DISCARDED by HexaGen: ImDrawList* igGetForegroundDrawList_ViewportPtr(ImGuiViewport* viewport)
+	// DISCARDED by HexaGen: ImDrawList* igGetForegroundDrawList_WindowPtr(ImGuiWindow* window)
+	// DISCARDED by HexaGen: ImDrawList* igGetWindowDrawList()
+	// DISCARDED by HexaGen: ImDrawList* ImDrawList_CloneOutput(ImDrawList* self)
+	// DISCARDED by HexaGen: ImDrawList* ImDrawList_ImDrawList(const ImDrawListSharedData* shared_data)
+	// DISCARDED by HexaGen: ImDrawListSharedData* igGetDrawListSharedData()
+	// DISCARDED by HexaGen: ImDrawListSharedData* ImDrawListSharedData_ImDrawListSharedData()
+	// DISCARDED by HexaGen: ImDrawListSplitter* ImDrawListSplitter_ImDrawListSplitter()
+	// DISCARDED by HexaGen: ImFileHandle igImFileOpen(const char* filename, const char* mode)
+	// DISCARDED by HexaGen: ImFont* igGetDefaultFont()
+	// DISCARDED by HexaGen: ImFont* igGetFont()
+	// DISCARDED by HexaGen: ImFont* ImFont_ImFont()
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFont(ImFontAtlas* self, const ImFontConfig* font_cfg)
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFontDefault(ImFontAtlas* self, const ImFontConfig* font_cfg)
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFontFromFileTTF(ImFontAtlas* self, const char* filename, float size_pixels, const ImFontConfig* font_cfg, const ImWchar* glyph_ranges)
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(ImFontAtlas* self, const char* compressed_font_data_base85, float size_pixels, const ImFontConfig* font_cfg, const ImWchar* glyph_ranges)
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFontFromMemoryCompressedTTF(ImFontAtlas* self, const void* compressed_font_data, int compressed_font_size, float size_pixels, const ImFontConfig* font_cfg, const ImWchar* glyph_ranges)
+	// DISCARDED by HexaGen: ImFont* ImFontAtlas_AddFontFromMemoryTTF(ImFontAtlas* self, void* font_data, int font_size, float size_pixels, const ImFontConfig* font_cfg, const ImWchar* glyph_ranges)
+	// DISCARDED by HexaGen: ImFontAtlas* ImFontAtlas_ImFontAtlas()
+	// DISCARDED by HexaGen: ImFontAtlasCustomRect* ImFontAtlas_GetCustomRectByIndex(ImFontAtlas* self, int index)
+	// DISCARDED by HexaGen: ImFontAtlasCustomRect* ImFontAtlasCustomRect_ImFontAtlasCustomRect()
+	// DISCARDED by HexaGen: ImFontConfig* ImFontConfig_ImFontConfig()
+	// DISCARDED by HexaGen: ImFontGlyphRangesBuilder* ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder()
+	// DISCARDED by HexaGen: ImGuiComboPreviewData* ImGuiComboPreviewData_ImGuiComboPreviewData()
+	// DISCARDED by HexaGen: ImGuiContext* igCreateContext(ImFontAtlas* shared_font_atlas)
+	// DISCARDED by HexaGen: ImGuiContext* igGetCurrentContext()
+	// DISCARDED by HexaGen: ImGuiContext* ImGuiContext_ImGuiContext(ImFontAtlas* shared_font_atlas)
+	// DISCARDED by HexaGen: ImGuiContextHook* ImGuiContextHook_ImGuiContextHook()
+	// DISCARDED by HexaGen: ImGuiDir igImGetDirQuadrantFromDelta(float dx, float dy)
+	// DISCARDED by HexaGen: ImGuiDockContext* ImGuiDockContext_ImGuiDockContext()
+	// DISCARDED by HexaGen: ImGuiDockNode* igDockBuilderGetCentralNode(ImGuiID node_id)
+	// DISCARDED by HexaGen: ImGuiDockNode* igDockBuilderGetNode(ImGuiID node_id)
+	// DISCARDED by HexaGen: ImGuiDockNode* igDockNodeGetRootNode(ImGuiDockNode* node)
+	// DISCARDED by HexaGen: ImGuiDockNode* igGetWindowDockNode()
+	// DISCARDED by HexaGen: ImGuiDockNode* ImGuiDockNode_ImGuiDockNode(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiID igAddContextHook(ImGuiContext* context, const ImGuiContextHook* hook)
+	// DISCARDED by HexaGen: ImGuiID igDockBuilderAddNode(ImGuiID node_id, ImGuiDockNodeFlags flags)
+	// DISCARDED by HexaGen: ImGuiID igDockBuilderSplitNode(ImGuiID node_id, ImGuiDir split_dir, float size_ratio_for_node_at_dir, ImGuiID* out_id_at_dir, ImGuiID* out_id_at_opposite_dir)
+	// DISCARDED by HexaGen: ImGuiID igDockContextGenNodeID(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: ImGuiID igDockNodeGetWindowMenuButtonId(const ImGuiDockNode* node)
+	// DISCARDED by HexaGen: ImGuiID igDockSpace(ImGuiID id, const ImVec2 size, ImGuiDockNodeFlags flags, const ImGuiWindowClass* window_class)
+	// DISCARDED by HexaGen: ImGuiID igDockSpaceOverViewport(const ImGuiViewport* viewport, ImGuiDockNodeFlags flags, const ImGuiWindowClass* window_class)
+	// DISCARDED by HexaGen: ImGuiID igGetActiveID()
+	// DISCARDED by HexaGen: ImGuiID igGetColumnsID(const char* str_id, int count)
+	// DISCARDED by HexaGen: ImGuiID igGetFocusedFocusScope()
+	// DISCARDED by HexaGen: ImGuiID igGetFocusID()
+	// DISCARDED by HexaGen: ImGuiID igGetFocusScope()
+	// DISCARDED by HexaGen: ImGuiID igGetHoveredID()
+	// DISCARDED by HexaGen: ImGuiID igGetID_Ptr(const void* ptr_id)
+	// DISCARDED by HexaGen: ImGuiID igGetID_Str(const char* str_id)
+	// DISCARDED by HexaGen: ImGuiID igGetID_StrStr(const char* str_id_begin, const char* str_id_end)
+	// DISCARDED by HexaGen: ImGuiID igGetIDWithSeed(const char* str_id_begin, const char* str_id_end, ImGuiID seed)
+	// DISCARDED by HexaGen: ImGuiID igGetItemID()
+	// DISCARDED by HexaGen: ImGuiID igGetWindowDockID()
+	// DISCARDED by HexaGen: ImGuiID igGetWindowResizeBorderID(ImGuiWindow* window, ImGuiDir dir)
+	// DISCARDED by HexaGen: ImGuiID igGetWindowResizeCornerID(ImGuiWindow* window, int n)
+	// DISCARDED by HexaGen: ImGuiID igGetWindowScrollbarID(ImGuiWindow* window, ImGuiAxis axis)
+	// DISCARDED by HexaGen: ImGuiID igImHashData(const void* data, size_t data_size, ImU32 seed)
+	// DISCARDED by HexaGen: ImGuiID igImHashStr(const char* data, size_t data_size, ImU32 seed)
+	// DISCARDED by HexaGen: ImGuiID igTableGetColumnResizeID(const ImGuiTable* table, int column_n, int instance_no)
+	// DISCARDED by HexaGen: ImGuiID ImGuiWindow_GetID_Int(ImGuiWindow* self, int n)
+	// DISCARDED by HexaGen: ImGuiID ImGuiWindow_GetID_Ptr(ImGuiWindow* self, const void* ptr)
+	// DISCARDED by HexaGen: ImGuiID ImGuiWindow_GetID_Str(ImGuiWindow* self, const char* str, const char* str_end)
+	// DISCARDED by HexaGen: ImGuiID ImGuiWindow_GetIDFromRectangle(ImGuiWindow* self, const ImRect r_abs)
+	// DISCARDED by HexaGen: ImGuiInputEvent* ImGuiInputEvent_ImGuiInputEvent()
+	// DISCARDED by HexaGen: ImGuiInputTextCallbackData* ImGuiInputTextCallbackData_ImGuiInputTextCallbackData()
+	// DISCARDED by HexaGen: ImGuiInputTextState* igGetInputTextState(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiInputTextState* ImGuiInputTextState_ImGuiInputTextState()
+	// DISCARDED by HexaGen: ImGuiIO* igGetIO()
+	// DISCARDED by HexaGen: ImGuiIO* ImGuiIO_ImGuiIO()
+	// DISCARDED by HexaGen: ImGuiItemFlags igGetItemFlags()
+	// DISCARDED by HexaGen: ImGuiItemStatusFlags igGetItemStatusFlags()
+	// DISCARDED by HexaGen: ImGuiKeyData* igGetKeyData(ImGuiKey key)
+	// DISCARDED by HexaGen: ImGuiLastItemData* ImGuiLastItemData_ImGuiLastItemData()
+	// DISCARDED by HexaGen: ImGuiListClipper* ImGuiListClipper_ImGuiListClipper()
+	// DISCARDED by HexaGen: ImGuiListClipperData* ImGuiListClipperData_ImGuiListClipperData()
+	// DISCARDED by HexaGen: ImGuiListClipperRange ImGuiListClipperRange_FromIndices(int min, int max)
+	// DISCARDED by HexaGen: ImGuiListClipperRange ImGuiListClipperRange_FromPositions(float y1, float y2, int off_min, int off_max)
+	// DISCARDED by HexaGen: ImGuiMenuColumns* ImGuiMenuColumns_ImGuiMenuColumns()
+	// DISCARDED by HexaGen: ImGuiMetricsConfig* ImGuiMetricsConfig_ImGuiMetricsConfig()
+	// DISCARDED by HexaGen: ImGuiModFlags igGetMergedModFlags()
+	// DISCARDED by HexaGen: ImGuiMouseCursor igGetMouseCursor()
+	// DISCARDED by HexaGen: ImGuiNavItemData* ImGuiNavItemData_ImGuiNavItemData()
+	// DISCARDED by HexaGen: ImGuiNextItemData* ImGuiNextItemData_ImGuiNextItemData()
+	// DISCARDED by HexaGen: ImGuiNextWindowData* ImGuiNextWindowData_ImGuiNextWindowData()
+	// DISCARDED by HexaGen: ImGuiOldColumnData* ImGuiOldColumnData_ImGuiOldColumnData()
+	// DISCARDED by HexaGen: ImGuiOldColumns* igFindOrCreateColumns(ImGuiWindow* window, ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiOldColumns* ImGuiOldColumns_ImGuiOldColumns()
+	// DISCARDED by HexaGen: ImGuiOnceUponAFrame* ImGuiOnceUponAFrame_ImGuiOnceUponAFrame()
+	// DISCARDED by HexaGen: ImGuiPayload* ImGuiPayload_ImGuiPayload()
+	// DISCARDED by HexaGen: ImGuiPlatformImeData* ImGuiPlatformImeData_ImGuiPlatformImeData()
+	// DISCARDED by HexaGen: ImGuiPlatformIO* igGetPlatformIO()
+	// DISCARDED by HexaGen: ImGuiPlatformIO* ImGuiPlatformIO_ImGuiPlatformIO()
+	// DISCARDED by HexaGen: ImGuiPlatformMonitor* ImGuiPlatformMonitor_ImGuiPlatformMonitor()
+	// DISCARDED by HexaGen: ImGuiPopupData* ImGuiPopupData_ImGuiPopupData()
+	// DISCARDED by HexaGen: ImGuiPtrOrIndex* ImGuiPtrOrIndex_ImGuiPtrOrIndex_Int(int index)
+	// DISCARDED by HexaGen: ImGuiPtrOrIndex* ImGuiPtrOrIndex_ImGuiPtrOrIndex_Ptr(void* ptr)
+	// DISCARDED by HexaGen: ImGuiSettingsHandler* igFindSettingsHandler(const char* type_name)
+	// DISCARDED by HexaGen: ImGuiSettingsHandler* ImGuiSettingsHandler_ImGuiSettingsHandler()
+	// DISCARDED by HexaGen: ImGuiSortDirection igTableGetColumnNextSortDirection(ImGuiTableColumn* column)
+	// DISCARDED by HexaGen: ImGuiStackLevelInfo* ImGuiStackLevelInfo_ImGuiStackLevelInfo()
+	// DISCARDED by HexaGen: ImGuiStackSizes* ImGuiStackSizes_ImGuiStackSizes()
+	// DISCARDED by HexaGen: ImGuiStackTool* ImGuiStackTool_ImGuiStackTool()
+	// DISCARDED by HexaGen: ImGuiStorage* igGetStateStorage()
+	// DISCARDED by HexaGen: ImGuiStoragePair* ImGuiStoragePair_ImGuiStoragePair_Float(ImGuiID _key, float _val_f)
+	// DISCARDED by HexaGen: ImGuiStoragePair* ImGuiStoragePair_ImGuiStoragePair_Int(ImGuiID _key, int _val_i)
+	// DISCARDED by HexaGen: ImGuiStoragePair* ImGuiStoragePair_ImGuiStoragePair_Ptr(ImGuiID _key, void* _val_p)
+	// DISCARDED by HexaGen: ImGuiStyle* igGetStyle()
+	// DISCARDED by HexaGen: ImGuiStyle* ImGuiStyle_ImGuiStyle()
+	// DISCARDED by HexaGen: ImGuiStyleMod* ImGuiStyleMod_ImGuiStyleMod_Float(ImGuiStyleVar idx, float v)
+	// DISCARDED by HexaGen: ImGuiStyleMod* ImGuiStyleMod_ImGuiStyleMod_Int(ImGuiStyleVar idx, int v)
+	// DISCARDED by HexaGen: ImGuiStyleMod* ImGuiStyleMod_ImGuiStyleMod_Vec2(ImGuiStyleVar idx, ImVec2 v)
+	// DISCARDED by HexaGen: ImGuiTabBar* ImGuiTabBar_ImGuiTabBar()
+	// DISCARDED by HexaGen: ImGuiTabItem* igTabBarFindMostRecentlySelectedTabForActiveWindow(ImGuiTabBar* tab_bar)
+	// DISCARDED by HexaGen: ImGuiTabItem* igTabBarFindTabByID(ImGuiTabBar* tab_bar, ImGuiID tab_id)
+	// DISCARDED by HexaGen: ImGuiTabItem* ImGuiTabItem_ImGuiTabItem()
+	// DISCARDED by HexaGen: ImGuiTable* igGetCurrentTable()
+	// DISCARDED by HexaGen: ImGuiTable* igTableFindByID(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiTable* ImGuiTable_ImGuiTable()
+	// DISCARDED by HexaGen: ImGuiTableColumn* ImGuiTableColumn_ImGuiTableColumn()
+	// DISCARDED by HexaGen: ImGuiTableColumnFlags igTableGetColumnFlags(int column_n)
+	// DISCARDED by HexaGen: ImGuiTableColumnSettings* ImGuiTableColumnSettings_ImGuiTableColumnSettings()
+	// DISCARDED by HexaGen: ImGuiTableColumnSettings* ImGuiTableSettings_GetColumnSettings(ImGuiTableSettings* self)
+	// DISCARDED by HexaGen: ImGuiTableColumnSortSpecs* ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs()
+	// DISCARDED by HexaGen: ImGuiTableInstanceData* igTableGetInstanceData(ImGuiTable* table, int instance_no)
+	// DISCARDED by HexaGen: ImGuiTableInstanceData* ImGuiTableInstanceData_ImGuiTableInstanceData()
+	// DISCARDED by HexaGen: ImGuiTableSettings* igTableGetBoundSettings(ImGuiTable* table)
+	// DISCARDED by HexaGen: ImGuiTableSettings* igTableSettingsCreate(ImGuiID id, int columns_count)
+	// DISCARDED by HexaGen: ImGuiTableSettings* igTableSettingsFindByID(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiTableSettings* ImGuiTableSettings_ImGuiTableSettings()
+	// DISCARDED by HexaGen: ImGuiTableSortSpecs* igTableGetSortSpecs()
+	// DISCARDED by HexaGen: ImGuiTableSortSpecs* ImGuiTableSortSpecs_ImGuiTableSortSpecs()
+	// DISCARDED by HexaGen: ImGuiTableTempData* ImGuiTableTempData_ImGuiTableTempData()
+	// DISCARDED by HexaGen: ImGuiTextBuffer* ImGuiTextBuffer_ImGuiTextBuffer()
+	// DISCARDED by HexaGen: ImGuiTextFilter* ImGuiTextFilter_ImGuiTextFilter(const char* default_filter)
+	// DISCARDED by HexaGen: ImGuiTextRange* ImGuiTextRange_ImGuiTextRange_Nil()
+	// DISCARDED by HexaGen: ImGuiTextRange* ImGuiTextRange_ImGuiTextRange_Str(const char* _b, const char* _e)
+	// DISCARDED by HexaGen: ImGuiViewport* igFindViewportByID(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiViewport* igFindViewportByPlatformHandle(void* platform_handle)
+	// DISCARDED by HexaGen: ImGuiViewport* igGetMainViewport()
+	// DISCARDED by HexaGen: ImGuiViewport* igGetWindowViewport()
+	// DISCARDED by HexaGen: ImGuiViewport* ImGuiViewport_ImGuiViewport()
+	// DISCARDED by HexaGen: ImGuiViewportP* igFindHoveredViewportFromPlatformWindowStack(const ImVec2 mouse_platform_pos)
+	// DISCARDED by HexaGen: ImGuiViewportP* ImGuiViewportP_ImGuiViewportP()
+	// DISCARDED by HexaGen: ImGuiWindow* igFindBottomMostVisibleWindowWithinBeginStack(ImGuiWindow* window)
+	// DISCARDED by HexaGen: ImGuiWindow* igFindWindowByID(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiWindow* igFindWindowByName(const char* name)
+	// DISCARDED by HexaGen: ImGuiWindow* igGetCurrentWindow()
+	// DISCARDED by HexaGen: ImGuiWindow* igGetCurrentWindowRead()
+	// DISCARDED by HexaGen: ImGuiWindow* igGetTopMostAndVisiblePopupModal()
+	// DISCARDED by HexaGen: ImGuiWindow* igGetTopMostPopupModal()
+	// DISCARDED by HexaGen: ImGuiWindow* ImGuiWindow_ImGuiWindow(ImGuiContext* context, const char* name)
+	// DISCARDED by HexaGen: ImGuiWindowClass* ImGuiWindowClass_ImGuiWindowClass()
+	// DISCARDED by HexaGen: ImGuiWindowSettings* igCreateNewWindowSettings(const char* name)
+	// DISCARDED by HexaGen: ImGuiWindowSettings* igFindOrCreateWindowSettings(const char* name)
+	// DISCARDED by HexaGen: ImGuiWindowSettings* igFindWindowSettings(ImGuiID id)
+	// DISCARDED by HexaGen: ImGuiWindowSettings* ImGuiWindowSettings_ImGuiWindowSettings()
+	// DISCARDED by HexaGen: ImRect* ImRect_ImRect_Float(float x1, float y1, float x2, float y2)
+	// DISCARDED by HexaGen: ImRect* ImRect_ImRect_Nil()
+	// DISCARDED by HexaGen: ImRect* ImRect_ImRect_Vec2(const ImVec2 min, const ImVec2 max)
+	// DISCARDED by HexaGen: ImRect* ImRect_ImRect_Vec4(const ImVec4 v)
+	// DISCARDED by HexaGen: ImTextureID igGetFontTexIdWhitePixel()
+	// DISCARDED by HexaGen: ImTextureID ImDrawCmd_GetTexID(ImDrawCmd* self)
+	// DISCARDED by HexaGen: ImU32 igColorConvertFloat4ToU32(const ImVec4 in)
+	// DISCARDED by HexaGen: ImU32 igGetColorU32_Col(ImGuiCol idx, float alpha_mul)
+	// DISCARDED by HexaGen: ImU32 igGetColorU32_U32(ImU32 col)
+	// DISCARDED by HexaGen: ImU32 igGetColorU32_Vec4(const ImVec4 col)
+	// DISCARDED by HexaGen: ImU32 igImAlphaBlendColors(ImU32 col_a, ImU32 col_b)
+	// DISCARDED by HexaGen: ImU64 igImFileGetSize(ImFileHandle file)
+	// DISCARDED by HexaGen: ImU64 igImFileRead(void* data, ImU64 size, ImU64 count, ImFileHandle file)
+	// DISCARDED by HexaGen: ImU64 igImFileWrite(const void* data, ImU64 size, ImU64 count, ImFileHandle file)
+	// DISCARDED by HexaGen: ImVec1* ImVec1_ImVec1_Float(float _x)
+	// DISCARDED by HexaGen: ImVec1* ImVec1_ImVec1_Nil()
+	// DISCARDED by HexaGen: ImVec2* ImVec2_ImVec2_Float(float _x, float _y)
+	// DISCARDED by HexaGen: ImVec2* ImVec2_ImVec2_Nil()
+	// DISCARDED by HexaGen: ImVec2ih* ImVec2ih_ImVec2ih_Nil()
+	// DISCARDED by HexaGen: ImVec2ih* ImVec2ih_ImVec2ih_short(short _x, short _y)
+	// DISCARDED by HexaGen: ImVec2ih* ImVec2ih_ImVec2ih_Vec2(const ImVec2 rhs)
+	// DISCARDED by HexaGen: ImVec4* ImVec4_ImVec4_Float(float _x, float _y, float _z, float _w)
+	// DISCARDED by HexaGen: ImVec4* ImVec4_ImVec4_Nil()
+	// DISCARDED by HexaGen: ImVector_ImWchar* ImVector_ImWchar_create()
+	// DISCARDED by HexaGen: int igCalcTypematicRepeatAmount(float t0, float t1, float repeat_delay, float repeat_rate)
+	// DISCARDED by HexaGen: int igDataTypeCompare(ImGuiDataType data_type, const void* arg_1, const void* arg_2)
+	// DISCARDED by HexaGen: int igDockNodeGetDepth(const ImGuiDockNode* node)
+	// DISCARDED by HexaGen: int igFindWindowDisplayIndex(ImGuiWindow* window)
+	// DISCARDED by HexaGen: int igGetColumnIndex()
+	// DISCARDED by HexaGen: int igGetColumnsCount()
+	// DISCARDED by HexaGen: int igGetFrameCount()
+	// DISCARDED by HexaGen: int igGetKeyIndex(ImGuiKey key)
+	// DISCARDED by HexaGen: int igGetKeyPressedAmount(ImGuiKey key, float repeat_delay, float rate)
+	// DISCARDED by HexaGen: int igGetMouseClickedCount(ImGuiMouseButton button)
+	// DISCARDED by HexaGen: int igImAbs_Int(int x)
+	// DISCARDED by HexaGen: int igImModPositive(int a, int b)
+	// DISCARDED by HexaGen: int igImParseFormatPrecision(const char* format, int default_value)
+	// DISCARDED by HexaGen: int igImStricmp(const char* str1, const char* str2)
+	// DISCARDED by HexaGen: int igImStrlenW(const ImWchar* str)
+	// DISCARDED by HexaGen: int igImStrnicmp(const char* str1, const char* str2, size_t count)
+	// DISCARDED by HexaGen: int igImTextCharFromUtf8(unsigned int* out_char, const char* in_text, const char* in_text_end)
+	// DISCARDED by HexaGen: int igImTextCountCharsFromUtf8(const char* in_text, const char* in_text_end)
+	// DISCARDED by HexaGen: int igImTextCountUtf8BytesFromChar(const char* in_text, const char* in_text_end)
+	// DISCARDED by HexaGen: int igImTextCountUtf8BytesFromStr(const ImWchar* in_text, const ImWchar* in_text_end)
+	// DISCARDED by HexaGen: int igImUpperPowerOfTwo(int v)
+	// DISCARDED by HexaGen: int igPlotEx(ImGuiPlotType plot_type, const char* label, float (*)(ImGuiPlotType plot_type, const char* label, float (*)(void* data, int idx)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 frame_size)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 frame_size)
+	// DISCARDED by HexaGen: int igTableGetColumnCount()
+	// DISCARDED by HexaGen: int igTableGetColumnIndex()
+	// DISCARDED by HexaGen: int igTableGetHoveredColumn()
+	// DISCARDED by HexaGen: int igTableGetRowIndex()
+	// DISCARDED by HexaGen: int ImDrawDataBuilder_GetDrawListCount(ImDrawDataBuilder* self)
+	// DISCARDED by HexaGen: int ImDrawList__CalcCircleAutoSegmentCount(ImDrawList* self, float radius)
+	// DISCARDED by HexaGen: int ImFontAtlas_AddCustomRectFontGlyph(ImFontAtlas* self, ImFont* font, ImWchar id, int width, int height, float advance_x, const ImVec2 offset)
+	// DISCARDED by HexaGen: int ImFontAtlas_AddCustomRectRegular(ImFontAtlas* self, int width, int height)
+	// DISCARDED by HexaGen: int ImGuiInputTextState_GetCursorPos(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: int ImGuiInputTextState_GetRedoAvailCount(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: int ImGuiInputTextState_GetSelectionEnd(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: int ImGuiInputTextState_GetSelectionStart(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: int ImGuiInputTextState_GetUndoAvailCount(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: int ImGuiStorage_GetInt(ImGuiStorage* self, ImGuiID key, int default_val)
+	// DISCARDED by HexaGen: int ImGuiTabBar_GetTabOrder(ImGuiTabBar* self, const ImGuiTabItem* tab)
+	// DISCARDED by HexaGen: int ImGuiTextBuffer_size(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: int* ImGuiStorage_GetIntRef(ImGuiStorage* self, ImGuiID key, int default_val)
+	// DISCARDED by HexaGen: void igActivateItem(ImGuiID id)
+	// DISCARDED by HexaGen: void igAddSettingsHandler(const ImGuiSettingsHandler* handler)
+	// DISCARDED by HexaGen: void igAlignTextToFramePadding()
+	// DISCARDED by HexaGen: void igBeginColumns(const char* str_id, int count, ImGuiOldColumnFlags flags)
+	// DISCARDED by HexaGen: void igBeginDisabled(bool disabled)
+	// DISCARDED by HexaGen: void igBeginDockableDragDropSource(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igBeginDockableDragDropTarget(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igBeginDocked(ImGuiWindow* window, bool* p_open)
+	// DISCARDED by HexaGen: void igBeginGroup()
+	// DISCARDED by HexaGen: void igBeginTooltip()
+	// DISCARDED by HexaGen: void igBeginTooltipEx(ImGuiTooltipFlags tooltip_flags, ImGuiWindowFlags extra_window_flags)
+	// DISCARDED by HexaGen: void igBringWindowToDisplayBack(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igBringWindowToDisplayBehind(ImGuiWindow* window, ImGuiWindow* above_window)
+	// DISCARDED by HexaGen: void igBringWindowToDisplayFront(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igBringWindowToFocusFront(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igBullet()
+	// DISCARDED by HexaGen: void igBulletText(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igBulletTextV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igCalcItemSize(ImVec2* pOut, ImVec2 size, float default_w, float default_h)
+	// DISCARDED by HexaGen: void igCalcTextSize(ImVec2* pOut, const char* text, const char* text_end, bool hide_text_after_double_hash, float wrap_width)
+	// DISCARDED by HexaGen: void igCalcWindowNextAutoFitSize(ImVec2* pOut, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igCallContextHooks(ImGuiContext* context, ImGuiContextHookType type)
+	// DISCARDED by HexaGen: void igClearActiveID()
+	// DISCARDED by HexaGen: void igClearDragDrop()
+	// DISCARDED by HexaGen: void igClearIniSettings()
+	// DISCARDED by HexaGen: void igCloseCurrentPopup()
+	// DISCARDED by HexaGen: void igClosePopupsExceptModals()
+	// DISCARDED by HexaGen: void igClosePopupsOverWindow(ImGuiWindow* ref_window, bool restore_focus_to_window_under_popup)
+	// DISCARDED by HexaGen: void igClosePopupToLevel(int remaining, bool restore_focus_to_window_under_popup)
+	// DISCARDED by HexaGen: void igColorConvertHSVtoRGB(float h, float s, float v, float* out_r, float* out_g, float* out_b)
+	// DISCARDED by HexaGen: void igColorConvertRGBtoHSV(float r, float g, float b, float* out_h, float* out_s, float* out_v)
+	// DISCARDED by HexaGen: void igColorConvertU32ToFloat4(ImVec4* pOut, ImU32 in)
+	// DISCARDED by HexaGen: void igColorEditOptionsPopup(const float* col, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: void igColorPickerOptionsPopup(const float* ref_col, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: void igColorTooltip(const char* text, const float* col, ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: void igColumns(int count, const char* id, bool border)
+	// DISCARDED by HexaGen: void igCustom_StbTextMakeUndoReplace(ImGuiInputTextState* str, int where, int old_length, int new_length)
+	// DISCARDED by HexaGen: void igCustom_StbTextUndo(ImGuiInputTextState* str)
+	// DISCARDED by HexaGen: void igDataTypeApplyOp(ImGuiDataType data_type, int op, void* output, const void* arg_1, const void* arg_2)
+	// DISCARDED by HexaGen: void igDebugDrawItemRect(ImU32 col)
+	// DISCARDED by HexaGen: void igDebugHookIdInfo(ImGuiID id, ImGuiDataType data_type, const void* data_id, const void* data_id_end)
+	// DISCARDED by HexaGen: void igDebugLog(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igDebugLogV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igDebugNodeColumns(ImGuiOldColumns* columns)
+	// DISCARDED by HexaGen: void igDebugNodeDockNode(ImGuiDockNode* node, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeDrawCmdShowMeshAndBoundingBox(ImDrawList* out_draw_list, const ImDrawList* draw_list, const ImDrawCmd* draw_cmd, bool show_mesh, bool show_aabb)
+	// DISCARDED by HexaGen: void igDebugNodeDrawList(ImGuiWindow* window, ImGuiViewportP* viewport, const ImDrawList* draw_list, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeFont(ImFont* font)
+	// DISCARDED by HexaGen: void igDebugNodeFontGlyph(ImFont* font, const ImFontGlyph* glyph)
+	// DISCARDED by HexaGen: void igDebugNodeInputTextState(ImGuiInputTextState* state)
+	// DISCARDED by HexaGen: void igDebugNodeStorage(ImGuiStorage* storage, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeTabBar(ImGuiTabBar* tab_bar, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeTable(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igDebugNodeTableSettings(ImGuiTableSettings* settings)
+	// DISCARDED by HexaGen: void igDebugNodeViewport(ImGuiViewportP* viewport)
+	// DISCARDED by HexaGen: void igDebugNodeWindow(ImGuiWindow* window, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeWindowSettings(ImGuiWindowSettings* settings)
+	// DISCARDED by HexaGen: void igDebugNodeWindowsList(ImVector_ImGuiWindowPtr* windows, const char* label)
+	// DISCARDED by HexaGen: void igDebugNodeWindowsListByBeginStackParent(ImGuiWindow** windows, int windows_size, ImGuiWindow* parent_in_begin_stack)
+	// DISCARDED by HexaGen: void igDebugRenderViewportThumbnail(ImDrawList* draw_list, ImGuiViewportP* viewport, const ImRect bb)
+	// DISCARDED by HexaGen: void igDebugStartItemPicker()
+	// DISCARDED by HexaGen: void igDebugTextEncoding(const char* text)
+	// DISCARDED by HexaGen: void igDestroyContext(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDestroyPlatformWindow(ImGuiViewportP* viewport)
+	// DISCARDED by HexaGen: void igDestroyPlatformWindows()
+	// DISCARDED by HexaGen: void igDockBuilderCopyDockSpace(ImGuiID src_dockspace_id, ImGuiID dst_dockspace_id, ImVector_const_charPtr* in_window_remap_pairs)
+	// DISCARDED by HexaGen: void igDockBuilderCopyNode(ImGuiID src_node_id, ImGuiID dst_node_id, ImVector_ImGuiID* out_node_remap_pairs)
+	// DISCARDED by HexaGen: void igDockBuilderCopyWindowSettings(const char* src_name, const char* dst_name)
+	// DISCARDED by HexaGen: void igDockBuilderDockWindow(const char* window_name, ImGuiID node_id)
+	// DISCARDED by HexaGen: void igDockBuilderFinish(ImGuiID node_id)
+	// DISCARDED by HexaGen: void igDockBuilderRemoveNode(ImGuiID node_id)
+	// DISCARDED by HexaGen: void igDockBuilderRemoveNodeChildNodes(ImGuiID node_id)
+	// DISCARDED by HexaGen: void igDockBuilderRemoveNodeDockedWindows(ImGuiID node_id, bool clear_settings_refs)
+	// DISCARDED by HexaGen: void igDockBuilderSetNodePos(ImGuiID node_id, ImVec2 pos)
+	// DISCARDED by HexaGen: void igDockBuilderSetNodeSize(ImGuiID node_id, ImVec2 size)
+	// DISCARDED by HexaGen: void igDockContextClearNodes(ImGuiContext* ctx, ImGuiID root_id, bool clear_settings_refs)
+	// DISCARDED by HexaGen: void igDockContextEndFrame(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockContextInitialize(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockContextNewFrameUpdateDocking(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockContextNewFrameUpdateUndocking(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockContextQueueDock(ImGuiContext* ctx, ImGuiWindow* target, ImGuiDockNode* target_node, ImGuiWindow* payload, ImGuiDir split_dir, float split_ratio, bool split_outer)
+	// DISCARDED by HexaGen: void igDockContextQueueUndockNode(ImGuiContext* ctx, ImGuiDockNode* node)
+	// DISCARDED by HexaGen: void igDockContextQueueUndockWindow(ImGuiContext* ctx, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igDockContextRebuildNodes(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockContextShutdown(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igDockNodeEndAmendTabBar()
+	// DISCARDED by HexaGen: void igDummy(const ImVec2 size)
+	// DISCARDED by HexaGen: void igEnd()
+	// DISCARDED by HexaGen: void igEndChild()
+	// DISCARDED by HexaGen: void igEndChildFrame()
+	// DISCARDED by HexaGen: void igEndColumns()
+	// DISCARDED by HexaGen: void igEndCombo()
+	// DISCARDED by HexaGen: void igEndComboPreview()
+	// DISCARDED by HexaGen: void igEndDisabled()
+	// DISCARDED by HexaGen: void igEndDragDropSource()
+	// DISCARDED by HexaGen: void igEndDragDropTarget()
+	// DISCARDED by HexaGen: void igEndFrame()
+	// DISCARDED by HexaGen: void igEndGroup()
+	// DISCARDED by HexaGen: void igEndListBox()
+	// DISCARDED by HexaGen: void igEndMainMenuBar()
+	// DISCARDED by HexaGen: void igEndMenu()
+	// DISCARDED by HexaGen: void igEndMenuBar()
+	// DISCARDED by HexaGen: void igEndPopup()
+	// DISCARDED by HexaGen: void igEndTabBar()
+	// DISCARDED by HexaGen: void igEndTabItem()
+	// DISCARDED by HexaGen: void igEndTable()
+	// DISCARDED by HexaGen: void igEndTooltip()
+	// DISCARDED by HexaGen: void igErrorCheckEndFrameRecover(ImGuiErrorLogCallback log_callback, void* user_data)
+	// DISCARDED by HexaGen: void igErrorCheckEndWindowRecover(ImGuiErrorLogCallback log_callback, void* user_data)
+	// DISCARDED by HexaGen: void igFindBestWindowPosForPopup(ImVec2* pOut, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igFindBestWindowPosForPopupEx(ImVec2* pOut, const ImVec2 ref_pos, const ImVec2 size, ImGuiDir* last_dir, const ImRect r_outer, const ImRect r_avoid, ImGuiPopupPositionPolicy policy)
+	// DISCARDED by HexaGen: void igFocusTopMostWindowUnderOne(ImGuiWindow* under_this_window, ImGuiWindow* ignore_window)
+	// DISCARDED by HexaGen: void igFocusWindow(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igGcAwakeTransientWindowBuffers(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igGcCompactTransientMiscBuffers()
+	// DISCARDED by HexaGen: void igGcCompactTransientWindowBuffers(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igGetAllocatorFunctions(ImGuiMemAllocFunc* p_alloc_func, ImGuiMemFreeFunc* p_free_func, void** p_user_data)
+	// DISCARDED by HexaGen: void igGetContentRegionAvail(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetContentRegionMax(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetContentRegionMaxAbs(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetCursorPos(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetCursorScreenPos(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetCursorStartPos(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetFontTexUvWhitePixel(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetItemRectMax(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetItemRectMin(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetItemRectSize(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetMouseDragDelta(ImVec2* pOut, ImGuiMouseButton button, float lock_threshold)
+	// DISCARDED by HexaGen: void igGetMousePos(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetMousePosOnOpeningCurrentPopup(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetNavInputAmount2d(ImVec2* pOut, ImGuiNavDirSourceFlags dir_sources, ImGuiNavReadMode mode, float slow_factor, float fast_factor)
+	// DISCARDED by HexaGen: void igGetPopupAllowedExtentRect(ImRect* pOut, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igGetWindowContentRegionMax(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetWindowContentRegionMin(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetWindowPos(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igGetWindowScrollbarRect(ImRect* pOut, ImGuiWindow* window, ImGuiAxis axis)
+	// DISCARDED by HexaGen: void igGetWindowSize(ImVec2* pOut)
+	// DISCARDED by HexaGen: void igImage(ImTextureID user_texture_id, const ImVec2 size, const ImVec2 uv0, const ImVec2 uv1, const ImVec4 tint_col, const ImVec4 border_col)
+	// DISCARDED by HexaGen: void igImBezierCubicCalc(ImVec2* pOut, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, float t)
+	// DISCARDED by HexaGen: void igImBezierCubicClosestPoint(ImVec2* pOut, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, const ImVec2 p, int num_segments)
+	// DISCARDED by HexaGen: void igImBezierCubicClosestPointCasteljau(ImVec2* pOut, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, const ImVec2 p, float tess_tol)
+	// DISCARDED by HexaGen: void igImBezierQuadraticCalc(ImVec2* pOut, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, float t)
+	// DISCARDED by HexaGen: void igImBitArrayClearBit(ImU32* arr, int n)
+	// DISCARDED by HexaGen: void igImBitArraySetBit(ImU32* arr, int n)
+	// DISCARDED by HexaGen: void igImBitArraySetBitRange(ImU32* arr, int n, int n2)
+	// DISCARDED by HexaGen: void igImClamp(ImVec2* pOut, const ImVec2 v, const ImVec2 mn, ImVec2 mx)
+	// DISCARDED by HexaGen: void igImFloor_Vec2(ImVec2* pOut, const ImVec2 v)
+	// DISCARDED by HexaGen: void igImFloorSigned_Vec2(ImVec2* pOut, const ImVec2 v)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildFinish(ImFontAtlas* atlas)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildInit(ImFontAtlas* atlas)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildMultiplyCalcLookupTable(unsigned char[256] out_table = 256, float in_multiply_factor, float gamma_factor)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildMultiplyRectAlpha8(const unsigned char[256] table = 256, unsigned char* pixels, int x, int y, int w, int h, int stride)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildPackCustomRects(ImFontAtlas* atlas, ImVector_stbtt_pack_context* pack_contexts)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildRender32bppRectFromString(ImFontAtlas* atlas, int texture_index, int x, int y, int w, int h, const char* in_str, char in_marker_char, unsigned int in_marker_pixel_value)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildRender8bppRectFromString(ImFontAtlas* atlas, int texture_index, int x, int y, int w, int h, const char* in_str, char in_marker_char, unsigned char in_marker_pixel_value)
+	// DISCARDED by HexaGen: void igImFontAtlasBuildSetupFont(ImFontAtlas* atlas, ImFont* font, ImFontConfig* font_config, float ascent, float descent)
+	// DISCARDED by HexaGen: void igImFormatStringToTempBuffer(const char** out_buf, const char** out_buf_end, const char* fmt, ...)
+	// DISCARDED by HexaGen: void igImFormatStringToTempBufferV(const char** out_buf, const char** out_buf_end, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igImLerp_Vec2Float(ImVec2* pOut, const ImVec2 a, const ImVec2 b, float t)
+	// DISCARDED by HexaGen: void igImLerp_Vec2Vec2(ImVec2* pOut, const ImVec2 a, const ImVec2 b, const ImVec2 t)
+	// DISCARDED by HexaGen: void igImLerp_Vec4(ImVec4* pOut, const ImVec4 a, const ImVec4 b, float t)
+	// DISCARDED by HexaGen: void igImLineClosestPoint(ImVec2* pOut, const ImVec2 a, const ImVec2 b, const ImVec2 p)
+	// DISCARDED by HexaGen: void igImMax(ImVec2* pOut, const ImVec2 lhs, const ImVec2 rhs)
+	// DISCARDED by HexaGen: void igImMin(ImVec2* pOut, const ImVec2 lhs, const ImVec2 rhs)
+	// DISCARDED by HexaGen: void igImMul(ImVec2* pOut, const ImVec2 lhs, const ImVec2 rhs)
+	// DISCARDED by HexaGen: void igImParseFormatSanitizeForPrinting(const char* fmt_in, char* fmt_out, size_t fmt_out_size)
+	// DISCARDED by HexaGen: void igImQsort(void* base, size_t count, size_t size_of_element, int (*)(void* base, size_t count, size_t size_of_element, int (*)(const void*, const void*)* compare_func)* compare_func)
+	// DISCARDED by HexaGen: void igImRotate(ImVec2* pOut, const ImVec2 v, float cos_a, float sin_a)
+	// DISCARDED by HexaGen: void igImStrncpy(char* dst, const char* src, size_t count)
+	// DISCARDED by HexaGen: void igImStrTrimBlanks(char* str)
+	// DISCARDED by HexaGen: void igImTriangleBarycentricCoords(const ImVec2 a, const ImVec2 b, const ImVec2 c, const ImVec2 p, float* out_u, float* out_v, float* out_w)
+	// DISCARDED by HexaGen: void igImTriangleClosestPoint(ImVec2* pOut, const ImVec2 a, const ImVec2 b, const ImVec2 c, const ImVec2 p)
+	// DISCARDED by HexaGen: void igIndent(float indent_w)
+	// DISCARDED by HexaGen: void igInitialize()
+	// DISCARDED by HexaGen: void igItemSize_Rect(const ImRect bb, float text_baseline_y)
+	// DISCARDED by HexaGen: void igItemSize_Vec2(const ImVec2 size, float text_baseline_y)
+	// DISCARDED by HexaGen: void igKeepAliveID(ImGuiID id)
+	// DISCARDED by HexaGen: void igLabelText(const char* label, const char* fmt, ...)
+	// DISCARDED by HexaGen: void igLabelTextV(const char* label, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igLoadIniSettingsFromDisk(const char* ini_filename)
+	// DISCARDED by HexaGen: void igLoadIniSettingsFromMemory(const char* ini_data, size_t ini_size)
+	// DISCARDED by HexaGen: void igLogBegin(ImGuiLogType type, int auto_open_depth)
+	// DISCARDED by HexaGen: void igLogButtons()
+	// DISCARDED by HexaGen: void igLogFinish()
+	// DISCARDED by HexaGen: void igLogRenderedText(const ImVec2* ref_pos, const char* text, const char* text_end)
+	// DISCARDED by HexaGen: void igLogSetNextTextDecoration(const char* prefix, const char* suffix)
+	// DISCARDED by HexaGen: void igLogText(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igLogTextV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igLogToBuffer(int auto_open_depth)
+	// DISCARDED by HexaGen: void igLogToClipboard(int auto_open_depth)
+	// DISCARDED by HexaGen: void igLogToFile(int auto_open_depth, const char* filename)
+	// DISCARDED by HexaGen: void igLogToTTY(int auto_open_depth)
+	// DISCARDED by HexaGen: void igMarkIniSettingsDirty_Nil()
+	// DISCARDED by HexaGen: void igMarkIniSettingsDirty_WindowPtr(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igMarkItemEdited(ImGuiID id)
+	// DISCARDED by HexaGen: void igMemFree(void* ptr)
+	// DISCARDED by HexaGen: void igNavInitRequestApplyResult()
+	// DISCARDED by HexaGen: void igNavInitWindow(ImGuiWindow* window, bool force_reinit)
+	// DISCARDED by HexaGen: void igNavMoveRequestApplyResult()
+	// DISCARDED by HexaGen: void igNavMoveRequestCancel()
+	// DISCARDED by HexaGen: void igNavMoveRequestForward(ImGuiDir move_dir, ImGuiDir clip_dir, ImGuiNavMoveFlags move_flags, ImGuiScrollFlags scroll_flags)
+	// DISCARDED by HexaGen: void igNavMoveRequestResolveWithLastItem(ImGuiNavItemData* result)
+	// DISCARDED by HexaGen: void igNavMoveRequestSubmit(ImGuiDir move_dir, ImGuiDir clip_dir, ImGuiNavMoveFlags move_flags, ImGuiScrollFlags scroll_flags)
+	// DISCARDED by HexaGen: void igNavMoveRequestTryWrapping(ImGuiWindow* window, ImGuiNavMoveFlags move_flags)
+	// DISCARDED by HexaGen: void igNewFrame()
+	// DISCARDED by HexaGen: void igNewLine()
+	// DISCARDED by HexaGen: void igNextColumn()
+	// DISCARDED by HexaGen: void igOpenPopup_ID(ImGuiID id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: void igOpenPopup_Str(const char* str_id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: void igOpenPopupEx(ImGuiID id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: void igOpenPopupOnItemClick(const char* str_id, ImGuiPopupFlags popup_flags)
+	// DISCARDED by HexaGen: void igPlotHistogram_FloatPtr(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size, int stride)
+	// DISCARDED by HexaGen: void igPlotHistogram_FnFloatPtr(const char* label, float (*)(const char* label, float (*)(void* data, int idx)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size)
+	// DISCARDED by HexaGen: void igPlotLines_FloatPtr(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size, int stride)
+	// DISCARDED by HexaGen: void igPlotLines_FnFloatPtr(const char* label, float (*)(const char* label, float (*)(void* data, int idx)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size)* values_getter, void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size)
+	// DISCARDED by HexaGen: void igPopAllowKeyboardFocus()
+	// DISCARDED by HexaGen: void igPopButtonRepeat()
+	// DISCARDED by HexaGen: void igPopClipRect()
+	// DISCARDED by HexaGen: void igPopColumnsBackground()
+	// DISCARDED by HexaGen: void igPopFocusScope()
+	// DISCARDED by HexaGen: void igPopFont()
+	// DISCARDED by HexaGen: void igPopID()
+	// DISCARDED by HexaGen: void igPopItemFlag()
+	// DISCARDED by HexaGen: void igPopItemWidth()
+	// DISCARDED by HexaGen: void igPopStyleColor(int count)
+	// DISCARDED by HexaGen: void igPopStyleVar(int count)
+	// DISCARDED by HexaGen: void igPopTextWrapPos()
+	// DISCARDED by HexaGen: void igProgressBar(float fraction, const ImVec2 size_arg, const char* overlay)
+	// DISCARDED by HexaGen: void igPushAllowKeyboardFocus(bool allow_keyboard_focus)
+	// DISCARDED by HexaGen: void igPushButtonRepeat(bool repeat)
+	// DISCARDED by HexaGen: void igPushClipRect(const ImVec2 clip_rect_min, const ImVec2 clip_rect_max, bool intersect_with_current_clip_rect)
+	// DISCARDED by HexaGen: void igPushColumnClipRect(int column_index)
+	// DISCARDED by HexaGen: void igPushColumnsBackground()
+	// DISCARDED by HexaGen: void igPushFocusScope(ImGuiID id)
+	// DISCARDED by HexaGen: void igPushFont(ImFont* font)
+	// DISCARDED by HexaGen: void igPushID_Int(int int_id)
+	// DISCARDED by HexaGen: void igPushID_Ptr(const void* ptr_id)
+	// DISCARDED by HexaGen: void igPushID_Str(const char* str_id)
+	// DISCARDED by HexaGen: void igPushID_StrStr(const char* str_id_begin, const char* str_id_end)
+	// DISCARDED by HexaGen: void igPushItemFlag(ImGuiItemFlags option, bool enabled)
+	// DISCARDED by HexaGen: void igPushItemWidth(float item_width)
+	// DISCARDED by HexaGen: void igPushMultiItemsWidths(int components, float width_full)
+	// DISCARDED by HexaGen: void igPushOverrideID(ImGuiID id)
+	// DISCARDED by HexaGen: void igPushStyleColor_U32(ImGuiCol idx, ImU32 col)
+	// DISCARDED by HexaGen: void igPushStyleColor_Vec4(ImGuiCol idx, const ImVec4 col)
+	// DISCARDED by HexaGen: void igPushStyleVar_Float(ImGuiStyleVar idx, float val)
+	// DISCARDED by HexaGen: void igPushStyleVar_Vec2(ImGuiStyleVar idx, const ImVec2 val)
+	// DISCARDED by HexaGen: void igPushTextWrapPos(float wrap_local_pos_x)
+	// DISCARDED by HexaGen: void igRemoveContextHook(ImGuiContext* context, ImGuiID hook_to_remove)
+	// DISCARDED by HexaGen: void igRemoveSettingsHandler(const char* type_name)
+	// DISCARDED by HexaGen: void igRender()
+	// DISCARDED by HexaGen: void igRenderArrow(ImDrawList* draw_list, ImVec2 pos, ImU32 col, ImGuiDir dir, float scale)
+	// DISCARDED by HexaGen: void igRenderArrowDockMenu(ImDrawList* draw_list, ImVec2 p_min, float sz, ImU32 col)
+	// DISCARDED by HexaGen: void igRenderArrowPointingAt(ImDrawList* draw_list, ImVec2 pos, ImVec2 half_sz, ImGuiDir direction, ImU32 col)
+	// DISCARDED by HexaGen: void igRenderBullet(ImDrawList* draw_list, ImVec2 pos, ImU32 col)
+	// DISCARDED by HexaGen: void igRenderCheckMark(ImDrawList* draw_list, ImVec2 pos, ImU32 col, float sz)
+	// DISCARDED by HexaGen: void igRenderColorRectWithAlphaCheckerboard(ImDrawList* draw_list, ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, float grid_step, ImVec2 grid_off, float rounding, ImDrawFlags flags)
+	// DISCARDED by HexaGen: void igRenderFrame(ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, bool border, float rounding)
+	// DISCARDED by HexaGen: void igRenderFrameBorder(ImVec2 p_min, ImVec2 p_max, float rounding)
+	// DISCARDED by HexaGen: void igRenderMouseCursor(ImVec2 pos, float scale, ImGuiMouseCursor mouse_cursor, ImU32 col_fill, ImU32 col_border, ImU32 col_shadow)
+	// DISCARDED by HexaGen: void igRenderNavHighlight(const ImRect bb, ImGuiID id, ImGuiNavHighlightFlags flags)
+	// DISCARDED by HexaGen: void igRenderPlatformWindowsDefault(void* platform_render_arg, void* renderer_render_arg)
+	// DISCARDED by HexaGen: void igRenderRectFilledRangeH(ImDrawList* draw_list, const ImRect rect, ImU32 col, float x_start_norm, float x_end_norm, float rounding)
+	// DISCARDED by HexaGen: void igRenderRectFilledWithHole(ImDrawList* draw_list, const ImRect outer, const ImRect inner, ImU32 col, float rounding)
+	// DISCARDED by HexaGen: void igRenderText(ImVec2 pos, const char* text, const char* text_end, bool hide_text_after_hash)
+	// DISCARDED by HexaGen: void igRenderTextClipped(const ImVec2 pos_min, const ImVec2 pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2 align, const ImRect* clip_rect)
+	// DISCARDED by HexaGen: void igRenderTextClippedEx(ImDrawList* draw_list, const ImVec2 pos_min, const ImVec2 pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2 align, const ImRect* clip_rect)
+	// DISCARDED by HexaGen: void igRenderTextEllipsis(ImDrawList* draw_list, const ImVec2 pos_min, const ImVec2 pos_max, float clip_max_x, float ellipsis_max_x, const char* text, const char* text_end, const ImVec2* text_size_if_known)
+	// DISCARDED by HexaGen: void igRenderTextWrapped(ImVec2 pos, const char* text, const char* text_end, float wrap_width)
+	// DISCARDED by HexaGen: void igResetMouseDragDelta(ImGuiMouseButton button)
+	// DISCARDED by HexaGen: void igSameLine(float offset_from_start_x, float spacing)
+	// DISCARDED by HexaGen: void igSaveIniSettingsToDisk(const char* ini_filename)
+	// DISCARDED by HexaGen: void igScaleWindowsInViewport(ImGuiViewportP* viewport, float scale)
+	// DISCARDED by HexaGen: void igScrollbar(ImGuiAxis axis)
+	// DISCARDED by HexaGen: void igScrollToBringRectIntoView(ImGuiWindow* window, const ImRect rect)
+	// DISCARDED by HexaGen: void igScrollToItem(ImGuiScrollFlags flags)
+	// DISCARDED by HexaGen: void igScrollToRect(ImGuiWindow* window, const ImRect rect, ImGuiScrollFlags flags)
+	// DISCARDED by HexaGen: void igScrollToRectEx(ImVec2* pOut, ImGuiWindow* window, const ImRect rect, ImGuiScrollFlags flags)
+	// DISCARDED by HexaGen: void igSeparator()
+	// DISCARDED by HexaGen: void igSeparatorEx(ImGuiSeparatorFlags flags)
+	// DISCARDED by HexaGen: void igSetActiveID(ImGuiID id, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igSetActiveIdUsingKey(ImGuiKey key)
+	// DISCARDED by HexaGen: void igSetActiveIdUsingNavAndKeys()
+	// DISCARDED by HexaGen: void igSetAllocatorFunctions(ImGuiMemAllocFunc alloc_func, ImGuiMemFreeFunc free_func, void* user_data)
+	// DISCARDED by HexaGen: void igSetClipboardText(const char* text)
+	// DISCARDED by HexaGen: void igSetColorEditOptions(ImGuiColorEditFlags flags)
+	// DISCARDED by HexaGen: void igSetColumnOffset(int column_index, float offset_x)
+	// DISCARDED by HexaGen: void igSetColumnWidth(int column_index, float width)
+	// DISCARDED by HexaGen: void igSetCurrentContext(ImGuiContext* ctx)
+	// DISCARDED by HexaGen: void igSetCurrentFont(ImFont* font)
+	// DISCARDED by HexaGen: void igSetCurrentViewport(ImGuiWindow* window, ImGuiViewportP* viewport)
+	// DISCARDED by HexaGen: void igSetCursorPos(const ImVec2 local_pos)
+	// DISCARDED by HexaGen: void igSetCursorPosX(float local_x)
+	// DISCARDED by HexaGen: void igSetCursorPosY(float local_y)
+	// DISCARDED by HexaGen: void igSetCursorScreenPos(const ImVec2 pos)
+	// DISCARDED by HexaGen: void igSetFocusID(ImGuiID id, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igSetHoveredID(ImGuiID id)
+	// DISCARDED by HexaGen: void igSetItemAllowOverlap()
+	// DISCARDED by HexaGen: void igSetItemDefaultFocus()
+	// DISCARDED by HexaGen: void igSetItemUsingMouseWheel()
+	// DISCARDED by HexaGen: void igSetKeyboardFocusHere(int offset)
+	// DISCARDED by HexaGen: void igSetLastItemData(ImGuiID item_id, ImGuiItemFlags in_flags, ImGuiItemStatusFlags status_flags, const ImRect item_rect)
+	// DISCARDED by HexaGen: void igSetMouseCursor(ImGuiMouseCursor cursor_type)
+	// DISCARDED by HexaGen: void igSetNavID(ImGuiID id, ImGuiNavLayer nav_layer, ImGuiID focus_scope_id, const ImRect rect_rel)
+	// DISCARDED by HexaGen: void igSetNavWindow(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igSetNextFrameWantCaptureKeyboard(bool want_capture_keyboard)
+	// DISCARDED by HexaGen: void igSetNextFrameWantCaptureMouse(bool want_capture_mouse)
+	// DISCARDED by HexaGen: void igSetNextItemOpen(bool is_open, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetNextItemWidth(float item_width)
+	// DISCARDED by HexaGen: void igSetNextWindowBgAlpha(float alpha)
+	// DISCARDED by HexaGen: void igSetNextWindowClass(const ImGuiWindowClass* window_class)
+	// DISCARDED by HexaGen: void igSetNextWindowCollapsed(bool collapsed, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetNextWindowContentSize(const ImVec2 size)
+	// DISCARDED by HexaGen: void igSetNextWindowDockID(ImGuiID dock_id, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetNextWindowFocus()
+	// DISCARDED by HexaGen: void igSetNextWindowPos(const ImVec2 pos, ImGuiCond cond, const ImVec2 pivot)
+	// DISCARDED by HexaGen: void igSetNextWindowScroll(const ImVec2 scroll)
+	// DISCARDED by HexaGen: void igSetNextWindowSize(const ImVec2 size, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetNextWindowSizeConstraints(const ImVec2 size_min, const ImVec2 size_max, ImGuiSizeCallback custom_callback, void* custom_callback_data)
+	// DISCARDED by HexaGen: void igSetNextWindowViewport(ImGuiID viewport_id)
+	// DISCARDED by HexaGen: void igSetScrollFromPosX_Float(float local_x, float center_x_ratio)
+	// DISCARDED by HexaGen: void igSetScrollFromPosX_WindowPtr(ImGuiWindow* window, float local_x, float center_x_ratio)
+	// DISCARDED by HexaGen: void igSetScrollFromPosY_Float(float local_y, float center_y_ratio)
+	// DISCARDED by HexaGen: void igSetScrollFromPosY_WindowPtr(ImGuiWindow* window, float local_y, float center_y_ratio)
+	// DISCARDED by HexaGen: void igSetScrollHereX(float center_x_ratio)
+	// DISCARDED by HexaGen: void igSetScrollHereY(float center_y_ratio)
+	// DISCARDED by HexaGen: void igSetScrollX_Float(float scroll_x)
+	// DISCARDED by HexaGen: void igSetScrollX_WindowPtr(ImGuiWindow* window, float scroll_x)
+	// DISCARDED by HexaGen: void igSetScrollY_Float(float scroll_y)
+	// DISCARDED by HexaGen: void igSetScrollY_WindowPtr(ImGuiWindow* window, float scroll_y)
+	// DISCARDED by HexaGen: void igSetStateStorage(ImGuiStorage* storage)
+	// DISCARDED by HexaGen: void igSetTabItemClosed(const char* tab_or_docked_window_label)
+	// DISCARDED by HexaGen: void igSetTooltip(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igSetTooltipV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igSetWindowClipRectBeforeSetChannel(ImGuiWindow* window, const ImRect clip_rect)
+	// DISCARDED by HexaGen: void igSetWindowCollapsed_Bool(bool collapsed, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowCollapsed_Str(const char* name, bool collapsed, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowCollapsed_WindowPtr(ImGuiWindow* window, bool collapsed, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowDock(ImGuiWindow* window, ImGuiID dock_id, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowFocus_Nil()
+	// DISCARDED by HexaGen: void igSetWindowFocus_Str(const char* name)
+	// DISCARDED by HexaGen: void igSetWindowFontScale(float scale)
+	// DISCARDED by HexaGen: void igSetWindowHitTestHole(ImGuiWindow* window, const ImVec2 pos, const ImVec2 size)
+	// DISCARDED by HexaGen: void igSetWindowPos_Str(const char* name, const ImVec2 pos, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowPos_Vec2(const ImVec2 pos, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowPos_WindowPtr(ImGuiWindow* window, const ImVec2 pos, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowSize_Str(const char* name, const ImVec2 size, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowSize_Vec2(const ImVec2 size, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowSize_WindowPtr(ImGuiWindow* window, const ImVec2 size, ImGuiCond cond)
+	// DISCARDED by HexaGen: void igSetWindowViewport(ImGuiWindow* window, ImGuiViewportP* viewport)
+	// DISCARDED by HexaGen: void igShadeVertsLinearColorGradientKeepAlpha(ImDrawList* draw_list, int vert_start_idx, int vert_end_idx, ImVec2 gradient_p0, ImVec2 gradient_p1, ImU32 col0, ImU32 col1)
+	// DISCARDED by HexaGen: void igShadeVertsLinearUV(ImDrawList* draw_list, int vert_start_idx, int vert_end_idx, const ImVec2 a, const ImVec2 b, const ImVec2 uv_a, const ImVec2 uv_b, bool clamp)
+	// DISCARDED by HexaGen: void igShowAboutWindow(bool* p_open)
+	// DISCARDED by HexaGen: void igShowDebugLogWindow(bool* p_open)
+	// DISCARDED by HexaGen: void igShowDemoWindow(bool* p_open)
+	// DISCARDED by HexaGen: void igShowFontAtlas(ImFontAtlas* atlas)
+	// DISCARDED by HexaGen: void igShowFontSelector(const char* label)
+	// DISCARDED by HexaGen: void igShowMetricsWindow(bool* p_open)
+	// DISCARDED by HexaGen: void igShowStackToolWindow(bool* p_open)
+	// DISCARDED by HexaGen: void igShowStyleEditor(ImGuiStyle* ref)
+	// DISCARDED by HexaGen: void igShowUserGuide()
+	// DISCARDED by HexaGen: void igShrinkWidths(ImGuiShrinkWidthItem* items, int count, float width_excess)
+	// DISCARDED by HexaGen: void igShutdown()
+	// DISCARDED by HexaGen: void igSpacing()
+	// DISCARDED by HexaGen: void igStartMouseMovingWindow(ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igStartMouseMovingWindowOrNode(ImGuiWindow* window, ImGuiDockNode* node, bool undock_floating_node)
+	// DISCARDED by HexaGen: void igStyleColorsClassic(ImGuiStyle* dst)
+	// DISCARDED by HexaGen: void igStyleColorsDark(ImGuiStyle* dst)
+	// DISCARDED by HexaGen: void igStyleColorsLight(ImGuiStyle* dst)
+	// DISCARDED by HexaGen: void igTabBarAddTab(ImGuiTabBar* tab_bar, ImGuiTabItemFlags tab_flags, ImGuiWindow* window)
+	// DISCARDED by HexaGen: void igTabBarCloseTab(ImGuiTabBar* tab_bar, ImGuiTabItem* tab)
+	// DISCARDED by HexaGen: void igTabBarQueueReorder(ImGuiTabBar* tab_bar, const ImGuiTabItem* tab, int offset)
+	// DISCARDED by HexaGen: void igTabBarQueueReorderFromMousePos(ImGuiTabBar* tab_bar, const ImGuiTabItem* tab, ImVec2 mouse_pos)
+	// DISCARDED by HexaGen: void igTabBarRemoveTab(ImGuiTabBar* tab_bar, ImGuiID tab_id)
+	// DISCARDED by HexaGen: void igTabItemBackground(ImDrawList* draw_list, const ImRect bb, ImGuiTabItemFlags flags, ImU32 col)
+	// DISCARDED by HexaGen: void igTabItemCalcSize(ImVec2* pOut, const char* label, bool has_close_button)
+	// DISCARDED by HexaGen: void igTabItemLabelAndCloseButton(ImDrawList* draw_list, const ImRect bb, ImGuiTabItemFlags flags, ImVec2 frame_padding, const char* label, ImGuiID tab_id, ImGuiID close_button_id, bool is_contents_visible, bool* out_just_closed, bool* out_text_clipped)
+	// DISCARDED by HexaGen: void igTableBeginApplyRequests(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableBeginCell(ImGuiTable* table, int column_n)
+	// DISCARDED by HexaGen: void igTableBeginInitMemory(ImGuiTable* table, int columns_count)
+	// DISCARDED by HexaGen: void igTableBeginRow(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableDrawBorders(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableDrawContextMenu(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableEndCell(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableEndRow(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableFixColumnSortDirection(ImGuiTable* table, ImGuiTableColumn* column)
+	// DISCARDED by HexaGen: void igTableGcCompactSettings()
+	// DISCARDED by HexaGen: void igTableGcCompactTransientBuffers_TablePtr(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableGcCompactTransientBuffers_TableTempDataPtr(ImGuiTableTempData* table)
+	// DISCARDED by HexaGen: void igTableGetCellBgRect(ImRect* pOut, const ImGuiTable* table, int column_n)
+	// DISCARDED by HexaGen: void igTableHeader(const char* label)
+	// DISCARDED by HexaGen: void igTableHeadersRow()
+	// DISCARDED by HexaGen: void igTableLoadSettings(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableMergeDrawChannels(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableNextRow(ImGuiTableRowFlags row_flags, float min_row_height)
+	// DISCARDED by HexaGen: void igTableOpenContextMenu(int column_n)
+	// DISCARDED by HexaGen: void igTablePopBackgroundChannel()
+	// DISCARDED by HexaGen: void igTablePushBackgroundChannel()
+	// DISCARDED by HexaGen: void igTableRemove(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableResetSettings(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableSaveSettings(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableSetBgColor(ImGuiTableBgTarget target, ImU32 color, int column_n)
+	// DISCARDED by HexaGen: void igTableSetColumnEnabled(int column_n, bool v)
+	// DISCARDED by HexaGen: void igTableSetColumnSortDirection(int column_n, ImGuiSortDirection sort_direction, bool append_to_sort_specs)
+	// DISCARDED by HexaGen: void igTableSetColumnWidth(int column_n, float width)
+	// DISCARDED by HexaGen: void igTableSetColumnWidthAutoAll(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableSetColumnWidthAutoSingle(ImGuiTable* table, int column_n)
+	// DISCARDED by HexaGen: void igTableSettingsAddSettingsHandler()
+	// DISCARDED by HexaGen: void igTableSetupColumn(const char* label, ImGuiTableColumnFlags flags, float init_width_or_weight, ImGuiID user_id)
+	// DISCARDED by HexaGen: void igTableSetupDrawChannels(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableSetupScrollFreeze(int cols, int rows)
+	// DISCARDED by HexaGen: void igTableSortSpecsBuild(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableSortSpecsSanitize(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableUpdateBorders(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableUpdateColumnsWeightFromWidth(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igTableUpdateLayout(ImGuiTable* table)
+	// DISCARDED by HexaGen: void igText(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igTextColored(const ImVec4 col, const char* fmt, ...)
+	// DISCARDED by HexaGen: void igTextColoredV(const ImVec4 col, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igTextDisabled(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igTextDisabledV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igTextEx(const char* text, const char* text_end, ImGuiTextFlags flags)
+	// DISCARDED by HexaGen: void igTextUnformatted(const char* text, const char* text_end)
+	// DISCARDED by HexaGen: void igTextV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igTextWrapped(const char* fmt, ...)
+	// DISCARDED by HexaGen: void igTextWrappedV(const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void igTranslateWindowsInViewport(ImGuiViewportP* viewport, const ImVec2 old_pos, const ImVec2 new_pos)
+	// DISCARDED by HexaGen: void igTreePop()
+	// DISCARDED by HexaGen: void igTreePush_Ptr(const void* ptr_id)
+	// DISCARDED by HexaGen: void igTreePush_Str(const char* str_id)
+	// DISCARDED by HexaGen: void igTreePushOverrideID(ImGuiID id)
+	// DISCARDED by HexaGen: void igUnindent(float indent_w)
+	// DISCARDED by HexaGen: void igUpdateHoveredWindowAndCaptureFlags()
+	// DISCARDED by HexaGen: void igUpdateInputEvents(bool trickle_fast_inputs)
+	// DISCARDED by HexaGen: void igUpdateMouseMovingWindowEndFrame()
+	// DISCARDED by HexaGen: void igUpdateMouseMovingWindowNewFrame()
+	// DISCARDED by HexaGen: void igUpdatePlatformWindows()
+	// DISCARDED by HexaGen: void igUpdateWindowParentAndRootLinks(ImGuiWindow* window, ImGuiWindowFlags flags, ImGuiWindow* parent_window)
+	// DISCARDED by HexaGen: void igValue_Bool(const char* prefix, bool b)
+	// DISCARDED by HexaGen: void igValue_Float(const char* prefix, float v, const char* float_format)
+	// DISCARDED by HexaGen: void igValue_Int(const char* prefix, int v)
+	// DISCARDED by HexaGen: void igValue_Uint(const char* prefix, unsigned int v)
+	// DISCARDED by HexaGen: void igWindowRectAbsToRel(ImRect* pOut, ImGuiWindow* window, const ImRect r)
+	// DISCARDED by HexaGen: void igWindowRectRelToAbs(ImRect* pOut, ImGuiWindow* window, const ImRect r)
+	// DISCARDED by HexaGen: void ImBitVector_Clear(ImBitVector* self)
+	// DISCARDED by HexaGen: void ImBitVector_ClearBit(ImBitVector* self, int n)
+	// DISCARDED by HexaGen: void ImBitVector_Create(ImBitVector* self, int sz)
+	// DISCARDED by HexaGen: void ImBitVector_SetBit(ImBitVector* self, int n)
+	// DISCARDED by HexaGen: void ImColor_destroy(ImColor* self)
+	// DISCARDED by HexaGen: void ImColor_HSV(ImColor* pOut, float h, float s, float v, float a)
+	// DISCARDED by HexaGen: void ImColor_SetHSV(ImColor* self, float h, float s, float v, float a)
+	// DISCARDED by HexaGen: void ImDrawCmd_destroy(ImDrawCmd* self)
+	// DISCARDED by HexaGen: void ImDrawData_Clear(ImDrawData* self)
+	// DISCARDED by HexaGen: void ImDrawData_DeIndexAllBuffers(ImDrawData* self)
+	// DISCARDED by HexaGen: void ImDrawData_destroy(ImDrawData* self)
+	// DISCARDED by HexaGen: void ImDrawData_ScaleClipRects(ImDrawData* self, const ImVec2 fb_scale)
+	// DISCARDED by HexaGen: void ImDrawDataBuilder_Clear(ImDrawDataBuilder* self)
+	// DISCARDED by HexaGen: void ImDrawDataBuilder_ClearFreeMemory(ImDrawDataBuilder* self)
+	// DISCARDED by HexaGen: void ImDrawDataBuilder_FlattenIntoSingleLayer(ImDrawDataBuilder* self)
+	// DISCARDED by HexaGen: void ImDrawList__ClearFreeMemory(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__OnChangedClipRect(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__OnChangedTextureID(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__OnChangedVtxOffset(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__PathArcToFastEx(ImDrawList* self, const ImVec2 center, float radius, int a_min_sample, int a_max_sample, int a_step)
+	// DISCARDED by HexaGen: void ImDrawList__PathArcToN(ImDrawList* self, const ImVec2 center, float radius, float a_min, float a_max, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList__PopUnusedDrawCmd(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__ResetForNewFrame(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList__TryMergeDrawCmds(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_AddBezierCubic(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, ImU32 col, float thickness, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_AddBezierQuadratic(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, ImU32 col, float thickness, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_AddCallback(ImDrawList* self, ImDrawCallback callback, void* callback_data)
+	// DISCARDED by HexaGen: void ImDrawList_AddCircle(ImDrawList* self, const ImVec2 center, float radius, ImU32 col, int num_segments, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddCircleFilled(ImDrawList* self, const ImVec2 center, float radius, ImU32 col, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_AddConvexPolyFilled(ImDrawList* self, const ImVec2* points, int num_points, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_AddDrawCmd(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_AddImage(ImDrawList* self, ImTextureID user_texture_id, const ImVec2 p_min, const ImVec2 p_max, const ImVec2 uv_min, const ImVec2 uv_max, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_AddImageQuad(ImDrawList* self, ImTextureID user_texture_id, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, const ImVec2 uv1, const ImVec2 uv2, const ImVec2 uv3, const ImVec2 uv4, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_AddImageRounded(ImDrawList* self, ImTextureID user_texture_id, const ImVec2 p_min, const ImVec2 p_max, const ImVec2 uv_min, const ImVec2 uv_max, ImU32 col, float rounding, ImDrawFlags flags)
+	// DISCARDED by HexaGen: void ImDrawList_AddLine(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, ImU32 col, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddNgon(ImDrawList* self, const ImVec2 center, float radius, ImU32 col, int num_segments, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddNgonFilled(ImDrawList* self, const ImVec2 center, float radius, ImU32 col, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_AddPolyline(ImDrawList* self, const ImVec2* points, int num_points, ImU32 col, ImDrawFlags flags, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddQuad(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, ImU32 col, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddQuadFilled(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_AddRect(ImDrawList* self, const ImVec2 p_min, const ImVec2 p_max, ImU32 col, float rounding, ImDrawFlags flags, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddRectFilled(ImDrawList* self, const ImVec2 p_min, const ImVec2 p_max, ImU32 col, float rounding, ImDrawFlags flags)
+	// DISCARDED by HexaGen: void ImDrawList_AddRectFilledMultiColor(ImDrawList* self, const ImVec2 p_min, const ImVec2 p_max, ImU32 col_upr_left, ImU32 col_upr_right, ImU32 col_bot_right, ImU32 col_bot_left)
+	// DISCARDED by HexaGen: void ImDrawList_AddText_FontPtr(ImDrawList* self, const ImFont* font, float font_size, const ImVec2 pos, ImU32 col, const char* text_begin, const char* text_end, float wrap_width, const ImVec4* cpu_fine_clip_rect)
+	// DISCARDED by HexaGen: void ImDrawList_AddText_Vec2(ImDrawList* self, const ImVec2 pos, ImU32 col, const char* text_begin, const char* text_end)
+	// DISCARDED by HexaGen: void ImDrawList_AddTriangle(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, ImU32 col, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_AddTriangleFilled(ImDrawList* self, const ImVec2 p1, const ImVec2 p2, const ImVec2 p3, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_ChannelsMerge(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_ChannelsSetCurrent(ImDrawList* self, int n)
+	// DISCARDED by HexaGen: void ImDrawList_ChannelsSplit(ImDrawList* self, int count)
+	// DISCARDED by HexaGen: void ImDrawList_destroy(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_GetClipRectMax(ImVec2* pOut, ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_GetClipRectMin(ImVec2* pOut, ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_PathArcTo(ImDrawList* self, const ImVec2 center, float radius, float a_min, float a_max, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_PathArcToFast(ImDrawList* self, const ImVec2 center, float radius, int a_min_of_12, int a_max_of_12)
+	// DISCARDED by HexaGen: void ImDrawList_PathBezierCubicCurveTo(ImDrawList* self, const ImVec2 p2, const ImVec2 p3, const ImVec2 p4, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_PathBezierQuadraticCurveTo(ImDrawList* self, const ImVec2 p2, const ImVec2 p3, int num_segments)
+	// DISCARDED by HexaGen: void ImDrawList_PathClear(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_PathFillConvex(ImDrawList* self, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PathLineTo(ImDrawList* self, const ImVec2 pos)
+	// DISCARDED by HexaGen: void ImDrawList_PathLineToMergeDuplicate(ImDrawList* self, const ImVec2 pos)
+	// DISCARDED by HexaGen: void ImDrawList_PathRect(ImDrawList* self, const ImVec2 rect_min, const ImVec2 rect_max, float rounding, ImDrawFlags flags)
+	// DISCARDED by HexaGen: void ImDrawList_PathStroke(ImDrawList* self, ImU32 col, ImDrawFlags flags, float thickness)
+	// DISCARDED by HexaGen: void ImDrawList_PopClipRect(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_PopTextureID(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_PrimQuadUV(ImDrawList* self, const ImVec2 a, const ImVec2 b, const ImVec2 c, const ImVec2 d, const ImVec2 uv_a, const ImVec2 uv_b, const ImVec2 uv_c, const ImVec2 uv_d, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PrimRect(ImDrawList* self, const ImVec2 a, const ImVec2 b, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PrimRectUV(ImDrawList* self, const ImVec2 a, const ImVec2 b, const ImVec2 uv_a, const ImVec2 uv_b, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PrimReserve(ImDrawList* self, int idx_count, int vtx_count)
+	// DISCARDED by HexaGen: void ImDrawList_PrimUnreserve(ImDrawList* self, int idx_count, int vtx_count)
+	// DISCARDED by HexaGen: void ImDrawList_PrimVtx(ImDrawList* self, const ImVec2 pos, const ImVec2 uv, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PrimWriteIdx(ImDrawList* self, ImDrawIdx idx)
+	// DISCARDED by HexaGen: void ImDrawList_PrimWriteVtx(ImDrawList* self, const ImVec2 pos, const ImVec2 uv, ImU32 col)
+	// DISCARDED by HexaGen: void ImDrawList_PushClipRect(ImDrawList* self, const ImVec2 clip_rect_min, const ImVec2 clip_rect_max, bool intersect_with_current_clip_rect)
+	// DISCARDED by HexaGen: void ImDrawList_PushClipRectFullScreen(ImDrawList* self)
+	// DISCARDED by HexaGen: void ImDrawList_PushTextureID(ImDrawList* self, ImTextureID texture_id)
+	// DISCARDED by HexaGen: void ImDrawListSharedData_destroy(ImDrawListSharedData* self)
+	// DISCARDED by HexaGen: void ImDrawListSharedData_SetCircleTessellationMaxError(ImDrawListSharedData* self, float max_error)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_Clear(ImDrawListSplitter* self)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_ClearFreeMemory(ImDrawListSplitter* self)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_destroy(ImDrawListSplitter* self)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_Merge(ImDrawListSplitter* self, ImDrawList* draw_list)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_SetCurrentChannel(ImDrawListSplitter* self, ImDrawList* draw_list, int channel_idx)
+	// DISCARDED by HexaGen: void ImDrawListSplitter_Split(ImDrawListSplitter* self, ImDrawList* draw_list, int count)
+	// DISCARDED by HexaGen: void ImFont_AddGlyph(ImFont* self, const ImFontConfig* src_cfg, ImWchar c, int texture_index, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
+	// DISCARDED by HexaGen: void ImFont_AddKerningPair(ImFont* self, ImWchar left_c, ImWchar right_c, float distance_adjustment)
+	// DISCARDED by HexaGen: void ImFont_AddRemapChar(ImFont* self, ImWchar dst, ImWchar src, bool overwrite_dst)
+	// DISCARDED by HexaGen: void ImFont_BuildLookupTable(ImFont* self)
+	// DISCARDED by HexaGen: void ImFont_CalcTextSizeA(ImVec2* pOut, ImFont* self, float size, float max_width, float wrap_width, const char* text_begin, const char* text_end, const char** remaining)
+	// DISCARDED by HexaGen: void ImFont_ClearOutputData(ImFont* self)
+	// DISCARDED by HexaGen: void ImFont_destroy(ImFont* self)
+	// DISCARDED by HexaGen: void ImFont_GrowIndex(ImFont* self, int new_size)
+	// DISCARDED by HexaGen: void ImFont_RenderChar(ImFont* self, ImDrawList* draw_list, float size, const ImVec2 pos, ImU32 col, ImWchar c)
+	// DISCARDED by HexaGen: void ImFont_RenderText(ImFont* self, ImDrawList* draw_list, float size, const ImVec2 pos, ImU32 col, const ImVec4 clip_rect, const char* text_begin, const char* text_end, float wrap_width, bool cpu_fine_clip)
+	// DISCARDED by HexaGen: void ImFont_SetGlyphVisible(ImFont* self, ImWchar c, bool visible)
+	// DISCARDED by HexaGen: void ImFontAtlas_CalcCustomRectUV(ImFontAtlas* self, const ImFontAtlasCustomRect* rect, ImVec2* out_uv_min, ImVec2* out_uv_max)
+	// DISCARDED by HexaGen: void ImFontAtlas_Clear(ImFontAtlas* self)
+	// DISCARDED by HexaGen: void ImFontAtlas_ClearFonts(ImFontAtlas* self)
+	// DISCARDED by HexaGen: void ImFontAtlas_ClearInputData(ImFontAtlas* self)
+	// DISCARDED by HexaGen: void ImFontAtlas_ClearTexData(ImFontAtlas* self)
+	// DISCARDED by HexaGen: void ImFontAtlas_ClearTexID(ImFontAtlas* self, ImTextureID nullId)
+	// DISCARDED by HexaGen: void ImFontAtlas_destroy(ImFontAtlas* self)
+	// DISCARDED by HexaGen: void ImFontAtlas_GetTexDataAsAlpha8(ImFontAtlas* self, int texture_index, unsigned char** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel)
+	// DISCARDED by HexaGen: void ImFontAtlas_GetTexDataAsRGBA32(ImFontAtlas* self, int texture_index, unsigned char** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel)
+	// DISCARDED by HexaGen: void ImFontAtlas_SetTexID(ImFontAtlas* self, int texture_index, ImTextureID id)
+	// DISCARDED by HexaGen: void ImFontAtlasCustomRect_destroy(ImFontAtlasCustomRect* self)
+	// DISCARDED by HexaGen: void ImFontConfig_destroy(ImFontConfig* self)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_AddChar(ImFontGlyphRangesBuilder* self, ImWchar c)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_AddRanges(ImFontGlyphRangesBuilder* self, const ImWchar* ranges)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_AddText(ImFontGlyphRangesBuilder* self, const char* text, const char* text_end)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_BuildRanges(ImFontGlyphRangesBuilder* self, ImVector_ImWchar* out_ranges)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_Clear(ImFontGlyphRangesBuilder* self)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_destroy(ImFontGlyphRangesBuilder* self)
+	// DISCARDED by HexaGen: void ImFontGlyphRangesBuilder_SetBit(ImFontGlyphRangesBuilder* self, size_t n)
+	// DISCARDED by HexaGen: void ImGuiComboPreviewData_destroy(ImGuiComboPreviewData* self)
+	// DISCARDED by HexaGen: void ImGuiContext_destroy(ImGuiContext* self)
+	// DISCARDED by HexaGen: void ImGuiContextHook_destroy(ImGuiContextHook* self)
+	// DISCARDED by HexaGen: void ImGuiDockContext_destroy(ImGuiDockContext* self)
+	// DISCARDED by HexaGen: void ImGuiDockNode_destroy(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: void ImGuiDockNode_Rect(ImRect* pOut, ImGuiDockNode* self)
+	// DISCARDED by HexaGen: void ImGuiDockNode_SetLocalFlags(ImGuiDockNode* self, ImGuiDockNodeFlags flags)
+	// DISCARDED by HexaGen: void ImGuiDockNode_UpdateMergedFlags(ImGuiDockNode* self)
+	// DISCARDED by HexaGen: void ImGuiInputEvent_destroy(ImGuiInputEvent* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextCallbackData_ClearSelection(ImGuiInputTextCallbackData* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextCallbackData_DeleteChars(ImGuiInputTextCallbackData* self, int pos, int bytes_count)
+	// DISCARDED by HexaGen: void ImGuiInputTextCallbackData_destroy(ImGuiInputTextCallbackData* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextCallbackData_InsertChars(ImGuiInputTextCallbackData* self, int pos, const char* text, const char* text_end)
+	// DISCARDED by HexaGen: void ImGuiInputTextCallbackData_SelectAll(ImGuiInputTextCallbackData* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_ClearFreeMemory(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_ClearSelection(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_ClearText(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_CursorAnimReset(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_CursorClamp(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_destroy(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_OnKeyPressed(ImGuiInputTextState* self, int key)
+	// DISCARDED by HexaGen: void ImGuiInputTextState_SelectAll(ImGuiInputTextState* self)
+	// DISCARDED by HexaGen: void ImGuiIO_AddFocusEvent(ImGuiIO* self, bool focused)
+	// DISCARDED by HexaGen: void ImGuiIO_AddInputCharacter(ImGuiIO* self, unsigned int c)
+	// DISCARDED by HexaGen: void ImGuiIO_AddInputCharactersUTF8(ImGuiIO* self, const char* str)
+	// DISCARDED by HexaGen: void ImGuiIO_AddInputCharacterUTF16(ImGuiIO* self, ImWchar16 c)
+	// DISCARDED by HexaGen: void ImGuiIO_AddKeyAnalogEvent(ImGuiIO* self, ImGuiKey key, bool down, float v)
+	// DISCARDED by HexaGen: void ImGuiIO_AddKeyEvent(ImGuiIO* self, ImGuiKey key, bool down)
+	// DISCARDED by HexaGen: void ImGuiIO_AddMouseButtonEvent(ImGuiIO* self, int button, bool down)
+	// DISCARDED by HexaGen: void ImGuiIO_AddMousePosEvent(ImGuiIO* self, float x, float y)
+	// DISCARDED by HexaGen: void ImGuiIO_AddMouseViewportEvent(ImGuiIO* self, ImGuiID id)
+	// DISCARDED by HexaGen: void ImGuiIO_AddMouseWheelEvent(ImGuiIO* self, float wh_x, float wh_y)
+	// DISCARDED by HexaGen: void ImGuiIO_ClearInputCharacters(ImGuiIO* self)
+	// DISCARDED by HexaGen: void ImGuiIO_ClearInputKeys(ImGuiIO* self)
+	// DISCARDED by HexaGen: void ImGuiIO_destroy(ImGuiIO* self)
+	// DISCARDED by HexaGen: void ImGuiIO_SetAppAcceptingEvents(ImGuiIO* self, bool accepting_events)
+	// DISCARDED by HexaGen: void ImGuiIO_SetKeyEventNativeData(ImGuiIO* self, ImGuiKey key, int native_keycode, int native_scancode, int native_legacy_index)
+	// DISCARDED by HexaGen: void ImGuiLastItemData_destroy(ImGuiLastItemData* self)
+	// DISCARDED by HexaGen: void ImGuiListClipper_Begin(ImGuiListClipper* self, int items_count, float items_height)
+	// DISCARDED by HexaGen: void ImGuiListClipper_destroy(ImGuiListClipper* self)
+	// DISCARDED by HexaGen: void ImGuiListClipper_End(ImGuiListClipper* self)
+	// DISCARDED by HexaGen: void ImGuiListClipper_ForceDisplayRangeByIndices(ImGuiListClipper* self, int item_min, int item_max)
+	// DISCARDED by HexaGen: void ImGuiListClipperData_destroy(ImGuiListClipperData* self)
+	// DISCARDED by HexaGen: void ImGuiListClipperData_Reset(ImGuiListClipperData* self, ImGuiListClipper* clipper)
+	// DISCARDED by HexaGen: void ImGuiMenuColumns_CalcNextTotalWidth(ImGuiMenuColumns* self, bool update_offsets)
+	// DISCARDED by HexaGen: void ImGuiMenuColumns_destroy(ImGuiMenuColumns* self)
+	// DISCARDED by HexaGen: void ImGuiMenuColumns_Update(ImGuiMenuColumns* self, float spacing, bool window_reappearing)
+	// DISCARDED by HexaGen: void ImGuiMetricsConfig_destroy(ImGuiMetricsConfig* self)
+	// DISCARDED by HexaGen: void ImGuiNavItemData_Clear(ImGuiNavItemData* self)
+	// DISCARDED by HexaGen: void ImGuiNavItemData_destroy(ImGuiNavItemData* self)
+	// DISCARDED by HexaGen: void ImGuiNextItemData_ClearFlags(ImGuiNextItemData* self)
+	// DISCARDED by HexaGen: void ImGuiNextItemData_destroy(ImGuiNextItemData* self)
+	// DISCARDED by HexaGen: void ImGuiNextWindowData_ClearFlags(ImGuiNextWindowData* self)
+	// DISCARDED by HexaGen: void ImGuiNextWindowData_destroy(ImGuiNextWindowData* self)
+	// DISCARDED by HexaGen: void ImGuiOldColumnData_destroy(ImGuiOldColumnData* self)
+	// DISCARDED by HexaGen: void ImGuiOldColumns_destroy(ImGuiOldColumns* self)
+	// DISCARDED by HexaGen: void ImGuiOnceUponAFrame_destroy(ImGuiOnceUponAFrame* self)
+	// DISCARDED by HexaGen: void ImGuiPayload_Clear(ImGuiPayload* self)
+	// DISCARDED by HexaGen: void ImGuiPayload_destroy(ImGuiPayload* self)
+	// DISCARDED by HexaGen: void ImGuiPlatformImeData_destroy(ImGuiPlatformImeData* self)
+	// DISCARDED by HexaGen: void ImGuiPlatformIO_destroy(ImGuiPlatformIO* self)
+	// DISCARDED by HexaGen: void ImGuiPlatformMonitor_destroy(ImGuiPlatformMonitor* self)
+	// DISCARDED by HexaGen: void ImGuiPopupData_destroy(ImGuiPopupData* self)
+	// DISCARDED by HexaGen: void ImGuiPtrOrIndex_destroy(ImGuiPtrOrIndex* self)
+	// DISCARDED by HexaGen: void ImGuiSettingsHandler_destroy(ImGuiSettingsHandler* self)
+	// DISCARDED by HexaGen: void ImGuiStackLevelInfo_destroy(ImGuiStackLevelInfo* self)
+	// DISCARDED by HexaGen: void ImGuiStackSizes_CompareWithCurrentState(ImGuiStackSizes* self)
+	// DISCARDED by HexaGen: void ImGuiStackSizes_destroy(ImGuiStackSizes* self)
+	// DISCARDED by HexaGen: void ImGuiStackSizes_SetToCurrentState(ImGuiStackSizes* self)
+	// DISCARDED by HexaGen: void ImGuiStackTool_destroy(ImGuiStackTool* self)
+	// DISCARDED by HexaGen: void ImGuiStorage_BuildSortByKey(ImGuiStorage* self)
+	// DISCARDED by HexaGen: void ImGuiStorage_Clear(ImGuiStorage* self)
+	// DISCARDED by HexaGen: void ImGuiStorage_SetAllInt(ImGuiStorage* self, int val)
+	// DISCARDED by HexaGen: void ImGuiStorage_SetBool(ImGuiStorage* self, ImGuiID key, bool val)
+	// DISCARDED by HexaGen: void ImGuiStorage_SetFloat(ImGuiStorage* self, ImGuiID key, float val)
+	// DISCARDED by HexaGen: void ImGuiStorage_SetInt(ImGuiStorage* self, ImGuiID key, int val)
+	// DISCARDED by HexaGen: void ImGuiStorage_SetVoidPtr(ImGuiStorage* self, ImGuiID key, void* val)
+	// DISCARDED by HexaGen: void ImGuiStoragePair_destroy(ImGuiStoragePair* self)
+	// DISCARDED by HexaGen: void ImGuiStyle_destroy(ImGuiStyle* self)
+	// DISCARDED by HexaGen: void ImGuiStyle_ScaleAllSizes(ImGuiStyle* self, float scale_factor)
+	// DISCARDED by HexaGen: void ImGuiStyleMod_destroy(ImGuiStyleMod* self)
+	// DISCARDED by HexaGen: void ImGuiTabBar_destroy(ImGuiTabBar* self)
+	// DISCARDED by HexaGen: void ImGuiTabItem_destroy(ImGuiTabItem* self)
+	// DISCARDED by HexaGen: void ImGuiTable_destroy(ImGuiTable* self)
+	// DISCARDED by HexaGen: void ImGuiTableColumn_destroy(ImGuiTableColumn* self)
+	// DISCARDED by HexaGen: void ImGuiTableColumnSettings_destroy(ImGuiTableColumnSettings* self)
+	// DISCARDED by HexaGen: void ImGuiTableColumnSortSpecs_destroy(ImGuiTableColumnSortSpecs* self)
+	// DISCARDED by HexaGen: void ImGuiTableInstanceData_destroy(ImGuiTableInstanceData* self)
+	// DISCARDED by HexaGen: void ImGuiTableSettings_destroy(ImGuiTableSettings* self)
+	// DISCARDED by HexaGen: void ImGuiTableSortSpecs_destroy(ImGuiTableSortSpecs* self)
+	// DISCARDED by HexaGen: void ImGuiTableTempData_destroy(ImGuiTableTempData* self)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_append(ImGuiTextBuffer* self, const char* str, const char* str_end)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_appendf(ImGuiTextBuffer* buffer, const char* fmt, ...)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_appendfv(ImGuiTextBuffer* self, const char* fmt, va_list args)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_clear(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_destroy(ImGuiTextBuffer* self)
+	// DISCARDED by HexaGen: void ImGuiTextBuffer_reserve(ImGuiTextBuffer* self, int capacity)
+	// DISCARDED by HexaGen: void ImGuiTextFilter_Build(ImGuiTextFilter* self)
+	// DISCARDED by HexaGen: void ImGuiTextFilter_Clear(ImGuiTextFilter* self)
+	// DISCARDED by HexaGen: void ImGuiTextFilter_destroy(ImGuiTextFilter* self)
+	// DISCARDED by HexaGen: void ImGuiTextRange_destroy(ImGuiTextRange* self)
+	// DISCARDED by HexaGen: void ImGuiTextRange_split(ImGuiTextRange* self, char separator, ImVector_ImGuiTextRange* out)
+	// DISCARDED by HexaGen: void ImGuiViewport_destroy(ImGuiViewport* self)
+	// DISCARDED by HexaGen: void ImGuiViewport_GetCenter(ImVec2* pOut, ImGuiViewport* self)
+	// DISCARDED by HexaGen: void ImGuiViewport_GetWorkCenter(ImVec2* pOut, ImGuiViewport* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_CalcWorkRectPos(ImVec2* pOut, ImGuiViewportP* self, const ImVec2 off_min)
+	// DISCARDED by HexaGen: void ImGuiViewportP_CalcWorkRectSize(ImVec2* pOut, ImGuiViewportP* self, const ImVec2 off_min, const ImVec2 off_max)
+	// DISCARDED by HexaGen: void ImGuiViewportP_ClearRequestFlags(ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_destroy(ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_GetBuildWorkRect(ImRect* pOut, ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_GetMainRect(ImRect* pOut, ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_GetWorkRect(ImRect* pOut, ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiViewportP_UpdateWorkRect(ImGuiViewportP* self)
+	// DISCARDED by HexaGen: void ImGuiWindow_destroy(ImGuiWindow* self)
+	// DISCARDED by HexaGen: void ImGuiWindow_MenuBarRect(ImRect* pOut, ImGuiWindow* self)
+	// DISCARDED by HexaGen: void ImGuiWindow_Rect(ImRect* pOut, ImGuiWindow* self)
+	// DISCARDED by HexaGen: void ImGuiWindow_TitleBarRect(ImRect* pOut, ImGuiWindow* self)
+	// DISCARDED by HexaGen: void ImGuiWindowClass_destroy(ImGuiWindowClass* self)
+	// DISCARDED by HexaGen: void ImGuiWindowSettings_destroy(ImGuiWindowSettings* self)
+	// DISCARDED by HexaGen: void ImRect_Add_Rect(ImRect* self, const ImRect r)
+	// DISCARDED by HexaGen: void ImRect_Add_Vec2(ImRect* self, const ImVec2 p)
+	// DISCARDED by HexaGen: void ImRect_ClipWith(ImRect* self, const ImRect r)
+	// DISCARDED by HexaGen: void ImRect_ClipWithFull(ImRect* self, const ImRect r)
+	// DISCARDED by HexaGen: void ImRect_destroy(ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_Expand_Float(ImRect* self, const float amount)
+	// DISCARDED by HexaGen: void ImRect_Expand_Vec2(ImRect* self, const ImVec2 amount)
+	// DISCARDED by HexaGen: void ImRect_Floor(ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetBL(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetBR(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetCenter(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetSize(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetTL(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_GetTR(ImVec2* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_ToVec4(ImVec4* pOut, ImRect* self)
+	// DISCARDED by HexaGen: void ImRect_Translate(ImRect* self, const ImVec2 d)
+	// DISCARDED by HexaGen: void ImRect_TranslateX(ImRect* self, float dx)
+	// DISCARDED by HexaGen: void ImRect_TranslateY(ImRect* self, float dy)
+	// DISCARDED by HexaGen: void ImVec1_destroy(ImVec1* self)
+	// DISCARDED by HexaGen: void ImVec2_destroy(ImVec2* self)
+	// DISCARDED by HexaGen: void ImVec2ih_destroy(ImVec2ih* self)
+	// DISCARDED by HexaGen: void ImVec4_destroy(ImVec4* self)
+	// DISCARDED by HexaGen: void ImVector_ImWchar_destroy(ImVector_ImWchar* self)
+	// DISCARDED by HexaGen: void ImVector_ImWchar_Init(ImVector_ImWchar* p)
+	// DISCARDED by HexaGen: void ImVector_ImWchar_UnInit(ImVector_ImWchar* p)
+	// DISCARDED by HexaGen: void* igImFileLoadToMemory(const char* filename, const char* mode, size_t* out_file_size, int padding_bytes)
+	// DISCARDED by HexaGen: void* igMemAlloc(size_t size)
+	// DISCARDED by HexaGen: void* ImGuiStorage_GetVoidPtr(ImGuiStorage* self, ImGuiID key)
+	// DISCARDED by HexaGen: void** ImGuiStorage_GetVoidPtrRef(ImGuiStorage* self, ImGuiID key, void* default_val)
 }

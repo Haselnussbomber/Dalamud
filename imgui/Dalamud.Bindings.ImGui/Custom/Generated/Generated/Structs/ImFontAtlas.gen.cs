@@ -372,17 +372,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -397,20 +386,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -418,20 +393,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
 						return ret != 0;
@@ -456,39 +417,11 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-					return ret != 0;
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 					return ret != 0;
@@ -509,20 +442,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -530,20 +449,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -568,23 +473,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -592,20 +480,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 						return ret != 0;
@@ -622,23 +496,6 @@ public unsafe partial struct ImFontAtlas
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 							return ret != 0;
@@ -664,23 +521,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, int* textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -692,26 +532,6 @@ public unsafe partial struct ImFontAtlas
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, int* textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, textureIndex);
 								return ret != 0;
@@ -791,20 +611,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -822,23 +628,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, Vector2* outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -846,23 +635,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvBorder = &outUvBorder)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -893,45 +665,11 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, Vector2* outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, outUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
 			{
 				fixed (Vector2* poutUvFill = &outUvFill)
-				{
-					fixed (int* ptextureIndex = &textureIndex)
-					{
-						byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-						return ret != 0;
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvFill = outUvFill)
 				{
 					fixed (int* ptextureIndex = &textureIndex)
 					{
@@ -958,23 +696,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -982,23 +703,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutSize = &outSize)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -1029,26 +733,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, Vector2* outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, outUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -1056,23 +740,6 @@ public unsafe partial struct ImFontAtlas
 				fixed (Vector2* poutUvBorder = &outUvBorder)
 				{
 					fixed (Vector2* poutUvFill = &outUvFill)
-					{
-						fixed (int* ptextureIndex = &textureIndex)
-						{
-							byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-							return ret != 0;
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutUvBorder = outUvBorder)
-				{
-					fixed (Vector2* poutUvFill = outUvFill)
 					{
 						fixed (int* ptextureIndex = &textureIndex)
 						{
@@ -1092,26 +759,6 @@ public unsafe partial struct ImFontAtlas
 					fixed (Vector2* poutUvBorder = &outUvBorder)
 					{
 						fixed (Vector2* poutUvFill = &outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, outSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, Vector2* outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
 						{
 							fixed (int* ptextureIndex = &textureIndex)
 							{
@@ -1143,26 +790,6 @@ public unsafe partial struct ImFontAtlas
 				}
 			}
 		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutSize = &outSize)
-				{
-					fixed (Vector2* poutUvBorder = outUvBorder)
-					{
-						fixed (Vector2* poutUvFill = outUvFill)
-						{
-							fixed (int* ptextureIndex = &textureIndex)
-							{
-								byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, outOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-								return ret != 0;
-							}
-						}
-					}
-				}
-			}
-		}
 		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ref Vector2 outUvBorder, ref Vector2 outUvFill, ref int textureIndex)
 		{
 			fixed (ImFontAtlas* @this = &this)
@@ -1174,29 +801,6 @@ public unsafe partial struct ImFontAtlas
 						fixed (Vector2* poutUvBorder = &outUvBorder)
 						{
 							fixed (Vector2* poutUvFill = &outUvFill)
-							{
-								fixed (int* ptextureIndex = &textureIndex)
-								{
-									byte ret = ImGuiNative.GetMouseCursorTexData(@this, cursor, (Vector2*)poutOffset, (Vector2*)poutSize, (Vector2*)poutUvBorder, (Vector2*)poutUvFill, (int*)ptextureIndex);
-									return ret != 0;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		public unsafe bool GetMouseCursorTexData(ImGuiMouseCursor cursor, ref Vector2 outOffset, ref Vector2 outSize, ReadOnlySpan<Vector2> outUvBorder, ReadOnlySpan<Vector2> outUvFill, ref int textureIndex)
-		{
-			fixed (ImFontAtlas* @this = &this)
-			{
-				fixed (Vector2* poutOffset = &outOffset)
-				{
-					fixed (Vector2* poutSize = &outSize)
-					{
-						fixed (Vector2* poutUvBorder = outUvBorder)
-						{
-							fixed (Vector2* poutUvFill = outUvFill)
 							{
 								fixed (int* ptextureIndex = &textureIndex)
 								{
