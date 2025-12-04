@@ -128,7 +128,7 @@ public class DalamudBuild : NukeBuild
                 if (IsCIBuild)
                 {
                     s = s
-                        .SetProcessArgumentConfigurator(a => a.Add("/clp:NoSummary")); // Disable MSBuild summary on CI builds
+                        .SetProcessAdditionalArguments("/clp:NoSummary"); // Disable MSBuild summary on CI builds
                 }
                 // We need to emit compiler generated files for the docs build, since docfx can't run generators directly
                 // TODO: This fails every build after this because of redefinitions...
@@ -238,7 +238,7 @@ public class DalamudBuild : NukeBuild
                 .SetProject(InjectorProjectFile)
                 .SetConfiguration(Configuration));
 
-            FileSystemTasks.DeleteDirectory(ArtifactsDirectory);
+            ArtifactsDirectory.CreateOrCleanDirectory();
             Directory.CreateDirectory(ArtifactsDirectory);
         });
 }
