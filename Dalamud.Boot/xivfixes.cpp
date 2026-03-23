@@ -8,6 +8,56 @@
 #include "ntdll.h"
 #include "utils.h"
 
+void xivfixes::mimalloc_allocator(bool bApply) {
+    static const char* LogTag = "[xivfixes:mimalloc_allocator]";
+
+    // TODO: prevent from running when inject mode is used
+
+    static std::optional<hooks::direct_hook<decltype(_aligned_malloc)>> aligned_malloc_hook;
+    static std::optional<hooks::direct_hook<decltype(_aligned_free)>> aligned_free_hook;
+
+    if (bApply) {
+        const char* alignedMallocPtr = utils::signature_finder()
+            .look_in(utils::loaded_module(g_hGameInstance), ".text")
+            .look_for_hex("E9 ?? ?? ?? ?? ?? ?? ?? 4C 8B C3 48 8B D7")
+            .find_one()
+            .resolve_jump_target();
+
+        if (!alignedMallocPtr) {
+            logging::E("{} Failed to find signature for _aligned_malloc", LogTag);
+            return;
+        }
+
+        const char* alignedFreePtr = utils::signature_finder()
+            .look_in(utils::loaded_module(g_hGameInstance), ".text")
+            .look_for_hex("E8 ?? ?? ?? ?? EB ?? 8B 15 ?? ?? ?? ?? 65 48 8B 04 25")
+            .find_one()
+            .resolve_jump_target();
+
+        if (!alignedFreePtr) {
+            logging::E("{} Failed to find signature for _aligned_free", LogTag);
+            return;
+        }
+
+        logging::I("{} Hooking _aligned_malloc", LogTag);
+        aligned_malloc_hook.emplace("_aligned_malloc", reinterpret_cast<decltype(_aligned_malloc)*>(alignedMallocPtr));
+        aligned_malloc_hook->set_detour(mi_malloc_aligned);
+
+        logging::I("{} Hooking _aligned_free", LogTag);
+        aligned_free_hook.emplace("_aligned_free", reinterpret_cast<decltype(_aligned_free)*>(alignedFreePtr));
+        aligned_free_hook->set_detour(mi_free);
+    } else {
+        logging::I("{} Disabling _aligned_malloc hook", LogTag);
+        aligned_malloc_hook.reset();
+
+        logging::I("{} Disabling _aligned_free hook", LogTag);
+        aligned_free_hook.reset();
+
+        logging::I("{} Collecting memory allocated by mimalloc", LogTag);
+        mi_collect(true);
+    }
+}
+
 void xivfixes::unhook_dll(bool bApply) {
     static const auto LogTag = "[xivfixes:unhook_dll]";
     static const auto LogTagW = L"[xivfixes:unhook_dll]";
@@ -222,7 +272,7 @@ void xivfixes::prevent_devicechange_crashes(bool bApply) {
             // <pointer to new wndproc>
             memcpy(s_pfnBinder, "\xFF\x35\x01\x00\x00\x00\xC3", 7);
             *reinterpret_cast<void**>(reinterpret_cast<char*>(s_pfnBinder) + 7) = s_pfnAlternativeWndProc;
-            
+
             s_pfnGameWndProc = pWndClassExA->lpfnWndProc;
 
             WNDCLASSEXA wndClassExA = *pWndClassExA;
@@ -452,7 +502,7 @@ void xivfixes::backup_userdata_save(bool bApply) {
 
             const auto lock = std::lock_guard(s_mtx);
             s_handles.try_emplace(handle, std::move(temporaryPath), std::move(path));
-            
+
             return handle;
         });
 
@@ -599,7 +649,7 @@ void xivfixes::symbol_load_patches(bool bApply) {
         }
 
         for (const auto& mod : utils::loaded_module::all_modules())
-           RemoveFullPathPdbInfo(mod); 
+           RemoveFullPathPdbInfo(mod);
 
         if (!s_dllNotificationCookie) {
             const auto res = LdrRegisterDllNotification(
@@ -671,6 +721,7 @@ void xivfixes::apply_all(bool bApply) {
             { "prevent_icmphandle_crashes", &prevent_icmphandle_crashes },
             { "symbol_load_patches", &symbol_load_patches },
             { "disable_game_debugging_protection", &disable_game_debugging_protection },
+            { "mimalloc_allocator", &mimalloc_allocator },
         }
         ) {
         try {

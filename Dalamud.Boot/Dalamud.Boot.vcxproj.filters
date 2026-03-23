@@ -17,6 +17,9 @@
     <Filter Include="MinHook">
       <UniqueIdentifier>{6ec5597d-e293-4d2a-a307-7444c8fac04b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mimalloc">
+      <UniqueIdentifier>{912eda72-acd3-4792-8e59-6eb447b6f04d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -66,6 +69,54 @@
     </ClCompile>
     <ClCompile Include="..\lib\TsudaKageyu-minhook\src\trampoline.c">
       <Filter>MinHook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\alloc-aligned.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\alloc-posix.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\alloc.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\arena.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\bitmap.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\heap.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\init.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\libc.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\prim\prim.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\options.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\page.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\random.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\segment-map.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\segment.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\os.c">>
+      <Filter>mimalloc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\mimalloc\src\stats.c">>
+      <Filter>mimalloc</Filter>
     </ClCompile>
     <ClCompile Include="hooks.cpp">
       <Filter>Dalamud.Boot DLL</Filter>
@@ -143,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="..\lib\TsudaKageyu-minhook\src\HDE\table64.h">
       <Filter>MinHook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\mimalloc\include\mimalloc.h">
+      <Filter>mimalloc</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="crashhandler_shared.h" />

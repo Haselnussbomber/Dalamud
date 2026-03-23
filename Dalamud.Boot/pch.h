@@ -74,6 +74,9 @@
 // https://github.com/nlohmann/json
 #include "../lib/nlohmann-json/json.hpp"
 
+// https://github.com/microsoft/mimalloc
+#include "../lib/mimalloc/include/mimalloc.h"
+
 #include "unicode.h"
 
 // Global variables
