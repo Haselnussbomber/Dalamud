@@ -2,6 +2,8 @@
 
 #include "xivfixes.h"
 
+#include <igzip_lib.h>
+
 #include "DalamudStartInfo.h"
 #include "hooks.h"
 #include "logging.h"
@@ -222,7 +224,7 @@ void xivfixes::prevent_devicechange_crashes(bool bApply) {
             // <pointer to new wndproc>
             memcpy(s_pfnBinder, "\xFF\x35\x01\x00\x00\x00\xC3", 7);
             *reinterpret_cast<void**>(reinterpret_cast<char*>(s_pfnBinder) + 7) = s_pfnAlternativeWndProc;
-            
+
             s_pfnGameWndProc = pWndClassExA->lpfnWndProc;
 
             WNDCLASSEXA wndClassExA = *pWndClassExA;
@@ -452,7 +454,7 @@ void xivfixes::backup_userdata_save(bool bApply) {
 
             const auto lock = std::lock_guard(s_mtx);
             s_handles.try_emplace(handle, std::move(temporaryPath), std::move(path));
-            
+
             return handle;
         });
 
@@ -599,7 +601,7 @@ void xivfixes::symbol_load_patches(bool bApply) {
         }
 
         for (const auto& mod : utils::loaded_module::all_modules())
-           RemoveFullPathPdbInfo(mod); 
+           RemoveFullPathPdbInfo(mod);
 
         if (!s_dllNotificationCookie) {
             const auto res = LdrRegisterDllNotification(
@@ -660,6 +662,61 @@ void xivfixes::disable_game_debugging_protection(bool bApply) {
     }
 }
 
+using TFnUncompress = int(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen);
+
+static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+    thread_local inflate_state state;
+    isal_inflate_init(&state);
+
+    state.next_in = const_cast<unsigned char*>(source);
+    state.avail_in = static_cast<uint32_t>(sourceLen);
+    state.next_out = dest;
+    state.avail_out = static_cast<uint32_t>(*destLen);
+
+    int err = isal_inflate(&state);
+    if (err != ISAL_DECOMP_OK) {
+        return err;
+    }
+
+    *destLen = static_cast<unsigned long>(state.total_out);
+
+    return err;
+}
+
+void xivfixes::faster_inflate(bool bApply) {
+    static const char* LogTag = "[xivfixes:faster_inflate]";
+    static std::optional<hooks::direct_hook<TFnUncompress>> s_hook;
+
+    if (bApply) {
+        if (!g_startInfo.BootEnabledGameFixes.contains("faster_inflate")) {
+            logging::I("{} Turned off via environment variable.", LogTag);
+            return;
+        }
+
+        try {
+            auto pfnTarget = utils::signature_finder()
+                .look_in(utils::loaded_module(g_hGameInstance), ".text")
+                .look_for_hex("E8 ?? ?? ?? ?? 8B 5C 24 ?? 44 8B C3")
+                .find_one()
+                .resolve_jump_target<TFnUncompress*>();
+
+            logging::I("{} Found target function at 0x{:X}", LogTag, reinterpret_cast<size_t>(pfnTarget));
+
+            s_hook.emplace("faster_inflate", pfnTarget);
+            s_hook->set_detour(detour_uncompress);
+
+            logging::I("{} Enable", LogTag);
+        } catch (const std::exception& e) {
+            logging::W("{} Failed to apply hook: {}", LogTag, e.what());
+        }
+    } else {
+        if (s_hook) {
+            logging::I("{} Disable", LogTag);
+            s_hook.reset();
+        }
+    }
+}
+
 void xivfixes::apply_all(bool bApply) {
     for (const auto& [taskName, taskFunction] : std::initializer_list<std::pair<const char*, void(*)(bool)>>
         {
@@ -671,6 +728,7 @@ void xivfixes::apply_all(bool bApply) {
             { "prevent_icmphandle_crashes", &prevent_icmphandle_crashes },
             { "symbol_load_patches", &symbol_load_patches },
             { "disable_game_debugging_protection", &disable_game_debugging_protection },
+            { "faster_inflate", &faster_inflate },
         }
         ) {
         try {

@@ -22,3 +22,6 @@
 [submodule "lib/Lumina.Excel"]
 	path = lib/Lumina.Excel
 	url = https://github.com/NotAdam/Lumina.Excel.git
+[submodule "lib/isa-l"]
+	path = lib/isa-l
+	url = https://github.com/intel/isa-l.git
