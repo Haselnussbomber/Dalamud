@@ -3,6 +3,9 @@
 #include "xivfixes.h"
 
 #include <zlib.h>
+#include <chrono>
+#include <atomic>
+#include <vector>
 
 #include "DalamudStartInfo.h"
 #include "hooks.h"
@@ -664,7 +667,14 @@ void xivfixes::disable_game_debugging_protection(bool bApply) {
 
 using TFnUncompress = int(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen);
 
-static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+static std::optional<hooks::direct_hook<TFnUncompress>> s_zlibng_raw_inflate_hook;
+
+static std::atomic<uint64_t> s_totalCalls{0};
+static std::atomic<uint64_t> s_originalTotalTimeNs{0};
+static std::atomic<uint64_t> s_zlibngTotalTimeNs{0};
+static std::atomic<uint64_t> s_totalBytesProcessed{0};
+
+static int detour_uncompress_zlibng(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
     z_stream stream{};
     stream.next_in = const_cast<unsigned char*>(source);
     stream.avail_in = static_cast<unsigned int>(sourceLen);
@@ -687,9 +697,55 @@ static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const 
     return inflateEnd(&stream);
 }
 
+static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+    if (!s_zlibng_raw_inflate_hook) {
+        return detour_uncompress_zlibng(dest, destLen, source, sourceLen);
+    }
+
+    std::vector<unsigned char> tempOriginalDest(*destLen);
+    unsigned long originalDestLen = *destLen;
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+    int originalErr = s_zlibng_raw_inflate_hook->call_original(tempOriginalDest.data(), &originalDestLen, source, sourceLen);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    uint64_t originalTimeNs = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+
+    unsigned long zlibngDestLen = *destLen;
+    auto t3 = std::chrono::high_resolution_clock::now();
+    int zlibngErr = detour_uncompress_zlibng(dest, &zlibngDestLen, source, sourceLen);
+    auto t4 = std::chrono::high_resolution_clock::now();
+    uint64_t zlibngTimeNs = std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count();
+
+    if (zlibngErr == originalErr && zlibngDestLen == originalDestLen) {
+        if (zlibngErr == Z_OK) {
+            if (memcmp(tempOriginalDest.data(), dest, zlibngDestLen) != 0) {
+                logging::W("[zlibng benchmark] Data mismatch between original and zlib-ng!");
+            }
+        }
+    } else {
+        logging::W("[zlibng benchmark] Return code or length mismatch! originalErr={}, zlibngErr={}, originalDestLen={}, zlibngDestLen={}",
+            originalErr, zlibngErr, originalDestLen, zlibngDestLen);
+    }
+
+    s_originalTotalTimeNs += originalTimeNs;
+    s_zlibngTotalTimeNs += zlibngTimeNs;
+    s_totalBytesProcessed += sourceLen;
+
+    uint64_t calls = ++s_totalCalls;
+    if (calls % 1000 == 0) {
+        double avgOriginalUs = (double)s_originalTotalTimeNs.load() / calls / 1000.0;
+        double avgZlibngUs = (double)s_zlibngTotalTimeNs.load() / calls / 1000.0;
+        double speedup = avgZlibngUs > 0 ? (avgOriginalUs / avgZlibngUs) : 1.0;
+        logging::I("[zlibng benchmark] Calls: {}, Total source bytes: {}, Avg original: {:.3f} us, Avg zlib-ng: {:.3f} us, Speedup: {:.2f}x",
+            calls, s_totalBytesProcessed.load(), avgOriginalUs, avgZlibngUs, speedup);
+    }
+
+    *destLen = zlibngDestLen;
+    return zlibngErr;
+}
+
 void xivfixes::zlibng_raw_inflate_uncompress(bool bApply) {
     static const char* LogTag = "[xivfixes:zlibng_raw_inflate_uncompress]";
-    static std::optional<hooks::direct_hook<TFnUncompress>> s_hook;
 
     if (bApply) {
         if (!g_startInfo.BootEnabledGameFixes.contains("zlibng_raw_inflate_uncompress")) {
@@ -706,17 +762,17 @@ void xivfixes::zlibng_raw_inflate_uncompress(bool bApply) {
 
             logging::I("{} Found target function at 0x{:X}", LogTag, reinterpret_cast<size_t>(pfnTarget));
 
-            s_hook.emplace("zlibng_raw_inflate_uncompress", pfnTarget);
-            s_hook->set_detour(detour_uncompress);
+            s_zlibng_raw_inflate_hook.emplace("zlibng_raw_inflate_uncompress", pfnTarget);
+            s_zlibng_raw_inflate_hook->set_detour(detour_uncompress);
 
             logging::I("{} Enable", LogTag);
         } catch (const std::exception& e) {
             logging::W("{} Failed to apply hook: {}", LogTag, e.what());
         }
     } else {
-        if (s_hook) {
+        if (s_zlibng_raw_inflate_hook) {
             logging::I("{} Disable", LogTag);
-            s_hook.reset();
+            s_zlibng_raw_inflate_hook.reset();
         }
     }
 }
