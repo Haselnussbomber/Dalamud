@@ -142,7 +142,85 @@ public class DalamudBuild : NukeBuild
             });
         });
 
+    private static string GetCMakePath()
+    {
+        try
+        {
+            var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "cmake",
+                Arguments = "--version",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
+            process.WaitForExit();
+            if (process.ExitCode == 0)
+                return "cmake";
+        }
+        catch {}
+
+        try
+        {
+            var vswhere = System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                "Microsoft Visual Studio", "Installer", "vswhere.exe");
+            if (System.IO.File.Exists(vswhere))
+            {
+                var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = vswhere,
+                    Arguments = "-latest -find Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                if (!string.IsNullOrEmpty(output) && System.IO.File.Exists(output))
+                    return output;
+            }
+        }
+        catch {}
+
+        return "cmake";
+    }
+
+    Target CompileZlibNg => _ => _
+        .Executes(() =>
+        {
+            if (IsDocsBuild)
+                return;
+
+            var cmakePath = GetCMakePath();
+            var zlibNgDir = RootDirectory / "lib" / "zlib-ng";
+            var buildDir = zlibNgDir / "build";
+
+            var configureProcess = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = cmakePath,
+                Arguments = $"-S \"{zlibNgDir}\" -B \"{buildDir}\" -A x64 -DZLIB_COMPAT=ON",
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
+            configureProcess.WaitForExit();
+            if (configureProcess.ExitCode != 0)
+                throw new Exception("CMake configure failed");
+
+            var buildProcess = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = cmakePath,
+                Arguments = $"--build \"{buildDir}\" --config {Configuration}",
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
+            buildProcess.WaitForExit();
+            if (buildProcess.ExitCode != 0)
+                throw new Exception("CMake build failed");
+        });
+
     Target CompileDalamudBoot => _ => _
+        .DependsOn(CompileZlibNg)
         .Executes(() =>
         {
             MSBuildTasks.MSBuild(s => s

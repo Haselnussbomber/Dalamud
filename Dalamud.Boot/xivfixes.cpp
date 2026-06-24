@@ -2,6 +2,8 @@
 
 #include "xivfixes.h"
 
+#include <zlib.h>
+
 #include "DalamudStartInfo.h"
 #include "hooks.h"
 #include "logging.h"
@@ -660,6 +662,65 @@ void xivfixes::disable_game_debugging_protection(bool bApply) {
     }
 }
 
+using TFnUncompress = int(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen);
+
+static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+    z_stream stream{};
+    stream.next_in = const_cast<unsigned char*>(source);
+    stream.avail_in = static_cast<unsigned int>(sourceLen);
+    stream.next_out = dest;
+    stream.avail_out = static_cast<unsigned int>(*destLen);
+
+    int err = inflateInit2(&stream, -15);
+    if (err != Z_OK)
+        return err;
+
+    err = inflate(&stream, Z_FINISH);
+    if (err != Z_STREAM_END) {
+        inflateEnd(&stream);
+        if (err == Z_NEED_DICT || (err == Z_BUF_ERROR && stream.avail_in == 0))
+            return Z_DATA_ERROR;
+        return err;
+    }
+
+    *destLen = static_cast<unsigned long>(stream.total_out);
+    return inflateEnd(&stream);
+}
+
+void xivfixes::zlibng_raw_inflate_uncompress(bool bApply) {
+    static const char* LogTag = "[xivfixes:zlibng_raw_inflate_uncompress]";
+    static std::optional<hooks::direct_hook<TFnUncompress>> s_hook;
+
+    if (bApply) {
+        if (!g_startInfo.BootEnabledGameFixes.contains("zlibng_raw_inflate_uncompress")) {
+            logging::I("{} Turned off via environment variable.", LogTag);
+            return;
+        }
+
+        try {
+            auto pfnTarget = utils::signature_finder()
+                .look_in(utils::loaded_module(g_hGameInstance), ".text")
+                .look_for_hex("E8 ?? ?? ?? ?? 8B 5C 24 ?? 44 8B C3")
+                .find_one()
+                .resolve_jump_target<TFnUncompress*>();
+
+            logging::I("{} Found target function at 0x{:X}", LogTag, reinterpret_cast<size_t>(pfnTarget));
+
+            s_hook.emplace("zlibng_raw_inflate_uncompress", pfnTarget);
+            s_hook->set_detour(detour_uncompress);
+
+            logging::I("{} Enable", LogTag);
+        } catch (const std::exception& e) {
+            logging::W("{} Failed to apply hook: {}", LogTag, e.what());
+        }
+    } else {
+        if (s_hook) {
+            logging::I("{} Disable", LogTag);
+            s_hook.reset();
+        }
+    }
+}
+
 void xivfixes::apply_all(bool bApply) {
     for (const auto& [taskName, taskFunction] : std::initializer_list<std::pair<const char*, void(*)(bool)>>
         {
@@ -671,6 +732,7 @@ void xivfixes::apply_all(bool bApply) {
             { "prevent_icmphandle_crashes", &prevent_icmphandle_crashes },
             { "symbol_load_patches", &symbol_load_patches },
             { "disable_game_debugging_protection", &disable_game_debugging_protection },
+            { "zlibng_raw_inflate_uncompress", &zlibng_raw_inflate_uncompress },
         }
         ) {
         try {
