@@ -3,6 +3,9 @@
 #include "xivfixes.h"
 
 #include <igzip_lib.h>
+#include <chrono>
+#include <atomic>
+#include <vector>
 
 #include "DalamudStartInfo.h"
 #include "hooks.h"
@@ -664,7 +667,14 @@ void xivfixes::disable_game_debugging_protection(bool bApply) {
 
 using TFnUncompress = int(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen);
 
-static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+static std::optional<hooks::direct_hook<TFnUncompress>> s_isal_raw_inflate_hook;
+
+static std::atomic<uint64_t> s_totalCalls{ 0 };
+static std::atomic<uint64_t> s_originalTotalTimeNs{ 0 };
+static std::atomic<uint64_t> s_isalTotalTimeNs{ 0 };
+static std::atomic<uint64_t> s_totalBytesProcessed{ 0 };
+
+static int detour_uncompress_isal(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
     thread_local inflate_state state;
     isal_inflate_init(&state);
 
@@ -673,7 +683,7 @@ static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const 
     state.next_out = dest;
     state.avail_out = static_cast<uint32_t>(*destLen);
 
-    int err = isal_inflate(&state);
+    int err = isal_inflate_stateless(&state);
     if (err != ISAL_DECOMP_OK) {
         return err;
     }
@@ -683,9 +693,56 @@ static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const 
     return err;
 }
 
+static int detour_uncompress(unsigned char* dest, unsigned long* destLen, const unsigned char* source, unsigned long sourceLen) {
+    if (!s_isal_raw_inflate_hook) {
+        return detour_uncompress_isal(dest, destLen, source, sourceLen);
+    }
+
+    std::vector<unsigned char> tempOriginalDest(*destLen);
+    unsigned long originalDestLen = *destLen;
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+    int originalErr = s_isal_raw_inflate_hook->call_original(tempOriginalDest.data(), &originalDestLen, source, sourceLen);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    uint64_t originalTimeNs = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+
+    unsigned long isalDestLen = *destLen;
+    auto t3 = std::chrono::high_resolution_clock::now();
+    int err = detour_uncompress_isal(dest, &isalDestLen, source, sourceLen);
+    auto t4 = std::chrono::high_resolution_clock::now();
+    uint64_t zlibngTimeNs = std::chrono::duration_cast<std::chrono::nanoseconds>(t4 - t3).count();
+
+    if (err == originalErr && isalDestLen == originalDestLen) {
+        if (err == ISAL_DECOMP_OK) {
+            if (memcmp(tempOriginalDest.data(), dest, isalDestLen) != 0) {
+                logging::W("[isal benchmark] Data mismatch between original and isa-l!");
+            }
+        }
+    }
+    else {
+        logging::W("[isal benchmark] Return code or length mismatch! originalErr={}, isalErr={}, originalDestLen={}, isalDestLen={}",
+            originalErr, err, originalDestLen, isalDestLen);
+    }
+
+    s_originalTotalTimeNs += originalTimeNs;
+    s_isalTotalTimeNs += zlibngTimeNs;
+    s_totalBytesProcessed += sourceLen;
+
+    uint64_t calls = ++s_totalCalls;
+    if (calls % 1000 == 0) {
+        double avgOriginalUs = (double)s_originalTotalTimeNs.load() / calls / 1000.0;
+        double avgZlibngUs = (double)s_isalTotalTimeNs.load() / calls / 1000.0;
+        double speedup = avgZlibngUs > 0 ? (avgOriginalUs / avgZlibngUs) : 1.0;
+        logging::I("[isal benchmark] Calls: {}, Total source bytes: {}, Avg original: {:.3f} us, Avg isa-l: {:.3f} us, Speedup: {:.2f}x",
+            calls, s_totalBytesProcessed.load(), avgOriginalUs, avgZlibngUs, speedup);
+    }
+
+    *destLen = isalDestLen;
+    return err;
+}
+
 void xivfixes::faster_inflate(bool bApply) {
     static const char* LogTag = "[xivfixes:faster_inflate]";
-    static std::optional<hooks::direct_hook<TFnUncompress>> s_hook;
 
     if (bApply) {
         if (!g_startInfo.BootEnabledGameFixes.contains("faster_inflate")) {
@@ -702,17 +759,17 @@ void xivfixes::faster_inflate(bool bApply) {
 
             logging::I("{} Found target function at 0x{:X}", LogTag, reinterpret_cast<size_t>(pfnTarget));
 
-            s_hook.emplace("faster_inflate", pfnTarget);
-            s_hook->set_detour(detour_uncompress);
+            s_isal_raw_inflate_hook.emplace("faster_inflate", pfnTarget);
+            s_isal_raw_inflate_hook->set_detour(detour_uncompress);
 
             logging::I("{} Enable", LogTag);
         } catch (const std::exception& e) {
             logging::W("{} Failed to apply hook: {}", LogTag, e.what());
         }
     } else {
-        if (s_hook) {
+        if (s_isal_raw_inflate_hook) {
             logging::I("{} Disable", LogTag);
-            s_hook.reset();
+            s_isal_raw_inflate_hook.reset();
         }
     }
 }
