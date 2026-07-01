@@ -92,10 +92,8 @@ fi
 
 echo "Microsoft (R) .NET Core SDK version $("$DOTNET_EXE" --version)"
 
-cd "$BUILD_DIRECTORY"
-cmake .. -A x64
-cmake --build . --config "$CONFIG" --parallel $(nproc) "${REMAINING_ARGS[@]}"
-cd "$SCRIPT_DIR"
+cmake -B build -A x64
+cmake --build build --config "$CONFIG" --parallel $(nproc) "${REMAINING_ARGS[@]}"
 
 "$DOTNET_EXE" build Dalamud.Injector/Dalamud.Injector.csproj -c "$CONFIG"
 "$DOTNET_EXE" build Dalamud/Dalamud.csproj -c "$CONFIG"

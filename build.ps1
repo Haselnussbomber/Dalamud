@@ -86,13 +86,8 @@ else {
 
 Write-Output "Microsoft (R) .NET Core SDK version $(& $env:DOTNET_EXE --version)"
 
-Push-Location $BuildDirectory
-try {
-    cmake .. -A x64
-    cmake --build . --config $Config --parallel $env:NUMBER_OF_PROCESSORS @BuildArguments
-} finally {
-    Pop-Location
-}
+cmake -B build -A x64
+cmake --build build --config $Config --parallel $env:NUMBER_OF_PROCESSORS @BuildArguments
 
-ExecSafe { & $env:DOTNET_EXE build Dalamud.Injector/Dalamud.Injector.csproj -c $Config }
-ExecSafe { & $env:DOTNET_EXE build Dalamud/Dalamud.csproj -c $Config }
+# ExecSafe { & $env:DOTNET_EXE build Dalamud.Injector/Dalamud.Injector.csproj -c $Config }
+# ExecSafe { & $env:DOTNET_EXE build Dalamud/Dalamud.csproj -c $Config }

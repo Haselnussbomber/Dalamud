@@ -14,44 +14,21 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
 set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
-# CoreCLR
-add_library(CoreCLR STATIC
-    ../lib/CoreCLR/boot.cpp
-    ../lib/CoreCLR/CoreCLR.cpp)
+set(CIMGUI_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/cimgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/cimgui/imgui
+    CACHE INTERNAL "cimgui: Include Directories")
 
-target_compile_definitions(CoreCLR PUBLIC
-    UNICODE _UNICODE)
+set(CIMGUI_DEFINITIONS
+    IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1
+    IMGUI_USER_CONFIG="${CMAKE_CURRENT_SOURCE_DIR}/lib/cimgui/cimgui_user.h"
+    CACHE INTERNAL "cimgui: Additional Definitions")
 
-target_include_directories(CoreCLR PUBLIC
-    ../lib/CoreCLR)
+add_subdirectory(lib/CoreCLR)
+add_subdirectory(lib/TsudaKageyu-minhook)
+add_subdirectory(lib/cimgui)
+add_subdirectory(lib/cimguizmo)
+add_subdirectory(lib/cimplot)
 
-# minhook
-add_library(minhook STATIC
-    ../lib/TsudaKageyu-minhook/src/buffer.c
-    ../lib/TsudaKageyu-minhook/src/HDE/hde32.c
-    ../lib/TsudaKageyu-minhook/src/HDE/hde64.c
-    ../lib/TsudaKageyu-minhook/src/hook.c
-    ../lib/TsudaKageyu-minhook/src/trampoline.c)
-
-target_include_directories(minhook PUBLIC
-    ../lib/TsudaKageyu-minhook/include)
-
-# imgui
-add_library(imgui OBJECT
-    ../lib/cimgui/imgui/imgui.cpp
-    ../lib/cimgui/imgui/imgui_demo.cpp
-    ../lib/cimgui/imgui/imgui_draw.cpp
-    ../lib/cimgui/imgui/imgui_tables.cpp
-    ../lib/cimgui/imgui/imgui_widgets.cpp)
-
-target_compile_definitions(imgui PRIVATE
-    UNICODE
-    _UNICODE
-    IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
-
-# Projects
 add_subdirectory(Dalamud.Boot)
 add_subdirectory(DalamudCrashHandler)
-add_subdirectory(external/cimgui)
-add_subdirectory(external/cimguizmo)
-add_subdirectory(external/cimplot)
