@@ -8,6 +8,8 @@ using Lumina.Text.ReadOnly;
 
 using Newtonsoft.Json;
 
+using SeString = Dalamud.Game.Text.SeString;
+
 namespace Dalamud.Utility;
 
 /// <summary>
@@ -151,7 +153,7 @@ public static class SeStringBuilderExtensions
     public static SeStringBuilder PushItemLink(this SeStringBuilder builder, uint itemId, string? displayNameOverride = null)
     {
         var (baseItemId, itemKind) = ItemUtil.GetBaseId(itemId);
-        return builder.Append(SeStringUtil.CreateItemLink(baseItemId, itemKind, displayNameOverride));
+        return builder.Append(SeString.CreateItemLink(baseItemId, itemKind, displayNameOverride));
     }
 
     /// <summary>
@@ -164,7 +166,7 @@ public static class SeStringBuilderExtensions
     /// <returns>The <see cref="SeStringBuilder"/> instance with the item link appended for method chaining.</returns>
     public static SeStringBuilder PushItemLink(this SeStringBuilder builder, uint baseItemId, ItemKind itemKind, string? displayNameOverride = null)
     {
-        return builder.Append(SeStringUtil.CreateItemLink(baseItemId, itemKind, displayNameOverride));
+        return builder.Append(SeString.CreateItemLink(baseItemId, itemKind, displayNameOverride));
     }
 
     /// <summary>
@@ -177,7 +179,7 @@ public static class SeStringBuilderExtensions
     /// <returns>The <see cref="SeStringBuilder"/> instance with the item link appended for method chaining.</returns>
     public static SeStringBuilder PushItemLink(this SeStringBuilder builder, Item item, bool isHq, string? displayNameOverride = null)
     {
-        return builder.Append(SeStringUtil.CreateItemLink(item, isHq, displayNameOverride));
+        return builder.Append(SeString.CreateItemLink(item, isHq, displayNameOverride));
     }
 
     /// <summary>
@@ -188,7 +190,7 @@ public static class SeStringBuilderExtensions
     /// <returns>The <see cref="SeStringBuilder"/> instance with the map link appended for method chaining.</returns>
     public static SeStringBuilder PushMapLink(this SeStringBuilder builder, IGameObject obj)
     {
-        return builder.Append(SeStringUtil.CreateMapLink(obj));
+        return builder.Append(SeString.CreateMapLink(obj));
     }
 
     /// <summary>
@@ -213,7 +215,7 @@ public static class SeStringBuilderExtensions
         int instanceId = 0,
         float fudgeFactor = 0.05f)
     {
-        return builder.Append(SeStringUtil.CreateMapLink(territoryId, mapId, xCoord, yCoord, zCoord, instanceId, fudgeFactor));
+        return builder.Append(SeString.CreateMapLink(territoryId, mapId, xCoord, yCoord, zCoord, instanceId, fudgeFactor));
     }
 
     /// <summary>
@@ -226,7 +228,7 @@ public static class SeStringBuilderExtensions
     /// <returns>The <see cref="SeStringBuilder"/> instance with the party finder link appended for method chaining.</returns>
     public static SeStringBuilder PushPartyFinderLink(this SeStringBuilder builder, uint listingId, string recruiterName, bool isCrossWorld = false)
     {
-        return builder.Append(SeStringUtil.CreatePartyFinderLink(listingId, recruiterName, isCrossWorld));
+        return builder.Append(SeString.CreatePartyFinderLink(listingId, recruiterName, isCrossWorld));
     }
 
     /// <summary>
@@ -237,6 +239,6 @@ public static class SeStringBuilderExtensions
     /// <returns>The <see cref="SeStringBuilder"/> instance with the search conditions link appended for method chaining.</returns>
     public static SeStringBuilder PushPartyFinderSearchConditionsLink(this SeStringBuilder builder, string message)
     {
-        return builder.Append(SeStringUtil.CreatePartyFinderSearchConditionsLink(message));
+        return builder.Append(SeString.CreatePartyFinderSearchConditionsLink(message));
     }
 }

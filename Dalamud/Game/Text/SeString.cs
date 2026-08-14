@@ -1,8 +1,7 @@
 using Dalamud.Data;
-using Dalamud.Game.ClientState;
 using Dalamud.Game.ClientState.Objects.Types;
-using Dalamud.Game.Text;
 using Dalamud.Game.Text.Evaluator;
+using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -14,12 +13,12 @@ using Lumina.Text.ReadOnly;
 using CSFramework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework;
 using MapSheet = Lumina.Excel.Sheets.Map;
 
-namespace Dalamud.Utility;
+namespace Dalamud.Game.Text;
 
 /// <summary>
 /// This class provices static utility functions for ReadOnlySeStrings.
 /// </summary>
-public static class SeStringUtil
+public static class SeString
 {
     /// <summary>
     /// Creates an SeString representing an entire Payload chain that can be used to link an item in the chat log.
@@ -50,7 +49,7 @@ public static class SeStringUtil
     /// <returns>An SeString containing all the macros necessary to display an item link in the chat log.</returns>
     public static ReadOnlySeString CreateItemLink(uint itemId, ItemKind kind = ItemKind.Normal, string? displayNameOverride = null)
     {
-        var clientState = Service<ClientState>.Get();
+        var clientState = Service<ClientState.ClientState>.Get();
         var evaluator = Service<SeStringEvaluator>.Get();
 
         var rawId = ItemUtil.GetRawId(itemId, kind);

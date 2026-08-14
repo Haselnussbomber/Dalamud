@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Gui;
+using Dalamud.Game.Text;
 using Dalamud.Plugin.SelfTest;
 using Dalamud.Utility;
 
@@ -50,7 +51,7 @@ internal class ItemPayloadSelfTestStep : ISelfTestStep
         switch (this.currentSubStep)
         {
             case SubStep.PrintNormalItem:
-                toPrint = SeStringUtil.CreateItemLink(normalItemId);
+                toPrint = SeString.CreateItemLink(normalItemId);
                 this.currentSubStep++;
                 break;
             case SubStep.HoverNormalItem:
@@ -60,7 +61,7 @@ internal class ItemPayloadSelfTestStep : ISelfTestStep
                 this.currentSubStep++;
                 break;
             case SubStep.PrintHqItem:
-                toPrint = SeStringUtil.CreateItemLink(hqItemId, ItemKind.Hq);
+                toPrint = SeString.CreateItemLink(hqItemId, ItemKind.Hq);
                 this.currentSubStep++;
                 break;
             case SubStep.HoverHqItem:
@@ -70,7 +71,7 @@ internal class ItemPayloadSelfTestStep : ISelfTestStep
                 this.currentSubStep++;
                 break;
             case SubStep.PrintCollectable:
-                toPrint = SeStringUtil.CreateItemLink(collectableItemId, ItemKind.Collectible);
+                toPrint = SeString.CreateItemLink(collectableItemId, ItemKind.Collectible);
                 this.currentSubStep++;
                 break;
             case SubStep.HoverCollectable:
@@ -80,7 +81,7 @@ internal class ItemPayloadSelfTestStep : ISelfTestStep
                 this.currentSubStep++;
                 break;
             case SubStep.PrintEventItem:
-                toPrint = SeStringUtil.CreateItemLink(eventItemId, ItemKind.EventItem);
+                toPrint = SeString.CreateItemLink(eventItemId, ItemKind.EventItem);
                 this.currentSubStep++;
                 break;
             case SubStep.HoverEventItem:
@@ -90,7 +91,7 @@ internal class ItemPayloadSelfTestStep : ISelfTestStep
                 this.currentSubStep++;
                 break;
             case SubStep.PrintNormalWithText:
-                toPrint = SeStringUtil.CreateItemLink(normalItemId, displayNameOverride: "Gort");
+                toPrint = SeString.CreateItemLink(normalItemId, displayNameOverride: "Gort");
                 this.currentSubStep++;
                 break;
             case SubStep.HoverNormalWithText:
