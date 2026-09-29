@@ -7,7 +7,6 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-using Dalamud.Game.Chat;
 using Dalamud.Game.Text;
 using Dalamud.Interface;
 using Dalamud.Interface.FontIdentifier;
@@ -19,7 +18,8 @@ using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal.AutoUpdate;
 using Dalamud.Plugin.Internal.Profiles;
-using Dalamud.Storage;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.ReliableFileStorage;
 using Dalamud.Utility;
 
 using Newtonsoft.Json;

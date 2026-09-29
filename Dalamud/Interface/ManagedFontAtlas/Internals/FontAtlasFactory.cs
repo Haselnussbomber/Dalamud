@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Data;
-using Dalamud.Game;
 using Dalamud.Interface.FontIdentifier;
 using Dalamud.Interface.GameFonts;
 using Dalamud.Interface.ImGuiBackend;
@@ -16,7 +14,10 @@ using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameLifecycle;
 using Dalamud.Utility;
 
 using Lumina.Data.Files;

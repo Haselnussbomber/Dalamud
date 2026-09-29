@@ -1,5 +1,5 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Services.Conditions;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

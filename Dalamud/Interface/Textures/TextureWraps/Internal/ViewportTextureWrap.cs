@@ -3,11 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.Framework;
 using Dalamud.Utility;
 
 using TerraFX.Interop.DirectX;

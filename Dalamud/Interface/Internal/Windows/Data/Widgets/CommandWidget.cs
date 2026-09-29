@@ -1,8 +1,8 @@
 using System.Linq;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Command;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.CommandManager;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

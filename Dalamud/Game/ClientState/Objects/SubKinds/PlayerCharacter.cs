@@ -1,5 +1,5 @@
-using Dalamud.Data;
 using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.Services.DataManager;
 
 using Lumina.Excel;
 using Lumina.Excel.Sheets;

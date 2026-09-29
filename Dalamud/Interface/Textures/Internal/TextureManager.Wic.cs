@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Dalamud.Interface.Textures.Internal.SharedImmediateTextures;
 using Dalamud.Interface.Textures.TextureWraps;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 using Dalamud.Utility;
 using Dalamud.Utility.TerraFxCom;
 

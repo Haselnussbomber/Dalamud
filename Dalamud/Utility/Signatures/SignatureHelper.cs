@@ -3,8 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-using Dalamud.Game;
 using Dalamud.Hooking;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility.Signatures.Wrappers;
 
 using Serilog;

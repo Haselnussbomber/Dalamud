@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using CheapLoc;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.Player;
 using Dalamud.Logging.Internal;
+using Dalamud.Services.PlayerState;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;

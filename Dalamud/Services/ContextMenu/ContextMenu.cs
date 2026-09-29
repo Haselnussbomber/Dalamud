@@ -1,0 +1,522 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading;
+
+using Dalamud.Game.Text;
+using Dalamud.Hooking;
+using Dalamud.Logging.Internal;
+using Dalamud.Utility;
+
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
+using InteropGenerator.Runtime;
+
+using Lumina.Text.ReadOnly;
+
+namespace Dalamud.Services.ContextMenu;
+
+/// <summary>
+/// This class handles interacting with the game's (right-click) context menu.
+/// </summary>
+[ServiceManager.EarlyLoadedService]
+internal sealed unsafe class ContextMenu : IInternalDisposableService, IContextMenu
+{
+    private static readonly ModuleLog Log = ModuleLog.Create<ContextMenu>();
+
+    private readonly Hook<AtkModuleVf22OpenAddonByAgentDelegate> atkModuleVf22OpenAddonByAgentHook;
+    private readonly Hook<AddonContextMenu.Delegates.OnMenuSelected> addonContextMenuOnMenuSelectedHook;
+
+    private uint? addonContextSubNameId;
+
+    [ServiceManager.ServiceConstructor]
+    private ContextMenu()
+    {
+        var raptureAtkModuleVtable = (nint*)RaptureAtkModule.StaticVirtualTablePointer;
+        this.atkModuleVf22OpenAddonByAgentHook = Hook<AtkModuleVf22OpenAddonByAgentDelegate>.FromAddress(raptureAtkModuleVtable[22], this.AtkModuleVf22OpenAddonByAgentDetour);
+        this.addonContextMenuOnMenuSelectedHook = Hook<AddonContextMenu.Delegates.OnMenuSelected>.FromAddress((nint)AddonContextMenu.StaticVirtualTablePointer->OnMenuSelected, this.AddonContextMenuOnMenuSelectedDetour);
+
+        this.atkModuleVf22OpenAddonByAgentHook.Enable();
+        this.addonContextMenuOnMenuSelectedHook.Enable();
+    }
+
+    private delegate ushort AtkModuleVf22OpenAddonByAgentDelegate(AtkModule* module, CStringPointer addonName, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, bool a8);
+
+    /// <inheritdoc/>
+    public event IContextMenu.MenuOpenedDelegate? MenuOpened;
+
+    private Dictionary<ContextMenuType, List<IMenuItem>> MenuItems { get; } = [];
+
+    private Lock MenuItemsLock { get; } = new();
+
+    private AgentInterface* SelectedAgent { get; set; }
+
+    private ContextMenuType? SelectedMenuType { get; set; }
+
+    private List<IMenuItem>? SelectedItems { get; set; }
+
+    private HashSet<nint> SelectedEventInterfaces { get; } = [];
+
+    private AtkUnitBase* SelectedParentAddon { get; set; }
+
+    // -1 -> -inf: native items
+    // 0 -> inf: selected items
+    private List<int> MenuCallbackIds { get; } = [];
+
+    private IReadOnlyList<IMenuItem>? SubmenuItems { get; set; }
+
+    private uint AddonContextSubNameId
+    {
+        get
+        {
+            if (this.addonContextSubNameId is not uint id)
+            {
+                id = checked((uint)RaptureAtkModule.Instance()->AddonNames.FindIndex(s => s.EqualToString("AddonContextSub")));
+                this.addonContextSubNameId = id;
+            }
+
+            return id;
+        }
+    }
+
+    /// <inheritdoc/>
+    void IInternalDisposableService.DisposeService()
+    {
+        this.atkModuleVf22OpenAddonByAgentHook.Dispose();
+        this.addonContextMenuOnMenuSelectedHook.Dispose();
+
+        var manager = RaptureAtkUnitManager.Instance();
+        if (manager == null)
+            return;
+
+        var menu = manager->GetAddonByName("ContextMenu");
+        var submenu = manager->GetAddonByName("AddonContextSub");
+        if (menu == null || submenu == null)
+            return;
+
+        if (menu->IsVisible)
+            menu->FireCallbackInt(-1);
+        if (submenu->IsVisible)
+            submenu->FireCallbackInt(-1);
+    }
+
+    /// <inheritdoc/>
+    public void AddMenuItem(ContextMenuType menuType, IMenuItem item)
+    {
+        using var scope = this.MenuItemsLock.EnterScope();
+
+        if (!this.MenuItems.TryGetValue(menuType, out var items))
+            this.MenuItems.TryAdd(menuType, items = []);
+
+        items.Add(item);
+    }
+
+    /// <inheritdoc/>
+    public bool RemoveMenuItem(ContextMenuType menuType, IMenuItem item)
+    {
+        using var scope = this.MenuItemsLock.EnterScope();
+
+        if (!this.MenuItems.TryGetValue(menuType, out var items))
+            return false;
+
+        return items.Remove(item);
+    }
+
+    /// <summary>
+    /// Gets the name with the given prefix.
+    /// </summary>
+    /// <param name="menuItem">The menu item to prefix.</param>
+    /// <returns>The prefixed name.</returns>
+    internal ReadOnlySeString GetPrefixedName(IMenuItem menuItem)
+    {
+        if (menuItem.Prefix is not { } prefix)
+            return menuItem.Name;
+
+        using var rssb = new RentedSeStringBuilder();
+        return rssb.Builder
+            .PushColorType(menuItem.PrefixColor)
+            .Append(prefix.ToIconString())
+            .Append(menuItem.Name)
+            .PopColorType()
+            .ToReadOnlySeString();
+    }
+
+    private AtkValue* ExpandContextMenuArray(Span<AtkValue> oldValues, int newSize)
+    {
+        // if the array has enough room, don't reallocate
+        if (oldValues.Length >= newSize)
+            return (AtkValue*)Unsafe.AsPointer(ref oldValues[0]);
+
+        var size = (AtkValue.StructSize * newSize) + 8;
+        var newArray = (nint)IMemorySpace.GetUISpace()->Malloc((ulong)size, 0);
+        if (newArray == nint.Zero)
+            throw new OutOfMemoryException();
+        NativeMemory.Fill((void*)newArray, (nuint)size, 0);
+
+        *(ulong*)newArray = (ulong)newSize;
+
+        // copy old memory if existing
+        if (!oldValues.IsEmpty)
+            oldValues.CopyTo(new((void*)(newArray + 8), oldValues.Length));
+
+        return (AtkValue*)(newArray + 8);
+    }
+
+    private void FreeExpandedContextMenuArray(AtkValue* newValues, int newSize) =>
+        IMemorySpace.Free((void*)((nint)newValues - 8), (ulong)((newSize * AtkValue.StructSize) + 8));
+
+    private AtkValue* CreateEmptySubmenuContextMenuArray(ReadOnlySeString name, int x, int y, out int valueCount)
+    {
+        // 0: UInt = ContextItemCount
+        // 1: String = Name
+        // 2: Int = PositionX
+        // 3: Int = PositionY
+        // 4: Bool = false
+        // 5: UInt = ContextItemSubmenuMask
+        // 6: UInt = ReturnArrowMask (_gap_0x6BC ? 1 << (ContextItemCount - 1) : 0)
+        // 7: UInt = 1
+
+        valueCount = 8;
+        var values = this.ExpandContextMenuArray([], valueCount);
+        using var rssb = new RentedSeStringBuilder();
+
+        values[0].SetUInt(0);
+        values[1].SetManagedString(rssb.Builder.Append(name).GetViewAsSpan());
+        values[2].SetInt(x);
+        values[3].SetInt(y);
+        values[4].SetBool(false);
+        values[5].SetUInt(0);
+        values[6].SetUInt(0);
+        values[7].SetUInt(1);
+        return values;
+    }
+
+    private void SetupGenericMenu(int headerCount, int sizeHeaderIdx, int returnHeaderIdx, int submenuHeaderIdx, IReadOnlyList<IMenuItem> items, ref int valueCount, ref AtkValue* values)
+    {
+        var itemsWithIdx = items.Select((item, idx) => (item, idx)).OrderBy(i => i.item.Priority).ToArray();
+        var prefixItems = itemsWithIdx.Where(i => i.item.Priority < 0).ToArray();
+        var suffixItems = itemsWithIdx.Where(i => i.item.Priority >= 0).ToArray();
+
+        var nativeMenuSize = (int)values[sizeHeaderIdx].UInt;
+        var prefixMenuSize = prefixItems.Length;
+        var suffixMenuSize = suffixItems.Length;
+
+        var hasGameDisabled = valueCount - headerCount - nativeMenuSize > 0;
+
+        var hasCustomDisabled = items.Any(item => !item.IsEnabled);
+        var hasAnyDisabled = hasGameDisabled || hasCustomDisabled;
+
+        values = this.ExpandContextMenuArray(
+            new(values, valueCount),
+            valueCount = (nativeMenuSize + items.Count) * (hasAnyDisabled ? 2 : 1) + headerCount);
+        var offsetData = new Span<AtkValue>(values, headerCount);
+        var nameData = new Span<AtkValue>(values + headerCount, nativeMenuSize + items.Count);
+        var disabledData = hasAnyDisabled ? new Span<AtkValue>(values + headerCount + nativeMenuSize + items.Count, nativeMenuSize + items.Count) : [];
+
+        var returnMask = offsetData[returnHeaderIdx].UInt;
+        var submenuMask = offsetData[submenuHeaderIdx].UInt;
+
+        nameData[..nativeMenuSize].CopyTo(nameData.Slice(prefixMenuSize, nativeMenuSize));
+        if (hasAnyDisabled)
+        {
+            if (hasGameDisabled)
+            {
+                // copy old disabled data
+                var oldDisabledData = new Span<AtkValue>(values + headerCount + nativeMenuSize, nativeMenuSize);
+                oldDisabledData.CopyTo(disabledData.Slice(prefixMenuSize, nativeMenuSize));
+            }
+            else
+            {
+                // enable all
+                for (var i = prefixMenuSize; i < prefixMenuSize + nativeMenuSize; ++i)
+                {
+                    disabledData[i].SetInt(0);
+                }
+            }
+        }
+
+        returnMask <<= prefixMenuSize;
+        submenuMask <<= prefixMenuSize;
+
+        void FillData(Span<AtkValue> disabledData, Span<AtkValue> nameData, int i, IMenuItem item, int idx)
+        {
+            this.MenuCallbackIds.Add(idx);
+
+            if (hasAnyDisabled)
+            {
+                disabledData[i].SetInt(item.IsEnabled ? 0 : 1);
+            }
+
+            if (item.IsReturn)
+                returnMask |= 1u << i;
+            if (item.IsSubmenu)
+                submenuMask |= 1u << i;
+
+            using var rssb = new RentedSeStringBuilder();
+            nameData[i].SetManagedString(rssb.Builder.Append(this.GetPrefixedName(item)).GetViewAsSpan());
+        }
+
+        for (var i = 0; i < prefixMenuSize; ++i)
+        {
+            var (item, idx) = prefixItems[i];
+            FillData(disabledData, nameData, i, item, idx);
+        }
+
+        this.MenuCallbackIds.AddRange(Enumerable.Range(0, nativeMenuSize).Select(i => -i - 1));
+
+        for (var i = prefixMenuSize + nativeMenuSize; i < prefixMenuSize + nativeMenuSize + suffixMenuSize; ++i)
+        {
+            var (item, idx) = suffixItems[i - prefixMenuSize - nativeMenuSize];
+            FillData(disabledData, nameData, i, item, idx);
+        }
+
+        offsetData[returnHeaderIdx].UInt = returnMask;
+        offsetData[submenuHeaderIdx].UInt = submenuMask;
+
+        offsetData[sizeHeaderIdx].UInt += (uint)items.Count;
+    }
+
+    private void SetupContextMenu(IReadOnlyList<IMenuItem> items, ref int valueCount, ref AtkValue* values)
+    {
+        // 0: UInt = Item Count
+        // 1: UInt = 0 (probably window name, just unused)
+        // 2: UInt = Return Mask (?)
+        // 3: UInt = Submenu Mask
+        // 4: UInt = OpenAtCursorPosition ? 2 : 1
+        // 5: UInt = ?
+        // 6: UInt = ?
+        // 7: UInt = ?
+
+        foreach (var item in items)
+        {
+            if (!item.Prefix.HasValue)
+            {
+                item.Prefix = IMenuItem.DalamudDefaultPrefix;
+                item.PrefixColor = IMenuItem.DalamudDefaultPrefixColor;
+
+                if (!item.UseDefaultPrefix)
+                {
+                    Log.Warning($"Menu item \"{item.Name}\" has no prefix, defaulting to Dalamud's. Menu items outside of a submenu must have a prefix.");
+                }
+            }
+        }
+
+        this.SetupGenericMenu(8, 0, 2, 3, items, ref valueCount, ref values);
+    }
+
+    private void SetupContextSubMenu(IReadOnlyList<IMenuItem> items, ref int valueCount, ref AtkValue* values)
+    {
+        // 0: UInt = ContextItemCount
+        // 1: skipped?
+        // 2: Int = PositionX
+        // 3: Int = PositionY
+        // 4: Bool = false
+        // 5: UInt = ContextItemSubmenuMask
+        // 6: UInt = _gap_0x6BC ? 1 << (ContextItemCount - 1) : 0
+        // 7: UInt = 1
+
+        this.SetupGenericMenu(8, 0, 6, 5, items, ref valueCount, ref values);
+    }
+
+    private ushort AtkModuleVf22OpenAddonByAgentDetour(AtkModule* module, CStringPointer addonName, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, bool a8)
+    {
+        var oldValues = values;
+        var addonNameSpan = addonName.AsSpan();
+
+        if (addonNameSpan.SequenceEqual("ContextMenu"u8))
+        {
+            this.MenuCallbackIds.Clear();
+            this.SelectedAgent = agent;
+            var unitManager = RaptureAtkUnitManager.Instance();
+            this.SelectedParentAddon = unitManager->GetAddonById(unitManager->GetAddonByName(addonName)->BlockedParentId);
+            this.SelectedEventInterfaces.Clear();
+            if (this.SelectedAgent == AgentInventoryContext.Instance())
+            {
+                this.SelectedMenuType = ContextMenuType.Inventory;
+            }
+            else if (this.SelectedAgent == AgentContext.Instance())
+            {
+                this.SelectedMenuType = ContextMenuType.Default;
+
+                var menu = AgentContext.Instance()->CurrentContextMenu;
+                var handlers = menu->EventHandlers;
+                var ids = menu->EventIds;
+                var count = (int)values[0].UInt;
+                handlers = handlers.Slice(7, count);
+                ids = ids.Slice(7, count);
+                for (var i = 0; i < count; ++i)
+                {
+                    if (ids[i] <= 106)
+                        continue;
+                    this.SelectedEventInterfaces.Add((nint)handlers[i].Value);
+                }
+            }
+            else
+            {
+                this.SelectedMenuType = null;
+            }
+
+            this.SubmenuItems = null;
+
+            if (this.SelectedMenuType is { } menuType)
+            {
+                using (this.MenuItemsLock.EnterScope())
+                {
+                    if (this.MenuItems.TryGetValue(menuType, out var items))
+                        this.SelectedItems = [.. items];
+                    else
+                        this.SelectedItems = [];
+                }
+
+                var args = new MenuOpenedArgs(this.SelectedItems.Add, this.SelectedParentAddon, this.SelectedAgent, this.SelectedMenuType.Value, this.SelectedEventInterfaces);
+                this.MenuOpened?.InvokeSafely(args);
+                this.SelectedItems = this.FixupMenuList(this.SelectedItems, (int)values[0].UInt);
+                this.SetupContextMenu(this.SelectedItems, ref valueCount, ref values);
+                Log.Verbose($"Opening {this.SelectedMenuType} context menu with {this.SelectedItems.Count} custom items.");
+            }
+            else
+            {
+                this.SelectedItems = null;
+            }
+        }
+        else if (addonNameSpan.SequenceEqual("AddonContextSub"u8))
+        {
+            this.MenuCallbackIds.Clear();
+            if (this.SubmenuItems != null)
+            {
+                this.SubmenuItems = this.FixupMenuList(this.SubmenuItems.ToList(), (int)values[0].UInt);
+
+                this.SetupContextSubMenu(this.SubmenuItems, ref valueCount, ref values);
+                Log.Verbose($"Opening {this.SelectedMenuType} submenu with {this.SubmenuItems.Count} custom items.");
+            }
+        }
+        else if (addonNameSpan.SequenceEqual("AddonContextMenuTitle"u8))
+        {
+            this.MenuCallbackIds.Clear();
+        }
+
+        var ret = this.atkModuleVf22OpenAddonByAgentHook.Original(module, addonName, valueCount, values, agent, a7, a8);
+        if (values != oldValues)
+            this.FreeExpandedContextMenuArray(values, valueCount);
+        return ret;
+    }
+
+    private List<IMenuItem> FixupMenuList(List<IMenuItem> items, int nativeMenuSize)
+    {
+        // The in game menu actually supports 32 items, but the last item can't have a visible submenu arrow.
+        // As such, we'll only work with 31 items.
+        const int maxMenuItems = 31;
+        if (items.Count + nativeMenuSize > maxMenuItems)
+        {
+            Log.Warning($"Menu size exceeds {maxMenuItems} items, truncating.");
+            var orderedItems = items.OrderBy(i => i.Priority).ToArray();
+            var newItems = orderedItems[..(maxMenuItems - nativeMenuSize - 1)];
+            var submenuItems = orderedItems[(maxMenuItems - nativeMenuSize - 1)..];
+            return newItems.Append(new MenuItem
+            {
+                Prefix = SeIconChar.BoxedLetterD,
+                PrefixColor = 539,
+                IsSubmenu = true,
+                Priority = int.MaxValue,
+                Name = $"See More ({submenuItems.Length})",
+                OnClicked = a => a.OpenSubmenu(submenuItems),
+            }).ToList();
+        }
+
+        return items;
+    }
+
+    private void OpenSubmenu(ReadOnlySeString name, IReadOnlyList<IMenuItem> submenuItems, int posX, int posY)
+    {
+        if (submenuItems.Count == 0)
+            throw new ArgumentException("Submenu must not be empty", nameof(submenuItems));
+
+        this.SubmenuItems = submenuItems;
+
+        var module = RaptureAtkModule.Instance();
+        var values = this.CreateEmptySubmenuContextMenuArray(name, posX, posY, out var valueCount);
+
+        switch (this.SelectedMenuType)
+        {
+            case ContextMenuType.Default:
+            {
+                var ownerAddonId = ((AgentContext*)this.SelectedAgent)->OwnerAddon;
+                module->OpenAddon(this.AddonContextSubNameId, (uint)valueCount, values, &this.SelectedAgent->AtkEventInterface, 71, checked((ushort)ownerAddonId), 4);
+                break;
+            }
+
+            case ContextMenuType.Inventory:
+            {
+                var ownerAddonId = ((AgentInventoryContext*)this.SelectedAgent)->OwnerAddonId;
+                module->OpenAddon(this.AddonContextSubNameId, (uint)valueCount, values, &this.SelectedAgent->AtkEventInterface, 0, checked((ushort)ownerAddonId), 4);
+                break;
+            }
+
+            default:
+                Log.Warning($"Unknown context menu type (agent: {(nint)this.SelectedAgent}, cannot open submenu");
+                break;
+        }
+
+        this.FreeExpandedContextMenuArray(values, valueCount);
+    }
+
+    private bool AddonContextMenuOnMenuSelectedDetour(AddonContextMenu* addon, int selectedIdx, byte a3)
+    {
+        var items = this.SubmenuItems ?? this.SelectedItems;
+        if (items == null)
+            goto original;
+        if (this.MenuCallbackIds.Count == 0)
+            goto original;
+        if (selectedIdx < 0)
+            goto original;
+        if (selectedIdx >= this.MenuCallbackIds.Count)
+            goto original;
+
+        var callbackId = this.MenuCallbackIds[selectedIdx];
+
+        if (callbackId < 0)
+        {
+            selectedIdx = -callbackId - 1;
+        }
+        else
+        {
+            var item = items[callbackId];
+            var openedSubmenu = false;
+
+            try
+            {
+                if (item.OnClicked == null)
+                    throw new InvalidOperationException("Item has no OnClicked handler");
+                item.OnClicked.InvokeSafely(new MenuItemClickedArgs(
+                    (name, submenuItems) =>
+                    {
+                        short x, y;
+                        addon->AtkUnitBase.GetPosition(&x, &y);
+                        this.OpenSubmenu(name.IsEmpty ? item.Name : name, submenuItems, x, y);
+                        openedSubmenu = true;
+                    },
+                    this.SelectedParentAddon,
+                    this.SelectedAgent,
+                    this.SelectedMenuType ?? default,
+                    this.SelectedEventInterfaces));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Error while handling context menu click");
+            }
+
+            // Close with click sound
+            if (!openedSubmenu)
+                addon->AtkUnitBase.FireCallbackInt(-2);
+            return false;
+        }
+
+    original:
+        // Eventually handled by inventory context here: 14022BBD0 (6.51)
+        return this.addonContextMenuOnMenuSelectedHook.Original(addon, selectedIdx, a3);
+    }
+}

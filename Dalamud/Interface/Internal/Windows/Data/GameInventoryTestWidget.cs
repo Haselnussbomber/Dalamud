@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.Inventory;
-using Dalamud.Game.Inventory.InventoryEventArgTypes;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Logging.Internal;
+using Dalamud.Services.GameInventory;
+using Dalamud.Services.GameInventory.InventoryEventArgTypes;
 
 using Serilog.Events;
 

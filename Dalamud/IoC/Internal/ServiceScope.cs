@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Dalamud.Game;
+using Dalamud.Services.Framework;
 using Dalamud.Utility;
 
 namespace Dalamud.IoC.Internal;

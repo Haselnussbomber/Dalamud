@@ -1,8 +1,8 @@
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui.Toast;
 using Dalamud.Interface.Utility;
+using Dalamud.Services.ToastGui;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

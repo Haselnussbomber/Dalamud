@@ -1,4 +1,4 @@
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.SelfTestRegistry;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

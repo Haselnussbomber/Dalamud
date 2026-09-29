@@ -1,0 +1,23 @@
+using Dalamud.Services.PartyFinderGui.Types;
+
+namespace Dalamud.Services;
+
+/// <summary>
+/// This class handles interacting with the native PartyFinder window.
+/// </summary>
+public interface IPartyFinderGui : IDalamudService
+{
+    /// <summary>
+    /// Event type fired each time the game receives an individual Party Finder listing.
+    /// Cannot modify listings but can hide them.
+    /// </summary>
+    /// <param name="listing">The listings received.</param>
+    /// <param name="args">Additional arguments passed by the game.</param>
+    delegate void PartyFinderListingEventDelegate(IPartyFinderListing listing, IPartyFinderListingEventArgs args);
+
+    /// <summary>
+    /// Event fired each time the game receives an individual Party Finder listing.
+    /// Cannot modify listings but can hide them.
+    /// </summary>
+    event PartyFinderListingEventDelegate ReceiveListing;
+}

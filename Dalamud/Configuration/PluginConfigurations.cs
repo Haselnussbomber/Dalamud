@@ -1,7 +1,7 @@
 using System.IO;
 using System.Reflection;
 
-using Dalamud.Storage;
+using Dalamud.Services.ReliableFileStorage;
 using Dalamud.Utility;
 
 using Newtonsoft.Json;

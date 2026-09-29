@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game;
 using Dalamud.Interface.ImGuiFileDialog;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Internal.Windows.Data.Widgets;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.Services.Framework;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 
 using Serilog;
 

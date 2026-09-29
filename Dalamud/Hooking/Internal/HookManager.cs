@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-using Dalamud.Game;
 using Dalamud.Logging.Internal;
 using Dalamud.Memory;
+using Dalamud.Services.Framework;
 using Dalamud.Utility;
 
 using Iced.Intel;

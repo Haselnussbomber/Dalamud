@@ -1,8 +1,8 @@
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 
 namespace Dalamud.Interface.Internal.Windows.Data;
 

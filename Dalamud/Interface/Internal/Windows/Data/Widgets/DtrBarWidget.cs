@@ -3,8 +3,8 @@ using System.Threading;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
-using Dalamud.Game.Gui.Dtr;
+using Dalamud.Services.DtrBar;
+using Dalamud.Services.Framework;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

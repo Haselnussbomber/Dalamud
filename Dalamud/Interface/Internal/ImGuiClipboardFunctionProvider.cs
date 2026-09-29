@@ -5,9 +5,9 @@ using System.Text;
 using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui.Toast;
 using Dalamud.Interface.Utility;
 using Dalamud.Logging.Internal;
+using Dalamud.Services.ToastGui;
 
 using TerraFX.Interop.Windows;
 

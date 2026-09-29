@@ -1,10 +1,11 @@
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.Objects;
-using Dalamud.Game.Gui;
-using Dalamud.Game.Player;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.ObjectTable;
+using Dalamud.Services.PlayerState;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

@@ -3,15 +3,15 @@ using System.Numerics;
 using System.Reflection;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game;
 using Dalamud.Hooking.Internal;
 using Dalamud.Interface.Components;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Internal;
 using Dalamud.Plugin.Internal.Types;
+using Dalamud.Services.Framework;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 using Dalamud.Utility;
 
 using Serilog;

@@ -1,5 +1,5 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.GamePad;
+using Dalamud.Services.GamepadState;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

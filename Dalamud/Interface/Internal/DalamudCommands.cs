@@ -6,9 +6,11 @@ using CheapLoc;
 
 using Dalamud.Configuration.Internal;
 using Dalamud.Game;
-using Dalamud.Game.Command;
-using Dalamud.Game.Gui;
 using Dalamud.Plugin.Internal;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.CommandManager;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameGui;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal;

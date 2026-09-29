@@ -2,8 +2,8 @@ using System.Linq;
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui.FlyText;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.FlyTextGui;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

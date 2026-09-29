@@ -8,12 +8,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
 using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
-using Dalamud.Plugin.Services;
-using Dalamud.Storage;
+using Dalamud.Services;
+using Dalamud.Services.Framework;
+using Dalamud.Services.ReliableFileStorage;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility;
 using Dalamud.Utility.Timing;
 

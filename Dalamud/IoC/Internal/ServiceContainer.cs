@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Logging.Internal;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 
 namespace Dalamud.IoC.Internal;
 

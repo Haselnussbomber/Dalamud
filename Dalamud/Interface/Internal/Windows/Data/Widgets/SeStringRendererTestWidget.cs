@@ -3,15 +3,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Data;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.ImGuiSeStringRenderer;
 using Dalamud.Interface.ImGuiSeStringRenderer.Internal;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Internal;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.DataManager;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Component.GUI;

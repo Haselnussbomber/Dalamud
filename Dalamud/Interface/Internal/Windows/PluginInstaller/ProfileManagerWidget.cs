@@ -6,17 +6,17 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.Player;
 using Dalamud.Game.Text;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Plugin.Internal;
 using Dalamud.Plugin.Internal.Profiles;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
+using Dalamud.Services.PlayerState;
 using Dalamud.Utility;
 
 using Serilog;

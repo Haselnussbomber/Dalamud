@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Agent;
-using Dalamud.Game.Agent.AgentArgTypes;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.AgentLifecycle;
+using Dalamud.Services.AgentLifecycle.AgentArgTypes;
+using Dalamud.Services.SelfTestRegistry;
+
+using AgentId = Dalamud.Game.Enums.AgentId;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

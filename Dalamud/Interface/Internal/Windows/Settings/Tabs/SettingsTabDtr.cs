@@ -7,10 +7,10 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.Gui.Dtr;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility;
+using Dalamud.Services.DtrBar;
 
 namespace Dalamud.Interface.Internal.Windows.Settings.Tabs;
 

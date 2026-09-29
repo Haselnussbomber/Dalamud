@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Text;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

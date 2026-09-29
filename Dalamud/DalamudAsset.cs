@@ -1,4 +1,4 @@
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 
 using TerraFX.Interop.DirectX;
 

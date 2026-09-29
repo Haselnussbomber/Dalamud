@@ -1,10 +1,10 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Common;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.Objects;
-using Dalamud.Game.Text.Evaluator;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.ObjectTable;
+using Dalamud.Services.SelfTestRegistry;
+using Dalamud.Services.SeStringEvaluator;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;

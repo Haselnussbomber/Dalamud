@@ -4,7 +4,7 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 using Dalamud.Utility;
 
 using TerraFX.Interop.DirectX;

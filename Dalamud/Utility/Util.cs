@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Common;
-using Dalamud.Data;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
@@ -22,6 +21,7 @@ using Dalamud.Interface.Colors;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.DataManager;
 using Dalamud.Support;
 
 using Lumina.Excel.Sheets;

@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using Dalamud.Game;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.Framework;
 
 namespace Dalamud.Logging.Internal;
 

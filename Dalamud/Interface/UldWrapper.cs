@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using Dalamud.Data;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.Services.DataManager;
 using Dalamud.Utility;
 
 using Lumina.Data.Files;

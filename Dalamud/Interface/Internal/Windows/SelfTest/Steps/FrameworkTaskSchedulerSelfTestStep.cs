@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
-using Dalamud.Game;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.Framework;
+using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;
 
 using Log = Serilog.Log;

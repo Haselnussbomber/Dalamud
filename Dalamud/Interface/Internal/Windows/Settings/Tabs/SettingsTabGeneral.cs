@@ -2,8 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 
 using CheapLoc;
 
-using Dalamud.Game.Chat;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
+using Dalamud.Services.ChatGui;
 using Dalamud.Utility.Internal;
 
 namespace Dalamud.Interface.Internal.Windows.Settings.Tabs;

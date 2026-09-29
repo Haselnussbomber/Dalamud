@@ -1,0 +1,12 @@
+using Dalamud.Services.NotificationManager;
+
+namespace Dalamud.Services;
+
+/// <summary>Manager for notifications provided by Dalamud using ImGui.</summary>
+public interface INotificationManager : IDalamudService
+{
+    /// <summary>Adds a notification.</summary>
+    /// <param name="notification">The new notification.</param>
+    /// <returns>The added notification.</returns>
+    IActiveNotification AddNotification(Notification notification);
+}

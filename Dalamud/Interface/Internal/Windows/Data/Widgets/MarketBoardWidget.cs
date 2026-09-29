@@ -2,9 +2,9 @@ using System.Collections.Concurrent;
 using System.Globalization;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Marketboard.Network.Structures;
-using Dalamud.Game.MarketBoard;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.Marketboard;
+using Dalamud.Services.Marketboard.Structures;
 
 using ImGuiTable = Dalamud.Interface.Utility.ImGuiTable;
 

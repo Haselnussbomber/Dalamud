@@ -1,0 +1,402 @@
+using System.Runtime.InteropServices;
+
+using Dalamud.Bindings.ImGui;
+using Dalamud.Game.Enums;
+using Dalamud.Game.Gui;
+using Dalamud.Game.NativeWrapper;
+using Dalamud.Hooking;
+using Dalamud.Interface.Utility;
+using Dalamud.Logging.Internal;
+using Dalamud.Services.SigScanner;
+using Dalamud.Utility;
+
+using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
+using Vector2 = System.Numerics.Vector2;
+using Vector3 = System.Numerics.Vector3;
+using Vector4 = System.Numerics.Vector4;
+
+namespace Dalamud.Services.GameGui;
+
+/// <summary>
+/// A class handling many aspects of the in-game UI.
+/// </summary>
+[ServiceManager.EarlyLoadedService]
+internal sealed unsafe class GameGui : IInternalDisposableService, IGameGui
+{
+    private static readonly ModuleLog Log = ModuleLog.Create<GameGui>();
+
+    private readonly GameGuiAddressResolver address;
+
+    private readonly Hook<AgentItemDetail.Delegates.Update> handleItemHoverHook;
+    private readonly Hook<AgentItemDetail.Delegates.ReceiveEvent> handleItemOutHook;
+    private readonly Hook<AgentActionDetail.Delegates.HandleActionHover> handleActionHoverHook;
+    private readonly Hook<AgentActionDetail.Delegates.ReceiveEvent> handleActionOutHook;
+    private readonly Hook<HandleImmDelegate> handleImmHook;
+    private readonly Hook<RaptureAtkModule.Delegates.SetUiVisibility> setUiVisibilityHook;
+    private readonly Hook<Utf8String.Delegates.Ctor_FromSequence> utf8StringFromSequenceHook;
+    private readonly Hook<RaptureAtkModule.Delegates.Update> raptureAtkModuleUpdateHook;
+
+    [ServiceManager.ServiceConstructor]
+    private GameGui(TargetSigScanner sigScanner)
+    {
+        this.address = new GameGuiAddressResolver();
+        this.address.Setup(sigScanner);
+
+        Log.Verbose("===== G A M E G U I =====");
+        Log.Verbose($"HandleImm address {Util.DescribeAddress(this.address.HandleImm)}");
+
+        this.handleItemHoverHook = Hook<AgentItemDetail.Delegates.Update>.FromAddress((nint)AgentItemDetail.StaticVirtualTablePointer->Update, this.HandleItemHoverDetour);
+        this.handleItemOutHook = Hook<AgentItemDetail.Delegates.ReceiveEvent>.FromAddress((nint)AgentItemDetail.StaticVirtualTablePointer->ReceiveEvent, this.HandleItemOutDetour);
+
+        this.handleActionHoverHook = Hook<AgentActionDetail.Delegates.HandleActionHover>.FromAddress(AgentActionDetail.Addresses.HandleActionHover.Value, this.HandleActionHoverDetour);
+        this.handleActionOutHook = Hook<AgentActionDetail.Delegates.ReceiveEvent>.FromAddress((nint)AgentActionDetail.StaticVirtualTablePointer->ReceiveEvent, this.HandleActionOutDetour);
+
+        this.handleImmHook = Hook<HandleImmDelegate>.FromAddress(this.address.HandleImm, this.HandleImmDetour);
+
+        this.setUiVisibilityHook = Hook<RaptureAtkModule.Delegates.SetUiVisibility>.FromAddress((nint)RaptureAtkModule.StaticVirtualTablePointer->SetUiVisibility, this.SetUiVisibilityDetour);
+
+        this.utf8StringFromSequenceHook = Hook<Utf8String.Delegates.Ctor_FromSequence>.FromAddress(Utf8String.Addresses.Ctor_FromSequence.Value, this.Utf8StringFromSequenceDetour);
+
+        this.raptureAtkModuleUpdateHook = Hook<RaptureAtkModule.Delegates.Update>.FromFunctionPointerVariable(
+            new(&RaptureAtkModule.StaticVirtualTablePointer->Update),
+            this.RaptureAtkModuleUpdateDetour);
+
+        this.handleItemHoverHook.Enable();
+        this.handleItemOutHook.Enable();
+        this.handleImmHook.Enable();
+        this.setUiVisibilityHook.Enable();
+        this.handleActionHoverHook.Enable();
+        this.handleActionOutHook.Enable();
+        this.utf8StringFromSequenceHook.Enable();
+        this.raptureAtkModuleUpdateHook.Enable();
+    }
+
+    // Hooked delegates
+
+    [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+    private delegate char HandleImmDelegate(IntPtr framework, char a2, byte a3);
+
+    /// <inheritdoc/>
+    public event Action<bool>? UiHideToggled;
+
+    /// <inheritdoc/>
+    public event Action<uint>? HoveredItemChanged;
+
+    /// <inheritdoc/>
+    public event Action<IHoveredAction>? HoveredActionChanged;
+
+    /// <inheritdoc/>
+    public event Action<AgentUpdateFlag> AgentUpdate;
+
+    /// <inheritdoc/>
+    public bool GameUiHidden { get; private set; }
+
+    /// <inheritdoc/>
+    public uint HoveredItem { get; set; }
+
+    /// <inheritdoc/>
+    public IHoveredAction HoveredAction { get; } = new HoveredAction();
+
+    /// <inheritdoc/>
+    public bool OpenMapWithMapLink(uint territory, uint map, Vector3 worldPos)
+        => RaptureAtkModule.Instance()->OpenMapWithMapLink($"m:{territory},{map},{(int)worldPos.X * 1000},{(int)worldPos.Z * 1000}");
+
+    /// <inheritdoc/>
+    public bool WorldToScreen(Vector3 worldPos, out Vector2 screenPos)
+        => this.WorldToScreen(worldPos, out screenPos, out var inView) && inView;
+
+    /// <inheritdoc/>
+    public bool WorldToScreen(Vector3 worldPos, out Vector2 screenPos, out bool inView)
+    {
+        // Read current ViewProjectionMatrix plus game window size
+        var windowPos = ImGuiHelpers.MainViewport.Pos;
+        var viewProjectionMatrix = Control.Instance()->ViewProjectionMatrix;
+        var device = Device.Instance();
+        float width = device->Width;
+        float height = device->Height;
+
+        var pCoords = Vector4.Transform(new Vector4(worldPos, 1.0f), viewProjectionMatrix);
+        var inFront = pCoords.W > 0.0f;
+
+        if (Math.Abs(pCoords.W) < float.Epsilon)
+        {
+            screenPos = Vector2.Zero;
+            inView = false;
+            return false;
+        }
+
+        pCoords *= MathF.Abs(1.0f / pCoords.W);
+        screenPos = new Vector2(pCoords.X, pCoords.Y);
+
+        screenPos.X = (0.5f * width * (screenPos.X + 1f)) + windowPos.X;
+        screenPos.Y = (0.5f * height * (1f - screenPos.Y)) + windowPos.Y;
+
+        inView = inFront &&
+                 screenPos.X > windowPos.X && screenPos.X < windowPos.X + width &&
+                 screenPos.Y > windowPos.Y && screenPos.Y < windowPos.Y + height;
+
+        return inFront;
+    }
+
+    /// <inheritdoc/>
+    public bool ScreenToWorld(Vector2 screenPos, out Vector3 worldPos, float rayDistance = 100000.0f)
+    {
+        // The game is only visible in the main viewport, so if the cursor is outside
+        // of the game window, do not bother calculating anything
+        var windowPos = ImGuiHelpers.MainViewport.Pos;
+        var windowSize = ImGuiHelpers.MainViewport.Size;
+
+        if (screenPos.X < windowPos.X || screenPos.X > windowPos.X + windowSize.X ||
+            screenPos.Y < windowPos.Y || screenPos.Y > windowPos.Y + windowSize.Y)
+        {
+            worldPos = default;
+            return false;
+        }
+
+        var camera = FFXIVClientStructs.FFXIV.Client.Graphics.Scene.CameraManager.Instance()->CurrentCamera;
+        if (camera == null)
+        {
+            worldPos = Vector3.Zero;
+            return false;
+        }
+
+        var ray = camera->ScreenPointToRay(screenPos - windowPos);
+        var result = BGCollisionModule.RaycastMaterialFilter(ray.Origin, ray.Direction, out var hit);
+        worldPos = hit.Point;
+        return result;
+    }
+
+    /// <inheritdoc/>
+    public UIModulePtr GetUIModule()
+    {
+        return UIModule.Instance();
+    }
+
+    /// <inheritdoc/>
+    public AtkUnitBasePtr GetAddonByName(string name, int index = 1)
+    {
+        var unitManager = RaptureAtkUnitManager.Instance();
+        if (unitManager == null)
+            return 0;
+
+        return unitManager->GetAddonByName(name, index);
+    }
+
+    /// <inheritdoc/>
+    public AtkUnitBasePtr GetAddonByName(ReadOnlySpan<byte> name, int index = 1)
+    {
+        var unitManager = RaptureAtkUnitManager.Instance();
+        if (unitManager == null)
+            return 0;
+
+        return unitManager->GetAddonByName(name, index);
+    }
+
+    /// <inheritdoc/>
+    public T* GetAddonByName<T>(string name, int index = 1) where T : unmanaged
+        => (T*)this.GetAddonByName(name, index).Address;
+
+    /// <inheritdoc/>
+    public T* GetAddonByName<T>(ReadOnlySpan<byte> name, int index = 1) where T : unmanaged
+        => (T*)this.GetAddonByName(name, index).Address;
+
+    /// <inheritdoc/>
+    public AgentInterfacePtr GetAgentById(int id)
+    {
+        var agentModule = AgentModule.Instance();
+        if (agentModule == null || id < 0 || id >= agentModule->Agents.Length)
+            return 0;
+
+        return agentModule->Agents[id].Value;
+    }
+
+    /// <inheritdoc/>
+    public AgentInterfacePtr FindAgentInterface(string addonName)
+    {
+        var addon = this.GetAddonByName(addonName);
+        return this.FindAgentInterface(addon);
+    }
+
+    /// <inheritdoc/>
+    public AgentInterfacePtr FindAgentInterface(ReadOnlySpan<byte> addonName)
+    {
+        var addon = this.GetAddonByName(addonName);
+        return this.FindAgentInterface(addon);
+    }
+
+    /// <inheritdoc/>
+    public AgentInterfacePtr FindAgentInterface(AtkUnitBasePtr addon)
+    {
+        if (addon.IsNull)
+            return 0;
+
+        var agentModule = AgentModule.Instance();
+        if (agentModule == null)
+            return 0;
+
+        var addonId = addon.ParentId == 0 ? addon.Id : addon.ParentId;
+        if (addonId == 0)
+            return 0;
+
+        foreach (AgentInterface* agent in agentModule->Agents)
+        {
+            if (agent != null && agent->AddonId == addonId)
+                return agent;
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// Disables the hooks and submodules of this module.
+    /// </summary>
+    void IInternalDisposableService.DisposeService()
+    {
+        this.handleItemHoverHook.Dispose();
+        this.handleItemOutHook.Dispose();
+        this.handleImmHook.Dispose();
+        this.setUiVisibilityHook.Dispose();
+        this.handleActionHoverHook.Dispose();
+        this.handleActionOutHook.Dispose();
+        this.utf8StringFromSequenceHook.Dispose();
+        this.raptureAtkModuleUpdateHook.Dispose();
+    }
+
+    /// <summary>
+    /// Indicates if the game is in the lobby scene (title screen, chara select, chara make, aesthetician etc.).
+    /// </summary>
+    /// <returns>A value indicating whether the game is in the lobby scene.</returns>
+    internal bool IsInLobby() => RaptureAtkModule.Instance()->CurrentUIScene.StartsWith("LobbyMain"u8);
+
+    /// <summary>
+    /// Sets the current background music.
+    /// </summary>
+    /// <param name="bgmId">The BGM row id.</param>
+    /// <param name="sceneId">The BGM scene index. Defaults to MiniGame scene to avoid conflicts.</param>
+    internal void SetBgm(ushort bgmId, uint sceneId = 2) => BGMSystem.SetBGM(bgmId, sceneId);
+
+    /// <summary>
+    /// Resets the current background music.
+    /// </summary>
+    /// <param name="sceneId">The BGM scene index.</param>
+    internal void ResetBgm(uint sceneId = 2) => BGMSystem.Instance()->ResetBGM(sceneId);
+
+    /// <summary>
+    /// Reset the stored "UI hide" state.
+    /// </summary>
+    internal void ResetUiHideState()
+    {
+        this.GameUiHidden = false;
+    }
+
+    private void HandleItemHoverDetour(AgentItemDetail* thisPtr, uint frameCount)
+    {
+        this.handleItemHoverHook.Original(thisPtr, frameCount);
+
+        if (!thisPtr->IsAgentActive())
+            return;
+
+        var itemId = thisPtr->ItemId;
+        if (this.HoveredItem == itemId)
+            return;
+
+        this.HoveredItem = itemId;
+        this.HoveredItemChanged?.InvokeSafely(itemId);
+    }
+
+    private AtkValue* HandleItemOutDetour(AgentItemDetail* thisPtr, AtkValue* returnValue, AtkValue* values, uint valueCount, ulong eventKind)
+    {
+        var ret = this.handleItemOutHook.Original(thisPtr, returnValue, values, valueCount, eventKind);
+
+        if (values != null && valueCount == 1 && values->Int == -1)
+        {
+            this.HoveredItem = 0;
+            this.HoveredItemChanged?.InvokeSafely(0u);
+        }
+
+        return ret;
+    }
+
+    private void HandleActionHoverDetour(AgentActionDetail* hoverState, FFXIVClientStructs.FFXIV.Client.Enums.DetailKind detailKind, uint actionId, int a4, bool a5, int a6, int a7)
+    {
+        this.handleActionHoverHook.Original(hoverState, detailKind, actionId, a4, a5, a6, a7);
+        this.HoveredAction.DetailKind = (DetailKind)detailKind;
+        this.HoveredAction.BaseActionId = actionId;
+        this.HoveredAction.ActionId = hoverState->ActionId;
+        this.HoveredActionChanged?.InvokeSafely(this.HoveredAction);
+    }
+
+    private AtkValue* HandleActionOutDetour(AgentActionDetail* agentActionDetail, AtkValue* a2, AtkValue* a3, uint a4, ulong a5)
+    {
+        var retVal = this.handleActionOutHook.Original(agentActionDetail, a2, a3, a4, a5);
+
+        if (a3 != null && a4 == 1)
+        {
+            var a3Val = a3->Int;
+
+            if (a3Val == 255)
+            {
+                this.HoveredAction.DetailKind = DetailKind.None;
+                this.HoveredAction.BaseActionId = 0;
+                this.HoveredAction.ActionId = 0;
+                this.HoveredActionChanged?.InvokeSafely(this.HoveredAction);
+            }
+        }
+
+        return retVal;
+    }
+
+    private void SetUiVisibilityDetour(RaptureAtkModule* thisPtr, bool uiVisible)
+    {
+        this.setUiVisibilityHook.Original(thisPtr, uiVisible);
+
+        this.GameUiHidden = !RaptureAtkModule.Instance()->IsUiVisible;
+        this.UiHideToggled?.InvokeSafely(this.GameUiHidden);
+
+        Log.Debug("GameUiHidden: {0}", this.GameUiHidden);
+    }
+
+    private char HandleImmDetour(IntPtr framework, char a2, byte a3)
+    {
+        var result = this.handleImmHook.Original(framework, a2, a3);
+        if (!ImGuiHelpers.IsImGuiInitialized)
+            return result;
+
+        return ImGui.GetIO().WantTextInput
+                   ? (char)0
+                   : result;
+    }
+
+    private Utf8String* Utf8StringFromSequenceDetour(Utf8String* thisPtr, byte* sourcePtr, nuint sourceLen)
+    {
+        if (sourcePtr != null)
+            this.utf8StringFromSequenceHook.Original(thisPtr, sourcePtr, sourceLen);
+        else
+            thisPtr->Ctor(); // this is in ClientStructs but you could do it manually too
+
+        return thisPtr; // this function shouldn't need to return but the original asm moves this into rax before returning so be safe?
+    }
+
+    private void RaptureAtkModuleUpdateDetour(RaptureAtkModule* thisPtr, float delta)
+    {
+        // The game clears the AgentUpdateFlag in the original function, but it also updates agents in it too.
+        // We'll make a copy of the flags, so that we can fire events after the agents have been updated.
+
+        var agentUpdateFlag = thisPtr->AgentUpdateFlag;
+
+        this.raptureAtkModuleUpdateHook.Original(thisPtr, delta);
+
+        if (agentUpdateFlag != RaptureAtkModule.AgentUpdateFlags.None)
+        {
+            this.AgentUpdate.InvokeSafely((AgentUpdateFlag)agentUpdateFlag);
+        }
+    }
+}

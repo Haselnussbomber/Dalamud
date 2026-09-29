@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.AddonLifecycle;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

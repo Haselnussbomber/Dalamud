@@ -3,10 +3,10 @@ using System.Linq.Expressions;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal;
 using Dalamud.Plugin.Internal.Types;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 
 using Serilog;
 

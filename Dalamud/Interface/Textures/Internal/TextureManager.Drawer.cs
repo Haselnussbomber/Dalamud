@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility;
 
 using TerraFX.Interop.DirectX;

@@ -1,6 +1,7 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Objects;
 using Dalamud.Interface.Utility;
+using Dalamud.Services.ObjectTable;
+using Dalamud.Services.TargetManager;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

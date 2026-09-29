@@ -3,12 +3,12 @@ using System.Numerics;
 using System.Text;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Data;
-using Dalamud.Game.Inventory;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.GameInventory;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.Game;

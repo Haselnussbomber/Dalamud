@@ -1,7 +1,7 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Fates;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.FateTable;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

@@ -9,7 +9,7 @@ using System.Threading;
 using BitFaster.Caching.Lru;
 
 using Dalamud.Interface.Textures.Internal.SharedImmediateTextures;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 
 namespace Dalamud.Interface.Textures.Internal;
 

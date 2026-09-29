@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 
 using Dalamud.Configuration;
 using Dalamud.Configuration.Internal;
-using Dalamud.Data;
-using Dalamud.Game.Chat;
-using Dalamud.Game.Gui;
 using Dalamud.Game.Text.Sanitizer;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal;
@@ -24,6 +21,8 @@ using Dalamud.Plugin.Internal.Types.Manifest;
 using Dalamud.Plugin.Ipc;
 using Dalamud.Plugin.Ipc.Internal;
 using Dalamud.Plugin.VersionInfo;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.DataManager;
 using Dalamud.Utility;
 
 using Serilog;

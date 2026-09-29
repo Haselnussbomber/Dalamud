@@ -1,4 +1,4 @@
-using Dalamud.Game;
+using Dalamud.Game.Enums;
 
 namespace Dalamud.Utility;
 

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 using Dalamud.Common;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
 using Dalamud.Hooking.Internal.Verification;
 using Dalamud.Plugin.Internal;
-using Dalamud.Storage;
+using Dalamud.Services.ReliableFileStorage;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility;
 using Dalamud.Utility.Timing;
 

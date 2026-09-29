@@ -16,11 +16,10 @@ using Dalamud.Interface.ImGuiSeStringRenderer.Internal;
 using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Utility;
 
 using Lumina.Text.Payloads;
 
-using VirtualKey = Dalamud.Game.ClientState.Keys.VirtualKey;
+using VirtualKey = Dalamud.Services.KeyState.VirtualKey;
 
 namespace Dalamud.Interface.Utility;
 

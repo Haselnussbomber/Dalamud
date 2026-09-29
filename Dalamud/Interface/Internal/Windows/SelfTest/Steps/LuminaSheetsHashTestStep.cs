@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Data;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SelfTestRegistry;
 
 using Lumina.Data.Files.Excel;
 using Lumina.Data.Structs.Excel;

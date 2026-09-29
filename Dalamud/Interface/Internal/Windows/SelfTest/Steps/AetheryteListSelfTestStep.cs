@@ -1,6 +1,6 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Aetherytes;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.AetheryteList;
+using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;

@@ -1,5 +1,5 @@
 using Dalamud.Hooking.Internal.Verification;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.SelfTestRegistry;
 
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 

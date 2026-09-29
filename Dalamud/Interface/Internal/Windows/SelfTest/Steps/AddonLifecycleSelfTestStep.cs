@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Addon.Lifecycle;
-using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.AddonLifecycle;
+using Dalamud.Services.AddonLifecycle.AddonArgTypes;
+using Dalamud.Services.SelfTestRegistry;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

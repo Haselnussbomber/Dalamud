@@ -2,8 +2,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Dalamud.Data;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.Services.DataManager;
 
 using Lumina.Data.Files;
 

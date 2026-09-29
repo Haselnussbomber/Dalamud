@@ -8,18 +8,18 @@ using System.Text.RegularExpressions;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Console;
-using Dalamud.Game;
-using Dalamud.Game.Command;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Internal;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.CommandManager;
+using Dalamud.Services.Console;
+using Dalamud.Services.Framework;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 using Dalamud.Utility;
 
 using Serilog;

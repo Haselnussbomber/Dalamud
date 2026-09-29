@@ -2,11 +2,11 @@ using System.Linq;
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Internal.Windows.Data.Widgets;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Windowing;
+using Dalamud.Services.ChatGui;
 using Dalamud.Utility;
 
 using Serilog;

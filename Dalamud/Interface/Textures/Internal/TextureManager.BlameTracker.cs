@@ -6,8 +6,8 @@ using System.Threading;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Plugin.Services;
-using Dalamud.Storage.Assets;
+using Dalamud.Services;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility;
 
 using TerraFX.Interop;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.Internal.UiDebug.Browsing;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Ipc.Internal;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.GameGui;
 
 using FFXIVClientStructs.FFXIV.Component.GUI;
 

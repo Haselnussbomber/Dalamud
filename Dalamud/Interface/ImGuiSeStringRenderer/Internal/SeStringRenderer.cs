@@ -7,11 +7,11 @@ using System.Text;
 using BitFaster.Caching.Lru;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Data;
-using Dalamud.Game;
 using Dalamud.Game.Text;
 using Dalamud.Interface.ImGuiSeStringRenderer.Internal.TextProcessing;
 using Dalamud.Interface.Utility;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.System.String;

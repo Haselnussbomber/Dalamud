@@ -1,7 +1,7 @@
 using System.Numerics;
 
-using Dalamud.Data;
 using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.Services.DataManager;
 
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 

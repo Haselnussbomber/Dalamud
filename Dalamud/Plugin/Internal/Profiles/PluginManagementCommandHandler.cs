@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 using CheapLoc;
 
-using Dalamud.Game;
-using Dalamud.Game.Command;
-using Dalamud.Game.Gui;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.CommandManager;
+using Dalamud.Services.Framework;
 using Dalamud.Utility;
 
 using Serilog;

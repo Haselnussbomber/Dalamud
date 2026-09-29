@@ -9,7 +9,7 @@ using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures.TextureWraps.Internal;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Textures.Internal.SharedImmediateTextures;

@@ -1,5 +1,5 @@
 using Dalamud.Interface.Internal.Windows.SelfTest.Steps;
-using Dalamud.Plugin.SelfTest.Internal;
+using Dalamud.Services.SelfTestRegistry;
 
 using Lumina.Excel.Sheets;
 

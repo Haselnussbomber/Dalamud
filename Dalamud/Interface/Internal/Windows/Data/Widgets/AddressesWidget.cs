@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

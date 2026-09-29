@@ -3,7 +3,7 @@ using System.IO;
 
 using Dalamud.Common;
 using Dalamud.Game;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 
 namespace Dalamud.Interface.Textures.Internal;
 

@@ -1,7 +1,7 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui.PartyFinder;
-using Dalamud.Game.Gui.PartyFinder.Types;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.PartyFinderGui;
+using Dalamud.Services.PartyFinderGui.Types;
+using Dalamud.Services.SelfTestRegistry;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

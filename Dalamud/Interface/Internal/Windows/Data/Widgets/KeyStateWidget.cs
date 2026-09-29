@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.KeyState;
 
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 

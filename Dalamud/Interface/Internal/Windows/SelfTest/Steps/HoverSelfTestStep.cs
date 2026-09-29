@@ -1,6 +1,7 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Gui;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.SelfTestRegistry;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

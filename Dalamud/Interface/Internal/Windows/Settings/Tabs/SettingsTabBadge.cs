@@ -8,7 +8,7 @@ using Dalamud.Interface.Colors;
 using Dalamud.Interface.Internal.Badge;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
 using Dalamud.Interface.Utility;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility.Internal;
 
 namespace Dalamud.Interface.Internal.Windows.Settings.Tabs;

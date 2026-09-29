@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Common;
-using Dalamud.Data;
-using Dalamud.Game.ClientState;
 using Dalamud.Game.Text;
-using Dalamud.Game.Text.Evaluator;
 using Dalamud.Game.Text.Noun.Enums;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SeStringEvaluator;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.System.String;

@@ -1,6 +1,6 @@
 using System.Threading;
 
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 
 namespace Dalamud.Utility;
 

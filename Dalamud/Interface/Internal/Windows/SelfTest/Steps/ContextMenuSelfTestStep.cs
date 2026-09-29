@@ -3,11 +3,11 @@ using System.Linq;
 using System.Text;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Data;
 using Dalamud.Game.ClientState.Objects.SubKinds;
-using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.ContextMenu;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SelfTestRegistry;
 
 using Lumina.Excel;
 using Lumina.Excel.Sheets;

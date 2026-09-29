@@ -13,7 +13,7 @@ using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Internal.Types.Manifest;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 using Dalamud.Utility;
 
 using Lumina.Data.Files;

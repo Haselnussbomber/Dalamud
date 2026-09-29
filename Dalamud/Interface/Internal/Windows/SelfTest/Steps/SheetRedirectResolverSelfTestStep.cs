@@ -1,6 +1,6 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Text.Evaluator.Internal;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.SelfTestRegistry;
+using Dalamud.Services.SeStringEvaluator.Internal;
 
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;

@@ -2,9 +2,9 @@ using System.Globalization;
 using System.Linq;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Marketboard.Network.Structures;
-using Dalamud.Game.MarketBoard;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.Marketboard;
+using Dalamud.Services.Marketboard.Structures;
+using Dalamud.Services.SelfTestRegistry;
 
 namespace Dalamud.Interface.Internal.Windows.SelfTest.Steps;
 

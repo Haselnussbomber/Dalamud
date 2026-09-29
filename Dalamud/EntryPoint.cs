@@ -11,11 +11,10 @@ using Dalamud.Interface.Internal.Windows;
 using Dalamud.Logging.Internal;
 using Dalamud.Logging.Retention;
 using Dalamud.Plugin.Internal;
-using Dalamud.Storage;
+using Dalamud.Services.Framework;
+using Dalamud.Services.ReliableFileStorage;
 using Dalamud.Support;
 using Dalamud.Utility;
-
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 using Newtonsoft.Json;
 
@@ -29,6 +28,8 @@ using Serilog.Events;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.WindowsAndMessaging;
 
+using CSFramework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework;
+
 namespace Dalamud;
 
 /// <summary>
@@ -41,7 +42,7 @@ public sealed class EntryPoint
     /// </summary>
     public static readonly LoggingLevelSwitch LogLevelSwitch = new(LogEventLevel.Verbose);
 
-    private static IHook<Framework.Delegates.Destroy>? globalFrameworkDestroyHook;
+    private static IHook<CSFramework.Delegates.Destroy>? globalFrameworkDestroyHook;
 
     /// <summary>
     /// A delegate used during initialization of the CLR from Dalamud.Boot.
@@ -123,9 +124,9 @@ public sealed class EntryPoint
     /// </summary>
     internal static unsafe void SetupGlobalDestroyHook()
     {
-        globalFrameworkDestroyHook = ReloadedHooks.Instance.CreateHook<Framework.Delegates.Destroy>(
+        globalFrameworkDestroyHook = ReloadedHooks.Instance.CreateHook<CSFramework.Delegates.Destroy>(
             GlobalFrameworkDestroyDetour,
-            (long)Framework.StaticVirtualTablePointer->Destroy);
+            (long)CSFramework.StaticVirtualTablePointer->Destroy);
         globalFrameworkDestroyHook.Activate();
     }
 
@@ -317,9 +318,9 @@ public sealed class EntryPoint
             Log.Error(args.Exception, "Unobserved exception in Task.");
     }
 
-    private static unsafe bool GlobalFrameworkDestroyDetour(Framework* thisPtr)
+    private static unsafe bool GlobalFrameworkDestroyDetour(CSFramework* thisPtr)
     {
-        var dalamudFramework = Service<Game.Framework>.GetNullable();
+        var dalamudFramework = Service<Framework>.GetNullable();
         if (dalamudFramework is { IsFrameworkUnloading: false })
         {
             Log.Information("Framework::Destroy!");

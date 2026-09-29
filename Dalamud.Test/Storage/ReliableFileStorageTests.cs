@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 
-using Dalamud.Storage;
+using Dalamud.Services.ReliableFileStorage;
 
 using Xunit;
 

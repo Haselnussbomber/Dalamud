@@ -1,5 +1,5 @@
-using Dalamud.Data;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;
 
 using Lumina.Excel;

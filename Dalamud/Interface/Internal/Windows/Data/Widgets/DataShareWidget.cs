@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Text;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Plugin.Ipc.Internal;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 
 using Newtonsoft.Json;
 

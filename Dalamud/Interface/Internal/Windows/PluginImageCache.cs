@@ -11,7 +11,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Networking.Http;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Internal.Types.Manifest;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility;
 
 using Serilog;

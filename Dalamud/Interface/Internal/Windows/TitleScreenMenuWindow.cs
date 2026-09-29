@@ -4,11 +4,6 @@ using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Console;
-using Dalamud.Game;
-using Dalamud.Game.Addon.Lifecycle;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.Animation.EasingFunctions;
 using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
@@ -16,8 +11,14 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
-using Dalamud.Plugin.Services;
-using Dalamud.Storage.Assets;
+using Dalamud.Services;
+using Dalamud.Services.AddonLifecycle;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.Console;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.TitleScreenMenu;
 using Dalamud.Utility;
 
 using Lumina.Text.ReadOnly;

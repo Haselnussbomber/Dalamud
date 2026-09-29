@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures.TextureWraps.Internal;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 using Dalamud.Utility;
 using Dalamud.Utility.TerraFxCom;
 

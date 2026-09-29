@@ -14,7 +14,7 @@ using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility;
 
 using TerraFX.Interop.DirectX;

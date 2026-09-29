@@ -1,8 +1,8 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.Objects;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Plugin.Ipc;
 using Dalamud.Plugin.Ipc.Internal;
+using Dalamud.Services.ObjectTable;
 using Dalamud.Utility;
 
 using Serilog;

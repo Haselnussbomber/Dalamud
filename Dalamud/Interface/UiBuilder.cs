@@ -6,19 +6,19 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.Conditions;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.FontIdentifier;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
 using Dalamud.Plugin.Internal.Types;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.Conditions;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
 using Dalamud.Utility;
 
 using Serilog;

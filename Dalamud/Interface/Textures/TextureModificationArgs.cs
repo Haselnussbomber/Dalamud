@@ -1,7 +1,7 @@
 using System.Numerics;
 using System.Text;
 
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
 
 using TerraFX.Interop.DirectX;
 

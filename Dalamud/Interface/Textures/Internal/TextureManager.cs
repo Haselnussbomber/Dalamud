@@ -4,16 +4,17 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Data;
-using Dalamud.Game;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.Internal.SharedImmediateTextures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures.TextureWraps.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal.Types;
-using Dalamud.Plugin.Services;
-using Dalamud.Storage.Assets;
+using Dalamud.Services;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameLifecycle;
 using Dalamud.Utility;
 using Dalamud.Utility.TerraFxCom;
 

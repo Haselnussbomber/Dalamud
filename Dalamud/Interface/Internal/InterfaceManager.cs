@@ -11,17 +11,11 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.GamePad;
-using Dalamud.Game.ClientState.Keys;
 using Dalamud.Hooking;
 using Dalamud.Hooking.Internal;
 using Dalamud.Hooking.WndProcHook;
 using Dalamud.Interface.ImGuiBackend;
 using Dalamud.Interface.ImGuiBackend.Delegates;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal.Asserts;
 using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.Internal.ReShadeHandling;
@@ -34,7 +28,15 @@ using Dalamud.Interface.Windowing.Persistence;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Memory;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GamepadState;
+using Dalamud.Services.KeyState;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
+using Dalamud.Services.PlayerState;
+using Dalamud.Services.SigScanner;
 using Dalamud.Utility;
 using Dalamud.Utility.Timing;
 
@@ -573,7 +575,7 @@ internal partial class InterfaceManager : IInternalDisposableService
 
     private void OnLogin()
     {
-        var player = Service<Game.Player.PlayerState>.GetNullable();
+        var player = Service<PlayerState>.GetNullable();
         if (player == null)
             return;
 

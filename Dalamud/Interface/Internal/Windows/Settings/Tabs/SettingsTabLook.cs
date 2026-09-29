@@ -7,15 +7,15 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.FontIdentifier;
 using Dalamud.Interface.GameFonts;
 using Dalamud.Interface.ImGuiFontChooserDialog;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
+using Dalamud.Services.Framework;
+using Dalamud.Services.NotificationManager.Internal;
 using Dalamud.Utility;
 using Dalamud.Utility.Internal;
 

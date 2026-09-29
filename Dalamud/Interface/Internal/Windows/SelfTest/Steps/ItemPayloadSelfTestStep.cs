@@ -1,7 +1,8 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui;
 using Dalamud.Game.Text;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.ChatGui;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;
 
 using Lumina.Text.ReadOnly;

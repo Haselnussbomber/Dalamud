@@ -1,7 +1,7 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState.JobGauge;
-using Dalamud.Game.ClientState.JobGauge.Types;
-using Dalamud.Game.ClientState.Objects;
+using Dalamud.Services.JobGauges;
+using Dalamud.Services.JobGauges.Types;
+using Dalamud.Services.ObjectTable;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

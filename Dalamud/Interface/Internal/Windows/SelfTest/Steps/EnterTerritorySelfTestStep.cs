@@ -1,6 +1,6 @@
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.ClientState;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.SelfTestRegistry;
 
 using Lumina.Excel;
 using Lumina.Excel.Sheets;

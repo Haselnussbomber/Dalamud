@@ -6,7 +6,6 @@ using System.Numerics;
 using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.GameFonts;
 using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
@@ -14,7 +13,8 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Plugin.Internal;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.GameGui;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.Game.UI;

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Dalamud.Game.Command;
 using Dalamud.Plugin.Internal.Types;
+using Dalamud.Services.CommandManager;
 
 namespace Dalamud.Plugin.Internal;
 

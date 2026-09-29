@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Game;
 using Dalamud.Interface.Internal;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
@@ -16,6 +15,7 @@ using Dalamud.Plugin.Internal.Exceptions;
 using Dalamud.Plugin.Internal.Loader;
 using Dalamud.Plugin.Internal.Profiles;
 using Dalamud.Plugin.Internal.Types.Manifest;
+using Dalamud.Services.Framework;
 using Dalamud.Utility;
 
 namespace Dalamud.Plugin.Internal.Types;

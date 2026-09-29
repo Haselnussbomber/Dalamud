@@ -1,8 +1,8 @@
 using System.Linq;
 
-using Dalamud.Game.ClientState.GamePad;
 using Dalamud.Interface.Utility;
-using Dalamud.Plugin.SelfTest;
+using Dalamud.Services.GamepadState;
+using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;
 
 using Lumina.Text.Payloads;

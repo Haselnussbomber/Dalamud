@@ -1,0 +1,137 @@
+using System.Collections;
+using System.Collections.Generic;
+
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
+
+using CSFateContext = FFXIVClientStructs.FFXIV.Client.Game.Fate.FateContext;
+using CSFateManager = FFXIVClientStructs.FFXIV.Client.Game.Fate.FateManager;
+
+namespace Dalamud.Services.FateTable;
+
+/// <summary>
+/// This collection represents the currently available Fate events.
+/// </summary>
+[PluginInterface]
+[ServiceManager.EarlyLoadedService]
+#pragma warning disable SA1015
+[ResolveVia<IFateTable>]
+#pragma warning restore SA1015
+internal sealed class FateTable : IServiceType, IFateTable
+{
+    [ServiceManager.ServiceConstructor]
+    private FateTable()
+    {
+    }
+
+    /// <inheritdoc/>
+    public unsafe nint Address => (nint)CSFateManager.Instance();
+
+    /// <inheritdoc/>
+    int IReadOnlyCollection<IFate>.Count => this.Length;
+
+    /// <inheritdoc/>
+    public unsafe int Length
+    {
+        get
+        {
+            var fateManager = CSFateManager.Instance();
+            if (fateManager == null)
+                return 0;
+
+            // Sonar used this to check if the table was safe to read
+            if (fateManager->FateDirector == null)
+                return 0;
+
+            if (fateManager->Fates.First == null || fateManager->Fates.Last == null)
+                return 0;
+
+            return fateManager->Fates.Count;
+        }
+    }
+
+    /// <inheritdoc/>
+    public IFate? this[int index]
+    {
+        get
+        {
+            var address = this.GetFateAddress(index);
+            return this.CreateFateReference(address);
+        }
+    }
+
+    /// <inheritdoc/>
+    public IEnumerator<IFate> GetEnumerator()
+    {
+        return new Enumerator(this);
+    }
+
+    /// <inheritdoc/>
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+
+    /// <inheritdoc/>
+    public bool IsValid(IFate fate)
+    {
+        if (fate == null)
+            return false;
+
+        var playerState = Service<PlayerState.PlayerState>.Get();
+        return playerState.IsLoaded == true;
+    }
+
+    /// <inheritdoc/>
+    public unsafe nint GetFateAddress(int index)
+    {
+        if (index >= this.Length)
+            return 0;
+
+        var fateManager = CSFateManager.Instance();
+        if (fateManager == null)
+            return 0;
+
+        return (nint)fateManager->Fates[index].Value;
+    }
+
+    /// <inheritdoc/>
+    public unsafe IFate? CreateFateReference(IntPtr address)
+    {
+        if (address == 0)
+            return null;
+
+        var playerState = Service<PlayerState.PlayerState>.Get();
+        if (playerState.ContentId == 0)
+            return null;
+
+        return new Fate((CSFateContext*)address);
+    }
+
+    private struct Enumerator(FateTable fateTable) : IEnumerator<IFate>
+    {
+        private int index = -1;
+
+        public IFate Current { get; private set; }
+
+        object IEnumerator.Current => this.Current;
+
+        public bool MoveNext()
+        {
+            if (++this.index < fateTable.Length)
+            {
+                this.Current = fateTable[this.index];
+                return true;
+            }
+
+            this.Current = default;
+            return false;
+        }
+
+        public void Reset()
+        {
+            this.index = -1;
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+}

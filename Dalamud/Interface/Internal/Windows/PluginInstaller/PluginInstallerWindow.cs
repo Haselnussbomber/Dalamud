@@ -13,14 +13,9 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
-using Dalamud.Console;
-using Dalamud.Game.Command;
-using Dalamud.Game.Player;
 using Dalamud.Interface.Animation.EasingFunctions;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
@@ -33,6 +28,11 @@ using Dalamud.Plugin.Internal.Exceptions;
 using Dalamud.Plugin.Internal.Profiles;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Internal.Types.Manifest;
+using Dalamud.Services.CommandManager;
+using Dalamud.Services.Console;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
+using Dalamud.Services.PlayerState;
 using Dalamud.Support;
 using Dalamud.Utility;
 

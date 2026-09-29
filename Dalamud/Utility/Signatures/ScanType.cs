@@ -1,4 +1,4 @@
-using Dalamud.Game;
+using Dalamud.Services.SigScanner;
 
 namespace Dalamud.Utility.Signatures;
 

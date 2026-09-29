@@ -1,6 +1,6 @@
-using Dalamud.Data;
 using Dalamud.Game.ClientState.Objects.Types;
-using Dalamud.Game.Text.Evaluator;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.SeStringEvaluator;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -49,7 +49,7 @@ public static class SeString
     /// <returns>An SeString containing all the macros necessary to display an item link in the chat log.</returns>
     public static ReadOnlySeString CreateItemLink(uint itemId, ItemKind kind = ItemKind.Normal, string? displayNameOverride = null)
     {
-        var clientState = Service<ClientState.ClientState>.Get();
+        var clientState = Service<Services.ClientState.ClientState>.Get();
         var evaluator = Service<SeStringEvaluator>.Get();
 
         var rawId = ItemUtil.GetRawId(itemId, kind);

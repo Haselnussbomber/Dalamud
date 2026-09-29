@@ -6,7 +6,6 @@ using System.Runtime.Loader;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration;
-using Dalamud.Game.Chat;
 using Dalamud.Game.Text.Sanitizer;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal.Windows.PluginInstaller;
@@ -16,6 +15,7 @@ using Dalamud.Plugin.Ipc;
 using Dalamud.Plugin.Ipc.Exceptions;
 using Dalamud.Plugin.Ipc.Internal;
 using Dalamud.Plugin.VersionInfo;
+using Dalamud.Services.ChatGui;
 
 namespace Dalamud.Plugin;
 

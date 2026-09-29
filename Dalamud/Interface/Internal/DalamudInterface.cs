@@ -11,19 +11,9 @@ using CheapLoc;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Bindings.ImPlot;
 using Dalamud.Configuration.Internal;
-using Dalamud.Console;
-using Dalamud.Game;
-using Dalamud.Game.Addon.Lifecycle;
-using Dalamud.Game.Agent;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.Conditions;
-using Dalamud.Game.ClientState.Keys;
-using Dalamud.Game.Gui;
 using Dalamud.Hooking;
 using Dalamud.Interface.Animation.EasingFunctions;
 using Dalamud.Interface.Colors;
-using Dalamud.Interface.ImGuiNotification;
-using Dalamud.Interface.ImGuiNotification.Internal;
 using Dalamud.Interface.Internal.Badge;
 using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.Internal.Windows;
@@ -40,8 +30,19 @@ using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal;
-using Dalamud.Plugin.SelfTest.Internal;
-using Dalamud.Storage.Assets;
+using Dalamud.Services.AddonLifecycle;
+using Dalamud.Services.AgentLifecycle;
+using Dalamud.Services.ClientState;
+using Dalamud.Services.Conditions;
+using Dalamud.Services.Console;
+using Dalamud.Services.DalamudAssetManager;
+using Dalamud.Services.Framework;
+using Dalamud.Services.GameGui;
+using Dalamud.Services.KeyState;
+using Dalamud.Services.NotificationManager;
+using Dalamud.Services.NotificationManager.Internal;
+using Dalamud.Services.SelfTestRegistry;
+using Dalamud.Services.TitleScreenMenu;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.UI;
@@ -113,7 +114,7 @@ internal class DalamudInterface : IInternalDisposableService
         InterfaceManager interfaceManager,
         PluginImageCache pluginImageCache,
         DalamudAssetManager dalamudAssetManager,
-        Game.Framework framework,
+        Framework framework,
         ClientState clientState,
         TitleScreenMenu titleScreenMenu,
         GameGui gameGui,
@@ -1005,7 +1006,7 @@ internal class DalamudInterface : IInternalDisposableService
                                 texture.TextureType = TextureType.Crest;
                             }
 
-                            Service<Game.Framework>.Get().RunOnTick(CauseFastFail);
+                            Service<Framework>.Get().RunOnTick(CauseFastFail);
                         }
 
                         if (ImGui.MenuItem("Cause ImGui assert"u8))

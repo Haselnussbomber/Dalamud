@@ -5,10 +5,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 
 using Dalamud.Bindings.ImGui;
-using Dalamud.Game.Chat;
-using Dalamud.Game.Gui;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.Services.ChatGui;
 
 using Lumina.Text.ReadOnly;
 

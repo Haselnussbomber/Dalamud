@@ -4,11 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
+using Dalamud.Services;
+using Dalamud.Services.CommandManager;
 using Dalamud.Utility;
+
 using Serilog;
 
 namespace Dalamud.CorePlugin

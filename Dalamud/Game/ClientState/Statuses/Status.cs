@@ -1,8 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 
-using Dalamud.Data;
 using Dalamud.Game.ClientState.Objects;
 using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.Services.DataManager;
+using Dalamud.Services.ObjectTable;
 using Dalamud.Utility;
 
 using Lumina.Excel;
