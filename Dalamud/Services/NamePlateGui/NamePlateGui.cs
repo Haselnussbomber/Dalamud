@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using Dalamud.Game.ClientState.Objects;
 using Dalamud.Hooking;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;

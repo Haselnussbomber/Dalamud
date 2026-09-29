@@ -1,6 +1,5 @@
 using Dalamud.Game.Enums;
 using Dalamud.Game.NativeWrapper;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Utility;
 

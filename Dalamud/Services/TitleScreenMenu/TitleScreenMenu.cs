@@ -6,7 +6,6 @@ using System.Threading;
 using Dalamud.Interface.Textures;
 using Dalamud.IoC;
 using Dalamud.IoC.Internal;
-using Dalamud.Services;
 using Dalamud.Services.KeyState;
 using Dalamud.Utility;
 

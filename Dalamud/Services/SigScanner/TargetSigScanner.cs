@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.IO;
 
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 
 namespace Dalamud.Services.SigScanner;

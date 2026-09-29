@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 
 using Dalamud.Hooking;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.SigScanner;

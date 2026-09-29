@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 
 using Dalamud.Interface.Textures;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 
 namespace Dalamud.Services.TitleScreenMenu;

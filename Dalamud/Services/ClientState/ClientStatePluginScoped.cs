@@ -1,5 +1,4 @@
 using Dalamud.Common;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Services.Conditions;
 

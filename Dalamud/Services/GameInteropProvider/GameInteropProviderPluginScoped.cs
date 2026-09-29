@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Linq;
 
 using Dalamud.Hooking;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services.SigScanner;

@@ -3,9 +3,7 @@ using System.Runtime.InteropServices;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Internal;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
-using Dalamud.Services;
 
 using Serilog;
 

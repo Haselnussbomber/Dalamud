@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 
 using Dalamud.Hooking;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.AgentLifecycle.AgentArgTypes;

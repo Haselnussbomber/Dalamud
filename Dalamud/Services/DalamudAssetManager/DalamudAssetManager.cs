@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures.TextureWraps.Internal;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Services.Internal;
 using Dalamud.Utility;

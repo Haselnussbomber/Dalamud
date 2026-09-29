@@ -1,6 +1,5 @@
 using System.IO;
 
-using Dalamud.Game.ClientState.Objects;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.IoC.Internal;
 using Dalamud.Services.ObjectTable;

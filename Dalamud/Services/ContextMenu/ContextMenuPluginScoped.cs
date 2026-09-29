@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
 
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 
 namespace Dalamud.Services.ContextMenu;

@@ -1,4 +1,3 @@
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 
 using Lumina.Excel;

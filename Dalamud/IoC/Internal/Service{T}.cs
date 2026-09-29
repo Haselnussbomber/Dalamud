@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using Dalamud.IoC;
 using Dalamud.Utility;
 using Dalamud.Utility.Timing;
 

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 
 using Dalamud.Hooking;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.AddonLifecycle.AddonArgTypes;

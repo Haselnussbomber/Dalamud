@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Common;
-using Dalamud.IoC;
 using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Utility;
