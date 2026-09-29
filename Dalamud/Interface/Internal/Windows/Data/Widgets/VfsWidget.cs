@@ -4,6 +4,7 @@ using System.IO;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
 using Dalamud.Storage;
+using Dalamud.Utility;
 
 using Serilog;
 
@@ -47,6 +48,7 @@ internal class VfsWidget : IDataWindowWidget
         {
             Log.Information("=== WRITING ===");
             var data = new byte[this.numBytes];
+            Random.Shared.NextBytes(data);
             var stopwatch = new Stopwatch();
             var acc = 0L;
 
@@ -56,6 +58,7 @@ internal class VfsWidget : IDataWindowWidget
                 service.WriteAllBytesAsync(path, data).GetAwaiter().GetResult();
                 stopwatch.Stop();
                 acc += stopwatch.ElapsedMilliseconds;
+                Log.Verbose("Wrote {data}", Util.ByteArrayToHex(data));
                 Log.Information("Turn {Turn} took {Ms}ms", i, stopwatch.ElapsedMilliseconds);
             }
 
@@ -71,9 +74,10 @@ internal class VfsWidget : IDataWindowWidget
             for (var i = 0; i < this.reps; i++)
             {
                 stopwatch.Restart();
-                service.ReadAllBytesAsync(path).GetAwaiter().GetResult();
+                var data = service.ReadAllBytesAsync(path).GetAwaiter().GetResult();
                 stopwatch.Stop();
                 acc += stopwatch.ElapsedMilliseconds;
+                Log.Verbose("Read: {data}", Util.ByteArrayToHex(data));
                 Log.Information("Turn {Turn} took {Ms}ms", i, stopwatch.ElapsedMilliseconds);
             }
 

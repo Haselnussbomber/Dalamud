@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Dalamud.Logging.Internal;
 using Dalamud.Utility;
 
-using SQLite;
+using Turso;
 
 namespace Dalamud.Storage;
 
@@ -31,7 +31,7 @@ internal class ReliableFileStorage : IInternalDisposableService
 
     private readonly Lock syncRoot = new();
 
-    private SQLiteConnection? db;
+    private TursoConnection? db;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ReliableFileStorage"/> class.
@@ -56,9 +56,12 @@ internal class ReliableFileStorage : IInternalDisposableService
                 if (File.Exists(databasePath))
                     File.Delete(databasePath);
 
+                this.db?.Dispose();
+                this.db = null;
+
                 this.SetupDb(databasePath);
             }
-            catch (Exception)
+            catch
             {
                 // ignored, we can run without one
             }
@@ -77,16 +80,7 @@ internal class ReliableFileStorage : IInternalDisposableService
     {
         ArgumentException.ThrowIfNullOrEmpty(path);
 
-        if (File.Exists(path))
-            return true;
-
-        if (this.db == null)
-            return false;
-
-        // If the file doesn't actually exist on the FS, but it does in the DB, we can say YES and read operations will read from the DB instead
-        var normalizedPath = NormalizePath(path);
-        var file = this.db.Table<DbFile>().FirstOrDefault(f => f.Path == normalizedPath && f.ContainerId == containerId);
-        return file != null;
+        return File.Exists(path) || (this.db != null && this.ExistsInDatabase(path, containerId));
     }
 
     /// <summary>
@@ -120,43 +114,25 @@ internal class ReliableFileStorage : IInternalDisposableService
     /// <param name="bytes">The contents of the file.</param>
     /// <param name="containerId">Container to write to.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public Task WriteAllBytesAsync(string path, byte[] bytes, Guid containerId = default)
+    public async Task WriteAllBytesAsync(string path, byte[] bytes, Guid containerId = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(path);
 
-        using (this.syncRoot.EnterScope())
+        this.syncRoot.Enter();
+
+        try
         {
-            if (this.db == null)
+            if (this.db != null)
             {
-                FilesystemUtil.WriteAllBytesSafe(path, bytes);
-                return Task.CompletedTask;
+                await this.WriteOrUpdateToDatabaseAsync(path, bytes, containerId);
             }
 
-            this.db.RunInTransaction(() =>
-            {
-                var normalizedPath = NormalizePath(path);
-                var file = this.db.Table<DbFile>().FirstOrDefault(f => f.Path == normalizedPath && f.ContainerId == containerId);
-                if (file == null)
-                {
-                    file = new DbFile
-                    {
-                        ContainerId = containerId,
-                        Path = normalizedPath,
-                        Data = bytes,
-                    };
-                    this.db.Insert(file);
-                }
-                else
-                {
-                    file.Data = bytes;
-                    this.db.Update(file);
-                }
-
-                FilesystemUtil.WriteAllBytesSafe(path, bytes);
-            });
+            FilesystemUtil.WriteAllBytesSafe(path, bytes);
         }
-
-        return Task.CompletedTask;
+        finally
+        {
+            this.syncRoot.Exit();
+        }
     }
 
     /// <summary>
@@ -255,8 +231,8 @@ internal class ReliableFileStorage : IInternalDisposableService
 
     /// <summary>
     /// Read all bytes from a file.
-    /// If the file does not exist on the filesystem, a read is attempted from the backup. The backup is not
-    /// automatically written back to disk, however.
+    /// If the file does not exist on the filesystem, a read is attempted from the backup and the backup
+    /// automatically written back to disk.
     /// </summary>
     /// <param name="path">The path to read from.</param>
     /// <param name="forceBackup">Whether the backup of the file should take priority.</param>
@@ -269,19 +245,40 @@ internal class ReliableFileStorage : IInternalDisposableService
 
         if (forceBackup)
         {
-            // If the db failed to load, act as if the file does not exist
-            if (this.db == null)
-                throw new FileNotFoundException("Backup database was not available");
+            var bytes = await this.ReadFromDatabaseAsync(path, containerId);
 
-            var normalizedPath = NormalizePath(path);
-            var file = this.db.Table<DbFile>().FirstOrDefault(f => f.Path == normalizedPath && f.ContainerId == containerId)
-                ?? throw new FileNotFoundException();
-            return file.Data;
+            // If the file doesn't exist, write it
+            if (!File.Exists(path))
+            {
+                try
+                {
+                    FilesystemUtil.WriteAllBytesSafe(path, bytes);
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(e, $"File \"{path}\" does not exist on the filesystem and could not be written");
+                }
+            }
+
+            return bytes;
         }
 
         // If the file doesn't exist, immediately check the backup db
         if (!File.Exists(path))
-            return await this.ReadAllBytesAsync(path, true, containerId);
+        {
+            var bytes = await this.ReadFromDatabaseAsync(path, containerId);
+
+            try
+            {
+                FilesystemUtil.WriteAllBytesSafe(path, bytes);
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e, $"File \"{path}\" does not exist on the filesystem and could not be written");
+            }
+
+            return bytes;
+        }
 
         try
         {
@@ -290,14 +287,15 @@ internal class ReliableFileStorage : IInternalDisposableService
         catch (Exception e)
         {
             Log.Error(e, "Failed to read file from disk, falling back to database");
-            return await this.ReadAllBytesAsync(path, true, containerId);
+            return await this.ReadFromDatabaseAsync(path, containerId);
         }
     }
 
     /// <inheritdoc/>
     void IInternalDisposableService.DisposeService()
     {
-        this.DisposeCore();
+        this.db?.Dispose();
+        this.db = null;
     }
 
     /// <summary>
@@ -309,30 +307,96 @@ internal class ReliableFileStorage : IInternalDisposableService
     {
         // Replace users folder
         var usersFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        path = path.Replace(usersFolder, "%USERPROFILE%");
+        return path.Replace(usersFolder, "%USERPROFILE%");
+    }
 
-        return path;
+    /// <summary>
+    /// Check if a file exists in the database.
+    /// </summary>
+    /// <param name="path">The path to check.</param>
+    /// <param name="containerId">The container to check in.</param>
+    /// <returns>True if the row exists.</returns>
+    private bool ExistsInDatabase(string path, Guid containerId = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(path);
+
+        if (this.db == null)
+            throw new FileNotFoundException("Backup database is not available", path);
+
+        using var query = new TursoCommand(this.db);
+        query.CommandText = "SELECT EXISTS(SELECT 1 FROM DbFile WHERE Path = $path AND ContainerId = $containerId LIMIT 1);";
+        query.Parameters.AddWithValue("$path", NormalizePath(path));
+        query.Parameters.AddWithValue("$containerId", containerId.ToString());
+        var result = query.ExecuteScalar() as int?;
+        return result == 1;
+    }
+
+    /// <summary>
+    /// Check if a file exists in the database.
+    /// </summary>
+    /// <param name="path">The path to check.</param>
+    /// <param name="containerId">The container to check in.</param>
+    /// <returns>True if the row exists.</returns>
+    private async Task<byte[]> ReadFromDatabaseAsync(string path, Guid containerId = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(path);
+
+        if (this.db == null)
+            throw new FileNotFoundException("Backup database is not available", path);
+
+        var normalizedPath = NormalizePath(path);
+        await using var query = new TursoCommand(this.db);
+        query.CommandText = "SELECT Data FROM DbFile WHERE Path = $path AND ContainerId = $containerId LIMIT 1;";
+        query.Parameters.AddWithValue("$path", normalizedPath);
+        query.Parameters.AddWithValue("$containerId", containerId);
+        var result = await query.ExecuteScalarAsync();
+        return result as byte[] ?? throw new FileNotFoundException("File not found", path);
+    }
+
+    /// <summary>
+    /// Check if a file exists in the database.
+    /// </summary>
+    /// <param name="path">The path to check.</param>
+    /// <param name="bytes">The contents of the file.</param>
+    /// <param name="containerId">The container to check in.</param>
+    /// <returns>True if the row exists.</returns>
+    private async Task WriteOrUpdateToDatabaseAsync(string path, byte[] bytes, Guid containerId = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(path);
+
+        if (this.db == null)
+            throw new FileNotFoundException("Backup database is not available", path);
+
+        await using var upsert = new TursoCommand(this.db);
+        upsert.CommandText = @"
+                    INSERT INTO DbFile(ContainerId, Path, Data)
+                        VALUES ($containerId, $path, $data)
+                    ON CONFLICT(ContainerId, Path)
+                        DO UPDATE SET Data = excluded.Data;";
+        upsert.Parameters.AddWithValue("$containerId", containerId.ToString());
+        upsert.Parameters.AddWithValue("$path", NormalizePath(path));
+        upsert.Parameters.AddWithValue("$data", bytes);
+        await upsert.ExecuteNonQueryAsync();
     }
 
     private void SetupDb(string path)
     {
-        this.db = new SQLiteConnection(path,
-                                       SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
-        this.db.CreateTable<DbFile>();
-    }
+        this.db = new TursoConnection("Data Source=" + path);
+        this.db.Open();
 
-    private void DisposeCore() => this.db?.Dispose();
+        this.db.ExecuteNonQuery(@"
+            CREATE TABLE IF NOT EXISTS DbFile (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ContainerId VARCHAR(32) NOT NULL,
+                Path TEXT NOT NULL,
+                Data BLOB NOT NULL,
+                UNIQUE (ContainerId, Path)
+            );
+        ");
 
-    private class DbFile
-    {
-        [PrimaryKey]
-        [AutoIncrement]
-        public int Id { get; set; }
-
-        public Guid ContainerId { get; set; }
-
-        public string Path { get; set; } = null!;
-
-        public byte[] Data { get; set; } = null!;
+        this.db.ExecuteNonQuery(@"
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_DbFile_ContainerId_Path 
+                ON DbFile (ContainerId, Path);
+        ");
     }
 }

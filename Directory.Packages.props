@@ -19,7 +19,7 @@
     <PackageVersion Include="System.Reactive" Version="6.1.0" />
     <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="10.0.0" />
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.39" />
-    <PackageVersion Include="sqlite-net-pcl" Version="1.9.172" />
+    <PackageVersion Include="Turso.Data.Sqlite.Provider" Version="0.8.1" />
 
     <!-- DirectX / Win32 -->
     <PackageVersion Include="TerraFX.Interop.Windows" Version="10.0.26100.5" />
