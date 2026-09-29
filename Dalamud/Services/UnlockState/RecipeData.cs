@@ -3,6 +3,7 @@ using System.Linq;
 using CommunityToolkit.HighPerformance;
 
 using Dalamud.Game.Enums;
+using Dalamud.IoC.Internal;
 
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;

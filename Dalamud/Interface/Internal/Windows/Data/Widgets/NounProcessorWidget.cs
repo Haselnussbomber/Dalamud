@@ -6,6 +6,7 @@ using Dalamud.Common;
 using Dalamud.Game.Text.Noun;
 using Dalamud.Game.Text.Noun.Enums;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ClientState;
 using Dalamud.Services.DataManager;
 

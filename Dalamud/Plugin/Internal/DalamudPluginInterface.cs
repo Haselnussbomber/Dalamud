@@ -14,7 +14,6 @@ using Dalamud.Game.Text.Sanitizer;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal;
 using Dalamud.IoC.Internal;
-using Dalamud.Plugin.Internal;
 using Dalamud.Plugin.Internal.AutoUpdate;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Internal.Types.Manifest;
@@ -27,7 +26,7 @@ using Dalamud.Utility;
 
 using Serilog;
 
-namespace Dalamud.Plugin;
+namespace Dalamud.Plugin.Internal;
 
 /// <summary>
 /// This class acts as an interface to various objects needed to interact with Dalamud and the game.

@@ -6,6 +6,8 @@ using CheapLoc;
 using Dalamud.Configuration.Internal;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Services.ChatGui;

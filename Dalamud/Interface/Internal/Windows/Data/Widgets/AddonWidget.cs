@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.NativeWrapper;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.GameGui;
 using Dalamud.Utility;
 

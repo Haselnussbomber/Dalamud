@@ -13,6 +13,7 @@ using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Framework;
 using Dalamud.Utility;
 

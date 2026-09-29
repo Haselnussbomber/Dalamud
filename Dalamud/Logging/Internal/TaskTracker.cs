@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Services;
 using Dalamud.Services.Framework;
 

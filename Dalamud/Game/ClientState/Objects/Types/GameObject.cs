@@ -1,6 +1,7 @@
 using System.Numerics;
 
 using Dalamud.Game.ClientState.Objects.Enums;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ObjectTable;
 using Dalamud.Services.PlayerState;
 using Dalamud.Utility;

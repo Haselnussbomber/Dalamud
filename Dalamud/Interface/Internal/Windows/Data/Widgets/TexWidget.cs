@@ -17,6 +17,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Internal;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services;
 using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Services.NotificationManager;

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Interface.Internal.Badge;
 

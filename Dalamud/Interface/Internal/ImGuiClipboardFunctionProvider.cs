@@ -6,6 +6,7 @@ using CheapLoc;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.ToastGui;
 

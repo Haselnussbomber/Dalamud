@@ -1,6 +1,7 @@
 using Dalamud.Interface.ImGuiSeStringRenderer;
 using Dalamud.Interface.ImGuiSeStringRenderer.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.IoC.Internal;
 using Dalamud.Utility;
 
 namespace Dalamud.Interface.Textures.Internal;

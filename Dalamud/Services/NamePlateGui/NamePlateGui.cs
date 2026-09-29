@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 using Dalamud.Game.ClientState.Objects;
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.SigScanner;
 using Dalamud.Utility;

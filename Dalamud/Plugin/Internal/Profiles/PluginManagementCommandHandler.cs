@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using CheapLoc;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services;
 using Dalamud.Services.ChatGui;

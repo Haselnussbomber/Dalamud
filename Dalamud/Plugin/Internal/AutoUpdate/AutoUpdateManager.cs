@@ -11,6 +11,8 @@ using Dalamud.Interface;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services;

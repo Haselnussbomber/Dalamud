@@ -1,3 +1,4 @@
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Marketboard.Internal;
 using Dalamud.Services.Marketboard.Structures;
 

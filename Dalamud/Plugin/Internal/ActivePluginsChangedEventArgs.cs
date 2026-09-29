@@ -3,10 +3,10 @@ using System.Linq;
 
 using Dalamud.Plugin.Internal.Types;
 
-namespace Dalamud.Plugin;
+namespace Dalamud.Plugin.Internal;
 
 /// <inheritdoc cref="IActivePluginsChangedEventArgs" />
-public class ActivePluginsChangedEventArgs : EventArgs, IActivePluginsChangedEventArgs
+internal class ActivePluginsChangedEventArgs : EventArgs, IActivePluginsChangedEventArgs
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ActivePluginsChangedEventArgs"/> class

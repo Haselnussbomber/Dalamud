@@ -2,8 +2,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using Dalamud.Networking.Http;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types.Manifest;
+using Dalamud.Services.Internal;
 using Dalamud.Utility;
 
 using Newtonsoft.Json;

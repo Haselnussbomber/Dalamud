@@ -14,6 +14,7 @@ using Dalamud.Interface.Style;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.PlayerState;
 using Dalamud.Utility;
 

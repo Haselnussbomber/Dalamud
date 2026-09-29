@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 
 using Lumina.Data.Files;

@@ -6,6 +6,7 @@ using Dalamud.Game.Gui;
 using Dalamud.Game.NativeWrapper;
 using Dalamud.Hooking;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.SigScanner;
 using Dalamud.Utility;

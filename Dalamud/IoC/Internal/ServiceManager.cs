@@ -8,8 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.IoC;
-using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services;
 using Dalamud.Services.Framework;
@@ -22,7 +20,7 @@ using JetBrains.Annotations;
 
 // API10 TODO: Move to Dalamud.Service namespace. Some plugins reflect this... including my own, oops. There's a todo
 // for more reflective APIs, so I'll just leave it for now.
-namespace Dalamud;
+namespace Dalamud.IoC.Internal;
 
 // TODO:
 // - Unify dependency walking code(load/unload)

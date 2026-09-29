@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Gui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.GameGui;
 using Dalamud.Services.SelfTestRegistry;
 

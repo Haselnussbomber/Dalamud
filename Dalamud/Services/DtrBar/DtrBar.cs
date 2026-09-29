@@ -5,6 +5,7 @@ using System.Threading;
 
 using Dalamud.Configuration.Internal;
 using Dalamud.Game.Enums;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services.AddonEventManager;

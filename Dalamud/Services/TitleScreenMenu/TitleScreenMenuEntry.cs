@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 
 using Dalamud.Interface.Textures;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.KeyState;
 
 namespace Dalamud.Services.TitleScreenMenu;

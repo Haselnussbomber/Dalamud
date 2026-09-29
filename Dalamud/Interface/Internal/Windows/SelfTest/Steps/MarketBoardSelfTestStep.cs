@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Linq;
 
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Marketboard;
 using Dalamud.Services.Marketboard.Structures;
 using Dalamud.Services.SelfTestRegistry;

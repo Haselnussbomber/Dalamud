@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Utility;
 

@@ -10,6 +10,7 @@ using Dalamud.Game.Text;
 using Dalamud.Game.Text.Noun.Enums;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ClientState;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SeStringEvaluator;

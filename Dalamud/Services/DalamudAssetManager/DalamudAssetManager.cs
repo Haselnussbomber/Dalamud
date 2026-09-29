@@ -13,7 +13,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Textures.TextureWraps.Internal;
 using Dalamud.IoC;
 using Dalamud.IoC.Internal;
-using Dalamud.Networking.Http;
+using Dalamud.Services.Internal;
 using Dalamud.Utility;
 using Dalamud.Utility.Timing;
 

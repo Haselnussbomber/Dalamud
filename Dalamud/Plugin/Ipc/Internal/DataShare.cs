@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Ipc.Exceptions;
 
 using Serilog;

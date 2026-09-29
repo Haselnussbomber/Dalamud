@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.PartyFinderGui;
 using Dalamud.Services.PartyFinderGui.Types;
 using Dalamud.Services.SelfTestRegistry;

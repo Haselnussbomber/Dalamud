@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.CommandManager;
 using Dalamud.Services.SelfTestRegistry;
 

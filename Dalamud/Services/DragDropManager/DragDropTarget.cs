@@ -6,6 +6,7 @@ using System.Text;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Utility;
 
 using Serilog;

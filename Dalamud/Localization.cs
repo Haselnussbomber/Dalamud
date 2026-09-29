@@ -5,6 +5,9 @@ using System.Reflection;
 
 using CheapLoc;
 
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
+
 using Serilog;
 
 namespace Dalamud;

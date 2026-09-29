@@ -1,6 +1,7 @@
 using Dalamud.Configuration.Internal;
 using Dalamud.Hooking;
 using Dalamud.Interface.Windowing;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 
 using FFXIVClientStructs.FFXIV.Client.UI;

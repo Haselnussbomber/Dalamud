@@ -3,6 +3,7 @@ using System.Threading;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DtrBar;
 using Dalamud.Services.Framework;
 

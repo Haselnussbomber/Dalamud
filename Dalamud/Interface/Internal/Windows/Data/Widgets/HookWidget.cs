@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Hooking;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.SigScanner;
 
 using FFXIVClientStructs.FFXIV.Component.GUI;

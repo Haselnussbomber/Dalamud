@@ -3,6 +3,7 @@ using System.IO;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ReliableFileStorage;
 
 using Serilog;

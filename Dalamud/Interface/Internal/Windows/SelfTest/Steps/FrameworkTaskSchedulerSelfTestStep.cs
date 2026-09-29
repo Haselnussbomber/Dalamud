@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Framework;
 using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;

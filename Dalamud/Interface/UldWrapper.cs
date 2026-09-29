@@ -5,6 +5,7 @@ using System.Linq;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Utility;
 

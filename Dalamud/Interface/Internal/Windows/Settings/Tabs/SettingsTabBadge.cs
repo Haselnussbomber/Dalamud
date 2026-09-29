@@ -8,6 +8,7 @@ using Dalamud.Interface.Colors;
 using Dalamud.Interface.Internal.Badge;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Utility.Internal;
 

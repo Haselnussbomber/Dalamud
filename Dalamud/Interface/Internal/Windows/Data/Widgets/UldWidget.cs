@@ -12,9 +12,11 @@ using Dalamud.Interface.Components;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Memory;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SigScanner;
+using Dalamud.Utility;
 
 using Lumina.Data.Files;
 using Lumina.Data.Parsing.Uld;

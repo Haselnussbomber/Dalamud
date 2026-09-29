@@ -7,6 +7,7 @@ using System.Text;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Ipc.Internal;
 using Dalamud.Services.NotificationManager;
 using Dalamud.Services.NotificationManager.Internal;

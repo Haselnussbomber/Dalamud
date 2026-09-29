@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Dalamud.Configuration;
 using Dalamud.Configuration.Internal;
 using Dalamud.Interface.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Plugin.Internal.Types.Manifest;
 using Dalamud.Utility;

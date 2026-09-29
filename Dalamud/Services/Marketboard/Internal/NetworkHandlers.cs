@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
-using Dalamud.Networking.Http;
+using Dalamud.Services.Internal;
 using Dalamud.Services.Marketboard.Internal.MarketBoardUploaders;
 using Dalamud.Services.Marketboard.Network.Internal.MarketBoardUploaders.Universalis;
 using Dalamud.Services.Marketboard.Structures;

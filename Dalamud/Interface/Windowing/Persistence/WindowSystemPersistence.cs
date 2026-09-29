@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Interface.Windowing.Persistence;
 

@@ -1,6 +1,7 @@
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ChatGui;
 using Dalamud.Services.ClientState;
 using Dalamud.Services.GameGui;

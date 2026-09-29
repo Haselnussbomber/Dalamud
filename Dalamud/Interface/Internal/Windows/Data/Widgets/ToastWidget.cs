@@ -2,6 +2,7 @@ using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ToastGui;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;

@@ -5,6 +5,7 @@ using System.Text;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ContextMenu;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SelfTestRegistry;

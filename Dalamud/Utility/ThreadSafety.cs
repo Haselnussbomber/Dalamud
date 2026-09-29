@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Utility;
 

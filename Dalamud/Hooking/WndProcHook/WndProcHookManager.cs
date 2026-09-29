@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 
 using TerraFX.Interop.Windows;

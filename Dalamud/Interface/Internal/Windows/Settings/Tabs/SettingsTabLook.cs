@@ -14,6 +14,7 @@ using Dalamud.Interface.ImGuiFontChooserDialog;
 using Dalamud.Interface.Internal.Windows.Settings.Widgets;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Framework;
 using Dalamud.Services.NotificationManager.Internal;
 using Dalamud.Utility;

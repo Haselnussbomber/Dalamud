@@ -2,10 +2,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
+using Dalamud.IoC.Internal;
+using Dalamud.Networking.Http;
 using Dalamud.Plugin.Internal;
 using Dalamud.Utility;
 
-namespace Dalamud.Networking.Http;
+namespace Dalamud.Services.Internal;
 
 /// <summary>
 /// A service to help build and manage HttpClients with some semblance of Happy Eyeballs (RFC 8305 - IPv4 fallback)

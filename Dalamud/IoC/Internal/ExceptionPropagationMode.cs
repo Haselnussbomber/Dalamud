@@ -1,4 +1,4 @@
-namespace Dalamud;
+namespace Dalamud.IoC.Internal;
 
 /// <summary>
 /// Specifies how to handle the cases of failed services when calling <see cref="Service{T}.GetNullable"/>.

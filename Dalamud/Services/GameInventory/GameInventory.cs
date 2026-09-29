@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 
 using Dalamud.Game.Enums;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.GameInventory.InventoryEventArgTypes;
 
 namespace Dalamud.Services.GameInventory;

@@ -1,6 +1,7 @@
 using System.Numerics;
 
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.NotificationManager;
 using Dalamud.Services.NotificationManager.Internal;
 

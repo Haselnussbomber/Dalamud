@@ -10,6 +10,8 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Text;
 using Dalamud.Interface.ImGuiSeStringRenderer.Internal.TextProcessing;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SigScanner;
 using Dalamud.Utility;

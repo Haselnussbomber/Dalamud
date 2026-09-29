@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.SigScanner;
 using Dalamud.Utility.Signatures.Wrappers;
 

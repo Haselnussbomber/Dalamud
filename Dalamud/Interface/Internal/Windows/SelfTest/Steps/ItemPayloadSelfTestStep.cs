@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ChatGui;
 using Dalamud.Services.GameGui;
 using Dalamud.Services.SelfTestRegistry;

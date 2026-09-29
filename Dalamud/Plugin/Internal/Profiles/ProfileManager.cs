@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using CheapLoc;
 
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.PlayerState;
 using Dalamud.Utility;

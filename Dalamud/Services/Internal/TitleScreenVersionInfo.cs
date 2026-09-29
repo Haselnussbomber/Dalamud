@@ -1,5 +1,6 @@
 using Dalamud.Configuration.Internal;
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Services.AddonLifecycle;

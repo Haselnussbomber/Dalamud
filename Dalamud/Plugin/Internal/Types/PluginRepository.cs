@@ -8,9 +8,10 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
-using Dalamud.Networking.Http;
 using Dalamud.Plugin.Internal.Types.Manifest;
+using Dalamud.Services.Internal;
 using Dalamud.Utility;
 
 using Newtonsoft.Json;

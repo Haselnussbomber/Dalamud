@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CheapLoc;
 
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Plugin.Internal.Profiles;
 using Dalamud.Services.AgentLifecycle;

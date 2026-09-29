@@ -5,6 +5,7 @@ using Dalamud.Configuration.Internal;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Utility;
 
 namespace Dalamud.Services.NotificationManager.Internal;

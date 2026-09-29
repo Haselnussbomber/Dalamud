@@ -2,6 +2,7 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Common;
 using Dalamud.Game.Text.Noun;
 using Dalamud.Game.Text.Noun.Enums;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.SelfTestRegistry;
 
 using LSheets = Lumina.Excel.Sheets;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
 using Dalamud.Interface.Windowing;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin;
 using Dalamud.Services;
 using Dalamud.Services.CommandManager;

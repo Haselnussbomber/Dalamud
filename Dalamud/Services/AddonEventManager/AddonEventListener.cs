@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 
+using Dalamud.IoC.Internal;
+
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace Dalamud.Services.AddonEventManager;

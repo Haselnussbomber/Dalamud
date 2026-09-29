@@ -2,6 +2,8 @@ using System.Collections.Concurrent;
 
 using Dalamud.Common;
 using Dalamud.Game.Text.Noun.Enums;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Utility;

@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Dalamud.Logging.Internal;
-using Dalamud.Networking.Http;
+using Dalamud.Services.Internal;
 using Dalamud.Services.Marketboard.Internal.MarketBoardUploaders;
 using Dalamud.Services.Marketboard.Internal.MarketBoardUploaders.Universalis.Types;
 using Dalamud.Services.Marketboard.Structures;

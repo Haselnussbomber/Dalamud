@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services.CommandManager;
 

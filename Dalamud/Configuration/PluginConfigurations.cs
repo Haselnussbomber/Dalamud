@@ -1,6 +1,7 @@
 using System.IO;
 using System.Reflection;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ReliableFileStorage;
 using Dalamud.Utility;
 

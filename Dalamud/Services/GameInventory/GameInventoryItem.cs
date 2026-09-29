@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Services.GameInventory.Records;
 using Dalamud.Utility;
 

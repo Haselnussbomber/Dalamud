@@ -2,6 +2,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Services.Internal;
 

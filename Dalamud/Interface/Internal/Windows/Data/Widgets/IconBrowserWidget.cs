@@ -9,6 +9,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Internal;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Interface.Internal.Windows.Data.Widgets;
 

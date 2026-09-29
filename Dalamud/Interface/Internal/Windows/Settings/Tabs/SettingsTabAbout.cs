@@ -12,6 +12,7 @@ using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Services.GameGui;

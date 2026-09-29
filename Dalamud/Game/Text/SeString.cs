@@ -1,4 +1,5 @@
 using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SeStringEvaluator;
 using Dalamud.Utility;

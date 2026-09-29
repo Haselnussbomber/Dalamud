@@ -3,6 +3,7 @@ using System.Numerics;
 
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Utility;
 

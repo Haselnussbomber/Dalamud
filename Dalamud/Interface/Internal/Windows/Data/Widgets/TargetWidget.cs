@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ObjectTable;
 using Dalamud.Services.TargetManager;
 using Dalamud.Utility;

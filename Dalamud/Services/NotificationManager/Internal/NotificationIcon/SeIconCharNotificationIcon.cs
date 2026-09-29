@@ -1,6 +1,7 @@
 using System.Numerics;
 
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 
 namespace Dalamud.Services.NotificationManager.Internal.NotificationIcon;
 

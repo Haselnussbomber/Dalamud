@@ -1,5 +1,6 @@
 using System.Reactive.Disposables;
 
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Ipc.Exceptions;
 

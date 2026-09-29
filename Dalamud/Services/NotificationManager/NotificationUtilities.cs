@@ -10,6 +10,7 @@ using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 
 namespace Dalamud.Services.NotificationManager;

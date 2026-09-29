@@ -12,6 +12,7 @@ using Dalamud.Interface.Internal.DesignSystem;
 using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services.ClientState;
 using Dalamud.Services.Conditions;

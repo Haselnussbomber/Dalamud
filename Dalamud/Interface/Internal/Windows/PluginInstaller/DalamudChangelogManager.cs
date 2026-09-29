@@ -3,8 +3,9 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-using Dalamud.Networking.Http;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal;
+using Dalamud.Services.Internal;
 using Dalamud.Utility;
 
 using Serilog;

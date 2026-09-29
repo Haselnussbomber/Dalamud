@@ -11,6 +11,7 @@ using Dalamud.Interface.Internal;
 using Dalamud.Interface.Internal.Windows.Data.Widgets;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Framework;
 using Dalamud.Services.NotificationManager;
 using Dalamud.Services.NotificationManager.Internal;

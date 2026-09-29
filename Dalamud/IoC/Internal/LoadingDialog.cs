@@ -23,7 +23,7 @@ using TerraFX.Interop.Windows;
 using static TerraFX.Interop.Windows.TASKDIALOG_FLAGS;
 using static TerraFX.Interop.Windows.Windows;
 
-namespace Dalamud;
+namespace Dalamud.IoC.Internal;
 
 /// <summary>
 /// Class providing an early-loading dialog.

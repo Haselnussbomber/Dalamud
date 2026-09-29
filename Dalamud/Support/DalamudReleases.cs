@@ -2,7 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 using Dalamud.Configuration.Internal;
-using Dalamud.Networking.Http;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
+using Dalamud.Services.Internal;
 using Dalamud.Utility;
 
 using Newtonsoft.Json;

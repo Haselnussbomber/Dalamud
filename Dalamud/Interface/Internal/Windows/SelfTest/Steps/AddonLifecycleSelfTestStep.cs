@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.AddonLifecycle;
 using Dalamud.Services.AddonLifecycle.AddonArgTypes;
 using Dalamud.Services.SelfTestRegistry;

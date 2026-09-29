@@ -8,6 +8,7 @@ using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DalamudAssetManager;
 using Dalamud.Services.NotificationManager;
 using Dalamud.Services.NotificationManager.Internal;

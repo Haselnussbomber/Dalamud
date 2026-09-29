@@ -1,6 +1,7 @@
 using System.Linq;
 
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.GamepadState;
 using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;

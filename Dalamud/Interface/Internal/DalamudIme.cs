@@ -17,6 +17,9 @@ using Dalamud.Interface.Colors;
 using Dalamud.Interface.GameFonts;
 using Dalamud.Interface.ManagedFontAtlas.Internals;
 using Dalamud.Interface.Utility;
+using Dalamud.IoC.Internal;
+
+
 
 #if IMEDEBUG
 using Serilog;

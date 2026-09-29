@@ -1,6 +1,7 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Services.TargetManager;
 

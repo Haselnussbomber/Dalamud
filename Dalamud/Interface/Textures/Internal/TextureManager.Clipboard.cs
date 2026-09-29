@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Dalamud.Interface.Internal;
 using Dalamud.Interface.Textures.TextureWraps;
+using Dalamud.IoC.Internal;
 using Dalamud.Memory;
 using Dalamud.Utility;
 

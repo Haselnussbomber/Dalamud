@@ -1,4 +1,6 @@
 using Dalamud.Interface.Internal.Windows.SelfTest.Steps;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.SelfTestRegistry;
 
 using Lumina.Excel.Sheets;

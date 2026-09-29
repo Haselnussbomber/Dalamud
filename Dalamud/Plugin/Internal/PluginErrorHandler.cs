@@ -4,6 +4,8 @@ using System.Linq.Expressions;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Internal;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal.Types;
 using Dalamud.Services.NotificationManager;
 using Dalamud.Services.NotificationManager.Internal;

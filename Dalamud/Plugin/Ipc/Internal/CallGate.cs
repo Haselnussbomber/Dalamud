@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
+
 namespace Dalamud.Plugin.Ipc.Internal;
 
 /// <summary>

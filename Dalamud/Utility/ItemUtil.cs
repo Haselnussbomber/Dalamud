@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 
 using Dalamud.Common;
 using Dalamud.Game.Text;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 
 using Lumina.Excel.Sheets;

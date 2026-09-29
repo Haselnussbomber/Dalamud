@@ -6,6 +6,7 @@ using System.Linq;
 using CheapLoc;
 
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.Console;
 using Dalamud.Utility;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Dalamud.Game.Enums;
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Utility;

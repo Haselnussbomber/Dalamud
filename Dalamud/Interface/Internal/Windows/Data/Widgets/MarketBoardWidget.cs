@@ -3,6 +3,7 @@ using System.Globalization;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.Marketboard;
 using Dalamud.Services.Marketboard.Structures;
 

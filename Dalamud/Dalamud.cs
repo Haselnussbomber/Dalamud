@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Dalamud.Common;
 using Dalamud.Configuration.Internal;
 using Dalamud.Hooking.Internal.Verification;
+using Dalamud.IoC;
+using Dalamud.IoC.Internal;
 using Dalamud.Plugin.Internal;
 using Dalamud.Services.ReliableFileStorage;
 using Dalamud.Services.SigScanner;

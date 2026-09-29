@@ -1,6 +1,7 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Common;
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.ClientState;
 using Dalamud.Services.ObjectTable;
 using Dalamud.Services.SelfTestRegistry;

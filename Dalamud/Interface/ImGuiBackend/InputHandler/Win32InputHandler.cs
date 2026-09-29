@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using Dalamud.Bindings.ImGui;
+using Dalamud.IoC.Internal;
 using Dalamud.Memory;
 using Dalamud.Services.Console;
 using Dalamud.Utility;

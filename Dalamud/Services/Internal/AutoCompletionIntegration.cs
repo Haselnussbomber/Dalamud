@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Utility;
 
 using FFXIVClientStructs.FFXIV.Client.System.Memory;

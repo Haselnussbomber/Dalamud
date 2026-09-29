@@ -1,3 +1,5 @@
+using Dalamud.IoC.Internal;
+
 using Lumina.Excel;
 
 namespace Dalamud.Services.DataManager;

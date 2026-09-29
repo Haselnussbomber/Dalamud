@@ -1,4 +1,5 @@
 using Dalamud.Configuration.Internal;
+using Dalamud.IoC.Internal;
 
 using Lumina.Text.ReadOnly;
 

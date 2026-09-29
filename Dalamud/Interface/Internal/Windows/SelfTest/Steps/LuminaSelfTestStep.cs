@@ -1,3 +1,4 @@
+using Dalamud.IoC.Internal;
 using Dalamud.Services.DataManager;
 using Dalamud.Services.SelfTestRegistry;
 using Dalamud.Utility;

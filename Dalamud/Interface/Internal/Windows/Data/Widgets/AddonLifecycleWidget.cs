@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility.Raii;
+using Dalamud.IoC.Internal;
 using Dalamud.Services.AddonLifecycle;
 using Dalamud.Utility;
 

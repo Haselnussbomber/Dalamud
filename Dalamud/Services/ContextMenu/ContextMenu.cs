@@ -6,6 +6,7 @@ using System.Threading;
 
 using Dalamud.Game.Text;
 using Dalamud.Hooking;
+using Dalamud.IoC.Internal;
 using Dalamud.Logging.Internal;
 using Dalamud.Utility;
 
