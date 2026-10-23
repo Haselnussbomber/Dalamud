@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading;
 
 using CheapLoc;
@@ -21,6 +22,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Component.Shell;
+
+using Lumina.Text.ReadOnly;
 
 namespace Dalamud.Game.Command;
 
@@ -48,7 +51,7 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
             this.OnTryInvokeDebugCommand);
         this.tryInvokeDebugCommandHook.Enable();
 
-        this.console.Invoke += this.ConsoleOnInvoke;
+        this.console.Invoke += this.ProcessCommand;
     }
 
     /// <summary>
@@ -65,10 +68,27 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
     public ReadOnlyDictionary<string, IReadOnlyCommandInfo> Commands => new(this.commandMap);
 
     /// <inheritdoc/>
-    public bool ProcessCommand(string content)
+    public bool ProcessCommand(ReadOnlySeString input)
     {
+        if (input.IsEmpty)
+            return false;
+
+        var enu = input.GetEnumerator();
+        if (!enu.MoveNext())
+            return false;
+
+        // The command has to start with a text payload.
+        if (enu.Current.Type != ReadOnlySePayloadType.Text)
+            return false;
+
+        // The command has to start with a slash.
+        if (!enu.Current.Body.Span.StartsWith((byte)'/'))
+            return false;
+
+        var content = Encoding.UTF8.GetString(enu.Current.Body.Span);
+
         string command;
-        string argument;
+        ReadOnlySeString argument = default;
 
         var separatorPosition = content.IndexOf(' ');
         if (separatorPosition == -1 || separatorPosition + 1 >= content.Length)
@@ -83,8 +103,6 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
             {
                 command = content;
             }
-
-            argument = string.Empty;
         }
         else
         {
@@ -96,8 +114,14 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
             // => content.IndexOf(' ') == 12
             command = content[..separatorPosition];
 
-            var argStart = separatorPosition + 1;
-            argument = content[argStart..];
+            using var rssb = new RentedSeStringBuilder();
+
+            rssb.Append(content[(separatorPosition + 1)..]);
+
+            foreach (var payload in enu)
+                rssb.Append(payload);
+
+            argument = rssb.ToReadOnlySeString();
         }
 
         if (!this.commandMap.TryGetValue(command, out var handler)) // Command was not found.
@@ -124,7 +148,7 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
     }
 
     /// <inheritdoc/>
-    public void DispatchCommand(string command, string argument, IReadOnlyCommandInfo info)
+    public void DispatchCommand(string command, ReadOnlySeString argument, IReadOnlyCommandInfo info)
     {
         try
         {
@@ -242,13 +266,8 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
     /// <inheritdoc/>
     void IInternalDisposableService.DisposeService()
     {
-        this.console.Invoke -= this.ConsoleOnInvoke;
+        this.console.Invoke -= this.ProcessCommand;
         this.tryInvokeDebugCommandHook?.Dispose();
-    }
-
-    private bool ConsoleOnInvoke(string arg)
-    {
-        return arg.StartsWith('/') && this.ProcessCommand(arg);
     }
 
     private int OnTryInvokeDebugCommand(ShellCommands* self, Utf8String* command, UIModule* uiModule)
@@ -256,7 +275,7 @@ internal sealed unsafe class CommandManager : IInternalDisposableService, IComma
         var result = this.tryInvokeDebugCommandHook!.OriginalDisposeSafe(self, command, uiModule);
         if (result != -1) return result;
 
-        return this.ProcessCommand(command->ToString()) ? 0 : result;
+        return this.ProcessCommand(command->AsReadOnlySeString()) ? 0 : result;
     }
 
     private unsafe string? GetCurrentMacroLine()
@@ -326,11 +345,11 @@ internal class CommandManagerPluginScoped : IInternalDisposableService, ICommand
     }
 
     /// <inheritdoc/>
-    public bool ProcessCommand(string content)
+    public bool ProcessCommand(ReadOnlySeString content)
         => this.commandManagerService.ProcessCommand(content);
 
     /// <inheritdoc/>
-    public void DispatchCommand(string command, string argument, IReadOnlyCommandInfo info)
+    public void DispatchCommand(string command, ReadOnlySeString argument, IReadOnlyCommandInfo info)
         => this.commandManagerService.DispatchCommand(command, argument, info);
 
     /// <inheritdoc/>

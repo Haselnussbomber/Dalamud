@@ -11,6 +11,8 @@ using Dalamud.Game.Gui;
 using Dalamud.Plugin.Internal;
 using Dalamud.Utility;
 
+using Lumina.Text.ReadOnly;
+
 namespace Dalamud.Interface.Internal;
 
 /// <summary>
@@ -151,28 +153,29 @@ internal class DalamudCommands : IServiceType
         });
     }
 
-    private void OnUnloadCommand(string command, string arguments)
+    private void OnUnloadCommand(string command, ReadOnlySeString arguments)
     {
         Service<ChatGui>.Get().Print("Unloading...");
         Service<Framework>.Get().UnloadDalamud();
     }
 
-    private void OnKillCommand(string command, string arguments)
+    private void OnKillCommand(string command, ReadOnlySeString arguments)
     {
         Process.GetCurrentProcess().Kill();
     }
 
-    private void OnRestartCommand(string command, string arguments)
+    private void OnRestartCommand(string command, ReadOnlySeString arguments)
     {
         Dalamud.RestartGame();
     }
 
-    private void OnHelpCommand(string command, string arguments)
+    private void OnHelpCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         var commandManager = Service<CommandManager>.Get();
+        var argString = arguments.ToString();
 
-        if (arguments.IsNullOrWhitespace())
+        if (argString.IsNullOrWhitespace())
         {
             chatGui.Print(Loc.Localize("DalamudCmdHelpAvailable", "Available commands:"));
             foreach (var cmd in commandManager.Commands.OrderBy(cInfo => cInfo.Key))
@@ -185,7 +188,7 @@ internal class DalamudCommands : IServiceType
         }
         else
         {
-            var trimmedArguments = arguments.Trim();
+            var trimmedArguments = argString.Trim();
             var targetCommandText = trimmedArguments[0] == '/' ? trimmedArguments : $"/{trimmedArguments}";
             chatGui.Print(commandManager.Commands.TryGetValue(targetCommandText, out var targetCommand)
                               ? $"{targetCommandText}: {targetCommand.HelpMessage}"
@@ -193,7 +196,7 @@ internal class DalamudCommands : IServiceType
         }
     }
 
-    private void OnBadWordsAddCommand(string command, string arguments)
+    private void OnBadWordsAddCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
 
@@ -201,7 +204,7 @@ internal class DalamudCommands : IServiceType
                                                                       "Please use a plugin for this functionality."));
     }
 
-    private void OnBadWordsListCommand(string command, string arguments)
+    private void OnBadWordsListCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         var configuration = Service<DalamudConfiguration>.Get();
@@ -220,21 +223,22 @@ internal class DalamudCommands : IServiceType
             chatGui.Print($"\"{word}\"");
     }
 
-    private void OnBadWordsRemoveCommand(string command, string arguments)
+    private void OnBadWordsRemoveCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         var configuration = Service<DalamudConfiguration>.Get();
+        var argString = arguments.ToString();
 
         configuration.BadWords ??= [];
 
-        configuration.BadWords.RemoveAll(x => x == arguments);
+        configuration.BadWords.RemoveAll(x => x == argString);
 
         configuration.QueueSave();
 
-        chatGui.Print(string.Format(Loc.Localize("DalamudUnmuted", "Unmuted \"{0}\"."), arguments));
+        chatGui.Print(string.Format(Loc.Localize("DalamudUnmuted", "Unmuted \"{0}\"."), argString));
     }
 
-    private void OnLastLinkCommand(string command, string arguments)
+    private void OnLastLinkCommand(string command, ReadOnlySeString arguments)
     {
         var chatHandlers = Service<ChatHandlers>.Get();
         var chatGui = Service<ChatGui>.Get();
@@ -252,11 +256,11 @@ internal class DalamudCommands : IServiceType
         });
     }
 
-    private void OnBgmSetCommand(string command, string arguments)
+    private void OnBgmSetCommand(string command, ReadOnlySeString arguments)
     {
         var gameGui = Service<GameGui>.Get();
 
-        if (ushort.TryParse(arguments, out var value))
+        if (ushort.TryParse(arguments.ToString(), out var value))
         {
             gameGui.SetBgm(value);
         }
@@ -267,38 +271,38 @@ internal class DalamudCommands : IServiceType
         }
     }
 
-    private void OnDebugDrawDevMenu(string command, string arguments)
+    private void OnDebugDrawDevMenu(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().ToggleDevMenu();
         Service<DalamudConfiguration>.Get().DevMode = true;
     }
 
-    private void OnTogglePluginStats(string command, string arguments)
+    private void OnTogglePluginStats(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().TogglePluginStatsWindow();
     }
 
-    private void OnToggleBranchSwitcher(string command, string arguments)
+    private void OnToggleBranchSwitcher(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().ToggleBranchSwitcher();
     }
 
-    private void OnDebugDrawDataMenu(string command, string arguments)
+    private void OnDebugDrawDataMenu(string command, ReadOnlySeString arguments)
     {
         var dalamudInterface = Service<DalamudInterface>.Get();
 
-        if (string.IsNullOrEmpty(arguments))
+        if (arguments.IsEmpty)
             dalamudInterface.ToggleDataWindow();
         else
-            dalamudInterface.ToggleDataWindow(arguments);
+            dalamudInterface.ToggleDataWindow(arguments.ToString());
     }
 
-    private void OnOpenLog(string command, string arguments)
+    private void OnOpenLog(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().ToggleLogWindow();
     }
 
-    private void OnVersionInfoCommand(string command, string arguments)
+    private void OnVersionInfoCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         using var rssb = new RentedSeStringBuilder();
@@ -319,22 +323,23 @@ internal class DalamudCommands : IServiceType
             .ToReadOnlySeString());
     }
 
-    private void OnOpenInstallerCommand(string command, string arguments)
+    private void OnOpenInstallerCommand(string command, ReadOnlySeString arguments)
     {
         var configuration = Service<DalamudConfiguration>.Get();
         Service<DalamudInterface>.Get().TogglePluginInstallerWindowTo(configuration.PluginInstallerOpen);
     }
 
-    private void OnSetLanguageCommand(string command, string arguments)
+    private void OnSetLanguageCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         var configuration = Service<DalamudConfiguration>.Get();
         var localization = Service<Localization>.Get();
+        var langCode = arguments.ToString().ToLowerInvariant();
 
-        if (Localization.ApplicableLangCodes.Contains(arguments.ToLowerInvariant()) || arguments.Equals("en", StringComparison.InvariantCultureIgnoreCase))
+        if (Localization.ApplicableLangCodes.Contains(langCode) || langCode.Equals("en", StringComparison.OrdinalIgnoreCase))
         {
-            localization.SetupWithLangCode(arguments.ToLowerInvariant());
-            configuration.LanguageOverride = arguments.ToLowerInvariant();
+            localization.SetupWithLangCode(langCode);
+            configuration.LanguageOverride = langCode;
 
             chatGui.Print(string.Format(Loc.Localize("DalamudLanguageSetTo", "Language set to {0}"), arguments));
         }
@@ -349,16 +354,16 @@ internal class DalamudCommands : IServiceType
         configuration.QueueSave();
     }
 
-    private void OnOpenSettingsCommand(string command, string arguments)
+    private void OnOpenSettingsCommand(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().ToggleSettingsWindow();
     }
 
-    private void OnUiCommand(string command, string arguments)
+    private void OnUiCommand(string command, ReadOnlySeString arguments)
     {
         var im = Service<InterfaceManager>.Get();
 
-        im.IsDispatchingEvents = arguments switch
+        im.IsDispatchingEvents = arguments.ToString() switch
         {
             "show" => true,
             "hide" => false,
@@ -380,12 +385,12 @@ internal class DalamudCommands : IServiceType
         }
     }
 
-    private void OnOpenProfilerCommand(string command, string arguments)
+    private void OnOpenProfilerCommand(string command, ReadOnlySeString arguments)
     {
         Service<DalamudInterface>.Get().ToggleProfilerWindow();
     }
 
-    private void OnCopyLogCommand(string command, string arguments)
+    private void OnCopyLogCommand(string command, ReadOnlySeString arguments)
     {
         var chatGui = Service<ChatGui>.Get();
         var logPath = Path.Join(
@@ -398,7 +403,7 @@ internal class DalamudCommands : IServiceType
         chatGui.Print(message);
     }
 
-    private void OnToggleMultiMonitorCommand(string command, string arguments)
+    private void OnToggleMultiMonitorCommand(string command, ReadOnlySeString arguments)
     {
         var configuration = Service<DalamudConfiguration>.Get();
         var chatGui = Service<ChatGui>.Get();

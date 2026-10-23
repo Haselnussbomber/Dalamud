@@ -11,6 +11,8 @@ using Dalamud.Plugin.Internal.Types;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 
+using Lumina.Text.ReadOnly;
+
 using Serilog;
 
 namespace Dalamud.Plugin.Internal.Profiles;
@@ -361,9 +363,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         }
     }
 
-    private void OnEnableProfile(string command, string arguments)
+    private void OnEnableProfile(string command, ReadOnlySeString arguments)
     {
-        var name = this.ValidateProfileName(arguments);
+        var name = this.ValidateProfileName(arguments.ToString());
         if (name == null)
             return;
 
@@ -372,9 +374,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         this.commandQueue.Add((target, PluginCommandOperation.Enable));
     }
 
-    private void OnDisableProfile(string command, string arguments)
+    private void OnDisableProfile(string command, ReadOnlySeString arguments)
     {
-        var name = this.ValidateProfileName(arguments);
+        var name = this.ValidateProfileName(arguments.ToString());
         if (name == null)
             return;
 
@@ -383,9 +385,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         this.commandQueue.Add((target, PluginCommandOperation.Disable));
     }
 
-    private void OnToggleProfile(string command, string arguments)
+    private void OnToggleProfile(string command, ReadOnlySeString arguments)
     {
-        var name = this.ValidateProfileName(arguments);
+        var name = this.ValidateProfileName(arguments.ToString());
         if (name == null)
             return;
 
@@ -393,9 +395,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         this.commandQueue.Add((target, PluginCommandOperation.Toggle));
     }
 
-    private void OnEnablePlugin(string arguments, bool ephemeral)
+    private void OnEnablePlugin(ReadOnlySeString arguments, bool ephemeral)
     {
-        var plugin = this.ValidatePluginName(arguments);
+        var plugin = this.ValidatePluginName(arguments.ToString());
         if (plugin == null)
             return;
 
@@ -405,9 +407,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         this.commandQueue.Add((target, ephemeral ? PluginCommandOperation.EnableEphemeral : PluginCommandOperation.Enable));
     }
 
-    private void OnDisablePlugin(string arguments, bool ephemeral)
+    private void OnDisablePlugin(ReadOnlySeString arguments, bool ephemeral)
     {
-        var plugin = this.ValidatePluginName(arguments);
+        var plugin = this.ValidatePluginName(arguments.ToString());
         if (plugin == null)
             return;
 
@@ -417,9 +419,9 @@ internal class PluginManagementCommandHandler : IInternalDisposableService
         this.commandQueue.Add((target, ephemeral ? PluginCommandOperation.DisableEphemeral : PluginCommandOperation.Disable));
     }
 
-    private void OnTogglePlugin(string arguments, bool ephemeral)
+    private void OnTogglePlugin(ReadOnlySeString arguments, bool ephemeral)
     {
-        var plugin = this.ValidatePluginName(arguments);
+        var plugin = this.ValidatePluginName(arguments.ToString());
         if (plugin == null)
             return;
 

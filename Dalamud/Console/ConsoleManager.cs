@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 
 using Dalamud.Logging.Internal;
 
+using Lumina.Text.ReadOnly;
+
 using Serilog.Events;
 
 namespace Dalamud.Console;
@@ -33,7 +35,7 @@ internal partial class ConsoleManager : IServiceType
     /// <summary>
     /// Event that is triggered when a command is processed. Return true to stop the command from being processed any further.
     /// </summary>
-    public event Func<string, bool>? Invoke;
+    public event Func<ReadOnlySeString, bool>? Invoke;
 
     /// <summary>
     /// Gets a read-only dictionary of console entries.

@@ -1,3 +1,5 @@
+using Lumina.Text.ReadOnly;
+
 namespace Dalamud.Game.Command;
 
 /// <summary>
@@ -10,7 +12,7 @@ public interface IReadOnlyCommandInfo
     /// </summary>
     /// <param name="command">The command itself.</param>
     /// <param name="arguments">The arguments supplied to the command, ready for parsing.</param>
-    delegate void HandlerDelegate(string command, string arguments);
+    delegate void HandlerDelegate(string command, ReadOnlySeString arguments);
 
     /// <summary>
     /// Gets a <see cref="HandlerDelegate"/> which will be called when the command is dispatched.

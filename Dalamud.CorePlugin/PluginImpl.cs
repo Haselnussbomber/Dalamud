@@ -9,6 +9,9 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility;
+
+using Lumina.Text.ReadOnly;
+
 using Serilog;
 
 namespace Dalamud.CorePlugin
@@ -152,9 +155,9 @@ namespace Dalamud.CorePlugin
             }
         }
 
-        private void OnCommand(string command, string args)
+        private void OnCommand(string command, ReadOnlySeString args)
         {
-            this.pluginLog.Information("Command called!");
+            this.pluginLog.Information("Command called! {command} | {args}", command, args.ToMacroString());
 
             this.window?.IsOpen ^= true;
         }

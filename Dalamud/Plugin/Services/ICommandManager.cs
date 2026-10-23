@@ -2,6 +2,8 @@ using System.Collections.ObjectModel;
 
 using Dalamud.Game.Command;
 
+using Lumina.Text.ReadOnly;
+
 namespace Dalamud.Plugin.Services;
 
 /// <summary>
@@ -19,7 +21,7 @@ public interface ICommandManager : IDalamudService
     /// </summary>
     /// <param name="content">The full command string.</param>
     /// <returns>True if the command was found and dispatched.</returns>
-    bool ProcessCommand(string content);
+    bool ProcessCommand(ReadOnlySeString content);
 
     /// <summary>
     /// Dispatch the handling of a command.
@@ -27,7 +29,7 @@ public interface ICommandManager : IDalamudService
     /// <param name="command">The command to dispatch.</param>
     /// <param name="argument">The provided arguments.</param>
     /// <param name="info">A <see cref="CommandInfo"/> object describing this command.</param>
-    void DispatchCommand(string command, string argument, IReadOnlyCommandInfo info);
+    void DispatchCommand(string command, ReadOnlySeString argument, IReadOnlyCommandInfo info);
 
     /// <summary>
     /// Add a command handler, which you can use to add your own custom commands to the in-game chat.
